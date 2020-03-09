@@ -18,7 +18,7 @@ O serviço ainda não está disponível! :/
 
 ## Instalação/Execução
 
-**Configurando as credenciais 🐳** 
+**Configurando as credenciais** 🐳
 
 Caso seja necessário, para configurar a conexão com o banco de dados, é preciso criar o arquivo `config-dev.json`.
 ```json
@@ -32,9 +32,9 @@ Caso seja necessário, para configurar a conexão com o banco de dados, é preci
   }
 }
 ```
+**Configurando o Docker** 🐳
 
-### Iniciando os containers  🐳
-
+### Iniciando os containers
 ```bash
 $ docker-compose up -d
 ```
