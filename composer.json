@@ -1,0 +1,19 @@
+{
+    "name": "root/projeto",
+    "type": "project",
+    "config": {
+        "vendor-dir": "vendor",
+        "optimize-autoloader": true
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "public_html/",
+            "core\\": "core/"
+        }
+    },
+    "require": {
+        "monolog/monolog": "1.0.*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    }
+}
