@@ -68,10 +68,10 @@ class CRUD {
             try {
 
                 //Define utf8 como a formatação padrão de caracteres
-                $opcoes = array(
-                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-                );
+                // $opcoes = array(
+                //     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+                //     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                // );
 
                 //Habilita o auto-commit
                 if (!$autocommit) {
@@ -80,15 +80,20 @@ class CRUD {
 
                 if ($this->dados_conexao['drive'] == "mysql") {
                     $con = "mysql:host={$this->dados_conexao['host']};dbname={$this->dados_conexao['db']}";
+                    $opcoes = array(
+                        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                    );
                 }else{
                     $con = "sqlsrv:Server={$this->dados_conexao['host']};Database={$this->dados_conexao['db']}";
+                    $opcoes = null;
                 }
                 // echo $con;
                 $this->conexao = new PDO(
                     $con,
                     $this->dados_conexao['user'],
                     $this->dados_conexao['password']
-                    // ,$opcoes
+                    ,$opcoes
                 );
 
             } catch (PDOException $e) {
