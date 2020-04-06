@@ -4,27 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teste</title>
-    <link rel="stylesheet" href="teste.css" />
+    <link rel="stylesheet" href="./assets/css/teste.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
+    <link rel="stylesheet" href="./assets/dropdown.css" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css"
+    /> -->
   </head>
   <body>
-
-    
     <div class="grid-container">
       <div class="menu-icon">
         <i class="fas fa-bars header__menu"></i>
       </div>
 
       <header class="header">
-        <div class="header__search">Search...</div>
-        <div class="header__avatar">Your face</div>
+        <p class="username">Alexandre Lopes</p>
+
+        <div class="typeuser dropdown">
+          Professor
+          <i class="fas fa-angle-down"></i>
+          <!-- <div class="dropdown-content">
+            <a href="#">Aluno</a>
+            <a href="#">Coordenador</a>
+            <a href="#">Professor</a>
+          </div> -->
+        </div>
       </header>
 
       <aside class="sidenav">
         <ul class="sidenav__list">
+          <li class="sidenav__list-item first-item">
+            <img src="./assets/images/logo_sadc.svg" alt="" class="logo-icon" />
+          </li>
           <li class="sidenav__list-item">
             <img src="./assets/images/student.svg" alt="" class="icon" />
           </li>
@@ -51,24 +66,72 @@
           </li>
           <li class="sidenav__list-item-mobile">
             <img src="./assets/images/grupo.svg" alt="" class="icon" />
-            <p class="sidenav-item-text" >Turmas</p>
+            <p class="sidenav-item-text">Turmas</p>
           </li>
           <li class="sidenav__list-item-mobile">
             <img class="icon" src="./assets/images/reunion.svg" alt="" />
-            <p class="sidenav-item-text" >Conselhos Anteriores</p>
+            <p class="sidenav-item-text">Conselhos Anteriores</p>
           </li>
           <li class="sidenav__list-item-mobile">
             <img class="icon" src="./assets/images/config.svg" alt="" />
-            <p class="sidenav-item-text" >Configurações</p>
+            <p class="sidenav-item-text">Configurações</p>
           </li>
         </ul>
       </aside>
 
       <main class="main">
-        <h4 class="title is-6">Reuniões em Andamento</h4>
+        <h4 class="subtitle is-7">Reuniões em Andamento</h4>
         <div class="main-header">
-          <div class="main-header__heading">Hello User</div>
-          <div class="main-header__updates">Recent Items</div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="1">
+            <p class="subtitle is-8">Agropecuária</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-amb" data-turmaConselho="1">
+            <p class="subtitle is-8">Meio Ambiente</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="1">
+            <p class="subtitle is-8">Agropecuária</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="1">
+            <p class="subtitle is-8">Agropecuária</p>
+            <p class="subtitle is-7 bold">3° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-info" data-turmaConselho="1">
+            <p class="subtitle is-8">Informática</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-amb" data-turmaConselho="1">
+            <p class="subtitle is-8">Meio Ambiente</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-info" data-turmaConselho="1">
+            <p class="subtitle is-8">Informática</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-info" data-turmaConselho="1">
+            <p class="subtitle is-8">Informática</p>
+            <p class="subtitle is-7 bold">3° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-info" data-turmaConselho="1">
+            <p class="subtitle is-8">Informática</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-info" data-turmaConselho="1">
+            <p class="subtitle is-8">Informática</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
         </div>
 
         <div class="main-overview">
@@ -116,7 +179,9 @@
   <script>
     const menuIconEl = document.querySelector(".menu-icon");
     const sidenavEl = document.querySelector(".sidenav-mobile");
-    const sidenavCloseEl = document.querySelector(".sidenav__close-icon-mobile");
+    const sidenavCloseEl = document.querySelector(
+      ".sidenav__close-icon-mobile"
+    );
 
     function toggleClassName(el, className) {
       el.classList.toggle(className);
