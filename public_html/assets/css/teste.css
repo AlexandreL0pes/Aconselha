@@ -145,7 +145,7 @@ html {
 .sidenav__list {
   list-style-type: none;
   display: grid;
-  grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
   align-items: center;
   justify-self: center;
   grid-gap: 10px;
@@ -308,9 +308,10 @@ html {
   align-items: center;
   justify-items: center;
   color: black;
-  grid-template-rows: 4fr 1f;
+  grid-template-rows: 1fr 1f;
   background: transparent;
-  font-size: 10px;
+  font-size: 8px;
+  font-weight: 300;
 }
 .footer_nepeti {
   display: grid;
@@ -446,13 +447,13 @@ html {
   font-size: 0.75rem;
 }
 .subtitle {
-  color: #4a4a4a;
+  /* color: #4a4a4a; */
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.25;
 }
 .subtitle strong {
-  color: #363636;
+  /* color: #363636; */
   font-weight: 600;
 }
 .subtitle.is-1 {

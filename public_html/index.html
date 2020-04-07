@@ -1,380 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SADC</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste</title>
+    <link rel="stylesheet" href="./assets/css/teste.css" />
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
-      rel="stylesheet"
-    />
-    <!-- Bulma Version 0.8.x-->
-    <link
+    <link rel="stylesheet" href="./assets/css/dropdown.css" />
+    <!-- <link
       rel="stylesheet"
       href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css"
-    />
-    <link rel="stylesheet" type="text/css" href="./assets/index.css" />
+    /> -->
   </head>
-
   <body>
-    <!-- START NAV -->
-    <nav class="navbar">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item brand-text" href="../index.html">
-            SADC
-          </a>
-          <div class="navbar-burger burger" data-target="navMenu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-        <div id="navMenu" class="navbar-menu">
-          <div class="navbar-end">
-            <a class="navbar-item" href="admin.html">
-              Turmas
-            </a>
-            <a class="navbar-item" href="#">
-              Alunos
-            </a>
-            <a class="navbar-item" href="admin.html">
-              Conselhos Anteriores
-            </a>
-          </div>
-        </div>
+    <div class="grid-container">
+      <!-- Hamburg Icon -->
+      <div class="menu-icon">
+        <i class="fas fa-bars header__menu"></i>
       </div>
-    </nav>
-    <!-- END NAV -->
+      <!-- Hamburg Icon -->
 
-    <div class="container is-widescreen">
-      <div class="main-content columns is-fullheight">
-        <div
-          class="column is-3 is-narrow-mobile is-fullheight section is-hidden-mobile"
-        >
-          <aside class="menu is-hidden-mobile">
-            <p class="menu-label">
-              General
-            </p>
-            <ul class="menu-list">
-              <li><a class="is-active">Dashboard</a></li>
-              <li><a>Customers</a></li>
-              <li><a>Other</a></li>
-            </ul>
-            <p class="menu-label">
-              Administration
-            </p>
-            <ul class="menu-list">
-              <li><a>Team Settings</a></li>
-              <li>
-                <a>Manage Your Team</a>
-                <ul>
-                  <li><a>Members</a></li>
-                  <li><a>Plugins</a></li>
-                  <li><a>Add a member</a></li>
-                  <li><a>Remove a member</a></li>
-                </ul>
-              </li>
-              <li><a>Invitations</a></li>
-              <li><a>Cloud Storage Environment Settings</a></li>
-              <li><a>Authentication</a></li>
-              <li><a>Payments</a></li>
-            </ul>
-            <p class="menu-label">
-              Transactions
-            </p>
-            <ul class="menu-list">
-              <li><a>Payments</a></li>
-              <li><a>Transfers</a></li>
-              <li><a>Balance</a></li>
-              <li><a>Reports</a></li>
-            </ul>
-          </aside>
-        </div>
-        <div class="column is-9">
-          <section class="info-tiles">
-            <h1 class="title">
-              Turmas
-            </h1>
-
-            <!-- 
-            <div class="tile is-ancestor has-text-centered">
-              <div class="tile is-parent">
-                <article class="tile is-child box is-success">
-                  <p class="title">3° B</p>
-                  <p class="subtitle">Informática para Internet</p>
-                </article>
-              </div>
-              <div class="tile is-parent">
-                <article class="tile is-child box is-warning">
-                  <p class="title">2° B</p>
-                  <p class="subtitle">Informática para Internet</p>
-                </article>
-              </div>
-              <div class="tile is-parent">
-                <article class="tile is-child box is-warning">
-                  <p class="title">1° B</p>
-                  <p class="subtitle">Informática para Internet</p>
-                </article>
-              </div> -->
-          </section>
-
-          <div class="items">
-            <div class=" cardbox item is-error">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-success">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-warning">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-success">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-success">
-              <p class="title">3° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-warning">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-success">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-error">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-success">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-warning">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-success">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
-            <div class=" cardbox item is-warning">
-              <p class="title">1° B</p>
-              <p class="subtitle">Informática para Internet</p>
-            </div>
+      <!-- Header -->
+      <header class="header">
+        <div class="dropdown">
+          <div class="title pointerCursor">
+            Gerência<i class="fa fa-angle-right"></i>
           </div>
 
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <div class="columns">
-            <div class="column is-6">
-              <div class="card events-card">
-                <header class="card-header">
-                  <p class="card-header-title">
-                    Events
-                  </p>
-                  <a
-                    href="#"
-                    class="card-header-icon"
-                    aria-label="more options"
-                  >
-                    <span class="icon">
-                      <i class="fa fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                  </a>
-                </header>
-                <div class="card-table">
-                  <div class="content">
-                    <table class="table is-fullwidth is-striped">
-                      <tbody>
-                        <tr>
-                          <td width="5%"><i class="fa fa-bell-o"></i></td>
-                          <td>Lorum ipsum dolem aire</td>
-                          <td class="level-right">
-                            <a class="button is-small is-primary" href="#"
-                              >Action</a
-                            >
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="5%"><i class="fa fa-bell-o"></i></td>
-                          <td>Lorum ipsum dolem aire</td>
-                          <td class="level-right">
-                            <a class="button is-small is-primary" href="#"
-                              >Action</a
-                            >
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="5%"><i class="fa fa-bell-o"></i></td>
-                          <td>Lorum ipsum dolem aire</td>
-                          <td class="level-right">
-                            <a class="button is-small is-primary" href="#"
-                              >Action</a
-                            >
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="5%"><i class="fa fa-bell-o"></i></td>
-                          <td>Lorum ipsum dolem aire</td>
-                          <td class="level-right">
-                            <a class="button is-small is-primary" href="#"
-                              >Action</a
-                            >
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="5%"><i class="fa fa-bell-o"></i></td>
-                          <td>Lorum ipsum dolem aire</td>
-                          <td class="level-right">
-                            <a class="button is-small is-primary" href="#"
-                              >Action</a
-                            >
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="5%"><i class="fa fa-bell-o"></i></td>
-                          <td>Lorum ipsum dolem aire</td>
-                          <td class="level-right">
-                            <a class="button is-small is-primary" href="#"
-                              >Action</a
-                            >
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="5%"><i class="fa fa-bell-o"></i></td>
-                          <td>Lorum ipsum dolem aire</td>
-                          <td class="level-right">
-                            <a class="button is-small is-primary" href="#"
-                              >Action</a
-                            >
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="5%"><i class="fa fa-bell-o"></i></td>
-                          <td>Lorum ipsum dolem aire</td>
-                          <td class="level-right">
-                            <a class="button is-small is-primary" href="#"
-                              >Action</a
-                            >
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="5%"><i class="fa fa-bell-o"></i></td>
-                          <td>Lorum ipsum dolem aire</td>
-                          <td class="level-right">
-                            <a class="button is-small is-primary" href="#"
-                              >Action</a
-                            >
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <footer class="card-footer">
-                  <a href="#" class="card-footer-item">View All</a>
-                </footer>
-              </div>
-            </div>
-            <div class="column is-6">
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title">
-                    Inventory Search
-                  </p>
-                  <a
-                    href="#"
-                    class="card-header-icon"
-                    aria-label="more options"
-                  >
-                    <span class="icon">
-                      <i class="fa fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                  </a>
-                </header>
-                <div class="card-content">
-                  <div class="content">
-                    <div class="control has-icons-left has-icons-right">
-                      <input
-                        class="input is-large"
-                        type="text"
-                        placeholder=""
-                      />
-                      <span class="icon is-medium is-left">
-                        <i class="fa fa-search"></i>
-                      </span>
-                      <span class="icon is-medium is-right">
-                        <i class="fa fa-check"></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title">
-                    User Search
-                  </p>
-                  <a
-                    href="#"
-                    class="card-header-icon"
-                    aria-label="more options"
-                  >
-                    <span class="icon">
-                      <i class="fa fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                  </a>
-                </header>
-                <div class="card-content">
-                  <div class="content">
-                    <div class="control has-icons-left has-icons-right">
-                      <input
-                        class="input is-large"
-                        type="text"
-                        placeholder=""
-                      />
-                      <span class="icon is-medium is-left">
-                        <i class="fa fa-search"></i>
-                      </span>
-                      <span class="icon is-medium is-right">
-                        <i class="fa fa-check"></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="menu pointerCursor hide">
+            <div class="option" id="option1">Professor</div>
+            <div class="option" id="option2">Coordenador</div>
+            <div class="option" id="option3">Aluno</div>
           </div>
         </div>
-      </div>
+      </header>
+      <!-- Header -->
+
+      <!-- Sidebar -->
+      <aside class="sidenav">
+        <ul class="sidenav__list">
+          <li class="sidenav__list-item first-item">
+            <img src="./assets/images/logo_sadc.svg" alt="" class="logo-icon" />
+          </li>
+          <li class="sidenav__list-item">
+            <img src="./assets/images/student.svg" alt="" class="icon" />
+          </li>
+          <li class="sidenav__list-item">
+            <img src="./assets/images/grupo.svg" alt="" class="icon" />
+          </li>
+          <li class="sidenav__list-item">
+            <img class="icon" src="./assets/images/reunion.svg" alt="" />
+          </li>
+          <li class="sidenav__list-item">
+            <img class="icon" src="./assets/images/config.svg" alt="" />
+          </li>
+        </ul>
+      </aside>
+      <!-- Sidebar -->
+
+      <!-- Sidebar Mobile -->
+      <aside class="sidenav-mobile">
+        <div class="sidenav__close-icon-mobile">
+          <i class="fas fa-times sidenav__brand-close"></i>
+        </div>
+        <ul class="sidenav__list-mobile">
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/student.svg" alt="" class="icon" />
+            <p class="sidenav-item-text">Alunos</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/grupo.svg" alt="" class="icon" />
+            <p class="sidenav-item-text">Turmas</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img class="icon" src="./assets/images/reunion.svg" alt="" />
+            <p class="sidenav-item-text">Conselhos Anteriores</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img class="icon" src="./assets/images/config.svg" alt="" />
+            <p class="sidenav-item-text">Configurações</p>
+          </li>
+        </ul>
+      </aside>
+      <!-- Sidebar Mobile -->
+
+      <main class="main">
+        <h4 class="subtitle is-7">Reuniões em Andamento</h4>
+        <div class="main-header">
+          <div class="cardbox card-turma is-agro" data-turmaConselho="1">
+            <p class="subtitle is-8">Agropecuária</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-amb" data-turmaConselho="2">
+            <p class="subtitle is-8">Meio Ambiente</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="3">
+            <p class="subtitle is-8">Agropecuária</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitle is-8">Agropecuária</p>
+            <p class="subtitle is-7 bold">3° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-info" data-turmaConselho="6">
+            <p class="subtitle is-8">Informática</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-amb" data-turmaConselho="8">
+            <p class="subtitle is-8">Meio Ambiente</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-info" data-turmaConselho="11">
+            <p class="subtitle is-8">Informática</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-info" data-turmaConselho="15">
+            <p class="subtitle is-8">Informática</p>
+            <p class="subtitle is-7 bold">3° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-info" data-turmaConselho="1123">
+            <p class="subtitle is-8">Informática</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-info" data-turmaConselho="15">
+            <p class="subtitle is-8">Informática</p>
+            <p class="subtitle is-7 bold">1° B</p>
+            <p class="subtitle is-8">INFI.2019/1.A</p>
+          </div>
+        </div>
+
+        <!-- <div class="main-overview">
+          <div class="overviewcard">
+            <div class="overviewcard__icon">Overview</div>
+            <div class="overviewcard__info">Card</div>
+          </div>
+          <div class="overviewcard">
+            <div class="overviewcard__icon">Overview</div>
+            <div class="overviewcard__info">Card</div>
+          </div>
+          <div class="overviewcard">
+            <div class="overviewcard__icon">Overview</div>
+            <div class="overviewcard__info">Card</div>
+          </div>
+          <div class="overviewcard">
+            <div class="overviewcard__icon">Overview</div>
+            <div class="overviewcard__info">Card</div>
+          </div>
+        </div>
+
+        <div class="main-cards">
+          <div class="card">Card</div>
+          <div class="card">Card</div>
+          <div class="card">Card</div>
+        </div> -->
+      </main>
+
+      <footer class="footer">
+        <div class="footer__copyright"></div>
+        <div class="footer_nepeti">
+          <img
+            class="logo_nepeti"
+            src="./assets/images/logo_nepeti.png"
+            alt=""
+          />
+          <p class="text-nepeti">
+            &copy; 2020 - Núcleo de Estudos e Pesquisa em Tecnologia da
+            Informação
+          </p>
+        </div>
+      </footer>
     </div>
-    <!-- <script async type="text/javascript" src="../js/bulma.js"></script> -->
-    <script>
-      // The following code is based off a toggle menu by @Bradcomp
-      // source: https://gist.github.com/Bradcomp/a9ef2ef322a8e8017443b626208999c1
-      (function() {
-        var burger = document.querySelector(".burger");
-        var menu = document.querySelector("#" + burger.dataset.target);
-        burger.addEventListener("click", function() {
-          burger.classList.toggle("is-active");
-          menu.classList.toggle("is-active");
-        });
-      })();
-    </script>
   </body>
+  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/dropdown.js"></script>
 </html>
