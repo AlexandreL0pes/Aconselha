@@ -9,7 +9,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="./assets/dropdown.css" />
+    <link rel="stylesheet" href="./assets/css/dropdown.css" />
     <!-- <link
       rel="stylesheet"
       href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css"
@@ -22,17 +22,18 @@
       </div>
 
       <header class="header">
-        <p class="username">Alexandre Lopes</p>
+        <div class="dropdown">
+          <div class="title pointerCursor">
+            Gerência<i class="fa fa-angle-right"></i>
+          </div>
 
-        <div class="typeuser dropdown">
-          Professor
-          <i class="fas fa-angle-down"></i>
-          <!-- <div class="dropdown-content">
-            <a href="#">Aluno</a>
-            <a href="#">Coordenador</a>
-            <a href="#">Professor</a>
-          </div> -->
+          <div class="menu pointerCursor hide">
+            <div class="option" id="option1">Professor</div>
+            <div class="option" id="option2">Coordenador</div>
+            <div class="option" id="option3">Aluno</div>
+          </div>
         </div>
+
       </header>
 
       <aside class="sidenav">
@@ -87,47 +88,47 @@
             <p class="subtitle is-7 bold">1° B</p>
             <p class="subtitle is-8">INFI.2019/1.A</p>
           </div>
-          <div class="cardbox card-turma is-amb" data-turmaConselho="1">
+          <div class="cardbox card-turma is-amb" data-turmaConselho="2">
             <p class="subtitle is-8">Meio Ambiente</p>
             <p class="subtitle is-7 bold">1° B</p>
             <p class="subtitle is-8">INFI.2019/1.A</p>
           </div>
-          <div class="cardbox card-turma is-agro" data-turmaConselho="1">
+          <div class="cardbox card-turma is-agro" data-turmaConselho="3">
             <p class="subtitle is-8">Agropecuária</p>
             <p class="subtitle is-7 bold">1° B</p>
             <p class="subtitle is-8">INFI.2019/1.A</p>
           </div>
-          <div class="cardbox card-turma is-agro" data-turmaConselho="1">
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
             <p class="subtitle is-8">Agropecuária</p>
             <p class="subtitle is-7 bold">3° B</p>
             <p class="subtitle is-8">INFI.2019/1.A</p>
           </div>
-          <div class="cardbox card-turma is-info" data-turmaConselho="1">
+          <div class="cardbox card-turma is-info" data-turmaConselho="6">
             <p class="subtitle is-8">Informática</p>
             <p class="subtitle is-7 bold">1° B</p>
             <p class="subtitle is-8">INFI.2019/1.A</p>
           </div>
-          <div class="cardbox card-turma is-amb" data-turmaConselho="1">
+          <div class="cardbox card-turma is-amb" data-turmaConselho="8">
             <p class="subtitle is-8">Meio Ambiente</p>
             <p class="subtitle is-7 bold">1° B</p>
             <p class="subtitle is-8">INFI.2019/1.A</p>
           </div>
-          <div class="cardbox card-turma is-info" data-turmaConselho="1">
+          <div class="cardbox card-turma is-info" data-turmaConselho="11">
             <p class="subtitle is-8">Informática</p>
             <p class="subtitle is-7 bold">1° B</p>
             <p class="subtitle is-8">INFI.2019/1.A</p>
           </div>
-          <div class="cardbox card-turma is-info" data-turmaConselho="1">
+          <div class="cardbox card-turma is-info" data-turmaConselho="15">
             <p class="subtitle is-8">Informática</p>
             <p class="subtitle is-7 bold">3° B</p>
             <p class="subtitle is-8">INFI.2019/1.A</p>
           </div>
-          <div class="cardbox card-turma is-info" data-turmaConselho="1">
+          <div class="cardbox card-turma is-info" data-turmaConselho="1123">
             <p class="subtitle is-8">Informática</p>
             <p class="subtitle is-7 bold">1° B</p>
             <p class="subtitle is-8">INFI.2019/1.A</p>
           </div>
-          <div class="cardbox card-turma is-info" data-turmaConselho="1">
+          <div class="cardbox card-turma is-info" data-turmaConselho="15">
             <p class="subtitle is-8">Informática</p>
             <p class="subtitle is-7 bold">1° B</p>
             <p class="subtitle is-8">INFI.2019/1.A</p>
@@ -195,4 +196,10 @@
       toggleClassName(sidenavEl, "active");
     });
   </script>
+
+  <script>
+ 
+  </script>
+  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/dropdown.js"></script>
 </html>

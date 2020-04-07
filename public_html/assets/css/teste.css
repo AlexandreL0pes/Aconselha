@@ -22,12 +22,10 @@ body {
   padding: 0;
   color: black;
   font-family: "Roboto", sans-serif;
-  /* font-size: 0.75rem; */
+  font-size: 0.75rem;
   font-weight: 500;
 }
-h4 {
-  font-weight: 600;
-}
+
 
 html {
   /* border-box box model allows us to add padding and border to our elements without increasing their size */
@@ -73,24 +71,27 @@ html {
   /* background-color: #648ca6; */
   color: black;
   display: grid;
-  justify-items: flex-end;
+  /* justify-items: flex-end; */
   align-items: center;
-  grid-template-rows: repeat(auto-fill, minmax(25px, 1fr));
+  justify-items: right;
+  grid-template-rows: repeat(auto-fill, minmax(1fr, 1fr));
   grid-template-columns: auto;
   /* margin-right: 5px; */
   margin: 5px;
 }
-.username {
-  font-size: 12px;
 
-}
+
 .typeuser {
   display: grid;
-  grid-template-columns: auto 5px;
-  grid-gap: 5px;
+   grid-template-columns: 1fr 20px;
+   align-items: center;
+   margin: 0;
+   padding: 0;
+  /* grid-gap: 5px;
   align-items: center;
   justify-items: center;
-  font-size: 11px;
+  font-size: 11px;  */
+  font-size: 10px;
 }
 
 /* Make room for the menu icon on mobile */
