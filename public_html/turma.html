@@ -16,6 +16,7 @@
       rel="stylesheet"
       href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css"
     /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -92,40 +93,116 @@
       <main class="main">
         <div class="head-turma">
           <div class="info-turma">
-            <h4 class="title">Informações</h4>
-            <div class="info">
-                <p>3° B</p>
-                <p>Informática para Internet</p>
-                <p>INF.I.2019/1.1A</p>    
-              </div>
+            <span>Turma:</span><span>3° B</span>
+            <span>Curso:</span><span>Informática para Internet</span>
+          </div>
+          <div class="info">
+            <span>Conselheiro: </span>
+            <span>Adriano Honorato Braga</span>
+            <span>Representantes:</span>
+            <span>Alexandre Lopes, Ana Luiza</span>
           </div>
           <div class="actions">
-            <a class="button" href="#">Memória da Reunião</a>
-            <a class="button" href="#">Encaminhamentos Psicopedagógicos</a>
-            <a class="button" href="#">Memória da Reunião</a>
-            <a class="button" href="#">Encaminhamentos Psicopedagógicos</a>
+            <div class="action-card">
+              <!-- <img src="./assets/images/config.svg" alt="" class="logo" />  -->
+              <i class="fas fa-pen logo"></i>
+              <p class="subtitulo">Memória de Reunião</p>
+            </div>
+            <div class="action-card">
+              <p class="titulo">
+                <i class="fas fa-id-badge logo"></i>
+              </p>
+              <p class="subtitulo">Atendimentos Pedagógicos</p>
+            </div>
           </div>
         </div>
-        <div class="info-cards">
-          <div class="info-card">
-            <p class="subtitulo">Coeficiente Geral</p>
-            <p class="titulo">95,4</p>
+
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">95,4</p>
+            </div>
           </div>
-          <div class="info-card">
-            <p class="subtitulo">Coeficiente Técnico</p>
-            <p class="titulo">95,4</p>
-          </div>
-          <div class="info-card">
-            <p class="subtitulo">Coeficiente Médio</p>
-            <p class="titulo">95,4</p>
-          </div>
-          <div class="info-card">
-            <p class="subtitulo">Ocorrências</p>
-            <p class="titulo">95,4</p>
+          <div class="grafico">
+            <div>Gráfico de linha</div>
+            <!-- <div class="teste">Olaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div> -->
           </div>
         </div>
-        </main>
+
+        <div class="materias">
+          <div class="list">
+            <ul>             
+              <li>
+                <span class="number">1</span>
+                <span class="name">Matemática</span>
+                <span class="points">95</span>
+              </li>
+              <li>
+                <span class="number">2</span>
+                <span class="name">Biologia</span>
+                <span class="points">94</span>
+              </li>
+              <li>
+                <span class="number">3</span>
+                <span class="name">Desenvolvimento Web</span>
+                <span class="points">93</span>
+              </li>
+              <li>
+                <span class="number">4</span>
+                <span class="name">História</span>
+                <span class="points">92</span>
+              </li>
+              <li>
+                <span class="number">5</span>
+                <span class="name">Banco de Dados</span>
+                <span class="points">91</span>
+              </li>
+            </ul>
+          </div>
+          <div class="list-reverse">
+            <ul>
+              <li>
+                <span class="number">1</span>
+                <span class="name">Matemática</span>
+                <span class="points">60</span>
+              </li>
+              <li>
+                <span class="number">2</span>
+                <span class="name">Biologia</span>
+                <span class="points">61</span>
+              </li>
+              <li>
+                <span class="number">3</span>
+                <span class="name">Desenvolvimento Web</span>
+                <span class="points">62</span>
+              </li>
+              <li>
+                <span class="number">4</span>
+                <span class="name">História</span>
+                <span class="points">63,3</span>
+              </li>
+              <li>
+                <span class="number">5</span>
+                <span class="name">Banco de Dados</span>
+                <span class="points">87,3</span>
+              </li>
+            </ul>
+          </div>
         </div>
+      </main>
 
       <footer class="footer">
         <div class="footer__copyright"></div>
@@ -145,4 +222,5 @@
   </body>
   <script src="./assets/js/index.js"></script>
   <script src="./assets/js/dropdown.js"></script>
+  <script src="./assets/js/exampleChart.js"></script>
 </html>
