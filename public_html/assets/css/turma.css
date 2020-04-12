@@ -12,13 +12,9 @@
   grid-template-columns: 1fr;
   /* grid-template-rows: repeat(auto-fit, minmax(10px, 1fr)); */
   grid-template-rows: repeat(3, 2em);
-  /* align-content: center;
-  justify-content: center; */
   display: grid;
   grid-template-columns: 0.3fr 1fr;
   grid-template-rows: repeat(auto-fill, minmax(20px, 1fr));
-  /* align-items: center; */
-  /* grid-auto-flow: row; */
   grid-gap: 5px;
   padding: 10px;
 }
@@ -30,18 +26,14 @@
 
 .info {
   display: grid;
-  grid-template-columns: 0.4fr 1fr;
   grid-template-rows: repeat(auto-fill, minmax(20px, 1fr));
-  /* align-items: center; */
-  /* grid-auto-flow: row; */
   grid-gap: 5px;
   padding: 10px;
 }
 
 .actions {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  /* grid-template-rows: minmax(50px, 1fr) minmax(50px, 1fr); */
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   grid-gap: 5px;
   font-size: 8px;
 }
@@ -65,7 +57,6 @@
 }
 
 .actions .action-card .logo {
-  /* height: 1.6em; */
   font-size: 2em;
   margin-top: 2em;
   align-self: center;
@@ -73,10 +64,9 @@
 
 .overview {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   /* grid-template-rows: repeat(auto-fill, minmax(60px, 1fr)); */
   /* grid-template-rows: 1fr; */
-  font-size: 10px;
   font-weight: normal;
   grid-gap: 10px;
 }
@@ -93,9 +83,10 @@
 }
 
 .info-cards {
+  grid-column-end: span 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  grid-template-rows: repeat(auto-fit, minmax(60px, 1fr));
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(80px, 1fr));
   grid-gap: 5px;
   margin-top: 10px;
 }
@@ -133,12 +124,13 @@
 
 .grafico {
   background-color: burlywood;
+  grid-column-end: span 2;
 }
 
 .materias {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  font-size: 10px;
+  font-size: 12px;
   font-weight: normal;
   grid-gap: 10px;
 }
