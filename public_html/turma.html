@@ -93,14 +93,32 @@
       <main class="main">
         <div class="head-turma">
           <div class="info-turma">
-            <span>Turma:</span><span>3° B</span>
-            <span>Curso:</span><span>Informática para Internet</span>
+            <div class="list-info">
+              <ul>
+                <li>
+                  <span class="number"> <i class="fas fa-user"></i></span>
+                  <span class="name">3° B</span>
+                </li>
+                <li>
+                  <span class="number"
+                    ><i class="fa fa-book" aria-hidden="true"></i
+                  ></span>
+                  <span class="name">Técnico em Informática para Internet</span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="info">
-            <span>Conselheiro: </span>
-            <span>Adriano Honorato Braga</span>
-            <span>Representantes:</span>
-            <span>Alexandre Lopes, Ana Luiza</span>
+          <div class="info list-lideres">
+            <ul class="">
+              <li>
+                <span>Conselheiro:</span>
+                <span>Adriano Honorato Braga</span>
+              </li>
+              <li>
+                <span>Líderes:</span>
+                <span>Algum idiota que faz </span>
+              </li>
+            </ul>
           </div>
           <div class="actions">
             <div class="action-card">
@@ -116,16 +134,22 @@
             </div>
           </div>
         </div>
-
+        <div class="materias">
+          <div class="grafico">
+            <!-- <div>Gráfico de linha</div> -->
+            <canvas id="myChart" width="" height=""></canvas>
+            <!-- <div class="teste">Olaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div> -->
+          </div>
+        </div>
         <div class="overview">
           <div class="info-cards">
             <div class="info-card">
               <p class="subtitulo">Coeficiente Geral</p>
-              <p class="titulo">95,4</p>
+              <p class="titulo">67,4</p>
             </div>
             <div class="info-card">
               <p class="subtitulo">Coeficiente Técnico</p>
-              <p class="titulo">95,4</p>
+              <p class="titulo">89,3</p>
             </div>
             <div class="info-card">
               <p class="subtitulo">Coeficiente Médio</p>
@@ -136,15 +160,9 @@
               <p class="titulo">95,4</p>
             </div>
           </div>
-          <div class="grafico">
-            <div>Gráfico de linha</div>
-            <!-- <div class="teste">Olaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div> -->
-          </div>
-        </div>
 
-        <div class="materias">
           <div class="list">
-            <ul>             
+            <ul>
               <li>
                 <span class="number">1</span>
                 <span class="name">Matemática</span>
@@ -222,5 +240,5 @@
   </body>
   <script src="./assets/js/index.js"></script>
   <script src="./assets/js/dropdown.js"></script>
-  <script src="./assets/js/exampleChart.js"></script>
+  <!-- <script src="./assets/js/exampleChart.js"></script> -->
 </html>

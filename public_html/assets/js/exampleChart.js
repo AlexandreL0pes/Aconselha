@@ -46,7 +46,7 @@ let createChart = () => {
 let createLineChart = () => {
   let ctx = document.getElementById("myLineChart").getContext("2d");
   var myChart = new Chart(ctx, {
-    type: "line",
+    type: "bar",
     data: {
       labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
       datasets: [
