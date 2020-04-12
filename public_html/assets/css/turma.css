@@ -1,3 +1,11 @@
+:root {
+
+    /* Cores Base Layout */
+  --base-color: #eeb220;
+  --secondary-color: #c1ee20;
+  --terciary-color: #ee4c20;
+
+}
 .head-turma {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -53,7 +61,6 @@
   box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
   transition: box-shadow ease-in-out 0.4s;
   font-size: 1.2em;
-  border: solid 1px #eeb220;
   cursor: pointer;
 }
 
@@ -96,7 +103,7 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-template-rows: 4em .5fr;
+  grid-template-rows: 3em 1fr;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
@@ -124,7 +131,7 @@
 }
 
 .grafico {
-  background-color: burlywood;
+  background-color: var(--base-color);
   grid-column-end: span 2;
 }
 
