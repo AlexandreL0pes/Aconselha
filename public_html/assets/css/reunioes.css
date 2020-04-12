@@ -1,0 +1,88 @@
+:root {
+  /* Cores Cursos */
+  --info-color: rgb(40, 52, 153);
+  --amb-color: rgb(37, 165, 33);
+  --agro-color: #830c0c;
+}
+
+.cardbox {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: repeat(auto-fill, 10px 1fr 10px);
+  /* grid-auto-rows: minmax(30px, 1fr); */
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  color: #4a4a4a;
+  /* padding-top: 0.25rem;
+    padding-bottom: 0.25rem; */
+  /* margin: 0.25rem; */
+  margin: 0px;
+  padding: 0px;
+  grid-gap: 0;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+  cursor: pointer;
+}
+.cardbox:hover {
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Estilo para os tiles */
+.cardbox.is-info {
+  /* background: green; */
+  border-top: 2px solid var(--info-color);
+}
+
+.cardbox.is-agro {
+  border-top: 2px solid var(--agro-color);
+}
+
+.cardbox.is-amb {
+  border-top: 2px solid var(--amb-color);
+}
+
+.reunioes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
+  padding: 10px;
+  grid-gap: 10px;
+}
+
+.subtitle .is-7 {
+  margin: 0px;
+}
+
+.titulo {
+  margin: 0;
+}
+
+.button {
+  background-color: transparent;
+  border-color: var(--base-color);
+  border-width: 1px;
+  color: var(--base-color);
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  font-size: 8px;
+  text-transform: uppercase;
+  font-weight: lighter;
+  border-radius: 3px;
+}
+
+.button:focus,
+.button:hover {
+  background-color: var(--base-color);
+  border-color: var(--base-color);
+  color: #222424;
+}

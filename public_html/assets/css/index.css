@@ -64,19 +64,12 @@ html {
 /* Give every child element its grid name */
 .header {
   grid-area: header;
-  /* display: flex;
-  align-items: center;
-  justify-content: flex-end; */
-  /* padding-top: 10px; */
-  /* background-color: #648ca6; */
   color: black;
   display: grid;
-  /* justify-items: flex-end; */
   align-items: center;
   justify-items: right;
   grid-template-rows: repeat(auto-fill, minmax(1fr, 1fr));
   grid-template-columns: auto;
-  /* margin-right: 5px; */
   margin: 5px;
 }
 
@@ -87,10 +80,6 @@ html {
    align-items: center;
    margin: 0;
    padding: 0;
-  /* grid-gap: 5px;
-  align-items: center;
-  justify-items: center;
-  font-size: 11px;  */
   font-size: 10px;
 }
 
@@ -207,17 +196,10 @@ html {
 }
 
 
-
-.sidenav__list-item:hover {
-  /* background-color: rgba(255, 255, 255, 0.2); */
-  /* cursor: pointer; */
-}
-
 .sidenav-item-text {
   align-self: left;
   justify-self: start;
-  font-size: 0.5em;
-  /* font-stretch: condensed; */
+  font-size: 0.7em;
   font-weight: 900;
   
 }
@@ -233,14 +215,10 @@ html {
 .icon {
   width: 1.5em;
   height: 1.5em;
-  /* background-color: red; */
   text-emphasis-color: white;
-  /* background: url(./assets/images/reunion.svg); */
 }
 .main {
   grid-area: main;
-  /* background-color: #8fd4d9; */
-  /* padding-left: 40px; */
   margin: 20px;
   display: grid;
   row-gap: 10px;
@@ -277,30 +255,6 @@ html {
   margin: 20px;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  background-color: #82bef6;
-  margin-bottom: 20px;
-  -webkit-column-break-inside: avoid;
-  padding: 24px;
-  box-sizing: border-box;
-}
-
-/* Force varying heights to simulate dynamic content */
-.card:first-child {
-  height: 485px;
-}
-
-.card:nth-child(2) {
-  height: 200px;
-}
-
-.card:nth-child(3) {
-  height: 265px;
-}
 
 /* FOOTER */
 
@@ -335,10 +289,6 @@ html {
       "sidenav header"
       "sidenav main"
       "footer footer";
-  }
-
-  .header__search {
-    margin-left: 0;
   }
 
   .sidenav {
@@ -378,52 +328,13 @@ html {
   }
 }
 
-.cardbox {
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  grid-template-rows: repeat(auto-fill, 10px 1fr 10px);
-  /* grid-auto-rows: minmax(30px, 1fr); */
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
-    0 0 0 1px rgba(10, 10, 10, 0.02);
-  color: #4a4a4a;
-  /* padding-top: 0.25rem;
-  padding-bottom: 0.25rem; */
-  /* margin: 0.25rem; */
-  margin: 0px;
-  padding: 0px;
-  grid-gap: 0;
-  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
-  transition: box-shadow ease-in-out .4s;
-  cursor: pointer;
-  
-}
-.cardbox:hover {
-  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.3);
-  transform: translateY(-1px);
-}
-
 
 
 
 .bold {
   font-weight: 500 !important;
 }
-/* Estilo para os tiles */
-.cardbox.is-info {
-  /* background: green; */
-  border-top: 2px solid var(--info-color);
-}
 
-.cardbox.is-agro {
-  border-top: 2px solid var(--agro-color);
-}
-
-.cardbox.is-amb {
-  border-top: 2px solid var(--amb-color);
-}
 
 /* Fonts */
 
@@ -449,13 +360,11 @@ html {
   font-size: 0.75rem;
 }
 .subtitle {
-  /* color: #4a4a4a; */
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.25;
 }
 .subtitle strong {
-  /* color: #363636; */
   font-weight: 600;
 }
 .subtitle.is-1 {
@@ -480,7 +389,7 @@ html {
   font-size: 0.75rem;
 }
 .subtitle.is-8 {
-  font-size: 0.50rem;
+  font-size: 0.65rem;
 }
 .subtitle.is-9 {
   font-size: 0.25rem;
@@ -490,29 +399,5 @@ html {
 }
 
 
-.button {
-  background-color:transparent;
-  border-color:var(--base-color);
-  border-width:1px;
-  color:var(--base-color);
-  cursor:pointer;
-  justify-content:center;
-  padding-bottom:calc(.5em - 1px);
-  padding-left:.5em;
-  padding-right:.5em;
-  padding-top:calc(.5em - 1px);
-  text-align:center;
-  white-space:nowrap;
-  font-size: 8px;
-  text-transform: uppercase;
-  font-weight: lighter;
-  border-radius: 3px;
-}
 
 
-.button:focus,
-.button:hover {
- background-color:var(--base-color);
- border-color: var(--base-color);
- color:#222424;
-}
