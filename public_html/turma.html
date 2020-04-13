@@ -27,15 +27,35 @@
 
       <!-- Header -->
       <header class="header">
-        <div class="dropdown-user">
-          <div class="titulo pointerCursor">
-            Gerência<i class="fa fa-angle-right"></i>
+        <div class="dropdown is-right is-small no-border " id="dropdown-user">
+          <div class="dropdown-trigger">
+            <button
+              class="button"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu6"
+            >
+              <span>Coordenador</span>
+              <span class="icon is-small">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
           </div>
-
-          <div class="menu pointerCursor hide">
-            <div class="option" id="option1">Professor</div>
-            <div class="option" id="option2">Coordenador</div>
-            <div class="option" id="option3">Aluno</div>
+          <div class="dropdown-menu" id="dropdown-menu6" role="menu">
+            <div class="dropdown-content">
+              <div class="dropdown-item">
+                <a href="#" class="dropdown-item">
+                  Professor
+                </a>
+                <hr class="dropdown-divider" />
+                <a href="#" class="dropdown-item">
+                  Coordenador
+                </a>
+                <hr class="dropdown-divider" />
+                <a href="#" class="dropdown-item">
+                  Aluno
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -237,6 +257,5 @@
     </div>
   </body>
   <script src="./assets/js/index.js"></script>
-  <script src="./assets/js/dropdown.js"></script>
   <!-- <script src="./assets/js/exampleChart.js"></script> -->
 </html>

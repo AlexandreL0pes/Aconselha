@@ -401,6 +401,13 @@ img.icone {
   font-size: 0.12rem;
 }
 
+.no-border > .dropdown-trigger > .button {
+  border-width: 0px;
+}
 
+.no-border > .dropdown-trigger > .button:focus {
+  border-width: 0px;
+  box-shadow: none;
+}
 
 
