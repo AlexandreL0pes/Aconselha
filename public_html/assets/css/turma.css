@@ -11,7 +11,7 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   /* grid-template-rows: repeat(auto-fill, minmax(60px, 1fr)); */
   grid-template-rows: 1fr;
-  font-size: 1em;
+  font-size: 0.8em;
 
   font-weight: normal;
 }
@@ -94,7 +94,7 @@
   grid-column-end: span 1;
   display: grid;
   grid-template-columns: repeat(2, minmax(100px, 1fr));
-  grid-template-rows: repeat(auto-fit, minmax(80px, 1fr));
+  grid-auto-rows: 1fr;
   grid-gap: 5px;
   margin-top: 10px;
 }
@@ -103,7 +103,7 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-template-rows: 3em 1fr;
+  grid-template-rows: 2em 1fr;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
@@ -118,14 +118,14 @@
 
 .info-card .titulo {
   display: grid;
-  font-size: 1.4em;
+  font-size: 1em;
   font-weight: 500;
   align-content: center;
 }
 
 .info-card .subtitulo {
   display: grid;
-  font-size: 1em;
+  font-size: .8em;
   font-weight: 400;
   align-content: initial;
 }
@@ -145,7 +145,7 @@
 
 /* Lista */
 
-.list ul {
+.lista ul {
   position: relative;
   /* width: 200px; */
   /* margin: 100px auto 0; */
@@ -155,7 +155,7 @@
   /* box-shadow: inset 0 0 15px rgba(0, 0, 0, 0); */
 }
 
-.list ul li {
+.lista ul li {
   display: flex;
   background: rgba(255, 255, 255, 0.1);
   padding: 10px 20px;
@@ -165,39 +165,39 @@
   transition: 0.5s;
 }
 
-.list ul li:nth-child(1) {
+.lista ul li:nth-child(1) {
   background: rgba(255, 255, 255, 0.6);
 }
-.list ul li:nth-child(2) {
+.lista ul li:nth-child(2) {
   background: rgba(255, 255, 255, 0.5);
 }
-.list ul li:nth-child(3) {
+.lista ul li:nth-child(3) {
   background: rgba(255, 255, 255, 0.4);
 }
-.list ul li:nth-child(4) {
+.lista ul li:nth-child(4) {
   background: rgba(255, 255, 255, 0.3);
 }
-.list ul li:nth-child(5) {
+.lista ul li:nth-child(5) {
   background: rgba(255, 255, 255, 0.2);
 }
-.list ul li span:nth-child(1) {
+.lista ul li span:nth-child(1) {
   width: 30px;
 }
-.list ul li span:nth-child(2) {
+.lista ul li span:nth-child(2) {
   width: 200px;
 }
-.list ul li span:nth-child(3) {
+.lista ul li span:nth-child(3) {
   width: 50px;
   text-align: center;
 }
 
-.list ul li:hover {
+.lista ul li:hover {
   transform: scale(1.04);
   background: transparent;
 }
 
 /* Reverse List */
-.list-reverse ul {
+.lista-reverse ul {
   position: relative;
   /* width: 200px; */
   /* margin: 100px auto 0; */
@@ -206,7 +206,7 @@
   /* background: #eeb220; */
   /* box-shadow: inset 0 0 15px rgba(0, 0, 0, 0); */
 }
-.list-reverse ul li {
+.lista-reverse ul li {
   display: flex;
   background: rgba(255, 255, 255, 0.1);
   padding: 10px 20px;
@@ -216,38 +216,38 @@
   transition: 0.5s;
 }
 
-.list-reverse ul li:nth-child(5) {
+.lista-reverse ul li:nth-child(5) {
   background: rgba(255, 255, 255, 0.5);
 }
-.list-reverse ul li:nth-child(4) {
+.lista-reverse ul li:nth-child(4) {
   background: rgba(255, 255, 255, 0.4);
 }
-.list-reverse ul li:nth-child(3) {
+.lista-reverse ul li:nth-child(3) {
   background: rgba(255, 255, 255, 0.4);
 }
-.list-reverse ul li:nth-child(2) {
+.lista-reverse ul li:nth-child(2) {
   background: rgba(255, 255, 255, 0.3);
 }
-.list-reverse ul li:nth-child(1) {
+.lista-reverse ul li:nth-child(1) {
   background: rgba(255, 255, 255, 0.2);
 }
-.list-reverse ul li span:nth-child(1) {
+.lista-reverse ul li span:nth-child(1) {
   width: 30px;
 }
-.list-reverse ul li span:nth-child(2) {
+.lista-reverse ul li span:nth-child(2) {
   width: 200px;
 }
-.list-reverse ul li span:nth-child(3) {
+.lista-reverse ul li span:nth-child(3) {
   width: 50px;
   text-align: center;
 }
 
-.list-reverse ul li:hover {
+.lista-reverse ul li:hover {
   transform: scale(1.04);
   background: transparent;
 }
 
-.list-info ul {
+.lista-info ul {
   position: relative;
   padding: 0;
   box-sizing: border-box;
@@ -255,7 +255,7 @@
   letter-spacing: 0px;
 }
 
-.list-info ul li {
+.lista-info ul li {
   display: flex;
   background: rgba(255, 255, 255, 0.1);
   padding: 5px 10px;
@@ -265,17 +265,17 @@
   transition: 0.5s;
 }
 
-.list-info ul li span:nth-child(1) {
+.lista-info ul li span:nth-child(1) {
   width: 3em;
   text-align: center;
 }
-.list-info ul li span:nth-child(2) {
+.lista-info ul li span:nth-child(2) {
   width: 20em;
   float: left;
 
 }
 
-.list-lideres ul {
+.lista-lideres ul {
   position: relative;
   padding: 0;
   box-sizing: border-box;
@@ -283,7 +283,7 @@
   letter-spacing: 0px;
 }
 
-.list-lideres ul li {
+.lista-lideres ul li {
   display: flex;
   background: rgba(255, 255, 255, 0.1);
   padding: 5px 10px;
@@ -293,10 +293,10 @@
   transition: 0.5s;
 }
 
-.list-lideres ul li span:nth-child(1) {
+.lista-lideres ul li span:nth-child(1) {
   width: 7em;
 
 }
-.list-lideres ul li span:nth-child(2) {
+.lista-lideres ul li span:nth-child(2) {
   width: 12em;
 }

@@ -1,0 +1,446 @@
+<div class="head-turma">
+<div class="info-turma">
+  <div class="list-info">
+    <ul>
+      <li>
+        <span class="number"> <i class="fas fa-user"></i></span>
+        <span class="name">3° B</span>
+      </li>
+      <li>
+        <span class="number"
+          ><i class="fa fa-book" aria-hidden="true"></i
+        ></span>
+        <span class="name">Técnico em Informática para Internet</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="info list-lideres">
+  <ul class="">
+    <li>
+      <span>Conselheiro:</span>
+      <span>Adriano Honorato Braga</span>
+    </li>
+    <li>
+      <span>Líderes:</span>
+      <span>Alexandre Lopes, Ana Luiza</span>
+    </li>
+  </ul>
+</div>
+<div class="actions">
+  <div class="action-card">
+    <!-- <img src="./assets/images/config.svg" alt="" class="logo" />  -->
+    <i class="fas fa-pen logo"></i>
+    <p class="subtitulo">Memória de Reunião</p>
+  </div>
+  <div class="action-card">
+    <p class="titulo">
+      <i class="fas fa-id-badge logo"></i>
+    </p>
+    <p class="subtitulo">Atendimentos Pedagógicos</p>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+.head-turma {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    /* grid-template-rows: repeat(auto-fill, minmax(60px, 1fr)); */
+    grid-template-rows: 1fr;
+    font-size: 10px;
+  
+    font-weight: normal;
+    
+  }
+  .info-turma {
+    /* display: grid;
+  
+    grid-template-columns: 0.3fr 1fr;
+    grid-template-rows: repeat(auto-fill, minmax(20px, 1fr));
+  
+    grid-gap: 5px;
+    */
+  
+  }
+  
+  .info-turma p {
+    font-size: 1em;
+    font-weight: 400;
+  }
+  
+  .info {
+    /* display: grid;
+    grid-template-columns: 0.4fr 1fr;
+    grid-template-rows: repeat(auto-fill, minmax(20px, 1fr));
+    grid-gap: 5px;
+    padding: 10px; */
+  }
+  
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    /* grid-template-rows: minmax(50px, 1fr) minmax(50px, 1fr); */
+    grid-gap: 5px;
+    font-size: 8px;
+  }
+  .actions .action-card {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    place-items: center;
+  
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+      0 0 0 1px rgba(10, 10, 10, 0.02);
+    color: #4a4a4a;
+    box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+    transition: box-shadow ease-in-out 0.4s;
+  
+    cursor: pointer;
+  }
+  
+  .actions .action-card .logo {
+    /* height: 1.6em; */
+    font-size: 1.6em;
+    margin-top: 20px;
+  }
+  
+  .overview {
+    display: grid;
+    grid-template-columns: minmax(50px, 1fr) 2fr;
+    /* grid-template-rows: repeat(auto-fill, minmax(60px, 1fr)); */
+    /* grid-template-rows: 1fr; */
+    font-size: 10px;
+    font-weight: normal;
+    grid-gap: 10px;
+  }
+  
+  .info-card {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+      0 0 0 1px rgba(10, 10, 10, 0.02);
+    color: #4a4a4a;
+    grid-gap: 0;
+    box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+    transition: box-shadow ease-in-out 0.4s;
+  }
+  
+  .info-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(50px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+    grid-gap: 5px;
+    margin-top: 10px;
+  }
+  
+  .info-card {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: repeat(auto-fill, 15px 1fr);
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+      0 0 0 1px rgba(10, 10, 10, 0.02);
+    color: #4a4a4a;
+    margin: 0px;
+    padding: 0px;
+    grid-gap: 0;
+    box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+    transition: box-shadow ease-in-out 0.4s;
+  }
+  
+  .info-card .titulo {
+    display: grid;
+    font-size: 14px;
+    font-weight: 400;
+    align-content: center;
+  }
+  
+  .info-card .subtitulo {
+    display: grid;
+    font-size: 0.7em;
+    font-weight: 400;
+    align-content: initial;
+  }
+  
+  .overview .grafico {
+    background: burlywood;
+    /* grid-column: 2/ span 2;
+    grid-row: 1/span 2; */
+    /* grid-column: 2/-1; */
+    padding: 10px;
+  }
+  .overview .graficoLinha {
+    width: 80%;
+    height: 20%;
+  }
+  
+  .materias {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+    font-size: 10px;
+    font-weight: normal;
+    grid-gap: 10px;
+  }
+  /* .title-turma {
+    font-size: 1em;
+  }
+  
+  .head-turma {
+    display: grid;
+    grid-template-columns: .6fr 1fr;
+    grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+    font-size: 10px;
+    grid-gap: 5px;
+    font-weight: normal;
+  }
+  
+  .info-turma {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(20px, 1fr));
+  }
+  
+  .info-turma .info {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+    grid-template-columns: 5em 1fr;
+    font-size: 10px;
+    background-color: thistle;
+  }
+  
+  .actions {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background-color: tomato;
+  }
+  
+  a.button {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    margin: 0 0.3em 0.3em 0;
+    border: 0.1em solid black;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    transition: all 0.2s;
+    font-size: 8px;
+  }
+  a.button:hover {
+    color: #000000;
+    background-color: yellow;
+  }
+  .info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(70px, 1fr));
+    grid-gap: 5px;
+    margin-top: 10px;
+  }
+  
+  .info-card {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: repeat(auto-fill, 15px 1fr);
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+      0 0 0 1px rgba(10, 10, 10, 0.02);
+    color: #4a4a4a;
+    margin: 0px;
+    padding: 0px;
+    grid-gap: 0;
+    box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+    transition: box-shadow ease-in-out 0.4s;
+    border: solid black 1px;
+  }
+  
+  .info-card .titulo {
+      display: grid;
+      font-size: 22px;
+      font-weight: 500;
+      align-content: center;
+  }
+  .info-card .subtitulo {
+      display: grid;
+      font-size: .8em;
+      font-weight: 400;
+      align-content: initial;
+  } */
+  
+  /* Lista */
+  
+  .list ul {
+    position: relative;
+    /* width: 200px; */
+    /* margin: 100px auto 0; */
+    padding: 5px;
+    box-sizing: border-box;
+    background: #eeb220;
+    /* box-shadow: inset 0 0 15px rgba(0, 0, 0, 0); */
+  }
+  
+  .list ul li {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    list-style: none;
+    color: black;
+    margin: 5px 0;
+    transition: 0.5s;
+  }
+  
+  .list ul li:nth-child(1) {
+    background: rgba(255, 255, 255, 0.6);
+  }
+  .list ul li:nth-child(2) {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .list ul li:nth-child(3) {
+    background: rgba(255, 255, 255, 0.4);
+  }
+  .list ul li:nth-child(4) {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .list ul li:nth-child(5) {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .list ul li span:nth-child(1) {
+    width: 30px;
+  }
+  .list ul li span:nth-child(2) {
+    width: 200px;
+  }
+  .list ul li span:nth-child(3) {
+    width: 50px;
+    text-align: center;
+  }
+  
+  .list ul li:hover {
+    transform: scale(1.04);
+    background: transparent;
+  }
+  
+  /* Reverse List */
+  .list-reverse ul {
+    position: relative;
+    /* width: 200px; */
+    /* margin: 100px auto 0; */
+    padding: 5px;
+    box-sizing: border-box;
+    background: #eeb220;
+    /* box-shadow: inset 0 0 15px rgba(0, 0, 0, 0); */
+  }
+  .list-reverse ul li {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    list-style: none;
+    color: black;
+    margin: 5px 0;
+    transition: 0.5s;
+  }
+  
+  .list-reverse ul li:nth-child(5) {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .list-reverse ul li:nth-child(4) {
+    background: rgba(255, 255, 255, 0.4);
+  }
+  .list-reverse ul li:nth-child(3) {
+    background: rgba(255, 255, 255, 0.4);
+  }
+  .list-reverse ul li:nth-child(2) {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .list-reverse ul li:nth-child(1) {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .list-reverse ul li span:nth-child(1) {
+    width: 30px;
+  }
+  .list-reverse ul li span:nth-child(2) {
+    width: 200px;
+  }
+  .list-reverse ul li span:nth-child(3) {
+    width: 50px;
+    text-align: center;
+  }
+  
+  .list-reverse ul li:hover {
+    transform: scale(1.04);
+    background: transparent;
+  }
+  
+  
+  .list-info ul {
+    position: relative;
+    padding: 0;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0);
+    letter-spacing: 0px;
+  }
+  
+  .list-info ul li {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+    list-style: none;
+    color: black;
+    margin: 2px 0;
+    transition: 0.5s;
+  }
+  
+  .list-info ul li span:nth-child(1) {
+    width: 3em;
+    text-align: center;
+  }
+  .list-info ul li span:nth-child(2) {
+    width: 20em;
+  }
+  
+  .list-lideres ul {
+    position: relative;
+    padding: 0;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0);
+    letter-spacing: 0px;
+  }
+  
+  .list-lideres ul li {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+    list-style: none;
+    color: black;
+    margin: 2px 0;
+    transition: 0.5s;
+  }
+  
+  .list-lideres ul li span:nth-child(1) {
+    width: 7em;
+    text-align: left;
+  }
+  .list-lideres ul li span:nth-child(2) {
+    width: 20em;
+  }
+  
+  
+  
