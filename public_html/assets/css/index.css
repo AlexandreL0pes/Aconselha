@@ -137,7 +137,7 @@ html {
   grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
   align-items: center;
   justify-self: center;
-  grid-gap: 10px;
+  grid-gap: 25px;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -154,7 +154,7 @@ html {
   width: 1.2em;
   height: 1.2em;
   margin-top: 20px;
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .sidenav__list-mobile {
@@ -213,10 +213,11 @@ html {
 */
 
 /* Specifies the size of the svg icon */
-.icon {
-  width: 1.5em;
-  height: 1.5em;
+img.icone {
+  width: 1.3em;
+  height: 1.3em;
   text-emphasis-color: white;
+  cursor: pointer;
 }
 .main {
   grid-area: main;
@@ -265,7 +266,7 @@ html {
   align-items: center;
   justify-items: center;
   color: black;
-  grid-template-rows: 1fr 1f;
+  grid-template-rows: 1fr;
   background: transparent;
   font-size: 8px;
   font-weight: 300;
@@ -330,10 +331,7 @@ html {
 }
 
 
-.descricao {
-  display: flex;
-  justify-content: space-between;
-}
+
 
 .bold {
   font-weight: 500 !important;
@@ -367,6 +365,7 @@ html {
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.25;
+  /* margin: 5px; */
 }
 .subtitulo strong {
   font-weight: 600;

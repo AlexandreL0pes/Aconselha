@@ -11,8 +11,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"> -->
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+    />
   </head>
   <body>
     <div class="grid-container">
@@ -24,7 +26,7 @@
 
       <!-- Header -->
       <header class="header">
-        <div class="dropdown">
+        <div class="dropdown-user">
           <div class="titulo pointerCursor">
             Gerência<i class="fa fa-angle-right"></i>
           </div>
@@ -45,16 +47,16 @@
             <img src="./assets/images/logo_sadc.svg" alt="" class="logo-icon" />
           </li>
           <li class="sidenav__list-item">
-            <img src="./assets/images/student.svg" alt="" class="icon" />
+            <img src="./assets/images/student.svg" alt="" class="icone" />
           </li>
           <li class="sidenav__list-item">
-            <img src="./assets/images/grupo.svg" alt="" class="icon" />
+            <img src="./assets/images/grupo.svg" alt="" class="icone" />
           </li>
           <li class="sidenav__list-item">
-            <img class="icon" src="./assets/images/reunion.svg" alt="" />
+            <img class="icone" src="./assets/images/reunion.svg" alt="" />
           </li>
           <li class="sidenav__list-item">
-            <img class="icon" src="./assets/images/config.svg" alt="" />
+            <img class="icone" src="./assets/images/config.svg" alt="" />
           </li>
         </ul>
       </aside>
@@ -67,19 +69,19 @@
         </div>
         <ul class="sidenav__list-mobile">
           <li class="sidenav__list-item-mobile">
-            <img src="./assets/images/student.svg" alt="" class="icon" />
+            <img src="./assets/images/student.svg" alt="" class="icone" />
             <p class="sidenav-item-text">Alunos</p>
           </li>
           <li class="sidenav__list-item-mobile">
-            <img src="./assets/images/grupo.svg" alt="" class="icon" />
+            <img src="./assets/images/grupo.svg" alt="" class="icone" />
             <p class="sidenav-item-text">Turmas</p>
           </li>
           <li class="sidenav__list-item-mobile">
-            <img class="icon" src="./assets/images/reunion.svg" alt="" />
+            <img src="./assets/images/reunion.svg" alt="" class="icone" />
             <p class="sidenav-item-text">Conselhos Anteriores</p>
           </li>
           <li class="sidenav__list-item-mobile">
-            <img class="icon" src="./assets/images/config.svg" alt="" />
+            <img src="./assets/images/config.svg" alt="" class="icone" />
             <p class="sidenav-item-text">Configurações</p>
           </li>
         </ul>
@@ -87,68 +89,123 @@
       <!-- Sidebar Mobile -->
 
       <main class="main">
-        <div>
-          <h4 class="subtitulo is-6">Conselhos em Andamento</h4>
-          <div class="reunioes">
-            <div class="cardbox card-turma is-agro" data-turmaConselho="1">
-              <p class="subtitulo is-8">Agropecuária</p>
-              <p class="subtitulo is-7 bold">1° B</p>
-              <p class="subtitulo is-8">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-amb" data-turmaConselho="2">
-              <p class="subtitulo is-8">Meio Ambiente</p>
-              <p class="subtitulo is-7 bold">1° B</p>
-              <p class="subtitulo is-8">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-agro" data-turmaConselho="3">
-              <p class="subtitulo is-8">Agropecuária</p>
-              <p class="subtitulo is-7 bold">1° B</p>
-              <p class="subtitulo is-8">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-agro" data-turmaConselho="5">
-              <p class="subtitulo is-8">Agropecuária</p>
-              <p class="subtitulo is-7 bold">3° B</p>
-              <p class="subtitulo is-8">INFI.2019/1.A</p>
-            </div>
+        <h4 class="subtitulo is-6">Conselhos em Andamento</h4>
+        <div class="reunioes">
+          <div class="cardbox card-turma is-agro" data-turmaConselho="1">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">1° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
           </div>
-
-          <h4 class="subtitulo is-6">Conselhos não iniciados</h4>
-          <div class="descricao">
-            <p class="subtitulo is-7">
-              <span class="" id="qtdTurmas">Nenhuma</span> 
-              turma(s) selecionada(s)
-            </p>
-            <button href="#" class="button" id="iniciarConselho" disabled>Iniciar Conselho</button>
+          <div class="cardbox card-turma is-amb" data-turmaConselho="2">
+            <p class="subtitulo is-8">Meio Ambiente</p>
+            <p class="subtitulo is-7 bold">1° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
           </div>
-          <div class="turmas">
-            <div class="cardbox card-turma is-agro" data-cod-turma="1">
-              <p class="subtitulo is-8">Agropecuária</p>
-              <p class="subtitulo is-7 bold">1° B</p>
-              <p class="subtitulo is-8">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-amb" data-cod-turma="2">
-              <p class="subtitulo is-8">Meio Ambiente</p>
-              <p class="subtitulo is-7 bold">1° B</p>
-              <p class="subtitulo is-8">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-agro" data-cod-turma="3">
-              <p class="subtitulo is-8">Agropecuária</p>
-              <p class="subtitulo is-7 bold">1° B</p>
-              <p class="subtitulo is-8">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-agro" data-cod-turma="5">
-              <p class="subtitulo is-8">Agropecuária</p>
-              <p class="subtitulo is-7 bold">3° B</p>
-              <p class="subtitulo is-8">INFI.2019/1.A</p>
-            </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="3">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">1° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
           </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-turmaConselho="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
           </div>
         </div>
-     
+
+        <div class="descricao">
+          <div>
+            <h4 class="subtitulo is-6">Conselhos não iniciados</h4>
+            <p class="resultadoSelecionado">
+              <span class="" id="qtdTurmas">Nenhuma</span>
+              turma(s) selecionada(s)
+            </p>
+          </div>
+              <button href="#" class="button" id="iniciarConselho" disabled="">
+                Iniciar Conselho
+              </button>
+        </div>
+
+        <div class="turmas">
+          <div class="cardbox card-turma is-agro" data-cod-turma="1">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">1° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-amb" data-cod-turma="2">
+            <p class="subtitulo is-8">Meio Ambiente</p>
+            <p class="subtitulo is-7 bold">1° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-cod-turma="3">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">1° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+          <div class="cardbox card-turma is-agro" data-cod-turma="5">
+            <p class="subtitulo is-8">Agropecuária</p>
+            <p class="subtitulo is-7 bold">3° B</p>
+            <p class="subtitulo is-8">INFI.2019/1.A</p>
+          </div>
+        </div>
       </main>
 
       <footer class="footer">
-        <div class="footer__copyright"></div>
         <div class="footer_nepeti">
           <img
             class="logo_nepeti"
