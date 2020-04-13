@@ -21,7 +21,7 @@ body {
   margin: 0;
   padding: 0;
   color: #2f2f2d;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif !important;
   font-size: 0.75rem;
   font-weight: 500;
 }
@@ -330,7 +330,10 @@ html {
 }
 
 
-
+.descricao {
+  display: flex;
+  justify-content: space-between;
+}
 
 .bold {
   font-weight: 500 !important;
@@ -339,63 +342,63 @@ html {
 
 /* Fonts */
 
-.title.is-1 {
+.titulo.is-1 {
   font-size: 3rem;
 }
-.title.is-2 {
+.titulo.is-2 {
   font-size: 2.5rem;
 }
-.title.is-3 {
+.titulo.is-3 {
   font-size: 2rem;
 }
-.title.is-4 {
+.titulo.is-4 {
   font-size: 1.5rem;
 }
-.title.is-5 {
+.titulo.is-5 {
   font-size: 1.25rem;
 }
-.title.is-6 {
+.titulo.is-6 {
   font-size: 1rem;
 }
-.title.is-7 {
+.titulo.is-7 {
   font-size: 0.75rem;
 }
-.subtitle {
+.subtitulo {
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.25;
 }
-.subtitle strong {
+.subtitulo strong {
   font-weight: 600;
 }
-.subtitle.is-1 {
+.subtitulo.is-1 {
   font-size: 3rem;
 }
-.subtitle.is-2 {
+.subtitulo.is-2 {
   font-size: 2.5rem;
 }
-.subtitle.is-3 {
+.subtitulo.is-3 {
   font-size: 2rem;
 }
-.subtitle.is-4 {
+.subtitulo.is-4 {
   font-size: 1.5rem;
 }
-.subtitle.is-5 {
+.subtitulo.is-5 {
   font-size: 1.25rem;
 }
-.subtitle.is-6 {
+.subtitulo.is-6 {
   font-size: 1rem;
 }
-.subtitle.is-7 {
+.subtitulo.is-7 {
   font-size: 0.75rem;
 }
-.subtitle.is-8 {
+.subtitulo.is-8 {
   font-size: 0.65rem;
 }
-.subtitle.is-9 {
+.subtitulo.is-9 {
   font-size: 0.25rem;
 }
-.subtitle.is-10 {
+.subtitulo.is-10 {
   font-size: 0.12rem;
 }
 

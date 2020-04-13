@@ -15,7 +15,7 @@
   border-radius: 2px;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
     0 0 0 1px rgba(10, 10, 10, 0.02);
-  color: #4a4a4a;
+  color: #222424;
   /* padding-top: 0.25rem;
     padding-bottom: 0.25rem; */
   /* margin: 0.25rem; */
@@ -45,7 +45,7 @@
   border-top: 2px solid var(--amb-color);
 }
 
-.reunioes {
+.reunioes, .turmas {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
@@ -62,22 +62,20 @@
 }
 
 .button {
-  background-color: transparent;
+  background-color: black;
   border-color: var(--base-color);
   border-width: 1px;
-  color: var(--base-color);
+  color: white;
   cursor: pointer;
-  justify-content: center;
-  padding-bottom: calc(0.5em - 1px);
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  padding-top: calc(0.5em - 1px);
-  text-align: center;
-  white-space: nowrap;
-  font-size: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 10px;
   text-transform: uppercase;
-  font-weight: lighter;
   border-radius: 3px;
+  padding: 5px;
+}
+.button:disabled {
+  background: gray
 }
 
 .button:focus,
@@ -85,4 +83,13 @@
   background-color: var(--base-color);
   border-color: var(--base-color);
   color: #222424;
+}
+
+a {
+  text-decoration: none;
+}
+
+.selected {
+background: rgba(0, 0, 0, 0.1);
+/* border: solid 1px black; */
 }
