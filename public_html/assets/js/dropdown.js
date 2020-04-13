@@ -32,15 +32,15 @@ function toggleClass(elem, className) {
 
     const id = e.target.id;
     const newValue = e.target.textContent + " ";
-    const titleElem = document.querySelector(".dropdown .title");
-    const icon = document.querySelector(".dropdown .title .fa");
+    const titleElem = document.querySelector(".dropdown .titulo");
+    const icon = document.querySelector(".dropdown .titulo .fa");
 
     titleElem.textContent = newValue;
     titleElem.appendChild(icon);
 
     //trigger custom event
     document
-      .querySelector(".dropdown .title")
+      .querySelector(".dropdown .titulo")
       .dispatchEvent(new Event("change"));
     //setTimeout is used so transition is properly shown
     setTimeout(() => toggleClass(icon, "rotate-90", 0));
@@ -54,7 +54,7 @@ function toggleClass(elem, className) {
   }
 
   //get elements
-  const dropdownTitle = document.querySelector(".dropdown .title");
+  const dropdownTitle = document.querySelector(".dropdown .titulo");
   const dropdownOptions = document.querySelectorAll(".dropdown .option");
 
   //bind listeners to these elements
@@ -65,5 +65,5 @@ function toggleClass(elem, className) {
   );
 
   document
-    .querySelector(".dropdown .title")
+    .querySelector(".dropdown .titulo")
     .addEventListener("change", handleTitleChange);

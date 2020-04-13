@@ -11,13 +11,13 @@
     margin-top: .5em;
   }
 
-  .dropdown .title {
+  .dropdown .titulo {
     margin: 0.3em 0.3em 0.3em 0.3em;
     width: 100%;
     text-align: right;
   }
 
-  .dropdown .title .fa-angle-right {
+  .dropdown .titulo .fa-angle-right {
     float: right;
     margin-right: 0.7em;
     transition: transform 0.3s;
