@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300, 400, 500, 600, 700);
 
 :root {
   --size-sidebar: 40px;
@@ -12,9 +12,6 @@
   --info-color: rgb(40, 52, 153);
   --amb-color: rgb(37, 165, 33);
   --agro-color: #830c0c;
-
-
-
 }
 
 body {
@@ -25,7 +22,6 @@ body {
   font-size: 0.75rem;
   font-weight: 500;
 }
-
 
 html {
   /* border-box box model allows us to add padding and border to our elements without increasing their size */
@@ -73,13 +69,12 @@ html {
   margin: 5px;
 }
 
-
 .typeuser {
   display: grid;
-   grid-template-columns: 1fr 20px;
-   align-items: center;
-   margin: 0;
-   padding: 0;
+  grid-template-columns: 1fr 20px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
   font-size: 10px;
 }
 
@@ -181,7 +176,6 @@ html {
   color: black;
   padding: 0;
   margin: 0;
-
 }
 .sidenav__list-item-mobile {
   display: grid;
@@ -193,16 +187,13 @@ html {
   padding: 0;
   margin: 0;
   text-align: left;
-
 }
-
 
 .sidenav-item-text {
   align-self: left;
   justify-self: start;
   font-size: 0.7em;
   font-weight: 900;
-  
 }
 .sidenav {
   display: none;
@@ -256,7 +247,6 @@ img.icone {
   column-gap: 20px;
   margin: 20px;
 }
-
 
 /* FOOTER */
 
@@ -319,7 +309,6 @@ img.icone {
   .sidenav__close-icon {
     visibility: hidden;
   }
-  
 }
 
 /* Medium screens breakpoint (1050px) */
@@ -330,13 +319,9 @@ img.icone {
   }
 }
 
-
-
-
 .bold {
   font-weight: 500 !important;
 }
-
 
 /* Fonts */
 
@@ -410,4 +395,59 @@ img.icone {
   box-shadow: none;
 }
 
+.toasts {
+  background: transparent;
+  color: black;
+  display: inline-block;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+.snackbar {
+  background-color: rgb(255, 255, 252);
+  border-radius: 2px;
+  box-shadow: 1 0.5em 1em -0.125em rgba(10, 10, 10, 0.8),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  color: #222424;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+  cursor: pointer;
 
+  font-size: 0.7em;
+  padding: 5px 10px 5px 10px;
+  margin: 10px;
+}
+
+.toast-title {
+  font-weight: 600;
+}
+.toast-header {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-self: center;
+}
+.toast-time {
+  font-size: 0.9em;
+  font-weight: 300;
+  color: #7a7676;
+}
+
+.toast-time {
+  /* margin-right: 5px; */
+}
+
+.success {
+  border-left: solid 4px green;
+}
+.error {
+  border-left: solid 4px red;
+}
+.warning {
+  border-left: solid 4px yellow;
+}
+
+.toast-content {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
