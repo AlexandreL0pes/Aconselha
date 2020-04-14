@@ -78,7 +78,13 @@ let iniciarConselhos = () => {
       // codigoTurmas.append(i.getAttribute('data-cod-turma'));
       codigoTurmas.push(i.getAttribute("data-cod-turma"));
     }
-
+    showMessage({
+      title: "Houve um erro!",
+      subtitle: "Agora",
+      content: "Não foi possível alterar o trabalho.",
+      type: "success",
+      durationTime: 4000
+    });
     // const xhr = new XMLHttpRequest();
 
     // xhr.onload = function () {
