@@ -403,7 +403,7 @@ img.icone {
   top: 10px;
   right: 10px;
 }
-.snackbar {
+.toast {
   background-color: rgb(255, 255, 252);
   border-radius: 2px;
   box-shadow: 1 0.5em 1em -0.125em rgba(10, 10, 10, 0.8),
@@ -445,6 +445,9 @@ img.icone {
 }
 .warning {
   border-left: solid 4px yellow;
+}
+.info {
+  border-left: solid 4px blue;
 }
 
 .toast-content {
