@@ -18,7 +18,9 @@ let abrirReuniao = () => {
         event.target.getAttribute("data-turmaconselho") ||
         event.target.parentElement.getAttribute("data-turmaconselho");
       console.log(idReuniao);
-      window.location = "./reuniao.html?idTurmaConselho=" + idReuniao;
+      localStorage.setItem("conselhoAtual", idReuniao);
+
+      window.location = "./turma.html";
     });
   });
 };
@@ -83,7 +85,7 @@ let iniciarConselhos = () => {
       subtitle: "Agora",
       content: "Não foi possível alterar o trabalho.",
       type: "success",
-      durationTime: 4000
+      durationTime: 4000,
     });
     // const xhr = new XMLHttpRequest();
 
