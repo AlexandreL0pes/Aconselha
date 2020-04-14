@@ -31,15 +31,15 @@ let activeDropdown = () => {
 
 /**
  * Exibe e apaga a mensagem na tela
- * @param {string} title 
- * @param {string} subtitle 
- * @param {string} content 
- * @param {string} type 
- * @param {number} durationTime 
+ * @param {string} title - Title of the toast
+ * @param {string} subtitle - Subtitle of the toast
+ * @param {string} content - Text for the toast
+ * @param {('success' | 'warning' | 'error' | 'info')} type - Type of the toast
+ * @param {number} durationTime - Time that toast will remain on screen
  */
-let showMessage = (title, subtitle, content, type, durationTime) => {
+let showMessage = (title, content, type, durationTime) => {
   title = title === "undefined" ? "" : title;
-  subtitle = subtitle === "undefined" ? "Agora" : subtitle;
+  subtitle =  "Agora";
   content = content === "undefined" ? "" : content;
   type = type === "undefined" ? "info" : type;
   durationTime =
@@ -55,7 +55,7 @@ let showMessage = (title, subtitle, content, type, durationTime) => {
       </div>
     </div>
     <div class="toast-content">
-    ${content + " " + Math.round(Math.random() * 100)}
+    ${content}
     <div class="toast-message">
     </div>
     </div>
