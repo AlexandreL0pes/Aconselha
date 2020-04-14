@@ -437,16 +437,16 @@ img.icone {
   /* margin-right: 5px; */
 }
 
-.success {
+.toast.success {
   border-left: solid 4px green;
 }
-.error {
+.toast.error {
   border-left: solid 4px red;
 }
-.warning {
+.toast.warning {
   border-left: solid 4px yellow;
 }
-.info {
+.toast.info {
   border-left: solid 4px blue;
 }
 
