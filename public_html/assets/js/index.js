@@ -28,29 +28,34 @@ let activeDropdown = () => {
   });
 };
 
+
 /**
  * Exibe e apaga a mensagem na tela
- * @param {*} config
+ * @param {string} title 
+ * @param {string} subtitle 
+ * @param {string} content 
+ * @param {string} type 
+ * @param {number} durationTime 
  */
-let showMessage = (config) => {
-  config.title = config.title === "undefined" ? "" : config.title;
-  config.subtitle = config.subtitle === "undefined" ? "Agora" : config.subtitle;
-  config.content = config.content === "undefined" ? "" : config.content;
-  config.type = config.type === "undefined" ? "info" : config.type;
-  config.durationTime =
-    config.durationTime === "undefined" ? 4000 : parseInt(config.durationTime);
+let showMessage = (title, subtitle, content, type, durationTime) => {
+  title = title === "undefined" ? "" : title;
+  subtitle = subtitle === "undefined" ? "Agora" : subtitle;
+  content = content === "undefined" ? "" : content;
+  type = type === "undefined" ? "info" : type;
+  durationTime =
+    durationTime === "undefined" ? 4000 : parseInt(durationTime);
 
   const toasts = document.querySelector("#toasts");
 
-  let toast = `<div class="toast ${config.type}">
+  let toast = `<div class="toast ${type}">
     <div class="toast-header">
-      <div class="toast-title">${config.title}</div>
+      <div class="toast-title">${title}</div>
       <div class="toast-close">
-        <span class="toast-time">${config.subtitle}</span>
+        <span class="toast-time">${subtitle}</span>
       </div>
     </div>
     <div class="toast-content">
-    ${config.content + " " + Math.round(Math.random() * 100)}
+    ${content + " " + Math.round(Math.random() * 100)}
     <div class="toast-message">
     </div>
     </div>
@@ -68,6 +73,6 @@ let showMessage = (config) => {
     console.log(toasts.firstElementChild);
     
     toasts.removeChild(toasts.firstElementChild);
-  }, config.durationTime);
+  }, durationTime);
 };
 events();
