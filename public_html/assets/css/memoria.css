@@ -1,0 +1,110 @@
+.main {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(80px, 1fr));
+  /* padding-left: 20px; */
+  grid-gap: 30px;
+}
+.lista-info {
+  display: grid;
+  align-items: center;
+}
+
+.actions {
+  grid-column: auto / -1;
+}
+
+/* Action Button */
+.actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-gap: 5px;
+  font-size: 8px;
+}
+.actions .action-card {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(30px, 1fr));
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  place-items: center;
+
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  color: #4a4a4a;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  /* transition: box-shadow ease-in-out 0.4s; */
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.actions .action-card .logo {
+  font-size: 2em;
+  margin-top: 2em;
+  align-self: center;
+}
+
+.action-card.is-green {
+  color: rgb(19, 161, 0);
+  border-color: rgb(19, 161, 0);
+}
+/* Action Button */
+
+/* Lista Identificação */
+.lista-identificacao {
+}
+.lista-identificacao {
+  /* position: relative; */
+  padding: 0;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0);
+  letter-spacing: 0px;
+}
+
+.lista-identificacao li {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px 5px;
+  list-style: none;
+  color: black;
+  /* margin: 2px; */
+  /* transition: 0.5s; */
+}
+
+.lista-identificacao li span:nth-child(1) {
+  width: 3em;
+  text-align: center;
+}
+.lista-identificacao li span:nth-child(2) {
+  width: 20em;
+  float: left;
+}
+
+.content {
+  grid-column: 1 / -1;
+  grid-row: span 5;
+
+  display: grid;
+  grid-template-rows: 30px auto;
+  margin: 10px;
+}
+.subtitulo {
+  margin-bottom: 0px !important;
+}
+/* TextArea */
+.text-area {
+  resize: vertical;
+	margin-left: 5px;
+	margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  min-height: 70%;
+  max-height: 100%;
+  overflow: hidden;
+  text-emphasis-color: initial;
+	/* border-radius: 10px; */
+	border:none;
+  border-left: solid 1px black;
+}
+/* TextArea */

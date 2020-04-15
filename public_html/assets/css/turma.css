@@ -10,7 +10,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   /* grid-template-rows: repeat(auto-fill, minmax(60px, 1fr)); */
-  grid-template-rows: 1fr;
+  /* grid-template-rows: 1fr; */
+  grid-auto-rows: minmax(100px, 1fr);
   font-size: 0.8em;
 
   font-weight: normal;
