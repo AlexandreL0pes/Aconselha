@@ -454,3 +454,10 @@ img.icone {
   margin-top: 10px;
   margin-bottom: 5px;
 }
+
+.label {
+  font-weight: normal !important;
+}
+.label:not(:last-child) {
+  margin-bottom: .2em !important;
+}

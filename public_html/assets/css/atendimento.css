@@ -170,3 +170,17 @@
 .cardbox.is-amb {
   border-top: 2px solid var(--amb-color);
 }
+
+.formEncaminhamento {
+  /* display: none; */
+  margin: 10px;
+  grid-column: 1 / span 2;
+  grid-row-end: span 3;
+  /* border: solid 1px red; */
+}
+
+.botoes {
+  display: flex;
+  flex-flow: column-reverse;
+  align-items: flex-end;
+}
