@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste</title>
+    <link rel="stylesheet" href="./assets/css/index.css" />
+    <link rel="stylesheet" href="./assets/css/dropdown.css" />
+    <link rel="stylesheet" href="./assets/css/atendimento.css" />
+    <!-- <link rel="stylesheet" href="./assets/css/turma.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <div class="grid-container">
+      <!-- Hamburg Icon -->
+      <div class="menu-icon">
+        <i class="fas fa-bars header__menu"></i>
+      </div>
+      <!-- Hamburg Icon -->
+
+      <!-- Header -->
+      <header class="header">
+        <div class="dropdown is-right is-small no-border" id="dropdown-user">
+          <div class="dropdown-trigger">
+            <button
+              class="button"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu6"
+            >
+              <span>Coordenador</span>
+              <span class="icon is-small">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu6" role="menu">
+            <div class="dropdown-content">
+              <div class="dropdown-item">
+                <a href="#" class="dropdown-item">
+                  Professor
+                </a>
+                <hr class="dropdown-divider" />
+                <a href="#" class="dropdown-item">
+                  Coordenador
+                </a>
+                <hr class="dropdown-divider" />
+                <a href="#" class="dropdown-item">
+                  Aluno
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Header -->
+
+      <!-- Sidebar -->
+      <aside class="sidenav">
+        <ul class="sidenav__list">
+          <li class="sidenav__list-item first-item">
+            <img src="./assets/images/logo_sadc.svg" alt="" class="logo-icon" />
+          </li>
+          <li class="sidenav__list-item">
+            <img src="./assets/images/student.svg" alt="" class="icone" />
+          </li>
+          <li class="sidenav__list-item">
+            <img src="./assets/images/grupo.svg" alt="" class="icone" />
+          </li>
+          <li class="sidenav__list-item">
+            <img class="icone" src="./assets/images/reunion.svg" alt="" />
+          </li>
+          <li class="sidenav__list-item">
+            <img class="icone" src="./assets/images/config.svg" alt="" />
+          </li>
+        </ul>
+      </aside>
+      <!-- Sidebar -->
+
+      <!-- Sidebar Mobile -->
+      <aside class="sidenav-mobile">
+        <div class="sidenav__close-icon-mobile">
+          <i class="fas fa-times sidenav__brand-close"></i>
+        </div>
+        <ul class="sidenav__list-mobile">
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/student.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Alunos</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/grupo.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Turmas</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/reunion.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Conselhos Anteriores</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/config.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Configurações</p>
+          </li>
+        </ul>
+      </aside>
+      <!-- Sidebar Mobile -->
+
+      <main class="main">
+        <!-- <ul class="lista-identificacao">
+          <li>
+            <span class=""> <i class="fas fa-user"></i></span>
+            <span class="name">3° B</span>
+          </li>
+          <li>
+            <span class=""><i class="fa fa-book"></i></span>
+            <span class="name">Técnico em Informática para Internet</span>
+          </li>
+          <li>
+            <span class=""><i class="fa fa-calendar"></i></span>
+            <span class="name">1° Trimestre</span>
+          </li>
+        </ul> -->
+        <div class="descricao">
+          <div>
+            <h4 class="subtitulo is-5">Encaminhamentos Psicopedagógicos</h4>
+          </div>
+          <button class="button is-success">
+            <span class="icon is-small">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </span>
+            <span>Adicionar Encaminhamento</span>
+          </button>
+
+        </div>
+        <div class="encaminhamentos">
+          <div class="cardbox card-encaminhamento is-info" >
+            <p class="subtitulo is-6 bold">Alexandre Ferreira Lopes</p>
+            <p class="">3° B - Informática para Internet</p>
+            <p class="">Conversa com Aluno</p>
+          </div>
+          <div class="cardbox card-encaminhamento is-info" >
+            <p class="subtitulo is-6 bold">Thalia Santos de Santana</p>
+            <p class="">3° B - Informática para Internet</p>
+            <p class="">Reunião com Responsável</p>
+          </div>
+          <div class="cardbox card-encaminhamento is-info" >
+            <p class="subtitulo is-6 bold">Láyza Ferreira Lopes</p>
+            <p class="">3° B - Informática para Internet</p>
+            <p class="">Reunião com Responsável</p>
+          </div>
+          <div class="cardbox card-encaminhamento is-info" >
+            <p class="subtitulo is-6 bold">Alessandra Ferreira Salgado Novais</p>
+            <p class="">3° B - Informática para Internet</p>
+            <p class="">Reunião com Responsável</p>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer_nepeti">
+          <img
+            class="logo_nepeti"
+            src="./assets/images/logo_nepeti.png"
+            alt=""
+          />
+          <p class="text-nepeti">
+            &copy; 2020 - Núcleo de Estudos e Pesquisa em Tecnologia da
+            Informação
+          </p>
+        </div>
+      </footer>
+    </div>
+    <div class="toasts" id="toasts"></div>
+  </body>
+  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/atendimento.js"></script>
+</html>
