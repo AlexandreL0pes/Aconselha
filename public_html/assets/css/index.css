@@ -457,7 +457,11 @@ img.icone {
 
 .label {
   font-weight: normal !important;
+  margin-top: .2em !important;
 }
 .label:not(:last-child) {
   margin-bottom: .2em !important;
 }
+.dropdown-menu {
+  min-width: 100% !important;
+ }
