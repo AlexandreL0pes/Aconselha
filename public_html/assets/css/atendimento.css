@@ -212,6 +212,8 @@ a {
 }
 .chip > .chip-text {
   padding-left: 5px;
+  text-transform: capitalize;
+
 }
 
 .chip > .chip-close {
