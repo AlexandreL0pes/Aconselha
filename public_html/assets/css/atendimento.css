@@ -122,7 +122,7 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-template-rows: repeat(auto-fill,  auto auto auto);
+  grid-template-rows: 1fr 1fr 1fr;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
@@ -141,17 +141,14 @@
 }
 .cardbox p:first-child {
   text-align: center;
-  /* border:solid 2px red; */
 }
 .cardbox p:nth-child(2) {
   text-align: left;
-  /* border:solid 2px red; */
   font-size: .7em;
   font-weight: lighter;
 }
 .cardbox p:nth-child(3) {
   text-align: left;
-  /* border:solid 2px red; */
   font-size: .82em;
   font-weight: 500;
 
@@ -189,7 +186,7 @@
   border: solid 2px red; 
 } */
 a {
-  color: #222424 !important;
+  /* color: #222424 !important; */
 }
 .professores-selecionados {
   display: flex;
@@ -222,4 +219,17 @@ a {
   font-size: 1.4em;
   cursor: pointer;
   padding-right: 2px;
+}
+
+.informacao {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 10px;
+  margin-top: 10px;
+}
+
+.informacao > span {
+  font-size: 0.9em;
+  font-weight: 400;
 }
