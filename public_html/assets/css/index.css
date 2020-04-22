@@ -17,7 +17,7 @@
 body {
   margin: 0;
   padding: 0;
-  color: #2f2f2d;
+  color: #2f2f2d !important;
   font-family: "Roboto", sans-serif !important;
   font-size: 0.75rem;
   font-weight: 500;
@@ -464,4 +464,8 @@ img.icone {
 }
 .dropdown-menu {
   min-width: 100% !important;
+ }
+
+ .input {
+   /* border-radius: 2px !important; */
  }

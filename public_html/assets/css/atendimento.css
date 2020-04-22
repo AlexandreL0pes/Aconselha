@@ -184,3 +184,39 @@
   flex-flow: column-reverse;
   align-items: flex-end;
 }
+
+/* .tag  {
+  border: solid 2px red; 
+} */
+a {
+  color: #222424 !important;
+}
+.professores-selecionados {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 10px;
+  padding: 5px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  padding: 0px 5px;
+
+  border-radius: 3px;
+  background: rgba(98, 98, 98, 0.1);
+  font-size: .8em !important;
+}
+.chip > .chip-text {
+  padding-left: 5px;
+}
+
+.chip > .chip-close {
+  /* margin: 5px;   */
+  font-size: 1.4em;
+  cursor: pointer;
+  padding-right: 2px;
+}
