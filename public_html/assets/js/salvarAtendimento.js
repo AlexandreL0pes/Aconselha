@@ -1,3 +1,24 @@
+/**
+ * Listener 
+ * Clique para remoção de professor 
+ */
+const deleteProfessor = () => {
+  const chips = document.querySelectorAll(
+    ".professores-selecionados > .chip > .chip-close"
+  );
+
+  chips.forEach((chip) => {
+    chip.addEventListener("click", (event) => delChip(event));
+  });
+};
+
+const delChip = (event) => {
+  console.log("> Removendo o elemento!");
+  event.target.parentElement.remove();
+};
+
+deleteProfessor();
+
 let autocompleteAluno = () => {
   // Quando tiver fazendo request pro server, utilizar essa função
   var api = function (inputValue) {
@@ -10,7 +31,7 @@ let autocompleteAluno = () => {
           { label: "Alexandre", value: "2" },
           { label: "Alexandre", value: "2" },
         ];
-        return resp.json();
+        // return resp.json();
       })
       .then(function (states) {
         return states.filter(function (state) {
