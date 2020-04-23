@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste</title>
+    <link rel="stylesheet" href="./assets/css/index.css" />
+    <link rel="stylesheet" href="./assets/css/dropdown.css" />
+    <link rel="stylesheet" href="./assets/css/diagnostica.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+		/> -->
+    <link rel="stylesheet" href="./assets/css/bulma.min.css" />
+  </head>
+  <body>
+    <div class="grid-container">
+      <!-- Hamburg Icon -->
+      <div class="menu-icon">
+        <i class="fas fa-bars header__menu"></i>
+      </div>
+      <!-- Hamburg Icon -->
+
+      <!-- Header -->
+      <header class="header">
+        <div class="dropdown is-right is-small no-border" id="dropdown-user">
+          <div class="dropdown-trigger">
+            <button
+              class="button"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu6"
+            >
+              <span>Coordenador</span>
+              <span class="icon is-small">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu6" role="menu">
+            <div class="dropdown-content">
+              <div class="dropdown-item">
+                <a href="#" class="dropdown-item">
+                  Professor
+                </a>
+                <hr class="dropdown-divider" />
+                <a href="#" class="dropdown-item">
+                  Coordenador
+                </a>
+                <hr class="dropdown-divider" />
+                <a href="#" class="dropdown-item">
+                  Aluno
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Header -->
+
+      <!-- Sidebar -->
+      <aside class="sidenav">
+        <ul class="sidenav__list">
+          <li class="sidenav__list-item first-item">
+            <img src="./assets/images/logo_sadc.svg" alt="" class="logo-icon" />
+          </li>
+          <li class="sidenav__list-item">
+            <img src="./assets/images/student.svg" alt="" class="icone" />
+          </li>
+          <li class="sidenav__list-item">
+            <img src="./assets/images/grupo.svg" alt="" class="icone" />
+          </li>
+          <li class="sidenav__list-item">
+            <img class="icone" src="./assets/images/reunion.svg" alt="" />
+          </li>
+          <li class="sidenav__list-item">
+            <img class="icone" src="./assets/images/config.svg" alt="" />
+          </li>
+        </ul>
+      </aside>
+      <!-- Sidebar -->
+
+      <!-- Sidebar Mobile -->
+      <aside class="sidenav-mobile">
+        <div class="sidenav__close-icon-mobile">
+          <i class="fas fa-times sidenav__brand-close"></i>
+        </div>
+        <ul class="sidenav__list-mobile">
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/student.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Alunos</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/grupo.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Turmas</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/reunion.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Conselhos Anteriores</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/config.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Configurações</p>
+          </li>
+        </ul>
+      </aside>
+      <!-- Sidebar Mobile -->
+
+      <main class="main">
+        <div class="page-head">
+          <h4 class="titulo is-5">Avaliação Diagnóstica</h4>
+          <div class="card-info">
+            <span>Informações</span>
+            <p><span>Turma:</span> 3° B</p>
+            <p><span>Curso:</span> Pendente para Internet</p>
+            <p><span>Conselheiro:</span> Adriano Honorato Braga</p>
+          </div>
+        </div>
+        <div class="avaliacoes">
+          <div>
+            <h4 class="subtitulo is-7">Avaliações em andamento</h4>
+            <p class="resultadoSelecionado">
+              Restam
+              <span class="" id="qtdTurmas">3</span>
+              avaliações pendentes
+            </p>
+          </div>
+          <button class="button is-success is-right">
+            <span class="icon is-small">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </span>
+            <span>Finalizar</span>
+          </button>
+        </div>
+        <div class="alunos">
+          <div class="cardbox card-aluno concluido" data-turmaConselho="3">
+            <p class="subtitulo is-8">Concluída</p>
+            <p class="subtitulo is-7">André Castro Alves</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno concluido" data-turmaConselho="5">
+            <p class="subtitulo is-8">Concluída</p>
+            <p class="subtitulo is-7">Paulo Almeida Pinto</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno" data-turmaConselho="5">
+            <p class="subtitulo is-8">Pendente</p>
+            <p class="subtitulo is-7">João Rodrigues Correia</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno concluido" data-turmaConselho="3">
+            <p class="subtitulo is-8">Concluída</p>
+            <p class="subtitulo is-7">André Castro Alves</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno" data-turmaConselho="5">
+            <p class="subtitulo is-8">Pendente</p>
+            <p class="subtitulo is-7">Paulo Almeida Pinto</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno" data-turmaConselho="5">
+            <p class="subtitulo is-8">Pendente</p>
+            <p class="subtitulo is-7">João Rodrigues Correia</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno" data-turmaConselho="3">
+            <p class="subtitulo is-8">Pendente</p>
+            <p class="subtitulo is-7">André Castro Alves</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno" data-turmaConselho="5">
+            <p class="subtitulo is-8">Pendente</p>
+            <p class="subtitulo is-7">Paulo Almeida Pinto</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno" data-turmaConselho="5">
+            <p class="subtitulo is-8">Pendente</p>
+            <p class="subtitulo is-7">João Rodrigues Correia</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno concluido" data-turmaConselho="3">
+            <p class="subtitulo is-8">Concluída</p>
+            <p class="subtitulo is-7">André Castro Alves</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno" data-turmaConselho="5">
+            <p class="subtitulo is-8">Pendente</p>
+            <p class="subtitulo is-7">Paulo Almeida Pinto</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno" data-turmaConselho="5">
+            <p class="subtitulo is-8">Pendente</p>
+            <p class="subtitulo is-7">João Rodrigues Correia</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno concluido" data-turmaConselho="3">
+            <p class="subtitulo is-8">Concluída</p>
+            <p class="subtitulo is-7">André Castro Alves</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno" data-turmaConselho="5">
+            <p class="subtitulo is-8">Pendente</p>
+            <p class="subtitulo is-7">Paulo Almeida Pinto</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+          <div class="cardbox card-aluno" data-turmaConselho="5">
+            <p class="subtitulo is-8">Pendente</p>
+            <p class="subtitulo is-7">João Rodrigues Correia</p>
+            <p class="subtitulo is-8">2017103202030090</p>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer_nepeti">
+          <img
+            class="logo_nepeti"
+            src="./assets/images/logo_nepeti.png"
+            alt=""
+          />
+          <p class="text-nepeti">
+            &copy; 2020 - Núcleo de Estudos e Pesquisa em Tecnologia da
+            Informação
+          </p>
+        </div>
+      </footer>
+      <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Avaliação Diagnóstica</p>
+            <div class="modal-close-btn">
+              <i class="fas fa-times sidenav__brand-close"></i>
+            </div>
+          </header>
+          <section class="modal-card-body">
+            <div class="avaliacao-aluno">
+              <div class="info">
+                <p class="">Alexandre Ferreira Lopes</p>
+                <p class="gray-text subtitulo is-7">Informática para Internet</p>
+                <p class="gray-text subtitulo is-7">2017103202030090</p>
+							</div>
+							<div class="perfil-aluno">
+								<p>Selecione as categorias que se adequam ao aluno:</p>
+								<div class="perfis">
+									<div class="chip " data-perfil-id="10">
+										<span class="chip-text">Faltoso</span>
+									</div>
+									<div class="chip" data-perfil-id="1459">
+										<span class="chip-text">Indisciplina</span>
+									</div>
+									<div class="chip" data-perfil-id="14591">
+										<span class="chip-text">Problemas de Saúde</span>
+									</div>
+									<div class="chip" data-perfil-id="145918">
+										<span class="chip-text">Problemas Emocionais</span>
+									</div>
+									<div class="chip" data-perfil-id="145910">
+										<span class="chip-text">Falta de Estudo</span>
+									</div>
+									<div class="chip" data-perfil-id="145180">
+										<span class="chip-text">Baixo Rendimento</span>
+									</div>
+									<div class="chip" data-perfil-id="159180">
+										<span class="chip-text">Apresentou Progresso</span>
+									</div>
+									<div class="chip" data-perfil-id="145910">
+										<span class="chip-text">Estudante Destaque</span>
+									</div>
+								</div>
+							</div>
+						</div>
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button ">
+              <span class="icon is-small">
+								<i class="fas fa-chevron-left"></i>
+							</span>
+              <span>Anterior</span>
+            </button>
+            <button class="button is-success">
+              <span class="icon is-small">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </span>
+              <span>Salvar</span>
+            </button>
+            <button class="button">
+							<span>Próximo</span>
+								<span class="icon is-small">
+									<i class="fas fa-chevron-right"></i>
+								</span>
+            </button>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <div class="toasts" id="toasts"></div>
+  </body>
+  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/reunioes.js"></script>
+</html>

@@ -1,0 +1,235 @@
+:root {
+  /* Cores Cursos */
+  --info-color: rgb(40, 52, 153);
+  --amb-color: rgb(37, 165, 33);
+  --agro-color: #830c0c;
+}
+
+.cardbox {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: repeat(auto-fill, 1fr 1fr 1fr);
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  color: #222424;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 5px;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+  cursor: pointer;
+}
+.cardbox:hover {
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.selected {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para os tiles */
+.cardbox.is-info {
+  /* background: green; */
+  border-top: 2px solid var(--info-color);
+}
+
+.cardbox.is-agro {
+  border-top: 2px solid var(--agro-color);
+}
+
+.cardbox.is-amb {
+  border-top: 2px solid var(--amb-color);
+}
+
+.cardbox > p {
+  text-justify: center;
+  justify-self: center;
+  text-align: center;
+  /* border: solid red 2px; */
+}
+
+.cardbox > p:first-child {
+  color: gray;
+  font-weight: 600;
+}
+
+.selected {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.concluido {
+  /* background: rgba(39, 246, 2, 0.1); */
+  cursor: auto;
+
+  border-left: 4px solid;
+  border-image-source: linear-gradient(
+    45deg,
+    rgb(0, 143, 104),
+    rgb(250, 224, 66)
+  );
+  border-image-slice: 1;
+  border-radius: 5px !important;
+}
+.concluido > p:first-child {
+  color: rgb(40, 146, 49);
+}
+.alunos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-auto-rows: minmax(100px, 1fr);
+  grid-gap: 7px;
+}
+.avaliacoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.resultadoSelecionado {
+  margin-top: 0;
+  padding-left: 5px;
+  font-size: 0.6em;
+}
+
+.card-info {
+  display: grid;
+  align-items: center;
+  justify-items: left;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  color: #222424;
+  margin: 0px;
+  padding: 5px 20px;
+  grid-gap: 5px;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+}
+.page-head {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 5px;
+}
+.page-head > h4 {
+  grid-column: 1 / -1;
+  justify-content: center;
+  justify-self: center;
+  /* border: solid red 2px; */
+}
+
+.card-info {
+  /* font-size: 0.8em;
+    border: solid 2px red; */
+  font-size: 0.9em;
+  font-weight: 300;
+}
+
+.card-info > span:first-child {
+  font-size: 1.1em;
+  font-weight: 500;
+  justify-self: center;
+}
+
+.card-info > p:nth-child(n + 2):nth-child(-n + 4) > span {
+  font-weight: 500;
+}
+
+.button.is-success {
+}
+
+
+.modal-close-btn {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modal-card-body > .avaliacao-aluno {
+  font-weight: 300;
+  font-size: 0.9em;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+}
+/* Modal */
+
+.avaliacao-aluno > .info {
+	padding: 5px;
+	margin: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap: 5px;
+	font-size: 1.2em;
+	box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+.avaliacao-aluno {
+}
+
+.perfil-aluno > p {
+	/* font-weight: 500; */
+	/* font-size: .em; */
+}
+.gray-text {
+	color:rgb(98, 98, 98) !important;
+}
+.perfis {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 10px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  padding: 10px 10px;
+
+  border-radius: 3px;
+  background: rgba(98, 98, 98, 0.1);
+	font-size: 1em !important;
+	
+	transition: background 0.4s ease-in-out;
+}
+.chip > .chip-text {
+  padding: 0px 5px;
+	text-transform: capitalize;
+	cursor: pointer;
+}
+
+.chip > .chip-close {
+  /* margin: 5px;   */
+  font-size: 1.4em;
+  cursor: pointer;
+  padding-right: 2px;
+}
+
+.chip.selected {
+
+	/* background: rgb(238,178,32); */
+	background: #c1ee20;
+}
+
+.modal-card-foot > button:nth-child(2){
+	flex-grow: .5;
+	/* max-width: 100rem; */
+}
+
+.modal-card-foot {
+	/* column-gap: 50px; */
+}
