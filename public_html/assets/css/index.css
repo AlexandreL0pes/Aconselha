@@ -374,16 +374,16 @@ img.icone {
   font-size: 1rem;
 }
 .subtitulo.is-7 {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 .subtitulo.is-8 {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
 }
 .subtitulo.is-9 {
-  font-size: 0.25rem;
+  font-size: 0.65rem;
 }
 .subtitulo.is-10 {
-  font-size: 0.12rem;
+  font-size: 0.5rem;
 }
 
 .no-border > .dropdown-trigger > .button {
