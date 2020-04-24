@@ -239,3 +239,10 @@
 .modal-card-foot {
 	/* column-gap: 50px; */
 }
+
+.modal {
+}
+
+.modal.is-active {
+  transition: all  1s ease !important;
+}
