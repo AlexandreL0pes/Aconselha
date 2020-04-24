@@ -108,14 +108,21 @@
     0 0 0 1px rgba(10, 10, 10, 0.02);
   color: #222424;
   margin: 0px;
-  padding: 5px 20px;
-  grid-gap: 5px;
-  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
-  transition: box-shadow ease-in-out 0.4s;
+  padding: 20px 20px;
+  grid-gap: 3px;
+  box-shadow: 0 11px 11px 4px rgba(0, 0, 0, 0.3);
+	transition: box-shadow ease-in-out 0.4s;
+}
+
+.card-info > button {
+	margin-top: 5px;
+	margin-bottom: 0;
+	justify-self: right;
+
 }
 .page-head {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   row-gap: 5px;
 }
 .page-head > h4 {
@@ -133,13 +140,12 @@
 }
 
 .card-info > span:first-child {
-  font-size: 1.1em;
-  font-weight: 500;
-  justify-self: center;
+  font-size: 1em;
+  font-weight: 600;
 }
 
-.card-info > p:nth-child(n + 2):nth-child(-n + 4) > span {
-  font-weight: 500;
+.card-info > p:nth-child(n + 2):nth-child(-n + 4) {
+	
 }
 
 .button.is-success {
