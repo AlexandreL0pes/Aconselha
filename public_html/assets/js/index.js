@@ -38,12 +38,12 @@ let activeDropdown = () => {
  * @param {number} durationTime - Time that toast will remain on screen
  */
 let showMessage = (title, content, type, durationTime) => {
-  title = title === "undefined" ? "" : title;
+  title = title === undefined ? "" : title;
   subtitle =  "Agora";
-  content = content === "undefined" ? "" : content;
-  type = type === "undefined" ? "info" : type;
+  content = content === undefined ? "" : content;
+  type = type === undefined ? "info" : type;
   durationTime =
-    durationTime === "undefined" ? 4000 : parseInt(durationTime);
+    durationTime === undefined ? 5000 : durationTime;
 
   const toasts = document.querySelector("#toasts");
 
