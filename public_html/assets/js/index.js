@@ -70,7 +70,7 @@ let showMessage = (title, content, type, durationTime) => {
   // console.log(toasts.firstChild);
 
   setTimeout(() => {
-    console.log(toasts.firstElementChild);
+    // console.log(toasts.firstElementChild);
     
     toasts.removeChild(toasts.firstElementChild);
   }, durationTime);

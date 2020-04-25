@@ -108,7 +108,6 @@ const atualizarAvaliacoesPendentes = () => {
   const cards = document.querySelectorAll(".card-avaliacao");
   const selectedCards = document.querySelectorAll(".card-avaliacao.concluido");
   const qtdAvaliacoes = document.querySelector("#qtdAvaliacoes");
-  console.log(cards.length - selectedCards.length);
   qtdAvaliacoes.innerHTML = cards.length - selectedCards.length;
 };
 
@@ -151,7 +150,7 @@ const preencherModal = (modal, idAluno) => {
   const cardAluno = document.querySelector(
     `.card-avaliacao[data-aluno="${idAluno}"]`
   );
-  console.log(cardAluno);
+
   const aluno = {
     nome: cardAluno.querySelector('p[name="nome"]').innerHTML,
     curso: document.querySelector('span > span[name="curso"]').innerHTML,
