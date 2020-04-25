@@ -36,9 +36,6 @@ const openModal = () => {
       preencherModal(modal, localStorage.getItem("avaliacaoAtual"));
     });
   });
-
-  // Atualizar o contador de avaliações restantes
-  atualizarAvaliacoesPendentes();
 };
 
 //Listener
@@ -97,10 +94,11 @@ const fecharAvaliacao = (modal) => {
   if (localStorage.getItem("avaliacaoAtual")) {
     localStorage.removeItem("avaliacaoAtual");
   }
+  // Atualizar o contador de avaliações restantes
+  atualizarAvaliacoesPendentes();
 
   const selectedChips = modal.querySelectorAll(".chip.selected");
 
-  console.log(selectedChips);
   selectedChips.forEach((chip) => {
     chip.classList.remove("selected");
   });
@@ -110,6 +108,7 @@ const atualizarAvaliacoesPendentes = () => {
   const cards = document.querySelectorAll(".card-avaliacao");
   const selectedCards = document.querySelectorAll(".card-avaliacao.concluido");
   const qtdAvaliacoes = document.querySelector("#qtdAvaliacoes");
+  console.log(cards.length - selectedCards.length);
   qtdAvaliacoes.innerHTML = cards.length - selectedCards.length;
 };
 
@@ -159,9 +158,10 @@ const preencherModal = (modal, idAluno) => {
     matricula: cardAluno.querySelector('p[name="matricula"]').innerHTML,
   };
 
-    modal.querySelector('.info > p[name="nome"]').innerHTML = aluno.nome;
-    modal.querySelector('.info > p[name="curso"]').innerHTML = aluno.curso;
-    modal.querySelector('.info > p[name="matricula"]').innerHTML = aluno.matricula;
+  modal.querySelector('.info > p[name="nome"]').innerHTML = aluno.nome;
+  modal.querySelector('.info > p[name="curso"]').innerHTML = aluno.curso;
+  modal.querySelector('.info > p[name="matricula"]').innerHTML =
+    aluno.matricula;
 };
 
 // fecharAvaliacao();
