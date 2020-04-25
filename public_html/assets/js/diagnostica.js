@@ -28,11 +28,12 @@ const openModal = () => {
       let idAluno =
         event.target.getAttribute("data-aluno") ||
         event.target.parentElement.getAttribute("data-aluno");
-      modal.classList.toggle("is-active");
 
       if (idAluno) {
         localStorage.setItem("avaliacaoAtual", idAluno);
       }
+      modal.classList.toggle("is-active");
+      preencherModal(modal, localStorage.getItem("avaliacaoAtual"));
     });
   });
 
@@ -40,6 +41,7 @@ const openModal = () => {
   atualizarAvaliacoesPendentes();
 };
 
+//Listener
 const closeModal = (params) => {
   const modals = document.querySelectorAll(".modal");
   modals.forEach((modal) => {
@@ -54,6 +56,7 @@ const closeModal = (params) => {
   });
 };
 
+// Listener
 const selectPerfil = () => {
   const perfis = document.querySelectorAll(".perfil-aluno > .perfis > .chip");
   perfis.forEach((perfil) => {
@@ -143,6 +146,22 @@ const concluirAvaliacao = () => {
     //       console.log(resp);
     //   })
   });
+};
+
+const preencherModal = (modal, idAluno) => {
+  const cardAluno = document.querySelector(
+    `.card-avaliacao[data-aluno="${idAluno}"]`
+  );
+  console.log(cardAluno);
+  const aluno = {
+    nome: cardAluno.querySelector('p[name="nome"]').innerHTML,
+    curso: document.querySelector('span > span[name="curso"]').innerHTML,
+    matricula: cardAluno.querySelector('p[name="matricula"]').innerHTML,
+  };
+
+    modal.querySelector('.info > p[name="nome"]').innerHTML = aluno.nome;
+    modal.querySelector('.info > p[name="curso"]').innerHTML = aluno.curso;
+    modal.querySelector('.info > p[name="matricula"]').innerHTML = aluno.matricula;
 };
 
 // fecharAvaliacao();
