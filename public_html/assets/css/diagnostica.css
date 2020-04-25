@@ -179,6 +179,9 @@
 	box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
 }
+.info > p { 
+  text-align: center;
+}
 
 .avaliacao-aluno {
 }
