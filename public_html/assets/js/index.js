@@ -60,14 +60,14 @@ let showMessage = (title, content, type, durationTime) => {
     </div>
     </div>
   </div>`;
-  console.log("> Adicionando o elemento!");
+  // console.log("> Adicionando o elemento!");
 
   toasts.innerHTML += toast;
 
-  console.log("> Selecionando o elemento!");
-  console.log(toasts);
-  console.log("> Selecionando o primeiro elemento!");
-  console.log(toasts.firstChild);
+  // console.log("> Selecionando o elemento!");
+  // console.log(toasts);
+  // console.log("> Selecionando o primeiro elemento!");
+  // console.log(toasts.firstChild);
 
   setTimeout(() => {
     console.log(toasts.firstElementChild);
