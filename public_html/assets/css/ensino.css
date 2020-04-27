@@ -1,0 +1,294 @@
+:root {
+  /* Cores Cursos */
+  --info-color: rgb(40, 52, 153);
+  --amb-color: rgb(37, 165, 33);
+  --agro-color: #830c0c;
+}
+
+.cardbox {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: repeat(auto-fill, 1fr 1fr 1fr);
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  color: #222424;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 5px;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+  cursor: pointer;
+}
+.cardbox:hover {
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.selected {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para os tiles */
+.cardbox.is-info {
+  border-top: 2px solid var(--info-color);
+}
+
+.cardbox.is-agro {
+  border-top: 2px solid var(--agro-color);
+}
+
+.cardbox.is-amb {
+  border-top: 2px solid var(--amb-color);
+}
+
+.cardbox > p {
+  text-justify: center;
+  justify-self: center;
+  text-align: center;
+}
+
+.cardbox > p:first-child {
+  color: gray;
+  font-weight: 600;
+}
+
+.concluido {
+  cursor: auto;
+
+  border-left: 4px solid;
+  border-image-source: linear-gradient(
+    45deg,
+    rgb(0, 143, 104),
+    rgb(250, 224, 66)
+  );
+  border-image-slice: 1;
+  border-radius: 5px !important;
+}
+.concluido > p:first-child {
+  color: rgb(40, 146, 49);
+}
+.avaliacoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: minmax(100px, 1fr);
+  grid-gap: 7px;
+}
+
+.card-avaliacao {
+  display: grid;
+  align-items: center;
+  justify-items: left;
+  grid-template-rows: repeat(auto-fill, 1fr 1fr 1fr);
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  color: #222424;
+  margin: 0px;
+  padding: 5px 10px;
+
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+  cursor: pointer;
+}
+
+.card-avaliacao.experiencia {
+  cursor: auto;
+
+  border-left: 4px solid;
+  border-image-source: linear-gradient(
+    45deg,
+    rgb(21, 163, 219),
+    rgb(61, 211, 216)
+  );
+  border-image-slice: 1;
+  border-radius: 5px !important;
+}
+.card-avaliacao.ensino {
+  cursor: auto;
+  border-left: 4px solid;
+  border-image-source: linear-gradient(
+    0deg,
+    rgba(47, 53, 136, 0.938),
+    rgb(15, 39, 146)
+  );
+  border-image-slice: 1;
+  border-radius: 5px !important;
+}
+
+.descricao {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+
+  margin-top: 20px;
+  margin-bottom: 10px;
+  column-gap: 50px;
+  row-gap: 10px;
+}
+
+.resultadoSelecionado {
+  margin-top: 0;
+  padding-left: 5px;
+  font-size: 0.6em;
+}
+
+.pesquisa {
+  flex-grow: 0.6;
+}
+.field.tipos {
+  justify-content: center !important;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.card-info {
+  display: grid;
+  align-items: center;
+  justify-items: left;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  color: #222424;
+  margin: 0px;
+  padding: 20px 20px;
+  grid-gap: 3px;
+  box-shadow: 0 11px 11px 4px rgba(0, 0, 0, 0.3);
+  transition: box-shadow ease-in-out 0.4s;
+}
+
+.card-info > button {
+  margin-top: 5px;
+  margin-bottom: 0;
+  justify-self: right;
+}
+.page-head {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  row-gap: 5px;
+}
+.page-head > h4 {
+  grid-column: 1 / -1;
+  justify-content: center;
+  justify-self: center;
+}
+
+.card-info {
+  font-size: 0.9em;
+  font-weight: 300;
+}
+
+.card-info > span:first-child {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.actions {
+  grid-column-end: -1;
+  padding: 5px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+  align-items: center;
+  justify-self: center;
+  place-self: center;
+}
+
+.modal-close-btn {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Modal */
+
+.gray-text {
+  color: rgb(98, 98, 98) !important;
+}
+.perfis,
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 5px;
+  row-gap: 5px;
+  padding: 0px;
+}
+.chips-estudante {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 5px;
+  row-gap: 5px;
+  padding: 10px;
+}
+
+.chip-estudante {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  padding: 5px 5px;
+
+  border-radius: 3px;
+  background: rgba(98, 98, 98, 0.1);
+  font-size: 0.8em !important;
+
+  transition: background 0.4s ease-in-out;
+}
+.chip-estudante > .chip-text {
+  padding: 0px 2px;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.chip-estudante > .chip-close {
+  /* margin: 5px;   */
+  font-size: 1.2em;
+  cursor: pointer;
+  padding-right: 2px;
+}
+
+.chip-estudante.selected {
+  /* background: rgb(238,178,32); */
+  background: #c1ee20;
+}
+
+#avaliacao-experiencia {
+}
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  padding: 3px 3px;
+
+  border-radius: 30px;
+  background: rgba(98, 98, 98, 0.1);
+  font-size: 0.6em !important;
+  transition: background 0.4s ease-in-out;
+}
+.chip > .chip-text {
+  padding: 0px 5px;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.chip > .chip-close {
+  font-size: 1.4em;
+  cursor: pointer;
+  padding-right: 2px;
+}
+
+.chip.selected {
+  background: #c1ee20;
+}
+
+
+.input,.text-area {
+  /* border: none !important; */
+  box-shadow: none !important;
+  color: rgb(0, 0, 0) !important;
+}
