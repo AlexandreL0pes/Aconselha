@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ensino-Aprendizagem</title>
+    <link rel="stylesheet" href="./assets/css/index.css" />
+    <link rel="stylesheet" href="./assets/css/dropdown.css" />
+    <link rel="stylesheet" href="./assets/css/ensino.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+		/> -->
+    <link rel="stylesheet" href="./assets/css/bulma.min.css" />
+  </head>
+  <body>
+    <div class="grid-container">
+      <!-- Hamburg Icon -->
+      <div class="menu-icon">
+        <i class="fas fa-bars header__menu"></i>
+      </div>
+      <!-- Hamburg Icon -->
+
+      <!-- Header -->
+      <header class="header">
+        <div class="dropdown is-right is-small no-border" id="dropdown-user">
+          <div class="dropdown-trigger">
+            <button
+              class="button"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu6"
+            >
+              <span>Coordenador</span>
+              <span class="icon is-small">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu6" role="menu">
+            <div class="dropdown-content">
+              <div class="dropdown-item">
+                <a href="#" class="dropdown-item">
+                  Professor
+                </a>
+                <hr class="dropdown-divider" />
+                <a href="#" class="dropdown-item">
+                  Coordenador
+                </a>
+                <hr class="dropdown-divider" />
+                <a href="#" class="dropdown-item">
+                  Aluno
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Header -->
+
+      <!-- Sidebar -->
+      <aside class="sidenav">
+        <ul class="sidenav__list">
+          <li class="sidenav__list-item first-item">
+            <img src="./assets/images/logo_sadc.svg" alt="" class="logo-icon" />
+          </li>
+          <li class="sidenav__list-item">
+            <img src="./assets/images/student.svg" alt="" class="icone" />
+          </li>
+          <li class="sidenav__list-item">
+            <img src="./assets/images/grupo.svg" alt="" class="icone" />
+          </li>
+          <li class="sidenav__list-item">
+            <img class="icone" src="./assets/images/reunion.svg" alt="" />
+          </li>
+          <li class="sidenav__list-item">
+            <img class="icone" src="./assets/images/config.svg" alt="" />
+          </li>
+        </ul>
+      </aside>
+      <!-- Sidebar -->
+
+      <!-- Sidebar Mobile -->
+      <aside class="sidenav-mobile">
+        <div class="sidenav__close-icon-mobile">
+          <i class="fas fa-times sidenav__brand-close"></i>
+        </div>
+        <ul class="sidenav__list-mobile">
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/student.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Alunos</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/grupo.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Turmas</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/reunion.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Conselhos Anteriores</p>
+          </li>
+          <li class="sidenav__list-item-mobile">
+            <img src="./assets/images/config.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Configurações</p>
+          </li>
+        </ul>
+      </aside>
+      <!-- Sidebar Mobile -->
+
+      <main class="main">
+        <div class="page-head">
+          <h4 class="titulo is-5">Avaliação de Ensino-Aprendizagem</h4>
+          <div class="card-info">
+            <span
+              ><span name="turma">3° B</span> -
+              <span name="curso">Informática para Internet</span></span
+            >
+            <span class="subtitulo is-8 gray-text"
+              >Prof. Adriano Honorato Braga</span
+            >
+            <span class="subtitulo is-8 gray-text">20141.03INF10I.3B</span>
+            <button class="button is-small">
+              <span>Informações</span>
+              <span class="icon is-small">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </button>
+          </div>
+          <div class="actions">
+            <button class="button is-success is-right btnSalvar">
+              <span class="icon is-small">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </span>
+              <span>Dificuldade de Aprendizado</span>
+            </button>
+            <button class="button is-success is-right btnSalvar">
+              <span class="icon is-small">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </span>
+              <span>Experiências</span>
+            </button>
+          </div>
+        </div>
+        <div class="descricao">
+          <div>
+            <h4 class="subtitulo is-7">Avaliações em andamento</h4>
+            <p class="resultadoSelecionado">
+              Restam
+              <span class="" id="qtdAvaliacoes">3</span>
+              avaliações pendentes
+            </p>
+          </div>
+          <div class="pesquisa">
+            <div class="field has-addons tipos">
+              <p class="control">
+                <button class="button is-small">
+                  <span class="icon is-small">
+                    <i class="fas fa-question"></i>
+                  </span>
+                  <span>Ensino</span>
+                </button>
+              </p>
+              <p class="control">
+                <button class="button is-small align-center">
+                  <span>Experiências</span>
+                  <span class="icon is-small">
+                    <i class="fas fa-lightbulb"></i>
+                  </span>
+                </button>
+              </p>
+            </div>
+          </div>
+          <button class="button is-success is-right btnSalvar">
+            <span class="icon is-small">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </span>
+            <span>Finalizar</span>
+          </button>
+        </div>
+        <div class="avaliacoes">
+          <div class="card-avaliacao experiencia" data-aluno="35">
+            <p class="subtitulo is-9" name="">Experiências</p>
+            <p class="subtitulo is-7">Desenvolver a interpretação textual</p>
+            <div class="perfis">
+              <div class="chip" data-perfil-id="10">
+                <span class="chip-text">Pontos Positivos</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-avaliacao experiencia" data-aluno="35">
+            <p class="subtitulo is-9" name="">Experiências</p>
+            <p class="subtitulo is-7">Distribuição da Nota</p>
+            <div class="perfis">
+              <div class="chip" data-perfil-id="10">
+                <span class="chip-text">Pontos Positivos</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-avaliacao experiencia" data-aluno="35">
+            <p class="subtitulo is-9" name="">Experiências</p>
+            <p class="subtitulo is-7">Excesso de aulas teóricas</p>
+            <div class="perfis">
+              <div class="chip" data-perfil-id="10">
+                <span class="chip-text">Pontos Positivos</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-avaliacao ensino" data-aluno="35">
+            <p class="subtitulo is-9" name="">Ensino-Aprendizado</p>
+            <p class="subtitulo is-7">Matemática</p>
+            <div class="perfis">
+              <div class="chip" data-perfil-id="10">
+                <span class="chip-text">15 alunos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer_nepeti">
+          <img
+            class="logo_nepeti"
+            src="./assets/images/logo_nepeti.png"
+            alt=""
+          />
+          <p class="text-nepeti">
+            &copy; 2020 - Núcleo de Estudos e Pesquisa em Tecnologia da
+            Informação
+          </p>
+        </div>
+      </footer>
+      <div class="modal" id="avaliacao-aprendizado">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Avaliação de Ensino-Aprendizagem</p>
+            <div class="modal-close-btn">
+              <i class="fas fa-times sidenav__brand-close"></i>
+            </div>
+          </header>
+          <section class="modal-card-body">
+            <div class="formEncaminhamento">
+              <div class="field">
+                <label class="label">Disciplina</label>
+                <div class="dropdown">
+                  <div class="dropdown-trigger">
+                    <div class="control has-icons-left has-icons-right">
+                      <input
+                        class="input"
+                        type="text"
+                        placeholder="Digite o nome do aluno"
+                        value=""
+                        id="prova"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <div class="dropdown-menu" id="prova-menu" role="menu" />
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Estudantes</label>
+                <div class="dropdown">
+                  <div class="dropdown-trigger">
+                    <div class="control has-icons-left has-icons-right">
+                      <input
+                        class="input"
+                        type="text"
+                        placeholder="Digite o nome do professor"
+                        value=""
+                        id="professores"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <div
+                      class="dropdown-menu"
+                      id="professores-menu"
+                      role="menu"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="professores-selecionados chips"></div>
+
+              <div class="field">
+                <label class="label">Observação</label>
+                <div class="control">
+                  <textarea
+                    class="textarea"
+                    placeholder="Descreva a motivação do encaminhamento"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+            <div></div>
+            <div></div>
+
+            <button class="button is-success save-avaliation" name="">
+              <span class="icon is-small">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </span>
+              <span>Salvar</span>
+            </button>
+          </footer>
+        </div>
+      </div>
+      <div class="modal is-active" id="avaliacao-experiencia">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Experiências</p>
+            <div class="modal-close-btn">
+              <i class="fas fa-times sidenav__brand-close"></i>
+            </div>
+          </header>
+          <section class="modal-card-body">
+            <div class="formEncaminhamento">
+              <div class="field">
+                <label class="label">Assunto</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="Digite o nome do aluno"
+                    value=""
+                    id="prova"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Estudantes</label>
+                <div class="dropdown">
+                  <div class="dropdown-trigger">
+                    <div class="control has-icons-left has-icons-right">
+                      <input
+                        class="input"
+                        type="text"
+                        placeholder="Digite o nome do professor"
+                        value=""
+                        id="professores"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <div
+                      class="dropdown-menu"
+                      id="professores-menu"
+                      role="menu"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="estudantes-selecionados chips-estudante">
+                <div class="chip-estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Adriano Braga</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip-estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Adriano Braga</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip-estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Adriano Braga</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip-estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Adriano Braga</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip-estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Adriano Braga</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip-estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Adriano Braga</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip-estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Adriano Braga</span>
+                  <span class="chip-close">×</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label">Descrição</label>
+                <div class="control">
+                  <textarea
+                    class="textarea"
+                    placeholder="Descreva a motivação do encaminhamento"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+            <div></div>
+            <div></div>
+
+            <button class="button is-success save-avaliation" name="">
+              <span class="icon is-small">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </span>
+              <span>Salvar</span>
+            </button>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <div class="toasts" id="toasts"></div>
+  </body>
+  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/diagnostica.js"></script>
+  <script src="./assets/js/salvarAtendimento.js"></script>
+</html>
