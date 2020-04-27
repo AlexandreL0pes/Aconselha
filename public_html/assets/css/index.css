@@ -470,3 +470,8 @@ img.icone {
  .input {
    /* border-radius: 2px !important; */
  }
+
+ 
+.no-border {
+  border: none;
+}
