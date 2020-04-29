@@ -475,3 +475,8 @@ img.icone {
 .no-border {
   border: none;
 }
+
+/* .dropdown-menu .text-capitalize > .dropdown-content >  */
+.dropdown-menu.text-capitalize > .dropdown-content > .dropdown-item {
+  text-transform: capitalize;
+}
