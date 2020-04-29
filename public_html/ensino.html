@@ -324,18 +324,30 @@
             </div>
           </header>
           <section class="modal-card-body">
-            <div class="formEncaminhamento">
-              <div class="field">
-                <label class="label">Assunto</label>
-                <div class="control">
-                  <input
-                    class="input"
-                    type="text"
-                    placeholder="Digite o nome do aluno"
-                    value=""
-                    id="prova"
-                  />
-                </div>
+
+              <div class="columns">
+                  <div class="column is-two-thirds">
+                    <div class="field ">
+                        <label class="label">Título</label>
+                        <p class="control">
+                          <input class="input" type="text" placeholder="Name" />
+                        </p>
+                      </div>
+                  </div>
+                  <div class="column ">
+                    <div class="field">
+                        <label class="label">Categoria</label>
+                        <div class="control">
+                          <div class="select">
+                            <select>
+                              <option>Sugestões</option>
+                              <option>Pontos Positivos</option>
+                              <option>Pontos Negativos</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
               </div>
               <div class="field">
                 <label class="label">Estudantes</label>
@@ -357,11 +369,11 @@
                       class="dropdown-menu"
                       id="professores-menu"
                       role="menu"
-                    />
+                    ></div>
                   </div>
                 </div>
               </div>
-
+          
               <div class="estudantes-selecionados chips-estudante">
                 <div class="chip-estudante" data-estudante-id="1459180">
                   <span class="chip-text">Adriano Braga</span>
@@ -392,22 +404,18 @@
                   <span class="chip-close">×</span>
                 </div>
               </div>
-
-              <div class="field">
-                <label class="label">Descrição</label>
-                <div class="control">
-                  <textarea
-                    class="textarea"
-                    placeholder="Descreva a motivação do encaminhamento"
-                  ></textarea>
-                </div>
+          
+            <div class="field">
+              <label class="label">Descrição</label>
+              <div class="control">
+                <textarea class="textarea" placeholder="Detalhe aqui sua sugestão"></textarea>
               </div>
             </div>
+
           </section>
           <footer class="modal-card-foot">
             <div></div>
             <div></div>
-
             <button class="button is-success save-avaliation" name="">
               <span class="icon is-small">
                 <i class="fa fa-check" aria-hidden="true"></i>
@@ -424,3 +432,103 @@
   <script src="./assets/js/diagnostica.js"></script>
   <script src="./assets/js/salvarAtendimento.js"></script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div class="formEncaminhamento">
+    <div class="field">
+     
+     
+      <label class="label">Assunto</label>
+      <div class="control has-icons-left has-icons-right">
+        <input
+          class="input"
+          type="text"
+          placeholder="Digite o nome do aluno"
+          value=""
+          id="prova"
+        />
+        <span class="icon is-small is-left">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Estudantes</label>
+      <div class="dropdown">
+        <div class="dropdown-trigger">
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input"
+              type="text"
+              placeholder="Digite o nome do professor"
+              value=""
+              id="professores"
+            />
+            <span class="icon is-small is-left">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+          </div>
+          <div
+            class="dropdown-menu"
+            id="professores-menu"
+            role="menu"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="estudantes-selecionados chips-estudante">
+      <div class="chip-estudante" data-estudante-id="1459180">
+        <span class="chip-text">Adriano Braga</span>
+        <span class="chip-close">×</span>
+      </div>
+      <div class="chip-estudante" data-estudante-id="1459180">
+        <span class="chip-text">Adriano Braga</span>
+        <span class="chip-close">×</span>
+      </div>
+      <div class="chip-estudante" data-estudante-id="1459180">
+        <span class="chip-text">Adriano Braga</span>
+        <span class="chip-close">×</span>
+      </div>
+      <div class="chip-estudante" data-estudante-id="1459180">
+        <span class="chip-text">Adriano Braga</span>
+        <span class="chip-close">×</span>
+      </div>
+      <div class="chip-estudante" data-estudante-id="1459180">
+        <span class="chip-text">Adriano Braga</span>
+        <span class="chip-close">×</span>
+      </div>
+      <div class="chip-estudante" data-estudante-id="1459180">
+        <span class="chip-text">Adriano Braga</span>
+        <span class="chip-close">×</span>
+      </div>
+      <div class="chip-estudante" data-estudante-id="1459180">
+        <span class="chip-text">Adriano Braga</span>
+        <span class="chip-close">×</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Descrição</label>
+      <div class="control">
+        <textarea
+          class="textarea"
+          placeholder="Descreva a motivação do encaminhamento"
+        ></textarea>
+      </div>
+    </div>
+  </div -->
