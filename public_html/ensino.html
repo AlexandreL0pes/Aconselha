@@ -129,13 +129,13 @@
             </button>
           </div>
           <div class="actions">
-            <button class="button is-success is-right btnSalvar">
+            <button class="button is-success is-right" id="btnEnsino">
               <span class="icon is-small">
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </span>
               <span>Dificuldade de Aprendizado</span>
             </button>
-            <button class="button is-success is-right btnSalvar">
+            <button class="button is-success is-right" id="btnExperiencia">
               <span class="icon is-small">
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </span>
@@ -232,7 +232,7 @@
           </p>
         </div>
       </footer>
-      <div class="modal is-active" id="avaliacao-aprendizado">
+      <div class="modal" id="avaliacao-aprendizado">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -259,7 +259,11 @@
                         <i class="fa fa-search" aria-hidden="true"></i>
                       </span>
                     </div>
-                    <div class="dropdown-menu text-capitalize" id="ensino-disciplina-menu" role="menu"></div>
+                    <div
+                      class="dropdown-menu text-capitalize"
+                      id="ensino-disciplina-menu"
+                      role="menu"
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -273,7 +277,7 @@
                         type="text"
                         placeholder="Digite o nome do professor"
                         value=""
-                        id="ensino-estudante"
+                        id="ensino-estudantes"
                       />
                       <span class="icon is-small is-left">
                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -281,15 +285,17 @@
                     </div>
                     <div
                       class="dropdown-menu text-capitalize"
-                      id="ensino-estudante-menu"
+                      id="ensino-estudantes-menu"
                       role="menu"
                     ></div>
                   </div>
                 </div>
               </div>
 
-              <div class="estudantes-selecionados chips estudantes">
-              </div>
+              <div
+                class="chips estudantes"
+                id="ensino-estudantes-selecionados"
+              ></div>
 
               <div class="field">
                 <label class="label">Observação</label>
@@ -315,6 +321,7 @@
           </footer>
         </div>
       </div>
+
       <div class="modal" id="avaliacao-experiencia">
         <div class="modal-background"></div>
         <div class="modal-card">
@@ -325,94 +332,69 @@
             </div>
           </header>
           <section class="modal-card-body">
-
-              <div class="columns">
-                  <div class="column is-two-thirds">
-                    <div class="field ">
-                        <label class="label">Título</label>
-                        <p class="control">
-                          <input class="input" type="text" placeholder="Name" />
-                        </p>
-                      </div>
-                  </div>
-                  <div class="column ">
-                    <div class="field">
-                        <label class="label">Categoria</label>
-                        <div class="control">
-                          <div class="select">
-                            <select>
-                              <option>Sugestões</option>
-                              <option>Pontos Positivos</option>
-                              <option>Pontos Negativos</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
+            <div class="columns">
+              <div class="column is-two-thirds">
+                <div class="field">
+                  <label class="label">Título</label>
+                  <p class="control">
+                    <input class="input" type="text" placeholder="Name" />
+                  </p>
+                </div>
               </div>
-              <div class="field">
-                <label class="label">Estudantes</label>
-                <div class="dropdown">
-                  <div class="dropdown-trigger">
-                    <div class="control has-icons-left has-icons-right">
-                      <input
-                        class="input"
-                        type="text"
-                        placeholder="Digite o nome do professor"
-                        value=""
-                        id="professores"
-                      />
-                      <span class="icon is-small is-left">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                      </span>
+              <div class="column">
+                <div class="field">
+                  <label class="label">Categoria</label>
+                  <div class="control">
+                    <div class="select">
+                      <select>
+                        <option>Sugestões</option>
+                        <option>Pontos Positivos</option>
+                        <option>Pontos Negativos</option>
+                      </select>
                     </div>
-                    <div
-                      class="dropdown-menu text-capitalize"
-                      id="professores-menu"
-                      role="menu"
-                    ></div>
                   </div>
                 </div>
               </div>
-          
-              <div class="estudantes-selecionados chips estudantes">
-                <div class="chip estudante" data-estudante-id="1459180">
-                  <span class="chip-text">Adriano Braga</span>
-                  <span class="chip-close">×</span>
-                </div>
-                <div class="chip estudante" data-estudante-id="1459180">
-                  <span class="chip-text">Adriano Braga</span>
-                  <span class="chip-close">×</span>
-                </div>
-                <div class="chip estudante" data-estudante-id="1459180">
-                  <span class="chip-text">Adriano Braga</span>
-                  <span class="chip-close">×</span>
-                </div>
-                <div class="chip estudante" data-estudante-id="1459180">
-                  <span class="chip-text">Adriano Braga</span>
-                  <span class="chip-close">×</span>
-                </div>
-                <div class="chip estudante" data-estudante-id="1459180">
-                  <span class="chip-text">Adriano Braga</span>
-                  <span class="chip-close">×</span>
-                </div>
-                <div class="chip estudante" data-estudante-id="1459180">
-                  <span class="chip-text">Adriano Braga</span>
-                  <span class="chip-close">×</span>
-                </div>
-                <div class="chip estudante" data-estudante-id="1459180">
-                  <span class="chip-text">Adriano Braga</span>
-                  <span class="chip-close">×</span>
-                </div>
-              </div>
-          
+            </div>
             <div class="field">
-              <label class="label">Descrição</label>
-              <div class="control">
-                <textarea class="textarea" placeholder="Detalhe aqui sua sugestão"></textarea>
+              <label class="label">Disciplinas</label>
+              <div class="dropdown">
+                <div class="dropdown-trigger">
+                  <div class="control has-icons-left has-icons-right">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="Digite o nome do professor"
+                      value=""
+                      id="experiencia-disciplinas"
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div
+                    class="dropdown-menu text-capitalize"
+                    id="experiencia-disciplinas-menu"
+                    role="menu"
+                  ></div>
+                </div>
               </div>
             </div>
 
+            <div
+              class="chips disciplinas"
+              id="experiencia-disciplinas-selecionadas"
+            ></div>
+
+            <div class="field">
+              <label class="label">Descrição</label>
+              <div class="control">
+                <textarea
+                  class="textarea"
+                  placeholder="Detalhe aqui sua sugestão"
+                ></textarea>
+              </div>
+            </div>
           </section>
           <footer class="modal-card-foot">
             <div></div>
@@ -433,23 +415,7 @@
   <script src="./assets/js/index.js"></script>
   <script src="./assets/js/diagnostica.js"></script>
   <script src="./assets/js/ensino.js"></script>
-
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- 
 <div class="formEncaminhamento">
