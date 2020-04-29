@@ -147,9 +147,9 @@
           <div>
             <h4 class="subtitulo is-7">Avaliações em andamento</h4>
             <p class="resultadoSelecionado">
-              Restam
+              Foram encontrada(s)
               <span class="" id="qtdAvaliacoes">3</span>
-              avaliações pendentes
+              avaliações
             </p>
           </div>
           <div class="pesquisa">
@@ -232,7 +232,7 @@
           </p>
         </div>
       </footer>
-      <div class="modal" id="avaliacao-aprendizado">
+      <div class="modal is-active" id="avaliacao-aprendizado">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -253,13 +253,13 @@
                         type="text"
                         placeholder="Digite o nome do aluno"
                         value=""
-                        id="prova"
+                        id="ensino-disciplina"
                       />
                       <span class="icon is-small is-left">
                         <i class="fa fa-search" aria-hidden="true"></i>
                       </span>
                     </div>
-                    <div class="dropdown-menu" id="prova-menu" role="menu" />
+                    <div class="dropdown-menu" id="ensino-disciplina-menu" role="menu"></div>
                   </div>
                 </div>
               </div>
@@ -273,7 +273,7 @@
                         type="text"
                         placeholder="Digite o nome do professor"
                         value=""
-                        id="professores"
+                        id="ensino-estudante"
                       />
                       <span class="icon is-small is-left">
                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -281,14 +281,39 @@
                     </div>
                     <div
                       class="dropdown-menu"
-                      id="professores-menu"
+                      id="ensino-estudante-menu"
                       role="menu"
-                    />
+                    ></div>
                   </div>
                 </div>
               </div>
 
-              <div class="professores-selecionados chips"></div>
+              <div class="estudantes-selecionados chips estudantes">
+                <div class="chip estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Alexandre Lopes</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Alexandre Lopes</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Alexandre Lopes</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Alexandre Lopes</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Alexandre Lopes</span>
+                  <span class="chip-close">×</span>
+                </div>
+                <div class="chip estudante" data-estudante-id="1459180">
+                  <span class="chip-text">Alexandre Lopes</span>
+                  <span class="chip-close">×</span>
+                </div>
+              </div>
 
               <div class="field">
                 <label class="label">Observação</label>
@@ -314,7 +339,7 @@
           </footer>
         </div>
       </div>
-      <div class="modal is-active" id="avaliacao-experiencia">
+      <div class="modal" id="avaliacao-experiencia">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -374,32 +399,32 @@
                 </div>
               </div>
           
-              <div class="estudantes-selecionados chips-estudante">
-                <div class="chip-estudante" data-estudante-id="1459180">
+              <div class="estudantes-selecionados chips estudantes">
+                <div class="chip estudante" data-estudante-id="1459180">
                   <span class="chip-text">Adriano Braga</span>
                   <span class="chip-close">×</span>
                 </div>
-                <div class="chip-estudante" data-estudante-id="1459180">
+                <div class="chip estudante" data-estudante-id="1459180">
                   <span class="chip-text">Adriano Braga</span>
                   <span class="chip-close">×</span>
                 </div>
-                <div class="chip-estudante" data-estudante-id="1459180">
+                <div class="chip estudante" data-estudante-id="1459180">
                   <span class="chip-text">Adriano Braga</span>
                   <span class="chip-close">×</span>
                 </div>
-                <div class="chip-estudante" data-estudante-id="1459180">
+                <div class="chip estudante" data-estudante-id="1459180">
                   <span class="chip-text">Adriano Braga</span>
                   <span class="chip-close">×</span>
                 </div>
-                <div class="chip-estudante" data-estudante-id="1459180">
+                <div class="chip estudante" data-estudante-id="1459180">
                   <span class="chip-text">Adriano Braga</span>
                   <span class="chip-close">×</span>
                 </div>
-                <div class="chip-estudante" data-estudante-id="1459180">
+                <div class="chip estudante" data-estudante-id="1459180">
                   <span class="chip-text">Adriano Braga</span>
                   <span class="chip-close">×</span>
                 </div>
-                <div class="chip-estudante" data-estudante-id="1459180">
+                <div class="chip estudante" data-estudante-id="1459180">
                   <span class="chip-text">Adriano Braga</span>
                   <span class="chip-close">×</span>
                 </div>
@@ -428,9 +453,12 @@
     </div>
     <div class="toasts" id="toasts"></div>
   </body>
+  <script src="https://cdn.rawgit.com/mattmezza/bulmahead/master/dist/bulmahead.bundle.js"></script>
   <script src="./assets/js/index.js"></script>
   <script src="./assets/js/diagnostica.js"></script>
-  <script src="./assets/js/salvarAtendimento.js"></script>
+  <script src="./assets/js/ensino.js"></script>
+
+
 </html>
 
 
@@ -492,31 +520,31 @@
     </div>
 
     <div class="estudantes-selecionados chips-estudante">
-      <div class="chip-estudante" data-estudante-id="1459180">
+      <div class="chip estudante" data-estudante-id="1459180">
         <span class="chip-text">Adriano Braga</span>
         <span class="chip-close">×</span>
       </div>
-      <div class="chip-estudante" data-estudante-id="1459180">
+      <div class="chip estudante" data-estudante-id="1459180">
         <span class="chip-text">Adriano Braga</span>
         <span class="chip-close">×</span>
       </div>
-      <div class="chip-estudante" data-estudante-id="1459180">
+      <div class="chip estudante" data-estudante-id="1459180">
         <span class="chip-text">Adriano Braga</span>
         <span class="chip-close">×</span>
       </div>
-      <div class="chip-estudante" data-estudante-id="1459180">
+      <div class="chip estudante" data-estudante-id="1459180">
         <span class="chip-text">Adriano Braga</span>
         <span class="chip-close">×</span>
       </div>
-      <div class="chip-estudante" data-estudante-id="1459180">
+      <div class="chip estudante" data-estudante-id="1459180">
         <span class="chip-text">Adriano Braga</span>
         <span class="chip-close">×</span>
       </div>
-      <div class="chip-estudante" data-estudante-id="1459180">
+      <div class="chip estudante" data-estudante-id="1459180">
         <span class="chip-text">Adriano Braga</span>
         <span class="chip-close">×</span>
       </div>
-      <div class="chip-estudante" data-estudante-id="1459180">
+      <div class="chip estudante" data-estudante-id="1459180">
         <span class="chip-text">Adriano Braga</span>
         <span class="chip-close">×</span>
       </div>
