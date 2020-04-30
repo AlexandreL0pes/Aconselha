@@ -323,3 +323,10 @@
 .dropdown-trigger {
   width: 100%;
 }
+
+.btnSalvar {
+  text-align: right;
+  justify-self: end;
+  margin-left: auto;
+ }
+ 
