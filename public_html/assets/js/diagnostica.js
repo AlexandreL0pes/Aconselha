@@ -125,6 +125,7 @@ const concluirAvaliacao = () => {
 
     const dados = {
       acao: "Teste/teste",
+      nome: "2017103202030090",
       dados: [
         { name: "Alexandre12", age: 21, acao: "Teste/teste" },
         { name: "Alexandre123", age: 21, acao: "Teste/teste" },
@@ -142,7 +143,7 @@ const concluirAvaliacao = () => {
           throw new Error(
             "Houve um erro durante a execução: " + response.status
           );
-        return response.text();
+        return response.json();
       })
       .then((response) => {
         console.log(response);
