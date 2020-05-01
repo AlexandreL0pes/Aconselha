@@ -116,33 +116,41 @@ const concluirAvaliacao = () => {
   btnSalvar.addEventListener("click", (event) => {
     console.log("O botão foi pressionado!");
 
-    // const url = "https://randomuser.me/api/?results="; // Get 10 random users
-    //   fetch(url)
-    //     .then((resp) => {
-    //       console.log(resp.status);
-    //       return resp.json();
-    //     }) // Transform the data into json
-    //     .then(function (data) {
-    //       console.log(data);
-    //     });
+    const base = window.location.origin;
+    const url = window.location.pathname.split("/");
+    const baseUrl = `${base}/${url[1]}/api.php`;
 
-    //   const url = 'https://randomuser.me/api';
-    //   // The data we are going to send in our request
-    //   let data = {
-    //       name: 'Sara',
-    //   }
-    //   // Create our request constructor with all the parameters we need
-    //   var request = new Request(url, {
-    //       method: 'POST',
-    //       body: JSON.stringify(data),
-    //       headers: new Headers()
-    //   });
+    console.log(baseUrl);
 
-    //   fetch(request)
-    //   .then(function(resp) {
-    //       // Handle response we get from the API
-    //       console.log(resp);
-    //   })
+
+    const dados = {
+      acao: "Teste/teste",
+      dados: [
+        { name: "Alexandre12", age: 21, acao: "Teste/teste" },
+        { name: "Alexandre123", age: 21, acao: "Teste/teste" },
+        { name: "Alexandre124", age: 21, acao: "Teste/teste" },
+        { name: "Alexandre126", age: 21, acao: "Teste/teste" },
+      ]
+    };
+
+    fetch(baseUrl, {
+      method: "POST",
+      body: JSON.stringify(dados),
+    })
+      .then((response) => {
+        if (!response.ok)
+          throw new Error(
+            "Houve um erro durante a execução: " + response.status
+          );
+        return response.text();
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    
   });
 };
 
