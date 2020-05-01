@@ -10,7 +10,7 @@ class Assunto extends CRUD
 
     const TABELA = "assunto";
     const COL_ID = "id";
-    const COL_CONSELHO = "idTurmaConselho";
+    const COL_REUNIAO = "idReuniao";
     const COL_CLASSIFICACAO = "idClassificacao";
     const COL_OBSERVACAO = "observacao";
 
@@ -51,15 +51,15 @@ class Assunto extends CRUD
     public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
     {
         $campos = $campos != null ? $campos : " * ";
-        $ordem = $ordem != null ? $ordem : " " . self::COL_CONSELHO;
+        $ordem = $ordem != null ? $ordem : " " . self::COL_REUNIAO;
         $limite = $limite != null ? $limite : 10;
 
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
 
-        if (isset($busca[self::COL_CONSELHO]) && !empty($busca[self::COL_CONSELHO])) {
-            $where_condicao .= " AND " . self::COL_CONSELHO . " = ?";
-            $where_valor[] = $busca[self::COL_CONSELHO];
+        if (isset($busca[self::COL_REUNIAO]) && !empty($busca[self::COL_REUNIAO])) {
+            $where_condicao .= " AND " . self::COL_REUNIAO . " = ?";
+            $where_valor[] = $busca[self::COL_REUNIAO];
         }
 
         if (isset($busca[self::COL_CLASSIFICACAO]) && !empty($busca[self::COL_CLASSIFICACAO])) {

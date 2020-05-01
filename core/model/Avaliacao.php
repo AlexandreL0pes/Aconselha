@@ -9,7 +9,7 @@ use Exception;
 class Avaliacao extends CRUD {
     const TABELA = "avaliacao";
     const COL_ID = "id";
-    const COL_ID_CONSELHO = "idTurmaConselho";
+    const COL_ID_REUNIAO = "idReuniao";
     const COL_PROFESSOR = "cod_professor";
     const COL_MATRICULA = "cod_matricula";
     const COL_PERFIL = "idPerfil";
@@ -53,16 +53,16 @@ class Avaliacao extends CRUD {
 
     public function listar($campos = null, $busca = [], $ordem = null, $limite = null) {
         $campos = $campos != null ? $campos : " * ";
-        $ordem = $ordem != null ? $ordem : self::COL_ID_CONSELHO . " ASC ";
+        $ordem = $ordem != null ? $ordem : self::COL_ID_REUNIAO . " ASC ";
         $limite = $limite != null ? $limite : 10;
 
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
 
         if ($busca && count($busca) > 0) {
-            if (isset($busca[self::COL_ID_CONSELHO]) && !empty($busca[self::COL_ID_CONSELHO]) ) {
-                $where_condicao .= " AND " . self::COL_ID_CONSELHO . " = ? ";
-                $where_valor[] = $busca[self::COL_ID_CONSELHO];
+            if (isset($busca[self::COL_ID_REUNIAO]) && !empty($busca[self::COL_ID_REUNIAO]) ) {
+                $where_condicao .= " AND " . self::COL_ID_REUNIAO . " = ? ";
+                $where_valor[] = $busca[self::COL_ID_REUNIAO];
             }
             
             if (isset($busca[self::COL_MATRICULA]) && !empty($busca[self::COL_MATRICULA]) ) {

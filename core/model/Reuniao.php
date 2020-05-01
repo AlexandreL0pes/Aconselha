@@ -5,10 +5,10 @@ namespace core\model;
 use core\CRUD;
 use Exception;
 
-class Conselho extends CRUD
+class Reuniao extends CRUD
 {
 
-    const TABELA = 'TurmaConselho';
+    const TABELA = 'Reuniao';
     const COL_ID = 'id';
     const COL_COD_TURMA = 'cod_turma';
     const COL_DATA = 'data';
@@ -39,7 +39,7 @@ class Conselho extends CRUD
      */
     public function alterar($dados) {
         if (!isset($dados[self::COL_ID])) {
-            throw new Exception("É necessário informar o ID do conselho");
+            throw new Exception("É necessário informar o ID da reunião");
         }
 
         $where_condicao = self::COL_ID . " = ?";
