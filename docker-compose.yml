@@ -33,7 +33,7 @@ services:
       - "3306:3306"
     environment: 
       MYSQL_ROOT_PASSWORD: "123456789"
-      MYSQL_DATABASE: myDb
+      MYSQL_DATABASE: sadc
     volumes: 
       - mysql-data:/var/lib/mysql
     networks: 
