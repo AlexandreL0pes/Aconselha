@@ -28,7 +28,6 @@ let activeDropdown = () => {
   });
 };
 
-
 /**
  * Exibe e apaga a mensagem na tela
  * @param {string} title - Title of the toast
@@ -39,11 +38,10 @@ let activeDropdown = () => {
  */
 let showMessage = (title, content, type, durationTime) => {
   title = title === undefined ? "" : title;
-  subtitle =  "Agora";
+  subtitle = "Agora";
   content = content === undefined ? "" : content;
   type = type === undefined ? "info" : type;
-  durationTime =
-    durationTime === undefined ? 5000 : durationTime;
+  durationTime = durationTime === undefined ? 5000 : durationTime;
 
   const toasts = document.querySelector("#toasts");
 
@@ -71,8 +69,25 @@ let showMessage = (title, content, type, durationTime) => {
 
   setTimeout(() => {
     // console.log(toasts.firstElementChild);
-    
+
     toasts.removeChild(toasts.firstElementChild);
   }, durationTime);
 };
+
+/**
+ * Função Assincrona para o envio de dados para o servidor
+ * @param {string} url url para a requisição
+ * @param {string} data Objeto JSON com os dados para a requisição
+ */
+async function sendRequest(url, data) {
+  const response = await fetch(url, {
+    method: "post",
+    body: JSON.stringify(data),
+  });
+  if (!response.ok)
+    throw new Error("Houve um erro durante a execução " + response.status);
+  const responseData = await response.json();
+  return responseData;
+}
+
 events();
