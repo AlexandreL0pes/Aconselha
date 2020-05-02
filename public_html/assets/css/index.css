@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300, 400, 500, 600, 700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400, 700);
 
 :root {
   --size-sidebar: 40px;
@@ -457,7 +457,7 @@ img.icone {
 }
 
 .label {
-  font-weight: normal !important;
+  font-weight: 400 !important;
   margin-top: .2em !important;
 }
 .label:not(:last-child) {
@@ -479,4 +479,12 @@ img.icone {
 /* .dropdown-menu .text-capitalize > .dropdown-content >  */
 .dropdown-menu.text-capitalize > .dropdown-content > .dropdown-item {
   text-transform: capitalize;
+}
+
+.flex {
+  display: flex;
+}
+.align-end {
+  align-items: flex-end;
+  flex-wrap: wrap;
 }

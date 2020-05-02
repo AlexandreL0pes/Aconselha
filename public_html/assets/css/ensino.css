@@ -122,12 +122,15 @@
 .descricao {
   display: flex;
   justify-content: space-between;
-  flex-flow: wrap;
+  flex-wrap: wrap;
 
   margin-top: 20px;
   margin-bottom: 10px;
   column-gap: 50px;
   row-gap: 10px;
+}
+.descricao > * {
+  flex: 1;
 }
 
 .resultadoSelecionado {
@@ -137,7 +140,7 @@
 }
 
 .pesquisa {
-  flex-grow: 0.6;
+  /* flex-grow: 0.6; */
 }
 .field.tipos {
   justify-content: center !important;
