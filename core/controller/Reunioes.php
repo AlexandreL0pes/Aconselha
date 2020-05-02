@@ -58,6 +58,7 @@ class Reunioes
 
 		$reuniao = new Reuniao();
 
+		$erros = array();
 		foreach ($reunioes as $r) {
 			$resultado = $reuniao->alterar(
 				[
@@ -65,15 +66,16 @@ class Reunioes
 					Reuniao::COL_FINALIZADO => 1
 				]
 			);
+			if (!($resultado > 0)) {
+				array_push($erros, $r);
+			}
 		}
-
-		if ($resultado > 0) {
+		if (sizeof($erros) == 0) {
 			http_response_code(200);
 			return array('message'  => 'As reuniões foram finalizadas!');
-		}else{
+		} else {
 			http_response_code(500);
 			return array('message' => 'Não foi possível finalizar as reuniões!');
 		}
-
 	}
 }
