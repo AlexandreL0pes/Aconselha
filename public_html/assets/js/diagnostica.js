@@ -122,36 +122,24 @@ const concluirAvaliacao = () => {
 
     console.log(baseUrl);
 
-
     const dados = {
-      acao: "Teste/teste",
+      acao: "Teste/getDados",
       nome: "2017103202030090",
       dados: [
         { name: "Alexandre12", age: 21, acao: "Teste/teste" },
         { name: "Alexandre123", age: 21, acao: "Teste/teste" },
         { name: "Alexandre124", age: 21, acao: "Teste/teste" },
         { name: "Alexandre126", age: 21, acao: "Teste/teste" },
-      ]
+      ],
     };
 
-    fetch(baseUrl, {
-      method: "POST",
-      body: JSON.stringify(dados),
-    })
-      .then((response) => {
-        if (!response.ok)
-          throw new Error(
-            "Houve um erro durante a execução: " + response.status
-          );
-        return response.json();
-      })
-      .then((response) => {
-        console.log(response);
+    sendRequest(baseUrl, dados)
+      .then((data) => {
+        console.log(data);
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
-    
   });
 };
 
