@@ -12,10 +12,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
-    />
+    <link rel="stylesheet" href="./assets/css/bulma.min.css" />
   </head>
   <body>
     <div class="grid-container">
@@ -110,35 +107,44 @@
       <!-- Sidebar Mobile -->
 
       <main class="main">
-        <ul class="lista-identificacao">
-          <li>
-            <span class=""> <i class="fas fa-user"></i></span>
-            <span class="name">3° B</span>
-          </li>
-          <li>
-            <span class=""><i class="fa fa-book"></i></span>
-            <span class="name">Técnico em Informática para Internet</span>
-          </li>
-          <li>
-            <span class=""><i class="fa fa-calendar"></i></span>
-            <span class="name">1° Trimestre</span>
-          </li>
-        </ul>
-        <div class="actions">
-          <div class="action-card is-green">
-            <i class="fa fa-check logo"></i>
-            <p class="subtitulo is-8">Salvar Memória</p>
+        <div class="page-head">
+          <h4 class="titulo is-5">Conselho de Classe</h4>
+
+          <div class="card-info">
+            <span
+              ><span name="turma">3° B</span> -
+              <span name="curso">Informática para Internet</span></span
+            >
+            <span class="subtitulo is-8 gray-text"
+              >Prof. Adriano Honorato Braga</span
+            >
+            <span class="subtitulo is-8 gray-text">20141.03INF10I.3B</span>
+            <button class="button is-small">
+              <span>Informações</span>
+              <span class="icon is-small">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </button>
+          </div>          
+          <div class="actions">
+            <button class="button is-success">
+              <span class="icon is-small">
+                <i class="fas fa-check"></i>
+              </span>
+              <p class="">Salvar</p>
+            </button>
           </div>
         </div>
-        <div class="content">
-          <h4 class="subtitulo is-5">Memória da Reunião</h4>
 
-          <div class="memoria-text">
+        <div class="titulo">
+          <h4 class="subtitulo is-6">Memória da Reunião</h4>
+        </div>
+        <div class="field">
+          <div class="control">
             <textarea
-              class="text-area"
-              name=""
-              id="memoriaReuniao"
+              class="textarea"
               placeholder="Digite aqui os assuntos discutidos na reunião"
+              id="memoriaReuniao"
               autofocus
             ></textarea>
           </div>
