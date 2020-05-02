@@ -76,11 +76,14 @@ let showMessage = (title, content, type, durationTime) => {
 
 /**
  * Função Assincrona para o envio de dados para o servidor
- * @param {string} url url para a requisição
- * @param {string} data Objeto JSON com os dados para a requisição
+ * @param {JSON} data Objeto JSON com os dados para a requisição
  */
-async function sendRequest(url, data) {
-  const response = await fetch(url, {
+async function sendRequest(data) {
+  const base = window.location.origin;
+  const url = window.location.pathname.split("/");
+  const baseUrl = `${base}/${url[1]}/api.php`;
+
+  const response = await fetch(baseUrl, {
     method: "post",
     body: JSON.stringify(data),
   });

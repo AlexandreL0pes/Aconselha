@@ -116,14 +116,8 @@ const concluirAvaliacao = () => {
   btnSalvar.addEventListener("click", (event) => {
     console.log("O botão foi pressionado!");
 
-    const base = window.location.origin;
-    const url = window.location.pathname.split("/");
-    const baseUrl = `${base}/${url[1]}/api.php`;
-
-    console.log(baseUrl);
-
     const dados = {
-      acao: "Teste/getDados",
+      acao: "Teste/teste",
       nome: "2017103202030090",
       dados: [
         { name: "Alexandre12", age: 21, acao: "Teste/teste" },
@@ -133,7 +127,7 @@ const concluirAvaliacao = () => {
       ],
     };
 
-    sendRequest(baseUrl, dados)
+    sendRequest(dados)
       .then((data) => {
         console.log(data);
       })
