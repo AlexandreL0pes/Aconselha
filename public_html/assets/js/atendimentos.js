@@ -88,7 +88,16 @@ const closeModal = (params) => {
   });
 };
 
+
+const atualizarEncaminhamentos = () => {
+  const cards = document.querySelectorAll(".card-encaminhamento");
+  const qtdAvaliacoes = document.querySelector("#qtdEncaminhamentos");
+  qtdAvaliacoes.innerHTML = cards.length;
+};
+
+
 /**
  * Listener para fechar o modal
  */
 closeModal();
+atualizarEncaminhamentos();
