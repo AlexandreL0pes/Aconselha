@@ -6,7 +6,7 @@ use core\CRUD;
 use Exception;
 
 class Encaminhamento extends CRUD {
-    const TABELA = "encaminhamento";
+    const TABELA = "Encaminhamento";
     const COL_ID = "id";
     const COL_ID_AVALIACAO = "idAvaliacao";
     const COL_PROFESSOR = "cod_professor";
@@ -72,6 +72,33 @@ class Encaminhamento extends CRUD {
 
         return $retorno;
 
+
+    }
+
+    public function excluir($condicao = []) {
+
+        $where_condicao = " 1 = 1 ";
+        $where_valor = [];
+
+        if ($condicao && count($condicao) > 0) {
+            if (isset($condicao[self::COL_ID_AVALIACAO]) && !empty($condicao[self::COL_ID_AVALIACAO])) {
+                $where_condicao .= " AND " . self::COL_ID_AVALIACAO . " = ? ";
+                $where_valor[] = $condicao[self::COL_ID_AVALIACAO];
+            }
+            if (isset($condicao[self::COL_ID]) && !empty($condicao[self::COL_ID])) {
+                $where_condicao .= " AND " . self::COL_ID . " = ? ";
+                $where_valor[] = $condicao[self::COL_ID];
+            }
+        }
+
+        try {
+            $this->delete(self::TABELA, $where_condicao, $where_valor);
+        } catch (\Throwable $th) {
+            echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
+            return false;
+        }
+
+        return true;
 
     }
 
