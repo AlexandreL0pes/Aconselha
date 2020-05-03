@@ -65,11 +65,11 @@ class Atendimentos
             if (empty($erros)) {
                 http_response_code(200);
                 return array('message' => 'Os atendimentos foram cadastrados!');
-            }else{
+            } else {
                 http_response_code(500);
                 return array('message' => 'Não foi possível cadastrar todos os professores do encaminhamento.', 'errors' => $erros);
             }
-        }else{
+        } else {
             http_response_code(500);
             return array('message' => 'Não foi possível cadastrar o encaminhamento.');
         }
@@ -101,7 +101,7 @@ class Atendimentos
 
 
             $encaminhamento = new Encaminhamento();
-            
+
             $encaminhamento->excluir([Encaminhamento::COL_ID_AVALIACAO => $avaliacao_id]);
             $erros = array();
 
@@ -120,14 +120,56 @@ class Atendimentos
             if (empty($erros)) {
                 http_response_code(200);
                 return array('message' => 'Os atendimentos foram alterados!');
-            }else{
+            } else {
                 http_response_code(500);
                 return array('message' => 'Não foi possível alterar todos os professores do encaminhamento.', 'errors' => $erros);
             }
-        }else{
+        } else {
             http_response_code(500);
             return array('message' => 'Não foi possível alterar o encaminhamento.');
         }
     }
 
+    public function selecionarAtendimento($dados)
+    {
+        $avaliacao_id = $dados['avaliacao'];
+        $avaliacao = new Avaliacao();
+
+        $campos = Avaliacao::COL_ID . ", " . Avaliacao::COL_ID_REUNIAO . ", " .  Avaliacao::COL_ESTUDANTE . ", " .  Avaliacao::COL_OBSERVACAO . ", " .  Avaliacao::COL_ACAO;
+        $busca = [Avaliacao::COL_ID => $avaliacao_id];
+        $atendimento = ($avaliacao->listar($campos, $busca, null, 1))[0];
+
+        $professores = $this->professoresAtendimento($avaliacao_id);
+        // TODO: Consultar o id do aluno e retornar o nome
+        $aluno = ['id' => $atendimento[Avaliacao::COL_ESTUDANTE], 'nome' => 'Aluno de tal'];
+
+        $atendimentoCompleto = [
+            'avaliacao' => $atendimento[Avaliacao::COL_ID], 
+            'reuniao' => $atendimento[Avaliacao::COL_ID_REUNIAO], 
+            'estudante' => $aluno, 
+            'professores' => $professores, 
+            'queixa' => $atendimento[Avaliacao::COL_OBSERVACAO], 
+            'intervencao' => $atendimento[Avaliacao::COL_ACAO]
+        ];
+        http_response_code(200);
+        return json_encode($atendimentoCompleto);
+
+    }
+
+    public function professoresAtendimento($avaliacao_id)
+    {
+        $encaminhamento = new Encaminhamento();
+
+        $busca = [Encaminhamento::COL_ID_AVALIACAO => $avaliacao_id];
+        $professores_id = $encaminhamento->listar(Encaminhamento::COL_PROFESSOR, $busca, null, null);
+
+        $professores = [];
+        foreach ($professores_id as $professor_id) {
+            // TODO: Atribuir aqui o nome do professor vindo do Q-Acadêmico
+            $nome = 'Fulano de Tal';
+
+            array_push($professores, ['id' => $professor_id[Avaliacao::COL_PROFESSOR], 'nome' => $nome]);
+        }
+        return $professores;
+    }
 }
