@@ -320,7 +320,7 @@ img.icone {
 }
 
 .bold {
-  font-weight: 500 !important;
+  font-weight: 600 !important;
 }
 
 /* Fonts */
@@ -487,4 +487,8 @@ img.icone {
 .align-end {
   align-items: flex-end;
   flex-wrap: wrap;
+}
+
+.gray-text {
+	color:rgb(98, 98, 98) !important;
 }
