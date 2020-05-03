@@ -305,7 +305,7 @@ class CRUD {
 
         $this->stmt->execute();
 
-        $resultado = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+        $resultado = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (count($resultado) > 0 && isset($resultado[0])) {
             $lista = $resultado;
