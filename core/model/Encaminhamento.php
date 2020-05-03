@@ -49,7 +49,7 @@ class Encaminhamento extends CRUD {
         
         $campos = $campos != null ? $campos : " * ";
         $ordem = $ordem != null ? $ordem : self::COL_ID . " ASC";
-        $limite = $limite != null ? $limite : 10;
+        $limite = $limite != null ? $limite : 100;
 
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
@@ -59,12 +59,16 @@ class Encaminhamento extends CRUD {
                 $where_condicao .= " AND " . self::COL_ID_AVALIACAO . " = ? ";
                 $where_valor[] = $busca[self::COL_ID_AVALIACAO];
             }
+            if (isset($busca[self::COL_PROFESSOR]) && !empty($busca[self::COL_PROFESSOR])){
+                $where_condicao .= " AND " . self::COL_PROFESSOR . " = ? ";
+                $where_valor[] = $busca[self::COL_PROFESSOR];
+            }
         }
 
         $retorno = [];
 
         try {
-            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite);  
+            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite); 
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             return false;
