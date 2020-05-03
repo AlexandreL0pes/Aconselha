@@ -70,6 +70,11 @@ class Avaliacao extends CRUD {
                 $where_valor[] = $busca[self::COL_ESTUDANTE];
             }
 
+            if (isset($busca[self::COL_ID]) && !empty($busca[self::COL_ID])) {
+                $where_condicao .= " AND " . self::COL_ID . " = ? ";
+                $where_valor[] = $busca[self::COL_ID];
+            }
+
         }
 
         $retorno = [];
