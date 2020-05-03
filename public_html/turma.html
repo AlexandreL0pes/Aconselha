@@ -12,10 +12,7 @@
     />
     <link rel="stylesheet" href="./assets/css/dropdown.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
-    />
+    <link rel="stylesheet" href="./assets/css/bulma.min.css" />
   </head>
   <body>
     <div class="grid-container">
@@ -27,7 +24,7 @@
 
       <!-- Header -->
       <header class="header">
-        <div class="dropdown is-right is-small no-border " id="dropdown-user">
+        <div class="dropdown is-right is-small no-border" id="dropdown-user">
           <div class="dropdown-trigger">
             <button
               class="button"
@@ -57,8 +54,7 @@
               </div>
             </div>
           </div>
-        </div> 
-
+        </div>
       </header>
       <!-- Header -->
 
@@ -111,34 +107,17 @@
       <!-- Sidebar Mobile -->
 
       <main class="main">
-        <div class="head-turma">
-          <div class="info-turma">
-            <div class="lista-info">
-              <ul>
-                <li>
-                  <span class=""> <i class="fas fa-user"></i></span>
-                  <span class="name">3° B</span>
-                </li>
-                <li>
-                  <span class=""
-                    ><i class="fa fa-book" aria-hidden="true"></i
-                  ></span>
-                  <span class="name">Técnico em Informática para Internet</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="info lista-lideres">
-            <ul class="">
-              <li>
-                <span>Conselheiro:</span>
-                <span>Adriano Honorato Braga</span>
-              </li>
-              <li>
-                <span>Líderes:</span>
-                <span>Alexandre Lopes, Alexandre Lopes</span>
-              </li>
-            </ul>
+        <div class="page-head">
+          <!-- <h4 class="titulo is-5">Encaminhamentos Psicopedagógicos</h4> -->
+          <div class="card-info">
+            <span
+              ><span name="turma">3° B</span> -
+              <span name="curso">Informática para Internet</span></span
+            >
+            <span class="subtitulo is-8 gray-text"
+              >Prof. Adriano Honorato Braga</span
+            >
+            <span class="subtitulo is-8 gray-text">20141.03INF10I.3B</span>
           </div>
           <div class="actions">
             <div class="action-card memoria">
@@ -146,9 +125,7 @@
               <p class="subtitulo is-8">Memória de Reunião</p>
             </div>
             <div class="action-card atendimentos">
-              <p class="titulo">
-                <i class="fas fa-id-badge logo"></i>
-              </p>
+              <i class="fas fa-id-badge logo"></i>
               <p class="subtitulo is-8">Atendimentos Pedagógicos</p>
             </div>
           </div>
@@ -178,65 +155,340 @@
             <canvas id="myChart" width="" height=""></canvas>
           </div>
         </div>
-
-        <div class="materias">
-          <div class="lista">
-            <ul>
-              <li>
-                <span class="">1</span>
-                <span class="name">Matemática</span>
-                <span class="points">95</span>
-              </li>
-              <li>
-                <span class="">2</span>
-                <span class="name">Biologia</span>
-                <span class="points">94,3</span>
-              </li>
-              <li>
-                <span class="">3</span>
-                <span class="name">Desenvolvimento Web</span>
-                <span class="points">93,7</span>
-              </li>
-              <li>
-                <span class="">4</span>
-                <span class="name">História</span>
-                <span class="points">92,1</span>
-              </li>
-              <li>
-                <span class="">5</span>
-                <span class="name">Banco de Dados</span>
-                <span class="points">91,5</span>
-              </li>
-            </ul>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
           </div>
-          <div class="lista-reverse">
-            <ul>
-              <li>
-                <span class="">1</span>
-                <span class="name">Matemática</span>
-                <span class="points">60,2</span>
-              </li>
-              <li>
-                <span class="">2</span>
-                <span class="name">Biologia</span>
-                <span class="points">61,4</span>
-              </li>
-              <li>
-                <span class="">3</span>
-                <span class="name">Desenvolvimento Web</span>
-                <span class="points">62,2</span>
-              </li>
-              <li>
-                <span class="">4</span>
-                <span class="name">História</span>
-                <span class="points">63,3</span>
-              </li>
-              <li>
-                <span class="">5</span>
-                <span class="name">Banco de Dados</span>
-                <span class="points">87,3</span>
-              </li>
-            </ul>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
+          </div>
+        </div>
+        <div class="overview">
+          <div class="info-cards">
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Geral</p>
+              <p class="titulo">67,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Técnico</p>
+              <p class="titulo">89,3</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Coeficiente Médio</p>
+              <p class="titulo">95,4</p>
+            </div>
+            <div class="info-card">
+              <p class="subtitulo">Ocorrências</p>
+              <p class="titulo">5</p>
+            </div>
+          </div>
+          <div class="grafico">
+            Gráfico de Linha
+            <canvas id="myChart" width="" height=""></canvas>
           </div>
         </div>
       </main>
@@ -256,8 +508,7 @@
         </div>
       </footer>
     </div>
-    <div class="toasts" id="toasts">
-    </div>
+    <div class="toasts" id="toasts"></div>
   </body>
   <script src="./assets/js/index.js"></script>
   <script src="./assets/js/turma.js"></script>
