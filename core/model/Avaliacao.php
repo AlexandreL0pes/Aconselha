@@ -7,11 +7,11 @@ use Exception;
 
 
 class Avaliacao extends CRUD {
-    const TABELA = "avaliacao";
+    const TABELA = "Avaliacao";
     const COL_ID = "id";
     const COL_ID_REUNIAO = "idReuniao";
     const COL_PROFESSOR = "cod_professor";
-    const COL_MATRICULA = "cod_matricula";
+    const COL_ESTUDANTE = "cod_matricula";
     const COL_PERFIL = "idPerfil";
     const COL_DATA = "data";
     const COL_OBSERVACAO = "observacao";
@@ -65,9 +65,9 @@ class Avaliacao extends CRUD {
                 $where_valor[] = $busca[self::COL_ID_REUNIAO];
             }
             
-            if (isset($busca[self::COL_MATRICULA]) && !empty($busca[self::COL_MATRICULA]) ) {
-                $where_condicao .= " AND " . self::COL_MATRICULA . " = ? ";
-                $where_valor[] = $busca[self::COL_MATRICULA];
+            if (isset($busca[self::COL_ESTUDANTE]) && !empty($busca[self::COL_ESTUDANTE]) ) {
+                $where_condicao .= " AND " . self::COL_ESTUDANTE . " = ? ";
+                $where_valor[] = $busca[self::COL_ESTUDANTE];
             }
 
         }
