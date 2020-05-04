@@ -55,4 +55,48 @@ class Diagnosticas
             return array('message' => 'Não foi possível cadastrar a avaliação diagnóstica!');
         }
     }
+
+    public function alterar($dados)
+    {
+        $avaliacao_id = $dados['avaliacao'];
+        $perfis = $dados['perfis'];
+        $dataAtual = date('Y-m-d h:i:s');
+
+
+        $avaliacao = new Avaliacao();
+
+        $resultadoAvaliacao = $avaliacao->alterar([
+            Avaliacao::COL_ID => $avaliacao_id,
+            Avaliacao::COL_DATA => $dataAtual
+        ]);
+
+        if ($resultadoAvaliacao > 0) {
+            $analise = new Analise();
+
+            $analise->excluir([Analise::COL_AVALIACAO => $avaliacao_id]);
+            $erros = array();
+
+            foreach ($perfis as $perfil) {
+                $resultadoAnalise = $analise->adicionar([
+                    Analise::COL_AVALIACAO => $avaliacao_id,
+                    Analise::COL_PERFIL => $perfil
+                ]);
+
+                if (!($resultadoAnalise > 0)) {
+                    array_push($erros, $perfil);
+                }
+            }
+
+            if (empty($erros)) {
+                http_response_code(200);
+                return array('message' => 'Os perfis foram alterados!');
+            } else {
+                http_response_code(500);
+                return array('message' => 'Não foi possíve alterar os perfis!');
+            }
+        } else {
+            http_response_code(500);
+            return array('message' => 'Não foi possível encontrar a avaliação selecionada!');
+        }
+    }
 }
