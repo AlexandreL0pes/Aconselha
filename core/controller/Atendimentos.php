@@ -144,8 +144,6 @@ class Atendimentos
             // TODO: Consultar o id do aluno e retornar o nome
             $aluno = ['id' => $atendimento[Avaliacao::COL_ESTUDANTE], 'nome' => 'Aluno de tal'];
     
-            var_dump($atendimento);
-            echo empty($atendimento);
             $atendimentoCompleto = [
                 'avaliacao' => $atendimento[Avaliacao::COL_ID],
                 'reuniao' => $atendimento[Avaliacao::COL_ID_REUNIAO],
