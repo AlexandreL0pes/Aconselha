@@ -139,21 +139,27 @@ class Atendimentos
         $busca = [Avaliacao::COL_ID => $avaliacao_id];
         $atendimento = ($avaliacao->listar($campos, $busca, null, 1))[0];
 
-        $professores = $this->professoresAtendimento($avaliacao_id);
-        // TODO: Consultar o id do aluno e retornar o nome
-        $aluno = ['id' => $atendimento[Avaliacao::COL_ESTUDANTE], 'nome' => 'Aluno de tal'];
-
-        $atendimentoCompleto = [
-            'avaliacao' => $atendimento[Avaliacao::COL_ID], 
-            'reuniao' => $atendimento[Avaliacao::COL_ID_REUNIAO], 
-            'estudante' => $aluno, 
-            'professores' => $professores, 
-            'queixa' => $atendimento[Avaliacao::COL_OBSERVACAO], 
-            'intervencao' => $atendimento[Avaliacao::COL_ACAO]
-        ];
-        http_response_code(200);
-        return json_encode($atendimentoCompleto);
-
+        if (!empty($atendimento)) {
+            $professores = $this->professoresAtendimento($avaliacao_id);
+            // TODO: Consultar o id do aluno e retornar o nome
+            $aluno = ['id' => $atendimento[Avaliacao::COL_ESTUDANTE], 'nome' => 'Aluno de tal'];
+    
+            var_dump($atendimento);
+            echo empty($atendimento);
+            $atendimentoCompleto = [
+                'avaliacao' => $atendimento[Avaliacao::COL_ID],
+                'reuniao' => $atendimento[Avaliacao::COL_ID_REUNIAO],
+                'estudante' => $aluno,
+                'professores' => $professores,
+                'queixa' => $atendimento[Avaliacao::COL_OBSERVACAO],
+                'intervencao' => $atendimento[Avaliacao::COL_ACAO]
+            ];
+            http_response_code(200);
+            return json_encode($atendimentoCompleto);
+        }else{
+            http_response_code(500);
+            return array('message' => 'Não foi encontrado uma avaliação com o id especificado!');
+        }
     }
 
     public function professoresAtendimento($avaliacao_id)
@@ -171,5 +177,32 @@ class Atendimentos
             array_push($professores, ['id' => $professor_id[Avaliacao::COL_PROFESSOR], 'nome' => $nome]);
         }
         return $professores;
+    }
+
+    public function excluirAtendimento($dados)
+    {
+        $avaliacao_id = $dados['avaliacao'];
+
+        $condicao = [Encaminhamento::COL_ID_AVALIACAO => $avaliacao_id];
+        $encaminhamento = new Encaminhamento();
+
+        $retornoEncaminhamento = $encaminhamento->excluir($condicao);
+
+        if ($retornoEncaminhamento && $retornoEncaminhamento > 0) {
+            $avaliacao = new Avaliacao();
+            $condicao = [Avaliacao::COL_ID => $avaliacao_id];
+            $retornoAvaliacao = $avaliacao->excluir($condicao);
+
+            if ($retornoAvaliacao && $retornoAvaliacao > 0) {
+                http_response_code(200);
+                return array('message' => 'O encaminhamento foi excluído!');
+            } else {
+                http_response_code(500);
+                return array('message' => 'Houve um erro na exclusão do encaminhamento!');
+            }
+        } else {
+            http_response_code(500);
+            return array('message' => 'Houve um erro na exclusão dos professores envolvidos no encaminhamento!');
+        }
     }
 }
