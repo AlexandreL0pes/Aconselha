@@ -12,6 +12,7 @@ class Reunioes
 	private $data = null;
 	private $etapaConselho = null;
 	private $finalizado = null;
+	private $memoria = null;
 
 
 	public function __set($atributo, $valor)
@@ -76,6 +77,24 @@ class Reunioes
 		} else {
 			http_response_code(500);
 			return array('message' => 'Não foi possível finalizar as reuniões!');
+		}
+	}
+
+	public function salvarMemoria($dados)
+	{
+		$reuniao_id = $dados['reuniao'];
+		$memoria = $dados['memoria'];
+
+		$reuniao = new Reuniao();
+		$memoriaReuniao = [Reuniao::COL_ID => $reuniao_id, Reuniao::COL_MEMORIA => $memoria];
+		$resultado = $reuniao->alterar($memoriaReuniao);
+
+		if ($resultado && $resultado > 0) {
+			http_response_code(200);
+			return array('message' => 'A memória da reunião foi salva!');
+		} else {
+			http_response_code(500);
+			return array('message' => 'Não foi possível salvar a memória solicitada!');
 		}
 	}
 }
