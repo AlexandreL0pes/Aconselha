@@ -99,4 +99,38 @@ class Diagnosticas
             return array('message' => 'Não foi possível encontrar a avaliação selecionada!');
         }
     }
+
+    public function selecionarDiagnotica($dados)
+    {
+        $avaliacao_id = $dados['avaliacao'];
+        $avaliacao = new Avaliacao();
+
+        $campos = Avaliacao::COL_ID . ", " . Avaliacao::COL_ID_REUNIAO . ", " . Avaliacao::COL_PROFESSOR . ", " . Avaliacao::COL_ESTUDANTE . ", " . Avaliacao::COL_DATA ;
+        $busca = [Avaliacao::COL_ID => $avaliacao_id];
+        $diagnostica = ($avaliacao->listar($campos, $busca, null, 1))[0];
+
+        if (!empty($diagnostica)) {
+            // $perfis = $this->perfisDiagnostica()
+            $perfis = [1];
+            // $aluno = $aluno->selecionarAluno(aluno_id);
+            $aluno = ['id' => $diagnostica[Avaliacao::COL_ESTUDANTE], 'nome' => 'Aluno de Tal'];
+            // $professor = $professor->selecionarProfessor(professor_id)
+            $professor = ['id' => $diagnostica[Avaliacao::COL_PROFESSOR], 'nome' => 'Professor de Tal'];
+
+
+            $diagnosticaCompleto = [
+                'avaliacao' => $diagnostica[Avaliacao::COL_ID],
+                'reuniao' => $diagnostica[Avaliacao::COL_ID_REUNIAO],
+                'estudante' => $aluno,
+                'professor' =>  $professor,
+                'perfis' => $perfis
+            ];
+
+            http_response_code(200);
+            return json_encode($diagnosticaCompleto);
+        }else{
+            http_response_code(500);
+            return array('message' => 'Não foi encontrada uma avaliação diagnóstica com o id especificado!');
+        }
+    }
 }
