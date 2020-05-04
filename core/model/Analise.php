@@ -30,11 +30,11 @@ class Analise  extends CRUD
             throw new Exception("É necessário informar o id da Analise");
         }
 
-        $where_condicao = self::COL_ID . " = ? ";
-        $where_valor[] = $dados[self::COL_ID];
+        $where_condicao = self::COL_AVALIACAO . " = ? ";
+        $where_valor[] = $dados[self::COL_AVALIACAO];
 
         try {
-            $this->update(self::TABELA, $dados);
+            $this->update(self::TABELA, $dados, $where_condicao, $where_valor);
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             return false;
@@ -69,6 +69,30 @@ class Analise  extends CRUD
             $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, null, null);
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
+            return false;
+        }
+
+        return $retorno;
+    }
+
+    public function excluir($condicao = [])
+    {
+        $where_condicao = " 1 = 1 ";
+        $where_valor = [];
+
+        if ($condicao && count($condicao) > 0) {
+            if (isset($condicao[self::COL_AVALIACAO]) && !empty($condicao[self::COL_AVALIACAO])) {
+                $where_condicao .= " AND " . self::COL_AVALIACAO . " = ? ";
+                $where_valor[] = $condicao[self::COL_AVALIACAO];
+            }
+        }
+
+        $retorno = [];
+
+        try {
+            $retorno = $this->delete(self::TABELA, $where_condicao, $where_valor);
+        } catch (\Throwable $th) {
+            echo "Mensagem: " . $th->getMessage() . "\n Local:" . $th->getTraceAsString();
             return false;
         }
 
