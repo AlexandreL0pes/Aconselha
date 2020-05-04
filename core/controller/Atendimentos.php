@@ -143,7 +143,7 @@ class Atendimentos
             $professores = $this->professoresAtendimento($avaliacao_id);
             // TODO: Consultar o id do aluno e retornar o nome
             $aluno = ['id' => $atendimento[Avaliacao::COL_ESTUDANTE], 'nome' => 'Aluno de tal'];
-    
+
             $atendimentoCompleto = [
                 'avaliacao' => $atendimento[Avaliacao::COL_ID],
                 'reuniao' => $atendimento[Avaliacao::COL_ID_REUNIAO],
@@ -154,7 +154,7 @@ class Atendimentos
             ];
             http_response_code(200);
             return json_encode($atendimentoCompleto);
-        }else{
+        } else {
             http_response_code(500);
             return array('message' => 'Não foi encontrado uma avaliação com o id especificado!');
         }

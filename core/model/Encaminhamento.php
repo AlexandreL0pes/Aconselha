@@ -5,7 +5,8 @@ namespace core\model;
 use core\CRUD;
 use Exception;
 
-class Encaminhamento extends CRUD {
+class Encaminhamento extends CRUD
+{
     const TABELA = "Encaminhamento";
     const COL_ID = "id";
     const COL_ID_AVALIACAO = "idAvaliacao";
@@ -13,11 +14,11 @@ class Encaminhamento extends CRUD {
     const COL_OBSERVACAO = "observacao";
 
 
-    public function adicionar($dados) {
+    public function adicionar($dados)
+    {
         try {
 
             $retorno = $this->create(self::TABELA, $dados);
-
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             return false;
@@ -26,7 +27,8 @@ class Encaminhamento extends CRUD {
         return $retorno;
     }
 
-    public function alterar($dados) {
+    public function alterar($dados)
+    {
         if (!isset($dados[self::COL_ID])) {
             throw new Exception("É necessário informar o ID do Encaminhamento");
         }
@@ -42,11 +44,11 @@ class Encaminhamento extends CRUD {
         }
 
         return $dados[self::COL_ID];
-
     }
 
-    public function listar($campos = null, $busca = [], $ordem = null, $limite = null) {
-        
+    public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
+    {
+
         $campos = $campos != null ? $campos : " * ";
         $ordem = $ordem != null ? $ordem : self::COL_ID . " ASC";
         $limite = $limite != null ? $limite : 100;
@@ -54,12 +56,12 @@ class Encaminhamento extends CRUD {
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
 
-        if ($busca && count($busca) > 0){
-            if (isset($busca[self::COL_ID_AVALIACAO]) && !empty($busca[self::COL_ID_AVALIACAO])){
+        if ($busca && count($busca) > 0) {
+            if (isset($busca[self::COL_ID_AVALIACAO]) && !empty($busca[self::COL_ID_AVALIACAO])) {
                 $where_condicao .= " AND " . self::COL_ID_AVALIACAO . " = ? ";
                 $where_valor[] = $busca[self::COL_ID_AVALIACAO];
             }
-            if (isset($busca[self::COL_PROFESSOR]) && !empty($busca[self::COL_PROFESSOR])){
+            if (isset($busca[self::COL_PROFESSOR]) && !empty($busca[self::COL_PROFESSOR])) {
                 $where_condicao .= " AND " . self::COL_PROFESSOR . " = ? ";
                 $where_valor[] = $busca[self::COL_PROFESSOR];
             }
@@ -68,18 +70,17 @@ class Encaminhamento extends CRUD {
         $retorno = [];
 
         try {
-            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite); 
+            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             return false;
         }
 
         return $retorno;
-
-
     }
 
-    public function excluir($condicao = []) {
+    public function excluir($condicao = [])
+    {
 
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
@@ -103,7 +104,5 @@ class Encaminhamento extends CRUD {
         }
 
         return true;
-
     }
-
 }
