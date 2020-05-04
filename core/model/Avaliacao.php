@@ -88,6 +88,31 @@ class Avaliacao extends CRUD {
 
         return $retorno;
     }
+
+    public function excluir($condicao)
+    {
+        $where_condicao = " 1 = 1 ";
+        $where_valor = [];
+        print_r($condicao);
+
+        if ($condicao && count($condicao) > 0) {
+            if (isset($condicao[self::COL_ID]) && !empty($condicao[self::COL_ID])) {
+                $where_condicao .= " AND " . self::COL_ID . " = ? ";
+                $where_valor[] = $condicao[self::COL_ID];
+            }
+        }
+
+        $retorno = [];
+
+        try {
+            $retorno = $this->delete(self::TABELA, $where_condicao, $where_valor);
+        } catch (\Throwable $th) {
+            echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
+            return false;
+        }
+        
+        return $retorno;
+    }
 }
 
 
