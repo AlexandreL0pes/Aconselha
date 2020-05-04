@@ -105,7 +105,7 @@ class Diagnosticas
         $avaliacao_id = $dados['avaliacao'];
         $avaliacao = new Avaliacao();
 
-        $campos = Avaliacao::COL_ID . ", " . Avaliacao::COL_ID_REUNIAO . ", " . Avaliacao::COL_PROFESSOR . ", " . Avaliacao::COL_ESTUDANTE . ", " . Avaliacao::COL_DATA ;
+        $campos = Avaliacao::COL_ID . ", " . Avaliacao::COL_ID_REUNIAO . ", " . Avaliacao::COL_PROFESSOR . ", " . Avaliacao::COL_ESTUDANTE . ", " . Avaliacao::COL_DATA;
         $busca = [Avaliacao::COL_ID => $avaliacao_id];
         $diagnostica = ($avaliacao->listar($campos, $busca, null, 1))[0];
 
@@ -128,9 +128,37 @@ class Diagnosticas
 
             http_response_code(200);
             return json_encode($diagnosticaCompleto);
-        }else{
+        } else {
             http_response_code(500);
             return array('message' => 'Não foi encontrada uma avaliação diagnóstica com o id especificado!');
+        }
+    }
+
+    public function excluirDiagnostica($dados)
+    {
+        $avaliacao_id = $dados['avaliacao'];
+
+        $condicao = [Analise::COL_AVALIACAO => $avaliacao_id];
+        $analise = new Analise();
+
+        $retornoAnalise = $analise->excluir($condicao);
+
+        if ($retornoAnalise && $retornoAnalise > 0) {
+            $avaliacao = new Avaliacao();
+
+            $condicao = [Avaliacao::COL_ID => $avaliacao_id];
+            $retornoAvaliacao = $avaliacao->excluir($condicao);
+
+            if ($retornoAvaliacao && $retornoAvaliacao > 0) {
+                http_response_code(200);
+                return array('message' => 'A avaliação dignóstica foi excluída!');
+            } else {
+                http_response_code(500);
+                return array('message' => 'Houve um erro na exclusão da avaliação diagnóstica');
+            }
+        } else {
+            http_response_code(500);
+            return array('message' => 'Houve um erro na exclusão da avaliação diagnóstica');
         }
     }
 }

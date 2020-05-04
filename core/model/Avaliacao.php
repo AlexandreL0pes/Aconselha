@@ -93,7 +93,6 @@ class Avaliacao extends CRUD {
     {
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
-        print_r($condicao);
 
         if ($condicao && count($condicao) > 0) {
             if (isset($condicao[self::COL_ID]) && !empty($condicao[self::COL_ID])) {
