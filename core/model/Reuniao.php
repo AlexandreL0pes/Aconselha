@@ -14,6 +14,7 @@ class Reuniao extends CRUD
     const COL_DATA = 'data';
     const COL_ETAPA_CONSELHO = 'etapaConselho';
     const COL_FINALIZADO = 'finalizado';
+    const COL_MEMORIA = 'memoria';
 
 
     /**
