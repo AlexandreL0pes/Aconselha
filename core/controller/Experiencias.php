@@ -74,4 +74,54 @@ class Experiencias
             return array('message' => 'Não foi possível cadastrar a experiência');
         }
     }
+
+    public function alterar($dados)
+    {
+        $experiencia_id = $dados['experiencia'];
+        $reuniao = $dados['reuniao'];
+        $titulo = $dados['titulo'];
+        $descricao = $dados['descricao'];
+
+        $classificacao = $dados['classificacao'];
+        $disciplinas = $dados['disciplinas'];
+
+        $experiencia = new Experiencia();
+
+        $resultadoExperiencia = $experiencia->alterar([
+            Experiencia::COL_ID => $experiencia_id,
+            Experiencia::COL_ID_REUNIAO => $reuniao,
+            Experiencia::COL_TITULO => $titulo,
+            Experiencia::COL_OBSERVACAO => $descricao,
+            Experiencia::COL_CLASSIFICACAO => $classificacao
+        ]);
+
+        if ($resultadoExperiencia > 0) {
+            $disciplinasExperiencia = new DisciplinaExperiencia();
+
+            $disciplinasExperiencia->excluir([DisciplinaExperiencia::COL_ID_EXPERIENCIA => $experiencia_id]);
+
+            $erros = array();
+            foreach ($disciplinas as $disciplina) {
+                $resultadoDisciplinas = $disciplinasExperiencia->adicionar([
+                    DisciplinaExperiencia::COL_ID_EXPERIENCIA => $resultadoExperiencia,
+                    DisciplinaExperiencia::COL_DISCIPLINA => $disciplina
+                ]);
+
+                if (!($resultadoDisciplinas > 0)) {
+                    array_push($erros, $disciplina);
+                }
+            }
+
+            if (empty($erros)) {
+                http_response_code(200);
+                return array('message' => 'A experiência foi alterada com sucesso!');
+            } else {
+                http_response_code(500);
+                return array('message' => 'Houve erro na alteração das disciplinas em experiencia', 'errors' => $erros);
+            }
+        } else {
+            http_response_code(500);
+            return array('message' => 'Houve um erro na alteração das disciplinas');
+        }
+    }
 }
