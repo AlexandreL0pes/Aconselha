@@ -87,4 +87,24 @@ class Experiencia extends CRUD
 
         return $retorno;
     }
+
+    public function excluir($condicao = [])
+    {
+        $where_condicao = " 1 = 1 ";
+        $where_valor = [];
+
+        if (isset($condicao[self::COL_ID]) && !empty($condicao[self::COL_ID])) {
+            $where_condicao .= " AND " . self::COL_ID . " = ? ";
+            $where_valor[] = $condicao[self::COL_ID];
+        }
+
+        try {
+            $this->delete(self::TABELA, $where_condicao, $where_valor);
+        } catch (\Throwable $th) {
+            echo "Mensagem: " . $th->getTraceAsString() . "\n Local: " . $th->getTraceAsString();
+            return false;
+        }
+
+        return true;
+    }
 }
