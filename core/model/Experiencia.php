@@ -8,11 +8,12 @@ use Exception;
 class Experiencia extends CRUD
 {
 
-    const TABELA = "assunto";
+    const TABELA = "Experiencia";
     const COL_ID = "id";
+    const COL_TITULO = "titulo";
+    const COL_OBSERVACAO = "observacao";
     const COL_REUNIAO = "idReuniao";
     const COL_CLASSIFICACAO = "idClassificacao";
-    const COL_OBSERVACAO = "observacao";
 
 
     public function adicionar($dados)
@@ -52,7 +53,7 @@ class Experiencia extends CRUD
     {
         $campos = $campos != null ? $campos : " * ";
         $ordem = $ordem != null ? $ordem : " " . self::COL_REUNIAO;
-        $limite = $limite != null ? $limite : 10;
+        $limite = $limite != null ? $limite : 100;
 
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
