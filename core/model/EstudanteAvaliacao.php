@@ -55,11 +55,11 @@ class EstudanteAvaliacao extends CRUD
 
         if ($busca && count($busca) > 0) {
             if (isset($busca[self::COL_ID]) && !empty($busca[self::COL_ID])) {
-                $where_condicao .= $busca[self::COL_ID];
+                $where_condicao .= " AND " . $busca[self::COL_ID] . " = ? ";
                 $where_valor[] = $busca[self::COL_ID];
             }
             if (isset($busca[self::COL_ID_AVALIACAO]) && !empty($busca[self::COL_ID_AVALIACAO])) {
-                $where_condicao .= $busca[self::COL_ID_AVALIACAO];
+                $where_condicao .= " AND " . $busca[self::COL_ID_AVALIACAO] . " = ? ";
                 $where_valor[] = $busca[self::COL_ID_AVALIACAO];
             }
         }
