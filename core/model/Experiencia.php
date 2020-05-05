@@ -5,7 +5,7 @@ namespace core\model;
 use core\CRUD;
 use Exception;
 
-class Assunto extends CRUD
+class Experiencia extends CRUD
 {
 
     const TABELA = "assunto";
