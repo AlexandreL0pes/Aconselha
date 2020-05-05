@@ -13,6 +13,7 @@ class Experiencia extends CRUD
     const COL_TITULO = "titulo";
     const COL_OBSERVACAO = "observacao";
     const COL_REUNIAO = "idReuniao";
+    const COL_DATA = "data";
     const COL_CLASSIFICACAO = "idClassificacao";
 
 
