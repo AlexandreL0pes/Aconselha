@@ -69,11 +69,11 @@ class Atendimentos
 
             } else {
                 http_response_code(500);
-                return array('message' => 'Não foi possível cadastrar todos os professores do encaminhamento.', 'errors' => $erros);
+                return json_encode(array('message' => 'Não foi possível cadastrar todos os professores do encaminhamento.', 'errors' => $erros));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Não foi possível cadastrar o encaminhamento.');
+            return json_encode(array('message' => 'Não foi possível cadastrar o encaminhamento.'));
         }
     }
 
@@ -121,14 +121,14 @@ class Atendimentos
 
             if (empty($erros)) {
                 http_response_code(200);
-                return array('message' => 'Os atendimentos foram alterados!');
+                return json_encode(array('message' => 'Os atendimentos foram alterados!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Não foi possível alterar todos os professores do encaminhamento.', 'errors' => $erros);
+                return json_encode(array('message' => 'Não foi possível alterar todos os professores do encaminhamento.', 'errors' => $erros));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Não foi possível alterar o encaminhamento.');
+            return json_encode(array('message' => 'Não foi possível alterar o encaminhamento.'));
         }
     }
 
@@ -158,7 +158,7 @@ class Atendimentos
             return json_encode($atendimentoCompleto);
         } else {
             http_response_code(500);
-            return array('message' => 'Não foi encontrado uma avaliação com o id especificado!');
+            return json_encode(array('message' => 'Não foi encontrado uma avaliação com o id especificado!'));
         }
     }
 
@@ -195,14 +195,14 @@ class Atendimentos
 
             if ($retornoAvaliacao && $retornoAvaliacao > 0) {
                 http_response_code(200);
-                return array('message' => 'O encaminhamento foi excluído!');
+                return json_encode(array('message' => 'O encaminhamento foi excluído!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Houve um erro na exclusão do encaminhamento!');
+                return json_encode(array('message' => 'Houve um erro na exclusão do encaminhamento!'));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Houve um erro na exclusão dos professores envolvidos no encaminhamento!');
+            return json_encode(array('message' => 'Houve um erro na exclusão dos professores envolvidos no encaminhamento!'));
         }
     }
 }
