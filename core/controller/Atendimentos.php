@@ -64,7 +64,9 @@ class Atendimentos
 
             if (empty($erros)) {
                 http_response_code(200);
-                return array('message' => 'Os atendimentos foram cadastrados!');
+                // return array('message' => 'Os atendimentos foram cadastrados!');
+                return json_encode(array('message' => 'Os atendimentos foram cadastrados!'));
+
             } else {
                 http_response_code(500);
                 return array('message' => 'Não foi possível cadastrar todos os professores do encaminhamento.', 'errors' => $erros);
