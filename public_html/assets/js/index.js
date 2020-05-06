@@ -83,7 +83,7 @@ async function sendRequest(data) {
   const url = window.location.pathname.split("/");
   const baseUrl = `${base}/${url[1]}/api.php`;
 
-  const response = await fetch(baseUrl, {
+  const response = await fetch("http://localhost/public_html/api.php", {
     method: "post",
     body: JSON.stringify(data),
   });
