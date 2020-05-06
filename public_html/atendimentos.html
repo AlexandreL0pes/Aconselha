@@ -238,7 +238,7 @@
                           type="text"
                           placeholder="Digite o nome do aluno"
                           value=""
-                          id="prova"
+                          id="aluno"
                         />
                         <span class="icon is-small is-left">
                           <i class="fa fa-search" aria-hidden="true"></i>
@@ -246,7 +246,7 @@
                       </div>
                       <div
                         class="dropdown-menu"
-                        id="prova-menu"
+                        id="aluno-menu"
                         role="menu"
                       ></div>
                     </div>
@@ -294,6 +294,7 @@
                 <textarea
                   class="textarea"
                   placeholder="Descreva a motivação do encaminhamento"
+                  id="queixa"
                 ></textarea>
               </div>
             </div>
@@ -301,10 +302,10 @@
               <label class="label">Intervenção</label>
               <div class="control">
                 <div class="select">
-                  <select>
-                    <option>Selecione uma opção</option>
-                    <option>Conversa com Responsável</option>
-                    <option>Conversa com aluno</option>
+                  <select id="intervencao">
+                    <option value="2">Conversa com Responsável</option>
+                    <option value="3">Conversa com aluno</option>
+                    <option value="1">Conversa com o Psicólogo</option>
                   </select>
                 </div>
               </div>
@@ -312,7 +313,7 @@
           </section>
           <footer class="modal-card-foot">
             <div></div>
-            <button class="button is-success save-avaliation" name="">
+            <button class="button is-success salvar-encaminhamento" name="">
               <span class="icon is-small">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </span>
