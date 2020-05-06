@@ -29,7 +29,18 @@ const abrirEncaminhamento = (element) => {
     localStorage.setItem("encaminhamento", encaminhamento);
     modalEncaminhamento.classList.toggle("is-active");
 
-    // TODO: Adicionar aqui a função para preencher o modal com os dados do encaminhamento
+    const dados = {
+      acao: "Atendimentos/selecionarAtendimento",
+      avaliacao: encaminhamento,
+    };
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        preencherEncaminhamento(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   } else {
     showMessage(
       "Houve um erro!",
@@ -41,6 +52,22 @@ const abrirEncaminhamento = (element) => {
 };
 
 /**
+ * Efetua o preenchimento do modal com os parâmetros
+ * @param {JSON} dados Dados sobre o encaminhamento
+ */
+const preencherEncaminhamento = (dados) => {
+  dados.professores.map((professor) => {
+    addChip(professor.nome, professor.id);
+  });
+  const estudante = document.querySelector("#aluno");
+  estudante.value = dados.estudante.nome;
+  estudante.setAttribute("data-aluno", dados.estudante.id);
+
+  document.getElementById("queixa").value = dados.queixa;
+  document.getElementById("intervencao").value = dados.intervencao;
+};
+
+/**
  * Esconde o modal, remove o aluno do modal atual e apaga os perfis selecionados
  * @param {DOM Element} modal Modal de Avaliação Diagnóstica
  */
@@ -49,6 +76,7 @@ const fecharAvaliacao = (modal) => {
   if (localStorage.getItem("encaminhamento")) {
     localStorage.removeItem("encaminhamento");
   }
+  document.querySelector(".professores-selecionados").textContent = "";
 };
 
 /**
@@ -67,22 +95,19 @@ const closeModal = (params) => {
   const modals = document.querySelectorAll(".modal");
   modals.forEach((modal) => {
     const closeBtn = modal.querySelector(".modal-close-btn");
-    closeBtn.addEventListener("click", (event) => {
-      modal.classList.toggle("is-active");
-      if (localStorage.getItem("encaminhamento")) {
-        localStorage.removeItem("encaminhamento");
-      }
+    closeBtn.addEventListener("click", (evnt) => {
+      fecharAvaliacao(modal);
     });
     const bgModal = modal.querySelector(".modal-background");
-    bgModal.addEventListener("click", (event) => {
-      modal.classList.toggle("is-active");
-      if (localStorage.getItem("encaminhamento")) {
-        localStorage.removeItem("encaminhamento");
-      }
+    bgModal.addEventListener("click", (evnt) => {
+      fecharAvaliacao(modal);
     });
   });
 };
 
+/**
+ * Exibe a quantidade de encaminhamentos
+ */
 const atualizarEncaminhamentos = () => {
   const cards = document.querySelectorAll(".card-encaminhamento");
   const qtdAvaliacoes = document.querySelector("#qtdEncaminhamentos");
@@ -232,6 +257,10 @@ btnSalvarEncaminhamento.addEventListener("click", (e) =>
   salvarEncaminhamento(e)
 );
 
+/**
+ *  Dispara a requisição para salvar o encaminhamento
+ * @param {*} e
+ */
 const salvarEncaminhamento = (e) => {
   console.log("> Apertou");
 
@@ -244,11 +273,18 @@ const salvarEncaminhamento = (e) => {
     dados.intervencao != "" &&
     dados.reuniao != ""
   ) {
-    console.log(JSON.stringify(dados));
-  
+    console.log(dados);
+
     sendRequest(dados)
       .then((response) => {
         console.log(response);
+        fecharAvaliacao(document.getElementById("encaminhamento"));
+        showMessage(
+          "Deu certo!",
+          "O encaminhamento já foi salvo.",
+          "success",
+          4000
+        );
       })
       .catch((err) => {
         console.error(err);
@@ -262,9 +298,11 @@ const salvarEncaminhamento = (e) => {
     );
   }
 };
-
+/**
+ * Obtem todos os dados para cadastro de encaminhamento
+ */
 const pegarDados = () => {
-  const estudante = document.querySelector("#aluno").getAttribute('data-aluno');
+  const estudante = document.querySelector("#aluno").getAttribute("data-aluno");
   const professoresChips = document.querySelectorAll(
     ".professores-selecionados > div.chip"
   );
