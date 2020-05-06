@@ -81,9 +81,10 @@ let showMessage = (title, content, type, durationTime) => {
 async function sendRequest(data) {
   const base = window.location.origin;
   const url = window.location.pathname.split("/");
-  const baseUrl = `${base}/${url[1]}/api.php`;
-
-  const response = await fetch("http://localhost/public_html/api.php", {
+  // const baseUrl = `${base}/${url[1]}/api.php`;
+  const baseUrl = `http://localhost/public_html/api.php`;
+  
+  const response = await fetch(baseUrl, {
     method: "post",
     body: JSON.stringify(data),
   });
