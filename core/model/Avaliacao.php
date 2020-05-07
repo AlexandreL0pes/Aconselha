@@ -58,6 +58,7 @@ class Avaliacao extends CRUD {
 
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
+        $tabela = self::TABELA;
 
         if ($busca && count($busca) > 0) {
             if (isset($busca[self::COL_ID_REUNIAO]) && !empty($busca[self::COL_ID_REUNIAO]) ) {
@@ -75,12 +76,19 @@ class Avaliacao extends CRUD {
                 $where_valor[] = $busca[self::COL_ID];
             }
 
+            if (isset($busca['avaliacao']) && !empty($busca['avaliacao'])) {
+                if ($busca['avaliacao'] == "atendimento") {
+                    $tabela = self::TABELA . " av INNER JOIN " . Acao::TABELA ." a on av.". Avaliacao::COL_ACAO . " = a." . Acao::COL_ID;
+
+                }
+            }
+
         }
 
         $retorno = [];
 
         try {
-            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
+            $retorno = $this->read(null, $tabela, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             return false;
