@@ -46,10 +46,10 @@ class Reunioes
 
 		if ($resultado > 0) {
 			http_response_code(200);
-			return array('message' => 'As reuniões foram iniciadas!');
+			return json_encode(array('message' => 'As reuniões foram iniciadas!'));
 		} else {
 			http_response_code(500);
-			return array('message' => 'Não foi possível iniciar as reuniões!');
+			return json_encode(array('message' => 'Não foi possível iniciar as reuniões!'));
 		}
 	}
 
@@ -73,10 +73,10 @@ class Reunioes
 		}
 		if (sizeof($erros) == 0) {
 			http_response_code(200);
-			return array('message'  => 'As reuniões foram finalizadas!');
+			return json_encode(array('message'  => 'As reuniões foram finalizadas!'));
 		} else {
 			http_response_code(500);
-			return array('message' => 'Não foi possível finalizar as reuniões!');
+			return json_encode(array('message' => 'Não foi possível finalizar as reuniões!'));
 		}
 	}
 
@@ -91,10 +91,29 @@ class Reunioes
 
 		if ($resultado && $resultado > 0) {
 			http_response_code(200);
-			return array('message' => 'A memória da reunião foi salva!');
+			return json_encode(array('message' => 'A memória da reunião foi salva!'));
 		} else {
 			http_response_code(500);
-			return array('message' => 'Não foi possível salvar a memória solicitada!');
+			return json_encode(array('message' => 'Não foi possível salvar a memória solicitada!'));
+		}
+	}
+
+	public function selecionarMemoria($dados)
+	{
+		$reuniao_id = $dados['reuniao'];
+
+		$reuniao = new Reuniao();
+
+		$campos = Reuniao::COL_MEMORIA;
+		$busca = [Reuniao::COL_ID => $reuniao_id];
+		$memoriaReuniao = ($reuniao->listar($campos, $busca, null, 1))[0];
+
+		if (count($memoriaReuniao) > 0) {
+			http_response_code(200);
+			return json_encode($memoriaReuniao);
+		}else{
+			http_response_code(500);
+			return json_encode(array('message' => 'Não foi possível obter a memória da reunião solicitada!'));
 		}
 	}
 }
