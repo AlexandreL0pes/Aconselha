@@ -6,7 +6,6 @@
 
 /* Lista Identificação */
 
-
 .content {
   grid-column: 1 / -1;
   grid-row: span 5;
@@ -15,7 +14,6 @@
   grid-template-rows: 30px auto;
   margin: 10px;
 }
-
 
 .descricao {
   grid-column: 1 / -1;
@@ -60,11 +58,14 @@
 
   text-justify: center;
   text-align: center;
+
+  animation: fadeIn .7s ease-in-out;
 }
 .cardbox:hover {
   box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.3);
   transform: translateY(-1px);
 }
+
 
 
 /* Estilo para os cards */
@@ -98,12 +99,11 @@
 
   border-radius: 3px;
   background: rgba(98, 98, 98, 0.1);
-  font-size: .8em !important;
+  font-size: 0.8em !important;
 }
 .chip > .chip-text {
   padding-left: 5px;
   text-transform: capitalize;
-
 }
 
 .chip > .chip-close {
@@ -112,7 +112,6 @@
   cursor: pointer;
   padding-right: 2px;
 }
-
 
 /* Modal */
 .modal-close-btn {
@@ -132,23 +131,24 @@
 /* Modal */
 
 .avaliacao-aluno > .info {
-	padding: 5px;
-	margin: 30px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	row-gap: 5px;
-	font-size: 1.2em;
-	box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
-	border-radius: 5px;
+  padding: 5px;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5px;
+  font-size: 1.2em;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 .gray-text {
-	color:rgb(98, 98, 98) !important;
+  color: rgb(98, 98, 98) !important;
 }
 
-.input,.text-area {
+.input,
+.text-area {
   /* border: none !important; */
   box-shadow: none !important;
   color: rgb(0, 0, 0) !important;
@@ -158,7 +158,8 @@
   width: 100%;
 }
 
-.modal-card-head, .modal-card-foot {
+.modal-card-head,
+.modal-card-foot {
   padding: 5px 10px !important;
 }
 
@@ -182,9 +183,6 @@
   width: 100%;
 }
 
-
-
-
 /* PAGE HEADER */
 
 .card-info {
@@ -201,14 +199,13 @@
   padding: 20px 20px;
   grid-gap: 3px;
   box-shadow: 0 11px 11px 4px rgba(0, 0, 0, 0.3);
-	transition: box-shadow ease-in-out 0.4s;
+  transition: box-shadow ease-in-out 0.4s;
 }
 
 .card-info > button {
-	margin-top: 5px;
-	margin-bottom: 0;
-	justify-self: right;
-
+  margin-top: 5px;
+  margin-bottom: 0;
+  justify-self: right;
 }
 .page-head {
   display: grid;
@@ -230,7 +227,6 @@
   font-size: 1em;
   font-weight: 600;
 }
-
 
 .descricao {
   display: flex;
