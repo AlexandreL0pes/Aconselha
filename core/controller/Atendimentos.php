@@ -213,9 +213,10 @@ class Atendimentos
         $campos = "av." . Avaliacao::COL_ID . ", av." . Avaliacao::COL_ID_REUNIAO . ", a." . Acao::COL_NOME . ", av." . Avaliacao::COL_ESTUDANTE;
         $busca = ['avaliacao' => 'atendimento', Avaliacao::COL_ID_REUNIAO => $reuniao_id];
 
+        $ordem = Avaliacao::COL_DATA . " DESC ";
         $avaliacao = new Avaliacao();
 
-        $atendimentos = $avaliacao->listar($campos, $busca, null, 100);
+        $atendimentos = $avaliacao->listar($campos, $busca, $ordem, 100);
         $retorno = [];
 
         if (!empty($atendimentos) && !empty($atendimentos[0])) {
