@@ -15,6 +15,16 @@ cardsEncaminhamentos.forEach((card) => {
 });
 
 /**
+ * Listener para salvar Encaminhamento
+ */
+const btnSalvarEncaminhamento = document.querySelector(
+  ".salvar-encaminhamento"
+);
+btnSalvarEncaminhamento.addEventListener("click", (e) =>
+  salvarEncaminhamento(e)
+);
+
+/**
  * Abre o modal para a vizualização
  * @param {DOM Element} element
  */
@@ -111,7 +121,12 @@ const closeModal = (params) => {
 const atualizarEncaminhamentos = () => {
   const cards = document.querySelectorAll(".card-encaminhamento");
   const qtdAvaliacoes = document.querySelector("#qtdEncaminhamentos");
-  qtdAvaliacoes.innerHTML = cards.length;
+
+  if (cards.length == 0) {
+    qtdAvaliacoes.innerHTML = "Nenhum encaminhamento foi cadastrado";
+  } else {
+    qtdAvaliacoes.innerHTML = "Existem " + cards.length + " encaminhamentos salvos";
+  }
 };
 
 /**
@@ -250,13 +265,6 @@ const addChip = (nome, id) => {
   professoresSelecionados.insertAdjacentElement("afterbegin", chip);
 };
 
-const btnSalvarEncaminhamento = document.querySelector(
-  ".salvar-encaminhamento"
-);
-btnSalvarEncaminhamento.addEventListener("click", (e) =>
-  salvarEncaminhamento(e)
-);
-
 /**
  *  Dispara a requisição para salvar o encaminhamento
  * @param {*} e
@@ -298,6 +306,7 @@ const salvarEncaminhamento = (e) => {
     );
   }
 };
+
 /**
  * Obtem todos os dados para cadastro de encaminhamento
  */
@@ -334,9 +343,60 @@ const pegarDados = () => {
 
   return dados;
 };
+
+/**
+ * Faz a requisição dos encaminhamento do conselho atual
+* @param {} params 
+ */
+const listarEncaminhamentos = (params) => {
+  const reuniao = localStorage.getItem("conselhoAtual") || "";
+  const dados = {
+    acao: "Atendimentos/listarAtendimentosReuniao",
+    reuniao: reuniao,
+  };
+
+  sendRequest(dados)
+    .then((response) => {
+      console.log(response);
+      if (!response.message) {
+        response.forEach((encaminhamento) =>
+          addEncaminhamentoCard(encaminhamento)
+        );
+        atualizarEncaminhamentos();
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+/**
+ * Gera os cards de encaminhamento 
+ * @param {JSON} dados Json contendo os dados necessários para gerar o card encaminhamento
+ */
+const addEncaminhamentoCard = (dados) => {
+  let card = document.createElement("div");
+
+  card.classList.add("cardbox", "card-encaminhamento", "is-info");
+  card.setAttribute("data-encaminhamento", dados.encaminhamento);
+
+  card.innerHTML += `
+    <p class="subtitulo gray-text is-8">${dados.aluno.curso}</p>
+    <p class="subtitulo is-7">${dados.aluno.nome}</p>
+    <p class="gray-text subtitulo is-7">${dados.intervencao}</p>
+  `;
+  card.addEventListener("click", (event) => abrirEncaminhamento(event));
+
+  const encaminhamentos = document.querySelector(".encaminhamentos");
+  console.log(encaminhamentos);
+
+  encaminhamentos.appendChild(card);
+};
+
+
+listarEncaminhamentos();
 autocompleteAluno();
 autocompleteProfessor();
 deleteProfessor();
 
 closeModal();
-atualizarEncaminhamentos();
