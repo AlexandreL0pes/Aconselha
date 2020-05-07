@@ -208,16 +208,6 @@ class Atendimentos
 
     public function listarAtendimentosReuniao($dados)
     {
-        /*        {
-            encaminhamento: 40,
-            intervencao: "Conversar com o aluno",
-            aluno: {
-                cod_matricula: 2017103202030090,
-                nome: "Alexandre Lopes",
-                curso: "Informática para Internet"
-            }
-
-        } */
         $reuniao_id = $dados['reuniao'];
 
         $campos = "av." . Avaliacao::COL_ID . ", av." . Avaliacao::COL_ID_REUNIAO . ", a." . Acao::COL_NOME . ", av." . Avaliacao::COL_ESTUDANTE;
@@ -226,10 +216,9 @@ class Atendimentos
         $avaliacao = new Avaliacao();
 
         $atendimentos = $avaliacao->listar($campos, $busca, null, 100);
-
         $retorno = [];
 
-        if (count($atendimentos) > 0) {
+        if (!empty($atendimentos) && !empty($atendimentos[0])) {
             foreach ($atendimentos as $atendimento) {
                 // TODO: Consultar o Q-Academico os dados do aluno
                 $aluno = ['matricula' => $atendimento[Avaliacao::COL_ESTUDANTE], 'nome' => 'Um nome estático', 'curso' => 'Informática para Interte'];
