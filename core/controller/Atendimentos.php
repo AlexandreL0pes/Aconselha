@@ -4,6 +4,7 @@ namespace core\controller;
 
 use core\model\Avaliacao;
 use core\model\Encaminhamento;
+use core\model\Acao;
 
 class Atendimentos
 {
@@ -66,7 +67,6 @@ class Atendimentos
                 http_response_code(200);
                 // return array('message' => 'Os atendimentos foram cadastrados!');
                 return json_encode(array('message' => 'Os atendimentos foram cadastrados!'));
-
             } else {
                 http_response_code(500);
                 return json_encode(array('message' => 'Não foi possível cadastrar todos os professores do encaminhamento.', 'errors' => $erros));
@@ -203,6 +203,43 @@ class Atendimentos
         } else {
             http_response_code(500);
             return json_encode(array('message' => 'Houve um erro na exclusão dos professores envolvidos no encaminhamento!'));
+        }
+    }
+
+    public function listarAtendimentosReuniao($dados)
+    {
+        /*        {
+            encaminhamento: 40,
+            intervencao: "Conversar com o aluno",
+            aluno: {
+                cod_matricula: 2017103202030090,
+                nome: "Alexandre Lopes",
+                curso: "Informática para Internet"
+            }
+
+        } */
+        $reuniao_id = $dados['reuniao'];
+
+        $campos = "av." . Avaliacao::COL_ID . ", av." . Avaliacao::COL_ID_REUNIAO . ", a." . Acao::COL_NOME . ", av." . Avaliacao::COL_ESTUDANTE;
+        $busca = ['avaliacao' => 'atendimento', Avaliacao::COL_ID_REUNIAO => $reuniao_id];
+
+        $avaliacao = new Avaliacao();
+
+        $atendimentos = $avaliacao->listar($campos, $busca, null, 100);
+
+        $retorno = [];
+
+        if (count($atendimentos) > 0) {
+            foreach ($atendimentos as $atendimento) {
+                // TODO: Consultar o Q-Academico os dados do aluno
+                $aluno = ['matricula' => $atendimento[Avaliacao::COL_ESTUDANTE], 'nome' => 'Um nome estático', 'curso' => 'Informática para Interte'];
+
+                array_push($retorno, ['encaminhamento' => $atendimento[Avaliacao::COL_ID], 'intervencao' => $atendimento[Acao::COL_NOME], 'aluno' => $aluno]);
+            }
+
+            return json_encode($retorno);
+        } else {
+            return json_encode(array('message' => 'Nenhum atendimento foi encontrado'));
         }
     }
 }
