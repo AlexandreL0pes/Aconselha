@@ -86,6 +86,10 @@ class Reuniao extends CRUD
                 $where_condicao .= " AND " . self::COL_FINALIZADO . " = ?";
                 $where_valor[] = $busca[self::COL_FINALIZADO];
             }
+            if (isset($busca[self::COL_ID]) && !empty($busca[self::COL_ID])) {
+                $where_condicao .= " AND " . self::COL_ID . " = ? ";
+                $where_valor[] = $busca[self::COL_ID];
+            }
         }
 
         $retorno = [];
@@ -94,7 +98,6 @@ class Reuniao extends CRUD
         try {
 
             $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
-        
         } catch (Exception $e) {
             echo "Mensagem: " . $e->getMessage() . "\n Local: " . $e->getTraceAsString();
         }
