@@ -87,6 +87,12 @@ const fecharAvaliacao = (modal) => {
     localStorage.removeItem("encaminhamento");
   }
   document.querySelector(".professores-selecionados").textContent = "";
+  
+  const estudante = document.querySelector("#aluno");
+  estudante.setAttribute("data-aluno","");
+  estudante.value = "";
+  document.getElementById("queixa").value = "";
+  document.getElementById("intervencao").value;
 };
 
 /**
