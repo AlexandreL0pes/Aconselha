@@ -287,6 +287,7 @@ const salvarEncaminhamento = (e) => {
       .then((response) => {
         console.log(response);
         fecharAvaliacao(document.getElementById("encaminhamento"));
+        listarEncaminhamentos();
         showMessage(
           "Deu certo!",
           "O encaminhamento já foi salvo.",
@@ -391,7 +392,32 @@ const addEncaminhamentoCard = (dados) => {
   encaminhamentos.appendChild(card);
 };
 
+/**
+ * Requisita as ações de intervenção salvas no BD
+ */
+const listarAcoes = (params) => {
+  sendRequest({acao:"Acoes/listarAcoes"}).then((response) => {
+    preencherAcoes(response);
+  }).catch((err) => {
+    console.error(err);
+  });
+}
 
+/**
+ * Preenche o select com os dados informados
+ * @param {*} dados Acoes de Intervenção 
+ */
+const preencherAcoes = (dados) => {
+  const selectIntervencao = document.querySelector('select#intervencao');
+  dados.forEach(acao => {
+    let option = document.createElement('option');
+    option.setAttribute("value", acao.id);
+    option.appendChild(document.createTextNode(acao.nome));
+    selectIntervencao.appendChild(option);
+  });
+}
+
+listarAcoes();
 listarEncaminhamentos();
 autocompleteAluno();
 autocompleteProfessor();
