@@ -357,7 +357,6 @@ const listarEncaminhamentos = (params) => {
 
   sendRequest(dados)
     .then((response) => {
-      console.log(response);
       if (!response.message) {
         response.forEach((encaminhamento) =>
           addEncaminhamentoCard(encaminhamento)
@@ -388,7 +387,6 @@ const addEncaminhamentoCard = (dados) => {
   card.addEventListener("click", (event) => abrirEncaminhamento(event));
 
   const encaminhamentos = document.querySelector(".encaminhamentos");
-  console.log(encaminhamentos);
 
   encaminhamentos.appendChild(card);
 };
