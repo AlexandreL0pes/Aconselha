@@ -24,6 +24,13 @@ btnSalvarEncaminhamento.addEventListener("click", (e) =>
   salvarEncaminhamento(e)
 );
 
+const btnExcluirEncaminhamento = document.querySelector(
+  ".excluir-encaminhamento"
+);
+btnExcluirEncaminhamento.addEventListener("click", (e) =>
+  excluirEncaminhamento(e)
+);
+
 /**
  * Abre o modal para a vizualização
  * @param {DOM Element} element
@@ -87,9 +94,9 @@ const fecharAvaliacao = (modal) => {
     localStorage.removeItem("encaminhamento");
   }
   document.querySelector(".professores-selecionados").textContent = "";
-  
+
   const estudante = document.querySelector("#aluno");
-  estudante.setAttribute("data-aluno","");
+  estudante.setAttribute("data-aluno", "");
   estudante.value = "";
   document.getElementById("queixa").value = "";
   document.getElementById("intervencao").value;
@@ -131,7 +138,8 @@ const atualizarEncaminhamentos = () => {
   if (cards.length == 0) {
     qtdAvaliacoes.innerHTML = "Nenhum encaminhamento foi cadastrado";
   } else {
-    qtdAvaliacoes.innerHTML = "Existem " + cards.length + " encaminhamentos salvos";
+    qtdAvaliacoes.innerHTML =
+      "Existem " + cards.length + " encaminhamentos salvos";
   }
 };
 
@@ -353,7 +361,7 @@ const pegarDados = () => {
 
 /**
  * Faz a requisição dos encaminhamento do conselho atual
-* @param {} params 
+ * @param {} params
  */
 const listarEncaminhamentos = (params) => {
   const reuniao = localStorage.getItem("conselhoAtual") || "";
@@ -365,6 +373,7 @@ const listarEncaminhamentos = (params) => {
   sendRequest(dados)
     .then((response) => {
       if (!response.message) {
+        document.querySelector('.encaminhamentos').innerHTML ="";
         response.forEach((encaminhamento) =>
           addEncaminhamentoCard(encaminhamento)
         );
@@ -377,7 +386,7 @@ const listarEncaminhamentos = (params) => {
 };
 
 /**
- * Gera os cards de encaminhamento 
+ * Gera os cards de encaminhamento
  * @param {JSON} dados Json contendo os dados necessários para gerar o card encaminhamento
  */
 const addEncaminhamentoCard = (dados) => {
@@ -402,27 +411,63 @@ const addEncaminhamentoCard = (dados) => {
  * Requisita as ações de intervenção salvas no BD
  */
 const listarAcoes = (params) => {
-  sendRequest({acao:"Acoes/listarAcoes"}).then((response) => {
-    preencherAcoes(response);
-  }).catch((err) => {
-    console.error(err);
-  });
-}
+  sendRequest({ acao: "Acoes/listarAcoes" })
+    .then((response) => {
+      preencherAcoes(response);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
 
 /**
  * Preenche o select com os dados informados
- * @param {*} dados Acoes de Intervenção 
+ * @param {*} dados Acoes de Intervenção
  */
 const preencherAcoes = (dados) => {
-  const selectIntervencao = document.querySelector('select#intervencao');
-  dados.forEach(acao => {
-    let option = document.createElement('option');
+  const selectIntervencao = document.querySelector("select#intervencao");
+  dados.forEach((acao) => {
+    let option = document.createElement("option");
     option.setAttribute("value", acao.id);
     option.appendChild(document.createTextNode(acao.nome));
     selectIntervencao.appendChild(option);
   });
-}
+};
 
+const excluirEncaminhamento = (params) => {
+  const encaminhamento = localStorage.getItem("encaminhamento") || "";
+  
+  if (encaminhamento) {
+    const dados = {
+      acao: "Atendimentos/excluirAtendimento",
+      avaliacao: encaminhamento,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        showMessage(
+          "Deu tudo certo!",
+          "O encaminhamento foi excluído com sucesso.",
+          "success",
+          5000
+        );
+        fecharAvaliacao(document.querySelector('#encaminhamento'));
+        listarEncaminhamentos();
+        console.log(response);
+        
+      })
+      .catch((err) => {
+        showMessage(
+          "Algo deu errado!",
+          "Infelizmente não conseguimos excluir o encaminhamento.",
+          "error",
+          5000
+        );
+      });
+  } else {
+    showMessage("Quase lá", "Verifique todos os dados, parece existir um erro neles.", "warning", 5000);
+  }
+};
 listarAcoes();
 listarEncaminhamentos();
 autocompleteAluno();

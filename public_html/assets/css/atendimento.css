@@ -179,6 +179,11 @@
   margin-top: 5px;
 }
 
+.modal-card-foot {
+  padding-top: 30px !important;
+  padding: 30px 30px 10px 30px !important;
+}
+
 .dropdown-trigger {
   width: 100%;
 }
