@@ -364,6 +364,7 @@ const pegarDados = () => {
  * @param {} params
  */
 const listarEncaminhamentos = (params) => {
+  document.querySelector('.encaminhamentos').innerHTML ="";
   const reuniao = localStorage.getItem("conselhoAtual") || "";
   const dados = {
     acao: "Atendimentos/listarAtendimentosReuniao",
@@ -373,7 +374,6 @@ const listarEncaminhamentos = (params) => {
   sendRequest(dados)
     .then((response) => {
       if (!response.message) {
-        document.querySelector('.encaminhamentos').innerHTML ="";
         response.forEach((encaminhamento) =>
           addEncaminhamentoCard(encaminhamento)
         );
@@ -473,5 +473,6 @@ listarEncaminhamentos();
 autocompleteAluno();
 autocompleteProfessor();
 deleteProfessor();
+atualizarEncaminhamentos();
 
 closeModal();
