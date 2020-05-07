@@ -6,7 +6,7 @@ use core\CRUD;
 use Exception;
 
 class Acao extends CRUD {
-    const TABELA = "acao";
+    const TABELA = "Acao";
     const COL_ID = "id";
     const COL_NOME = "nome";
     const COL_DESCRICAO = "descricao";
