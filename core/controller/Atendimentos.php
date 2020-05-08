@@ -162,7 +162,7 @@ class Atendimentos
         }
     }
 
-    public function professoresAtendimento($atendimento_id)
+    private function professoresAtendimento($atendimento_id)
     {
         $encaminhamento = new Encaminhamento();
 
