@@ -6,7 +6,7 @@ const listener = () => {
   btnModalExperiencia.addEventListener("click", (e) => abrirNovoExperiencia());
 
   const btnSalvarExperiencia = document.getElementById("salvar-ensino");
-  btnSalvarExperiencia.addEventListener("click", (e) => salvarEnsino(e));
+  btnSalvarExperiencia.addEventListener("click", (e) => salvarAprendizado(e));
 };
 
 /**
@@ -64,13 +64,27 @@ const fecharAprendizado = () => {
 
   document.querySelector("#ensino-estudantes-selecionados").textContent = "";
   const disciplina = document.querySelector("#ensino-disciplina");
+  disciplina.setAttribute("data-disciplina", "");
   disciplina.value = "";
   document.getElementById("ensino-descricao").value = "";
 };
 
-const salvarEnsino = (e) => {
+const fecharExperiencia = () => {
+  const modal = document.getElementById("avaliacao-experiencia");
+  modal.classList.toggle("is-active");
+  if (localStorage.getItem("experiencia")) {
+    localStorage.setItem("experiencia", "");
+  }
+
+  document.getElementById("avaliacao-experiencia").value = "";
+  document.getElementById("experiencia-categoria").value;
+
+  document.getElementById('experiencia-disciplinas-selecionadas').textContent = "";
+  document.getElementById('experiencia-descricao').value = "";
+};
+const salvarAprendizado = (e) => {
   console.log(">> Apertou");
-  let dados = pegarDadosEnsino();
+  let dados = pegarDadosAprendizado();
   if (
     dados.disciplina != "" &&
     dados.estudantes.length > 0 &&
@@ -103,7 +117,7 @@ const salvarEnsino = (e) => {
   }
 };
 
-const pegarDadosEnsino = (params) => {
+const pegarDadosAprendizado = (params) => {
   const disciplina = document
     .querySelector("#ensino-disciplina")
     .getAttribute("data-disciplina");

@@ -182,7 +182,7 @@
           </div>
         </div>
         <div class="avaliacoes">
-          <div class="card-avaliacao experiencia" data-aluno="35">
+          <div class="card-avaliacao experiencia" data-experiencia="35">
             <p class="subtitulo is-9" name="">Experiências</p>
             <p class="subtitulo is-7">Desenvolver a interpretação textual</p>
             <div class="perfis">
@@ -191,7 +191,7 @@
               </div>
             </div>
           </div>
-          <div class="card-avaliacao experiencia" data-aluno="35">
+          <div class="card-avaliacao experiencia" data-experiencia="15">
             <p class="subtitulo is-9" name="">Experiências</p>
             <p class="subtitulo is-7">Distribuição da Nota</p>
             <div class="perfis">
@@ -200,7 +200,7 @@
               </div>
             </div>
           </div>
-          <div class="card-avaliacao experiencia" data-aluno="35">
+          <div class="card-avaliacao experiencia" data-experiencia="31">
             <p class="subtitulo is-9" name="">Experiências</p>
             <p class="subtitulo is-7">Excesso de aulas teóricas</p>
             <div class="perfis">
@@ -209,7 +209,7 @@
               </div>
             </div>
           </div>
-          <div class="card-avaliacao ensino" data-aluno="35">
+          <div class="card-avaliacao ensino" data-aprendizado="32">
             <p class="subtitulo is-9" name="">Ensino-Aprendizado</p>
             <p class="subtitulo is-7">Matemática</p>
             <div class="perfis">
@@ -234,7 +234,7 @@
           </p>
         </div>
       </footer>
-      <div class="modal is-active" id="avaliacao-aprendizado">
+      <div class="modal" id="avaliacao-aprendizado">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -340,7 +340,7 @@
                 <div class="field">
                   <label class="label">Título</label>
                   <p class="control">
-                    <input class="input" type="text" placeholder="Name" />
+                    <input id="experiencia-titulo" class="input" type="text" placeholder="Breve descricão da experiência" />
                   </p>
                 </div>
               </div>
@@ -348,7 +348,7 @@
                 <div class="field">
                   <label class="label">Categoria</label>
                   <div class="control">
-                    <div class="select">
+                    <div id="experiencia-categoria"class="select">
                       <select>
                         <option>Sugestões</option>
                         <option>Pontos Positivos</option>
@@ -393,6 +393,7 @@
               <label class="label">Descrição</label>
               <div class="control">
                 <textarea
+                id="experiencia-descricao"
                   class="textarea"
                   placeholder="Detalhe aqui sua sugestão"
                 ></textarea>
