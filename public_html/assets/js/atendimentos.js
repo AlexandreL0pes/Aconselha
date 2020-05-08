@@ -40,6 +40,8 @@ const abrirEncaminhamento = (element) => {
     "data-encaminhamento"
   );
 
+  console.log(encaminhamento);
+  
   const modalEncaminhamento = document.getElementById("encaminhamento");
 
   if (encaminhamento) {
@@ -48,7 +50,7 @@ const abrirEncaminhamento = (element) => {
 
     const dados = {
       acao: "Atendimentos/selecionarAtendimento",
-      avaliacao: encaminhamento,
+      atendimento: encaminhamento,
     };
     sendRequest(dados)
       .then((response) => {
@@ -80,7 +82,7 @@ const preencherEncaminhamento = (dados) => {
   estudante.value = dados.estudante.nome;
   estudante.setAttribute("data-aluno", dados.estudante.id);
 
-  document.getElementById("queixa").value = dados.queixa;
+  document.getElementById("queixa").value = dados.queixa;  
   document.getElementById("intervencao").value = dados.intervencao;
 };
 
@@ -437,7 +439,7 @@ const preencherAcoes = (dados) => {
   const selectIntervencao = document.querySelector("select#intervencao");
   dados.forEach((acao) => {
     let option = document.createElement("option");
-    option.setAttribute("value", acao.id);
+    option.setAttribute("value", acao.idAcao);
     option.appendChild(document.createTextNode(acao.nome));
     selectIntervencao.appendChild(option);
   });
