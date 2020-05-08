@@ -287,7 +287,6 @@ const salvarEncaminhamento = (e) => {
   console.log("> Apertou");
 
   let dados = pegarDados();
-  console.log(dados.professores.length);
   if (
     dados.estudante != "" &&
     dados.professores.length > 0 &&
@@ -364,7 +363,8 @@ const pegarDados = () => {
  * @param {} params
  */
 const listarEncaminhamentos = (params) => {
-  document.querySelector('.encaminhamentos').innerHTML ="";
+  document.querySelector(".encaminhamentos").innerHTML = "";
+  atualizarEncaminhamentos();
   const reuniao = localStorage.getItem("conselhoAtual") || "";
   const dados = {
     acao: "Atendimentos/listarAtendimentosReuniao",
@@ -392,7 +392,16 @@ const listarEncaminhamentos = (params) => {
 const addEncaminhamentoCard = (dados) => {
   let card = document.createElement("div");
 
-  card.classList.add("cardbox", "card-encaminhamento", "is-info");
+  let classCurso = "";
+  if (dados.aluno.curso === "Informática para Internet") {
+    classCurso = "is-info";
+  } else if (dados.aluno.curso === "Meio Ambiente") {
+    classCurso = "is-amb";
+  } else {
+    classCurso = "is-agro";
+  }
+
+  card.classList.add("cardbox", "card-encaminhamento", classCurso);
   card.setAttribute("data-encaminhamento", dados.encaminhamento);
 
   card.innerHTML += `
@@ -436,7 +445,7 @@ const preencherAcoes = (dados) => {
 
 const excluirEncaminhamento = (params) => {
   const encaminhamento = localStorage.getItem("encaminhamento") || "";
-  
+
   if (encaminhamento) {
     const dados = {
       acao: "Atendimentos/excluirAtendimento",
@@ -451,10 +460,9 @@ const excluirEncaminhamento = (params) => {
           "success",
           5000
         );
-        fecharAvaliacao(document.querySelector('#encaminhamento'));
+        fecharAvaliacao(document.querySelector("#encaminhamento"));
         listarEncaminhamentos();
         console.log(response);
-        
       })
       .catch((err) => {
         showMessage(
@@ -465,7 +473,12 @@ const excluirEncaminhamento = (params) => {
         );
       });
   } else {
-    showMessage("Quase lá", "Verifique todos os dados, parece existir um erro neles.", "warning", 5000);
+    showMessage(
+      "Quase lá",
+      "Verifique todos os dados, parece existir um erro neles.",
+      "warning",
+      5000
+    );
   }
 };
 listarAcoes();
