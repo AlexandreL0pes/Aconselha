@@ -234,7 +234,7 @@
           </p>
         </div>
       </footer>
-      <div class="modal" id="avaliacao-aprendizado">
+      <div class="modal is-active" id="avaliacao-aprendizado">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -303,6 +303,7 @@
                 <label class="label">Observação</label>
                 <div class="control">
                   <textarea
+                    id="ensino-descricao"
                     class="textarea"
                     placeholder="Descreva a motivação do encaminhamento"
                   ></textarea>
@@ -314,7 +315,7 @@
             <div></div>
             <div></div>
 
-            <button class="button is-success save-avaliation" name="">
+            <button class="button is-success salvar-ensino" name="" id="salvar-ensino">
               <span class="icon is-small">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </span>
@@ -401,7 +402,7 @@
           <footer class="modal-card-foot">
             <div></div>
             <div></div>
-            <button class="button is-success save-avaliation" name="">
+            <button class="button is-success salvar-experiencia" name="">
               <span class="icon is-small">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </span>
@@ -415,6 +416,5 @@
   </body>
   <script src="https://cdn.rawgit.com/mattmezza/bulmahead/master/dist/bulmahead.bundle.js"></script>
   <script src="./assets/js/index.js"></script>
-  <script src="./assets/js/diagnostica.js"></script>
   <script src="./assets/js/ensino.js"></script>
 </html>

@@ -1,15 +1,18 @@
 const listener = () => {
   const btnModalEnsino = document.querySelector("#btnEnsino");
-  btnModalEnsino.addEventListener("click", (e) => abrirModalEnsino());
+  btnModalEnsino.addEventListener("click", (e) => abrirNovoEnsino());
 
   const btnModalExperiencia = document.querySelector("#btnExperiencia");
-  btnModalExperiencia.addEventListener("click", (e) => abrirModalExperiencia());
+  btnModalExperiencia.addEventListener("click", (e) => abrirNovoExperiencia());
+
+  const btnSalvarExperiencia = document.getElementById("salvar-ensino");
+  btnSalvarExperiencia.addEventListener("click", (e) => salvarEnsino(e));
 };
 
 /**
  * Adiciona a classe is-active para o modal selecionado
  */
-const abrirModalEnsino = (e) => {
+const abrirNovoEnsino = (e) => {
   const modalEnsino = document.querySelector("#avaliacao-aprendizado");
   modalEnsino.classList.toggle("is-active");
 };
@@ -17,9 +20,120 @@ const abrirModalEnsino = (e) => {
 /**
  * Adiciona a classe is-active para o modal selecionado
  */
-const abrirModalExperiencia = (e) => {
+const abrirNovoExperiencia = (e) => {
   const modalExperiencia = document.querySelector("#avaliacao-experiencia");
   modalExperiencia.classList.toggle("is-active");
+};
+
+/**
+ * Listener para o fechamento do modal
+ * @param {*} params
+ */
+const closeModal = (params) => {
+  const modals = document.querySelectorAll(".modal");
+  modals.forEach((modal) => {
+    const closeBtn = modal.querySelector(".modal-close-btn");
+    closeBtn.addEventListener("click", (evnt) => {
+      fecharAvaliacao(modal);
+    });
+    const bgModal = modal.querySelector(".modal-background");
+    bgModal.addEventListener("click", (evnt) => {
+      fecharAvaliacao(modal);
+    });
+  });
+};
+
+/**
+ * Esconde o modal, remove o aluno do modal atual e apaga os perfis selecionados
+ * @param {DOM Element} modal Modal de Avaliação Diagnóstica
+ */
+const fecharAvaliacao = (modal) => {
+  modal.classList.toggle("is-active");
+  if (localStorage.getItem("encaminhamento")) {
+    localStorage.removeItem("encaminhamento");
+  }
+};
+
+const fecharAprendizado = () => {
+  const modal = document.getElementById("avaliacao-aprendizado");
+  modal.classList.toggle("is-active");
+
+  if (localStorage.getItem("aprendizado")) {
+    localStorage.removeItem("aprendizado");
+  }
+
+  document.querySelector("#ensino-estudantes-selecionados").textContent = "";
+  const disciplina = document.querySelector("#ensino-disciplina");
+  disciplina.value = "";
+  document.getElementById("ensino-descricao").value = "";
+};
+
+const salvarEnsino = (e) => {
+  console.log(">> Apertou");
+  let dados = pegarDadosEnsino();
+  if (
+    dados.disciplina != "" &&
+    dados.estudantes.length > 0 &&
+    dados.descricao != "" &&
+    dados.reuniao != ""
+  ) {
+    console.log(dados);
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        fecharAprendizado();
+        showMessage("Deu certo!", "A avaliação já foi salva!", "success", 4000);
+      })
+      .catch((err) => {
+        console.error(err);
+        showMessage(
+          "Ops, deu errado!",
+          "Não foi possível salvar a avaliação.",
+          "error",
+          5000
+        );
+      });
+  } else {
+    showMessage(
+      "Confira seus dados!",
+      "Existe algum erro nos dados informados.",
+      "warning",
+      5000
+    );
+  }
+};
+
+const pegarDadosEnsino = (params) => {
+  const disciplina = document
+    .querySelector("#ensino-disciplina")
+    .getAttribute("data-disciplina");
+
+  const estudantesChips = document.querySelectorAll(
+    "#ensino-estudantes-selecionados > div.chip"
+  );
+
+  let estudantes = [];
+  estudantesChips.forEach((estudanteChip) => {
+    estudantes.push(estudanteChip.getAttribute("data-aluno-id"));
+  });
+
+  const descricao = document.getElementById("ensino-descricao").value;
+
+  const reuniao = localStorage.getItem("conselhoAtual") || "";
+  const aprendizado = localStorage.getItem("aprendizado") || "";
+
+  let dados = {
+    acao: "Aprendizados/cadastrar",
+    reuniao: reuniao,
+    disciplina: disciplina,
+    estudantes: estudantes,
+    descricao: descricao,
+  };
+
+  if (aprendizado !== "") {
+    (dados.acao = "Apredizados/alterar"), (dados.aprendizado = aprendizado);
+  }
+  return dados;
 };
 
 /**
@@ -34,9 +148,9 @@ let autocompleteEnsinoDisciplina = () => {
     )
       .then(function (resp) {
         return [
-          { label: "alexandre Lopes", value: "2" },
-          { label: "Alexandre", value: "2" },
-          { label: "Alexandre", value: "2" },
+          { label: "Matemática", value: "3" },
+          { label: "Artes", value: "2" },
+          { label: "História", value: "1" },
         ];
         // return resp.json();
       })
@@ -58,6 +172,9 @@ let autocompleteEnsinoDisciplina = () => {
   var onSelect = function (state) {
     console.log("> O brabo tem nome - Disciplina");
     console.log(state);
+
+    const input = document.querySelector("#ensino-disciplina");
+    input.setAttribute("data-disciplina", state.value);
   };
 
   bulmahead("ensino-disciplina", "ensino-disciplina-menu", api, onSelect, 200);
@@ -102,9 +219,9 @@ let autocompleteEnsinoEstudantes = () => {
     console.log("> O brabo tem nome - estudantes");
     console.log(state);
 
-    addChip(state.label, state.value, "ensino-estudante-selecionados");
+    addChip(state.label, state.value, "ensino-estudantes-selecionados");
 
-    const input = document.querySelector("#ensino-estudante");
+    const input = document.querySelector("#ensino-estudantes");
     input.value = "";
   };
 
@@ -127,11 +244,7 @@ const addChip = (nome, id, local) => {
     <span class="chip-close">&times;</span>
   `;
   chip.addEventListener("click", (event) => delChip(event));
-
-  const professoresSelecionados = document.querySelector(
-    // ".chips.estudantes-selecionados"
-    "#" + local
-  );
+  const professoresSelecionados = document.getElementById(local);
   professoresSelecionados.insertAdjacentElement("afterbegin", chip);
 };
 
@@ -216,4 +329,5 @@ deleteProfessor();
 autocompleteEnsinoDisciplina();
 autocompleteEnsinoEstudantes();
 autocompleteExperienciaDisciplinas();
+closeModal();
 listener();
