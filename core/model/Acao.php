@@ -7,7 +7,7 @@ use Exception;
 
 class Acao extends CRUD {
     const TABELA = "Acao";
-    const COL_ID = "id";
+    const COL_ID = "idAcao";
     const COL_NOME = "nome";
     const COL_DESCRICAO = "descricao";
 

@@ -137,8 +137,8 @@ class Atendimentos
         $atendimento_id = $dados['atendimento'];
         $atendimento = new Atendimento();
 
-        $campos = "at." . Atendimento::COL_ID . ", " . Atendimento::COL_ID_REUNIAO . ", " .  Atendimento::COL_ESTUDANTE . ", " .  Atendimento::COL_OBSERVACAO . ", " .  Atendimento::COL_ACAO;
-        $busca = ["at." . Atendimento::COL_ID => $atendimento_id];
+        $campos = Atendimento::COL_ID . ", " . Atendimento::COL_ID_REUNIAO . ", " .  Atendimento::COL_ESTUDANTE . ", " .  Atendimento::COL_OBSERVACAO . ", a." .  Atendimento::COL_ACAO;
+        $busca = [Atendimento::COL_ID => $atendimento_id];
         $atendimento = ($atendimento->listar($campos, $busca, null, 1))[0];
 
         if (!empty($atendimento)) {
