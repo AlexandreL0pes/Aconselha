@@ -9,7 +9,7 @@ class Encaminhamento extends CRUD
 {
     const TABELA = "Encaminhamento";
     const COL_ID = "id";
-    const COL_ID_AVALIACAO = "idAvaliacao";
+    const COL_ID_ATENDIMENTO = "idAtendimento";
     const COL_PROFESSOR = "cod_professor";
     const COL_OBSERVACAO = "observacao";
 
@@ -57,9 +57,9 @@ class Encaminhamento extends CRUD
         $where_valor = [];
 
         if ($busca && count($busca) > 0) {
-            if (isset($busca[self::COL_ID_AVALIACAO]) && !empty($busca[self::COL_ID_AVALIACAO])) {
-                $where_condicao .= " AND " . self::COL_ID_AVALIACAO . " = ? ";
-                $where_valor[] = $busca[self::COL_ID_AVALIACAO];
+            if (isset($busca[self::COL_ID_ATENDIMENTO]) && !empty($busca[self::COL_ID_ATENDIMENTO])) {
+                $where_condicao .= " AND " . self::COL_ID_ATENDIMENTO . " = ? ";
+                $where_valor[] = $busca[self::COL_ID_ATENDIMENTO];
             }
             if (isset($busca[self::COL_PROFESSOR]) && !empty($busca[self::COL_PROFESSOR])) {
                 $where_condicao .= " AND " . self::COL_PROFESSOR . " = ? ";
@@ -86,9 +86,9 @@ class Encaminhamento extends CRUD
         $where_valor = [];
 
         if ($condicao && count($condicao) > 0) {
-            if (isset($condicao[self::COL_ID_AVALIACAO]) && !empty($condicao[self::COL_ID_AVALIACAO])) {
-                $where_condicao .= " AND " . self::COL_ID_AVALIACAO . " = ? ";
-                $where_valor[] = $condicao[self::COL_ID_AVALIACAO];
+            if (isset($condicao[self::COL_ID_ATENDIMENTO]) && !empty($condicao[self::COL_ID_ATENDIMENTO])) {
+                $where_condicao .= " AND " . self::COL_ID_ATENDIMENTO . " = ? ";
+                $where_valor[] = $condicao[self::COL_ID_ATENDIMENTO];
             }
             if (isset($condicao[self::COL_ID]) && !empty($condicao[self::COL_ID])) {
                 $where_condicao .= " AND " . self::COL_ID . " = ? ";

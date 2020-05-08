@@ -2,9 +2,9 @@
 
 namespace core\controller;
 
-use core\model\Avaliacao;
 use core\model\Encaminhamento;
 use core\model\Acao;
+use core\model\Atendimento;
 
 class Atendimentos
 {
@@ -36,14 +36,14 @@ class Atendimentos
 
         $professores = $dados['professores'];
 
-        $avaliacao = new Avaliacao();
+        $atendimento = new Atendimento();
 
-        $resultado = $avaliacao->adicionar([
-            Avaliacao::COL_ID_REUNIAO => $reuniao,
-            Avaliacao::COL_ESTUDANTE =>  $estudante,
-            Avaliacao::COL_DATA => $dataAtual,
-            Avaliacao::COL_OBSERVACAO => $observacao,
-            Avaliacao::COL_ACAO => $intervencao
+        $resultado = $atendimento->adicionar([
+            Atendimento::COL_ID_REUNIAO => $reuniao,
+            Atendimento::COL_ESTUDANTE =>  $estudante,
+            Atendimento::COL_DATA => $dataAtual,
+            Atendimento::COL_OBSERVACAO => $observacao,
+            Atendimento::COL_ACAO => $intervencao
         ]);
 
         if ($resultado > 0) {
@@ -54,7 +54,7 @@ class Atendimentos
             foreach ($professores as $professor) {
                 $resultadoEncaminhamento = $encaminhamento->adicionar(
                     [
-                        Encaminhamento::COL_ID_AVALIACAO => $resultado,
+                        Encaminhamento::COL_ID_ATENDIMENTO => $resultado,
                         Encaminhamento::COL_PROFESSOR => $professor
                     ]
                 );
@@ -79,7 +79,7 @@ class Atendimentos
 
     public function alterar($dados)
     {
-        $avaliacao_id = $dados['avaliacao'];
+        $atendimento_id = $dados['atendimento'];
         $reuniao = $dados['reuniao'];
         $dataAtual = date('Y-m-d');
         $estudante = $dados['estudante'];
@@ -88,15 +88,15 @@ class Atendimentos
 
         $professores = $dados['professores'];
 
-        $avaliacao = new Avaliacao();
+        $atendimento = new Atendimento();
 
-        $resultado = $avaliacao->alterar([
-            Avaliacao::COL_ID => $avaliacao_id,
-            Avaliacao::COL_ID_REUNIAO => $reuniao,
-            Avaliacao::COL_ESTUDANTE =>  $estudante,
-            Avaliacao::COL_DATA => $dataAtual,
-            Avaliacao::COL_OBSERVACAO => $observacao,
-            Avaliacao::COL_ACAO => $intervencao
+        $resultado = $atendimento->alterar([
+            Atendimento::COL_ID => $atendimento_id,
+            Atendimento::COL_ID_REUNIAO => $reuniao,
+            Atendimento::COL_ESTUDANTE =>  $estudante,
+            Atendimento::COL_DATA => $dataAtual,
+            Atendimento::COL_OBSERVACAO => $observacao,
+            Atendimento::COL_ACAO => $intervencao
         ]);
 
         if ($resultado > 0) {
@@ -104,13 +104,13 @@ class Atendimentos
 
             $encaminhamento = new Encaminhamento();
 
-            $encaminhamento->excluir([Encaminhamento::COL_ID_AVALIACAO => $avaliacao_id]);
+            $encaminhamento->excluir([Encaminhamento::COL_ID_ATENDIMENTO => $atendimento_id]);
             $erros = array();
 
             foreach ($professores as $professor) {
                 $resultadoEncaminhamento = $encaminhamento->adicionar(
                     [
-                        Encaminhamento::COL_ID_AVALIACAO => $resultado,
+                        Encaminhamento::COL_ID_ATENDIMENTO => $resultado,
                         Encaminhamento::COL_PROFESSOR => $professor
                     ]
                 );
@@ -134,25 +134,25 @@ class Atendimentos
 
     public function selecionarAtendimento($dados)
     {
-        $avaliacao_id = $dados['avaliacao'];
-        $avaliacao = new Avaliacao();
+        $atendimento_id = $dados['atendimento'];
+        $atendimento = new Atendimento();
 
-        $campos = Avaliacao::COL_ID . ", " . Avaliacao::COL_ID_REUNIAO . ", " .  Avaliacao::COL_ESTUDANTE . ", " .  Avaliacao::COL_OBSERVACAO . ", " .  Avaliacao::COL_ACAO;
-        $busca = [Avaliacao::COL_ID => $avaliacao_id];
-        $atendimento = ($avaliacao->listar($campos, $busca, null, 1))[0];
+        $campos = "at." . Atendimento::COL_ID . ", " . Atendimento::COL_ID_REUNIAO . ", " .  Atendimento::COL_ESTUDANTE . ", " .  Atendimento::COL_OBSERVACAO . ", " .  Atendimento::COL_ACAO;
+        $busca = ["at." . Atendimento::COL_ID => $atendimento_id];
+        $atendimento = ($atendimento->listar($campos, $busca, null, 1))[0];
 
         if (!empty($atendimento)) {
-            $professores = $this->professoresAtendimento($avaliacao_id);
+            $professores = $this->professoresAtendimento($atendimento_id);
             // TODO: Consultar o id do aluno e retornar o nome
-            $aluno = ['id' => $atendimento[Avaliacao::COL_ESTUDANTE], 'nome' => 'Aluno de tal'];
+            $aluno = ['id' => $atendimento[Atendimento::COL_ESTUDANTE], 'nome' => 'Aluno de tal'];
 
             $atendimentoCompleto = [
-                'avaliacao' => $atendimento[Avaliacao::COL_ID],
-                'reuniao' => $atendimento[Avaliacao::COL_ID_REUNIAO],
+                'atendimento' => $atendimento[Atendimento::COL_ID],
+                'reuniao' => $atendimento[Atendimento::COL_ID_REUNIAO],
                 'estudante' => $aluno,
                 'professores' => $professores,
-                'queixa' => $atendimento[Avaliacao::COL_OBSERVACAO],
-                'intervencao' => $atendimento[Avaliacao::COL_ACAO]
+                'queixa' => $atendimento[Atendimento::COL_OBSERVACAO],
+                'intervencao' => $atendimento[Atendimento::COL_ACAO]
             ];
             http_response_code(200);
             return json_encode($atendimentoCompleto);
@@ -162,11 +162,11 @@ class Atendimentos
         }
     }
 
-    public function professoresAtendimento($avaliacao_id)
+    public function professoresAtendimento($atendimento_id)
     {
         $encaminhamento = new Encaminhamento();
 
-        $busca = [Encaminhamento::COL_ID_AVALIACAO => $avaliacao_id];
+        $busca = [Encaminhamento::COL_ID_ATENDIMENTO => $atendimento_id];
         $professores_id = $encaminhamento->listar(Encaminhamento::COL_PROFESSOR, $busca, null, null);
 
         $professores = [];
@@ -174,26 +174,26 @@ class Atendimentos
             // TODO: Atribuir aqui o nome do professor vindo do Q-Acadêmico
             $nome = 'Fulano de Tal';
 
-            array_push($professores, ['id' => $professor_id[Avaliacao::COL_PROFESSOR], 'nome' => $nome]);
+            array_push($professores, ['id' => $professor_id[Encaminhamento::COL_PROFESSOR], 'nome' => $nome]);
         }
         return $professores;
     }
 
     public function excluirAtendimento($dados)
     {
-        $avaliacao_id = $dados['avaliacao'];
+        $atendimento_id = $dados['atendimento'];
 
-        $condicao = [Encaminhamento::COL_ID_AVALIACAO => $avaliacao_id];
+        $condicao = [Encaminhamento::COL_ID_ATENDIMENTO => $atendimento_id];
         $encaminhamento = new Encaminhamento();
 
         $retornoEncaminhamento = $encaminhamento->excluir($condicao);
 
         if ($retornoEncaminhamento && $retornoEncaminhamento > 0) {
-            $avaliacao = new Avaliacao();
-            $condicao = [Avaliacao::COL_ID => $avaliacao_id];
-            $retornoAvaliacao = $avaliacao->excluir($condicao);
+            $atendimento = new Atendimento();
+            $condicao = [Atendimento::COL_ID => $atendimento_id];
+            $retornoAtendimento = $atendimento->excluir($condicao);
 
-            if ($retornoAvaliacao && $retornoAvaliacao > 0) {
+            if ($retornoAtendimento && $retornoAtendimento > 0) {
                 http_response_code(200);
                 return json_encode(array('message' => 'O encaminhamento foi excluído!'));
             } else {
@@ -210,21 +210,22 @@ class Atendimentos
     {
         $reuniao_id = $dados['reuniao'];
 
-        $campos = "av." . Avaliacao::COL_ID . ", av." . Avaliacao::COL_ID_REUNIAO . ", a." . Acao::COL_NOME . ", av." . Avaliacao::COL_ESTUDANTE;
-        $busca = ['avaliacao' => 'atendimento', Avaliacao::COL_ID_REUNIAO => $reuniao_id];
+        $campos = "at." . Atendimento::COL_ID . ", at." . Atendimento::COL_ID_REUNIAO . ", a." . Acao::COL_NOME . ", at." . Atendimento::COL_ESTUDANTE;
+        // $campos = "av." . Avaliacao::COL_ID . ", av." . Avaliacao::COL_ID_REUNIAO . ", a." . Acao::COL_NOME . ", av." . Avaliacao::COL_ESTUDANTE;
+        $busca = [Atendimento::COL_ID_REUNIAO => $reuniao_id];
 
-        $ordem = Avaliacao::COL_DATA . " DESC ";
-        $avaliacao = new Avaliacao();
+        $ordem = Atendimento::COL_DATA . " DESC ";
+        $atendimento = new Atendimento();
 
-        $atendimentos = $avaliacao->listar($campos, $busca, $ordem, 100);
+        $atendimentos = $atendimento->listar($campos, $busca, $ordem, 100);
         $retorno = [];
 
         if (!empty($atendimentos) && !empty($atendimentos[0])) {
             foreach ($atendimentos as $atendimento) {
                 // TODO: Consultar o Q-Academico os dados do aluno
-                $aluno = ['matricula' => $atendimento[Avaliacao::COL_ESTUDANTE], 'nome' => 'Um nome estático', 'curso' => 'Informática para Interte'];
+                $aluno = ['matricula' => $atendimento[Atendimento::COL_ESTUDANTE], 'nome' => 'Um nome estático', 'curso' => 'Informática para Interte'];
 
-                array_push($retorno, ['encaminhamento' => $atendimento[Avaliacao::COL_ID], 'intervencao' => $atendimento[Acao::COL_NOME], 'aluno' => $aluno]);
+                array_push($retorno, ['encaminhamento' => $atendimento[Atendimento::COL_ID], 'intervencao' => $atendimento[Acao::COL_NOME], 'aluno' => $aluno]);
             }
 
             return json_encode($retorno);

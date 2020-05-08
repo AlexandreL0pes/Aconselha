@@ -352,7 +352,7 @@ const pegarDados = () => {
   };
 
   if (encaminhamento !== "") {
-    (dados.acao = "Atendimentos/alterar"), (dados.avaliacao = encaminhamento);
+    (dados.acao = "Atendimentos/alterar"), (dados.atendimento = encaminhamento);
   }
 
   return dados;
