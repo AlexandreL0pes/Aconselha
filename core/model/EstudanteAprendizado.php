@@ -5,12 +5,12 @@ namespace core\model;
 use core\CRUD;
 
 
-class EstudanteAvaliacao extends CRUD
+class EstudanteAprendizado extends CRUD
 {
-    const TABELA = "EstudanteAvaliacao";
+    const TABELA = "EstudanteAprendizado";
     const COL_ID = "id";
     const COL_MATRICULA = "COD_MATRICULA";
-    const COL_ID_AVALIACAO = "idAvaliacao";
+    const COL_ID_AVALIACAO = "idAprendizado";
 
 
     public function adicionar($dados)
