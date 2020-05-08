@@ -3,8 +3,8 @@
 
 namespace core\controller;
 
-use core\model\Avaliacao;
-use core\model\EstudanteAvaliacao;
+use core\model\Aprendizado;
+use core\model\EstudanteAprendizado;
 
 class Aprendizados
 {
@@ -17,24 +17,24 @@ class Aprendizados
         $dataAtual = date('Y-m-d h:i:s');
         $estudantes = $dados['estudantes'];
 
-        $avaliacao = new Avaliacao();
+        $avaliacao = new Aprendizado();
 
-        $resultadoAvaliacao = $avaliacao->adicionar([
-            Avaliacao::COL_ID_REUNIAO => $reuniao,
-            Avaliacao::COL_PAUTA => $disciplina,
-            Avaliacao::COL_OBSERVACAO => $observacao,
-            Avaliacao::COL_DATA => $dataAtual
+        $resultadoAprendizado = $avaliacao->adicionar([
+            Aprendizado::COL_ID_REUNIAO => $reuniao,
+            Aprendizado::COL_DISCIPLINA => $disciplina,
+            Aprendizado::COL_OBSERVACAO => $observacao,
+            Aprendizado::COL_DATA => $dataAtual
         ]);
 
-        if ($resultadoAvaliacao > 0) {
-            $estudantesAvaliacao = new EstudanteAvaliacao();
+        if ($resultadoAprendizado > 0) {
+            $estudantesAprendizado = new EstudanteAprendizado();
 
             $erros = array();
 
             foreach ($estudantes as $estudante) {
-                $resultadoEstudante = $estudantesAvaliacao->adicionar([
-                    EstudanteAvaliacao::COL_ID_AVALIACAO => $resultadoAvaliacao,
-                    EstudanteAvaliacao::COL_MATRICULA => $estudante
+                $resultadoEstudante = $estudantesAprendizado->adicionar([
+                    EstudanteAprendizado::COL_ID_AVALIACAO => $resultadoAprendizado,
+                    EstudanteAprendizado::COL_MATRICULA => $estudante
                 ]);
 
                 if (!($resultadoEstudante > 0)) {
@@ -57,13 +57,7 @@ class Aprendizados
 
     public function alterar($dados)
     {
-        /* {
-            "acao": "Aprendizados/cadastrar",
-          "reuniao": 6,
-            "disciplina": 5,
-            "estudantes": [1,2,3],
-            "descricao": "Uma observação qualquer"
-        } */
+
         $aprendizado_id = $dados['aprendizado'];
         $reuniao = $dados['reuniao'];
         $disciplina = $dados['disciplina'];
@@ -71,25 +65,25 @@ class Aprendizados
 
         $estudantes = $dados['estudantes'];
 
-        $avaliacao = new Avaliacao();
+        $avaliacao = new Aprendizado();
 
         $resultadoAvaliacao = $avaliacao->alterar([
-            Avaliacao::COL_ID => $aprendizado_id,
-            Avaliacao::COL_ID_REUNIAO => $reuniao,
-            Avaliacao::COL_PAUTA => $disciplina,
-            Avaliacao::COL_OBSERVACAO => $observacao
+            Aprendizado::COL_ID => $aprendizado_id,
+            Aprendizado::COL_ID_REUNIAO => $reuniao,
+            Aprendizado::COL_DISCIPLINA => $disciplina,
+            Aprendizado::COL_OBSERVACAO => $observacao
         ]);
 
         if ($resultadoAvaliacao > 0) {
-            $estudantesAvaliacao = new EstudanteAvaliacao();
-            $estudantesAvaliacao->excluir([EstudanteAvaliacao::COL_ID_AVALIACAO => $aprendizado_id]);
+            $estudantesAvaliacao = new EstudanteAprendizado();
+            $estudantesAvaliacao->excluir([EstudanteAprendizado::COL_ID_AVALIACAO => $aprendizado_id]);
 
             $erros = array();
 
             foreach ($estudantes as $estudante) {
                 $resultadoEstudantes = $estudantesAvaliacao->adicionar([
-                    EstudanteAvaliacao::COL_ID_AVALIACAO => $resultadoAvaliacao,
-                    EstudanteAvaliacao::COL_MATRICULA => $estudante
+                    EstudanteAprendizado::COL_ID_AVALIACAO => $resultadoAvaliacao,
+                    EstudanteAprendizado::COL_MATRICULA => $estudante
                 ]);
 
                 if (!($resultadoEstudantes > 0)) {
@@ -114,27 +108,27 @@ class Aprendizados
     {
         $aprendizado_id = $dados['aprendizado'];
 
-        $avaliacao = new Avaliacao();
+        $avaliacao = new Aprendizado();
 
-        $campos = Avaliacao::COL_ID . ", " .
-            Avaliacao::COL_ID_REUNIAO . ", " .
-            Avaliacao::COL_PAUTA . ", " .
-            Avaliacao::COL_DATA . ", " .
-            Avaliacao::COL_OBSERVACAO;
+        $campos = Aprendizado::COL_ID . ", " .
+            Aprendizado::COL_ID_REUNIAO . ", " .
+            Aprendizado::COL_DISCIPLINA . ", " .
+            Aprendizado::COL_DATA . ", " .
+            Aprendizado::COL_OBSERVACAO;
 
-        $busca = [Avaliacao::COL_ID => $aprendizado_id];
+        $busca = [Aprendizado::COL_ID => $aprendizado_id];
 
         $resultadoAprendizado = $avaliacao->listar($campos, $busca, null, 1)[0];
         if (!empty($resultadoAprendizado)) {
             $estudantes = $this->estudantesAprendizado($aprendizado_id);
 
             // TODO: Selecionar o nome da disciplina pelo id e retornar o nome
-            $disciplina = ['id' => $resultadoAprendizado[Avaliacao::COL_PAUTA], 'nome' => 'Disciplina ' . $resultadoAprendizado[Avaliacao::COL_PAUTA]];
+            $disciplina = ['id' => $resultadoAprendizado[Aprendizado::COL_DISCIPLINA], 'nome' => 'Disciplina ' . $resultadoAprendizado[Aprendizado::COL_DISCIPLINA]];
 
             $aprendizadoCompleto = [
-                'aprendizado' => $resultadoAprendizado[Avaliacao::COL_ID],
-                'reuniao' => $resultadoAprendizado[Avaliacao::COL_ID_REUNIAO],
-                'data' => $resultadoAprendizado[Avaliacao::COL_DATA],
+                'aprendizado' => $resultadoAprendizado[Aprendizado::COL_ID],
+                'reuniao' => $resultadoAprendizado[Aprendizado::COL_ID_REUNIAO],
+                'data' => $resultadoAprendizado[Aprendizado::COL_DATA],
                 'disciplina' => $disciplina,
                 'estudantes' => $estudantes
             ];
@@ -150,15 +144,15 @@ class Aprendizados
     private function estudantesAprendizado($aprendizado_id)
     {
 
-        $estudantesAvaliacao = new EstudanteAvaliacao();
-        $busca = [EstudanteAvaliacao::COL_ID_AVALIACAO => $aprendizado_id];
+        $estudantesAvaliacao = new EstudanteAprendizado();
+        $busca = [EstudanteAprendizado::COL_ID_AVALIACAO => $aprendizado_id];
 
-        $estudantes_id = $estudantesAvaliacao->listar(EstudanteAvaliacao::COL_MATRICULA, $busca, null, 100);
+        $estudantes_id = $estudantesAvaliacao->listar(EstudanteAprendizado::COL_MATRICULA, $busca, null, 100);
         $estudantes = [];
 
         foreach ($estudantes_id as $estudante_id) {
-            $nome = "Estudante " . $estudante_id[EstudanteAvaliacao::COL_MATRICULA];
-            array_push($estudantes, ['id' => $estudante_id[EstudanteAvaliacao::COL_MATRICULA], 'nome' => $nome]);
+            $nome = "Estudante " . $estudante_id[EstudanteAprendizado::COL_MATRICULA];
+            array_push($estudantes, ['id' => $estudante_id[EstudanteAprendizado::COL_MATRICULA], 'nome' => $nome]);
         }
 
         return $estudantes;
@@ -168,15 +162,15 @@ class Aprendizados
     {
         $aprendizado_id = $dados['aprendizado'];
 
-        $condicao = [EstudanteAvaliacao::COL_ID_AVALIACAO => $aprendizado_id];
+        $condicao = [EstudanteAprendizado::COL_ID_AVALIACAO => $aprendizado_id];
 
-        $estudantesAvaliacao = new EstudanteAvaliacao();
+        $estudantesAvaliacao = new EstudanteAprendizado();
 
         $retornoEstudantes = $estudantesAvaliacao->excluir($condicao);
 
         if ($retornoEstudantes) {
-            $aprendizado = new Avaliacao();
-            $condicao = [Avaliacao::COL_ID => $aprendizado_id];
+            $aprendizado = new Aprendizado();
+            $condicao = [Aprendizado::COL_ID => $aprendizado_id];
             $retornoAprendizado = $aprendizado->excluir($condicao);
             if ($retornoAprendizado) {
                 http_response_code(200);
@@ -188,6 +182,40 @@ class Aprendizados
         } else {
             http_response_code(500);
             return json_encode(array('message' => 'Houve um erro na exclusão do aprendizado!'));
+        }
+    }
+
+    public function listarAprendizadosReuniao($dados)
+    {
+
+
+        $reuniao_id = $dados['reuniao'];
+        $campos = Aprendizado::COL_ID . ", " . Aprendizado::COL_ID_REUNIAO . ", " . Aprendizado::COL_DISCIPLINA . ", " . Aprendizado::COL_OBSERVACAO;
+        $busca = [Aprendizado::COL_ID_REUNIAO => $reuniao_id];
+        $ordem = Aprendizado::COL_DATA . " DESC ";
+
+        $aprendizado = new Aprendizado();
+
+        $aprendizados = $aprendizado->listar($campos, $busca, $ordem, 1000);
+
+        $retorno = [];
+
+        if (!empty($aprendizados) && !empty($aprendizados[0])) {
+            foreach ($aprendizados as $aprendizado) {
+                $disciplina = ['id' => $aprendizado[Aprendizado::COL_DISCIPLINA], 'nome' => 'Disciplina ' . $aprendizado[Aprendizado::COL_DISCIPLINA]];
+                $estudantes = $this->estudantesAprendizado($aprendizado[Aprendizado::COL_ID]);
+
+                array_push($retorno, [
+                    "aprendizado" => $aprendizado[Aprendizado::COL_ID],
+                    "disciplina" => $disciplina,
+                    "estudantes" => $estudantes
+                ]);
+            }
+
+            return json_encode($retorno);
+        } else {
+            http_response_code(500);
+            return json_encode(array('message' => 'Nenhum aprendizado foi encontrado!'));
         }
     }
 }
