@@ -44,14 +44,14 @@ class Aprendizados
 
             if (empty($erros)) {
                 http_response_code(200);
-                return array('message' => 'O aprendizado foi salvo com sucesso!');
+                return json_encode(array('message' => 'O aprendizado foi salvo com sucesso!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Houve um erro no cadastro dos estudantes', 'errors' => $erros);
+                return json_encode(array('message' => 'Houve um erro no cadastro dos estudantes', 'errors' => $erros));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Não foi possível cadastrar o aprendizado!');
+            return json_encode(array('message' => 'Não foi possível cadastrar o aprendizado!'));
         }
     }
 
@@ -99,14 +99,14 @@ class Aprendizados
 
             if (empty($erros)) {
                 http_response_code(200);
-                return array('message' => 'O aprendizado foi alterado com sucesso!');
+                return json_encode(array('message' => 'O aprendizado foi alterado com sucesso!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Houve um erro na alteração dos estudantes!', $erros => $erros);
+                return json_encode(array('message' => 'Houve um erro na alteração dos estudantes!', $erros => $erros));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Houve um erro na alteração do aprendizado!');
+            return json_encode(array('message' => 'Houve um erro na alteração do aprendizado!'));
         }
     }
 
@@ -143,7 +143,7 @@ class Aprendizados
             return json_encode($aprendizadoCompleto);
         } else {
             http_response_code(500);
-            return array('message' => 'O aprendizado solicitado não foi encontrado!');
+            return json_encode(array('message' => 'O aprendizado solicitado não foi encontrado!'));
         }
     }
 
@@ -180,14 +180,14 @@ class Aprendizados
             $retornoAprendizado = $aprendizado->excluir($condicao);
             if ($retornoAprendizado) {
                 http_response_code(200);
-                return array('message' => 'O aprendizado foi excluído!');
+                return json_encode(array('message' => 'O aprendizado foi excluído!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Houve um erro durante a exclusão dos estudantes');
+                return json_encode(array('message' => 'Houve um erro durante a exclusão dos estudantes'));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Houve um erro na exclusão do aprendizado!');
+            return json_encode(array('message' => 'Houve um erro na exclusão do aprendizado!'));
         }
     }
 }
