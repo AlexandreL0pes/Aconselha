@@ -8,21 +8,6 @@ use core\model\DisciplinaExperiencia;
 
 class Experiencias
 {
-    private $experiencia_id = null;
-    private $titulo = null;
-    private $observacao = null;
-    private $reuniao_id = null;
-    private $classificacao_id = null;
-
-    public function __set($atributo, $valor)
-    {
-        $this->$atributo = $valor;
-    }
-
-    public function __get($atributo)
-    {
-        return $this->$atributo;
-    }
 
     public function cadastrar($dados)
     {
