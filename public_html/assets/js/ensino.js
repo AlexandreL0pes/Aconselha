@@ -341,6 +341,9 @@ let autocompleteEnsinoDisciplina = () => {
   bulmahead("ensino-disciplina", "ensino-disciplina-menu", api, onSelect, 200);
 };
 
+/**
+ * Dispara requisição assíncrona para obtenção dos aprendizados
+ */
 const solicitarAprendizados = async () => {
   const reuniao = localStorage.getItem("conselhoAtual") || "";
 
@@ -373,6 +376,10 @@ const solicitarAprendizados = async () => {
     });
 };
 
+/**
+ * Gera e adiciona um card aprendizado a partir do JSON especificado 
+ * @param {JSON} aprendizado 
+ */
 const addAprendizadoCard = (aprendizado) => {
   let card = document.createElement("div");
 
@@ -397,6 +404,9 @@ const addAprendizadoCard = (aprendizado) => {
   avaliacoes.append(card);
 };
 
+/**
+ * Faz a requisição dos aprendizados, impressão dos card's e atualiza a qtd de Avaliações 
+ */
 const listarAprendizados = () => {
   solicitarAprendizados()
     .then((aprendizados) => {
@@ -408,6 +418,9 @@ const listarAprendizados = () => {
     });
 };
 
+/**
+ * Dispara requisição assíncrona para obtenção das experiencias
+ */
 const solicitarExperiencias = async () => {
   const reuniao = localStorage.getItem("conselhoAtual") || "";
 
@@ -441,6 +454,10 @@ const solicitarExperiencias = async () => {
     });
 };
 
+/**
+ * Gera e adiciona um card experiencia a partir do JSON especificado 
+ * @param {JSON} experiencia 
+ */
 const addExperienciaCard = (experiencia) => {
   let card = document.createElement("div");
   card.classList.add("card-avaliacao", "experiencia");
@@ -462,6 +479,9 @@ const addExperienciaCard = (experiencia) => {
   avaliacoes.append(card);
 };
 
+/**
+ * Faz a requisição das experiencias, impressão dos card's e atualiza a qtd de Avaliações 
+ */
 const listarExperiencias = () => {
   atualizarAvaliacoes();
   solicitarExperiencias()
@@ -473,6 +493,10 @@ const listarExperiencias = () => {
       console.error(err);
     });
 };
+
+/**
+ * Contabiliza a quatidade de avaliações listadas na página
+ */
 const atualizarAvaliacoes = () => {
   const cards = document.querySelectorAll(".card-avaliacao");
   const qtdAvaliacoes = document.querySelector("#qtdAvaliacoes");
@@ -487,6 +511,7 @@ const atualizarAvaliacoes = () => {
 
 listarAprendizados();
 listarExperiencias();
+
 deleteProfessor();
 autocompleteEnsinoDisciplina();
 autocompleteEnsinoEstudantes();
