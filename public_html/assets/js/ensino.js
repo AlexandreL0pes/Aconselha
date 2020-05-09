@@ -30,29 +30,27 @@ const abrirNovoExperiencia = (e) => {
  * @param {*} params
  */
 const closeModal = (params) => {
-  const modals = document.querySelectorAll(".modal");
-  modals.forEach((modal) => {
-    const closeBtn = modal.querySelector(".modal-close-btn");
-    closeBtn.addEventListener("click", (evnt) => {
-      fecharAvaliacao(modal);
-    });
-    const bgModal = modal.querySelector(".modal-background");
-    bgModal.addEventListener("click", (evnt) => {
-      fecharAvaliacao(modal);
-    });
+  const modalAprendizado = document.getElementById("avaliacao-aprendizado");
+  const modalExperiencia = document.getElementById("avaliacao-experiencia");
+
+  let closeBtn = modalAprendizado.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", (evnt) => {
+    fecharAprendizado();
+  });
+  let bgModal = modalAprendizado.querySelector(".modal-background");
+  bgModal.addEventListener("click", (evnt) => {
+    fecharAprendizado();
+  });
+  closeBtn = modalExperiencia.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", (evnt) => {
+    fecharExperiencia();
+  });
+  bgModal = modalExperiencia.querySelector(".modal-background");
+  bgModal.addEventListener("click", (evnt) => {
+    fecharExperiencia();
   });
 };
 
-/**
- * Esconde o modal, remove o aluno do modal atual e apaga os perfis selecionados
- * @param {DOM Element} modal Modal de Avaliação Diagnóstica
- */
-const fecharAvaliacao = (modal) => {
-  modal.classList.toggle("is-active");
-  if (localStorage.getItem("encaminhamento")) {
-    localStorage.removeItem("encaminhamento");
-  }
-};
 
 const fecharAprendizado = () => {
   const modal = document.getElementById("avaliacao-aprendizado");
@@ -550,12 +548,12 @@ const preencherAprendizado = (aprendizado) => {
     addChip(estudante.nome, estudante.id, "ensino-estudantes-selecionados");
   });
 
-  const disciplina = document.querySelector('#ensino-disciplina');
+  const disciplina = document.querySelector("#ensino-disciplina");
   disciplina.value = aprendizado.disciplina.nome;
-  disciplina.setAttribute('data-disciplina', aprendizado.disciplina.id);
+  disciplina.setAttribute("data-disciplina", aprendizado.disciplina.id);
 
   document.getElementById("ensino-descricao").value = aprendizado.observacao;
-}
+};
 
 const abrirExperiencia = (event) => {
   console.log("Apertou a experiência!");
