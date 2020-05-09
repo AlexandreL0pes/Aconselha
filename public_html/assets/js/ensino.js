@@ -79,9 +79,11 @@ const fecharExperiencia = () => {
   document.getElementById("avaliacao-experiencia").value = "";
   document.getElementById("experiencia-categoria").value;
 
-  document.getElementById('experiencia-disciplinas-selecionadas').textContent = "";
-  document.getElementById('experiencia-descricao').value = "";
+  document.getElementById("experiencia-disciplinas-selecionadas").textContent =
+    "";
+  document.getElementById("experiencia-descricao").value = "";
 };
+
 const salvarAprendizado = (e) => {
   console.log(">> Apertou");
   let dados = pegarDadosAprendizado();
@@ -148,98 +150,6 @@ const pegarDadosAprendizado = (params) => {
     (dados.acao = "Apredizados/alterar"), (dados.aprendizado = aprendizado);
   }
   return dados;
-};
-
-/**
- * Adiciona auscultador para disparar as sugestões de disciplinas no modal de ENSINO
- * @params {} null
- */
-let autocompleteEnsinoDisciplina = () => {
-  // Quando tiver fazendo request pro server, utilizar essa função
-  var api = function (inputValue) {
-    return fetch(
-      "https://cdn.rawgit.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json"
-    )
-      .then(function (resp) {
-        return [
-          { label: "Matemática", value: "3" },
-          { label: "Artes", value: "2" },
-          { label: "História", value: "1" },
-        ];
-        // return resp.json();
-      })
-      .then(function (states) {
-        return states.filter(function (state) {
-          return state.label.startsWith(inputValue);
-        });
-      })
-      .then(function (filtered) {
-        return filtered.map(function (state) {
-          return { label: state.label, value: state.value };
-        });
-      })
-      .then(function (transformed) {
-        return transformed.slice(0, 5);
-      });
-  };
-
-  var onSelect = function (state) {
-    console.log("> O brabo tem nome - Disciplina");
-    console.log(state);
-
-    const input = document.querySelector("#ensino-disciplina");
-    input.setAttribute("data-disciplina", state.value);
-  };
-
-  bulmahead("ensino-disciplina", "ensino-disciplina-menu", api, onSelect, 200);
-};
-
-/**
- * Adiciona auscultador para disparar as sugestões de ESTUDANTES no modal de ENSINO
- * @params {} null
- */
-let autocompleteEnsinoEstudantes = () => {
-  var api = function (inputValue) {
-    return fetch(
-      "https://cdn.rawgit.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json"
-    )
-      .then(function (resp) {
-        return [
-          { label: "Adriano Braga", value: "1459180" },
-          { label: "Lucas Faria", value: "97312" },
-          { label: "Rangel Rigo", value: "417530" },
-          { label: "Marcos Morais", value: "914402" },
-          { label: "Jaqueline Ribeiro", value: "81183" },
-          { label: "Ramayane Braga", value: "41917" },
-        ];
-        // return resp.json();
-      })
-      .then(function (states) {
-        return states.filter(function (state) {
-          return state.label.startsWith(inputValue);
-        });
-      })
-      .then(function (filtered) {
-        return filtered.map(function (state) {
-          return { label: state.label, value: state.value };
-        });
-      })
-      .then(function (transformed) {
-        return transformed.slice(0, 5);
-      });
-  };
-
-  var onSelect = function (state) {
-    console.log("> O brabo tem nome - estudantes");
-    console.log(state);
-
-    addChip(state.label, state.value, "ensino-estudantes-selecionados");
-
-    const input = document.querySelector("#ensino-estudantes");
-    input.value = "";
-  };
-
-  bulmahead("ensino-estudantes", "ensino-estudantes-menu", api, onSelect, 200);
 };
 
 /**
@@ -339,6 +249,232 @@ let autocompleteExperienciaDisciplinas = () => {
   );
 };
 
+/**
+ * Adiciona auscultador para disparar as sugestões de ESTUDANTES no modal de ENSINO
+ * @params {} null
+ */
+let autocompleteEnsinoEstudantes = () => {
+  var api = function (inputValue) {
+    return fetch(
+      "https://cdn.rawgit.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json"
+    )
+      .then(function (resp) {
+        return [
+          { label: "Adriano Braga", value: "1459180" },
+          { label: "Lucas Faria", value: "97312" },
+          { label: "Rangel Rigo", value: "417530" },
+          { label: "Marcos Morais", value: "914402" },
+          { label: "Jaqueline Ribeiro", value: "81183" },
+          { label: "Ramayane Braga", value: "41917" },
+        ];
+        // return resp.json();
+      })
+      .then(function (states) {
+        return states.filter(function (state) {
+          return state.label.startsWith(inputValue);
+        });
+      })
+      .then(function (filtered) {
+        return filtered.map(function (state) {
+          return { label: state.label, value: state.value };
+        });
+      })
+      .then(function (transformed) {
+        return transformed.slice(0, 5);
+      });
+  };
+
+  var onSelect = function (state) {
+    console.log("> O brabo tem nome - estudantes");
+    console.log(state);
+
+    addChip(state.label, state.value, "ensino-estudantes-selecionados");
+
+    const input = document.querySelector("#ensino-estudantes");
+    input.value = "";
+  };
+
+  bulmahead("ensino-estudantes", "ensino-estudantes-menu", api, onSelect, 200);
+};
+
+/**
+ * Adiciona auscultador para disparar as sugestões de disciplinas no modal de ENSINO
+ * @params {} null
+ */
+let autocompleteEnsinoDisciplina = () => {
+  // Quando tiver fazendo request pro server, utilizar essa função
+  var api = function (inputValue) {
+    return fetch(
+      "https://cdn.rawgit.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json"
+    )
+      .then(function (resp) {
+        return [
+          { label: "Matemática", value: "3" },
+          { label: "Artes", value: "2" },
+          { label: "História", value: "1" },
+        ];
+        // return resp.json();
+      })
+      .then(function (states) {
+        return states.filter(function (state) {
+          return state.label.startsWith(inputValue);
+        });
+      })
+      .then(function (filtered) {
+        return filtered.map(function (state) {
+          return { label: state.label, value: state.value };
+        });
+      })
+      .then(function (transformed) {
+        return transformed.slice(0, 5);
+      });
+  };
+
+  var onSelect = function (state) {
+    console.log("> O brabo tem nome - Disciplina");
+    console.log(state);
+
+    const input = document.querySelector("#ensino-disciplina");
+    input.setAttribute("data-disciplina", state.value);
+  };
+
+  bulmahead("ensino-disciplina", "ensino-disciplina-menu", api, onSelect, 200);
+};
+
+const solicitarAprendizados = async () => {
+  const reuniao = localStorage.getItem("conselhoAtual") || "";
+
+  if (reuniao === "") {
+    showMessage(
+      "Ops, deu errado!",
+      "Não foi possível identificar a reunião atual!",
+      "error",
+      5000
+    );
+    return false;
+  }
+  let dados = {
+    acao: "Aprendizados/listarAprendizadosReuniao",
+    reuniao: reuniao,
+  };
+
+  return await sendRequest(dados)
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      showMessage(
+        "Ops, deu errado!",
+        "Não foi possível obter os aprendizados!",
+        "error",
+        5000
+      );
+      console.error(err);
+    });
+};
+
+const addAprendizadoCard = (aprendizado) => {
+  let card = document.createElement("div");
+
+  card.classList.add("card-avaliacao", "ensino");
+  card.setAttribute("data-aprendizado", aprendizado.aprendizado);
+  card.innerHTML = `
+  <p class="subtitulo is-9" name="">Ensino-Aprendizado</p>
+  <p class="subtitulo is-7">${aprendizado.disciplina.nome}</p>
+  <div class="perfis">
+    <div class="chip">
+      <span class="chip-text">${aprendizado.estudantes.length} ${
+    aprendizado.estudantes.length > 1 ? "alunos" : "aluno"
+  }</span>
+    </div>
+  </div>
+  `;
+
+  card.addEventListener("click", (event) => {
+    console.log(event);
+  });
+  const avaliacoes = document.querySelector(".avaliacoes");
+  avaliacoes.append(card);
+};
+
+const listarAprendizados = () => {
+  solicitarAprendizados()
+    .then((aprendizados) => {
+      aprendizados.map((aprendizado) => addAprendizadoCard(aprendizado));
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const solicitarExperiencias = async () => {
+  const reuniao = localStorage.getItem("conselhoAtual") || "";
+
+  if (reuniao === "") {
+    showMessage(
+      "Ops, deu errado!",
+      "Não foi possível identificar a reunião atual!",
+      "error",
+      5000
+    );
+    return false;
+  }
+
+  let dados = {
+    acao: "Experiencias/listarExperienciasReuniao",
+    reuniao: reuniao,
+  };
+
+  return await sendRequest(dados)
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      showMessage(
+        "Ops, deu errado!",
+        "Não conseguimos obter as experiências da reunião atual.",
+        "error",
+        5000
+      );
+      return false;
+    });
+};
+
+const addExperienciaCard = (experiencia) => {
+  let card = document.createElement("div");
+  card.classList.add("card-avaliacao", "experiencia");
+  card.setAttribute("data-experiencia", experiencia.experiencia);
+  card.innerHTML = `
+  <p class="subtitulo is-9">Experiências</p>
+  <p class="subtitulo is-7">${experiencia.titulo}</p>
+  <div class="perfis">
+    <div class="chip">
+      <span class="chip-text">${experiencia.classificacao}</span>
+    </div>
+  </div>
+  `;
+  card.addEventListener("click", (event) => {
+    console.log(event);
+  });
+
+  const avaliacoes = document.querySelector(".avaliacoes");
+  avaliacoes.append(card);
+};
+
+const listarExperiencias = () => {
+  solicitarExperiencias()
+    .then((experiencias) => {
+      experiencias.map((experiencia) => {
+        addExperienciaCard(experiencia);
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+listarAprendizados();
+listarExperiencias();
 deleteProfessor();
 autocompleteEnsinoDisciplina();
 autocompleteEnsinoEstudantes();
