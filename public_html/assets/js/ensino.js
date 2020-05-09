@@ -5,8 +5,11 @@ const listener = () => {
   const btnModalExperiencia = document.querySelector("#btnExperiencia");
   btnModalExperiencia.addEventListener("click", (e) => abrirNovoExperiencia());
 
-  const btnSalvarExperiencia = document.getElementById("salvar-ensino");
-  btnSalvarExperiencia.addEventListener("click", (e) => salvarAprendizado(e));
+  const btnSalvarEnsino = document.getElementById("salvar-ensino");
+  btnSalvarEnsino.addEventListener("click", (e) => salvarAprendizado(e));
+
+  const btnSalvarExperiencia = document.getElementById("salvar-experiencia");
+  btnSalvarExperiencia.addEventListener("click", (e) => salvarExperiencia(e));
 };
 
 /**
@@ -51,7 +54,6 @@ const closeModal = (params) => {
   });
 };
 
-
 const fecharAprendizado = () => {
   const modal = document.getElementById("avaliacao-aprendizado");
   modal.classList.toggle("is-active");
@@ -74,9 +76,10 @@ const fecharExperiencia = () => {
     localStorage.setItem("experiencia", "");
   }
 
-  document.getElementById("avaliacao-experiencia").value = "";
-  document.getElementById("experiencia-categoria").value;
+  document.getElementById("experiencia-titulo").value = "";
+  document.getElementById("experiencia-categoria").value = "";
 
+  document.getElementById("experiencia-disciplinas").value = "";
   document.getElementById("experiencia-disciplinas-selecionadas").textContent =
     "";
   document.getElementById("experiencia-descricao").value = "";
@@ -96,6 +99,7 @@ const salvarAprendizado = (e) => {
       .then((response) => {
         console.log(response);
         fecharAprendizado();
+        listarAvaliacoes();
         showMessage("Deu certo!", "A avaliação já foi salva!", "success", 4000);
       })
       .catch((err) => {
@@ -150,6 +154,75 @@ const pegarDadosAprendizado = (params) => {
   return dados;
 };
 
+const salvarExperiencia = () => {
+  console.log(">> Apertou Experiencia");
+  const dados = pegarDadosExperiencia();
+
+  if (dados.reuniao != "" && dados.titulo != "" && dados.classificacao != "") {
+    console.log(dados);
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        fecharExperiencia();
+        listarAvaliacoes();
+        showMessage(
+          "Deu certo!",
+          "A experiência já foi salva.",
+          "success",
+          4000
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+        showMessage(
+          "Ops, deu errado!",
+          "Não foi possível salvar a experiência",
+          "error",
+          5000
+        );
+      });
+  } else {
+    showMessage(
+      "Confira seus dados!",
+      "Pode existir algum erro nos dados informados.",
+      "warning",
+      5000
+    );
+  }
+};
+
+const pegarDadosExperiencia = (params) => {
+  const titulo = document.getElementById("experiencia-titulo").value;
+  const classificacao = document.getElementById("experiencia-categoria").value;
+  const disciplinasChips = document.querySelectorAll(
+    "#experiencia-disciplinas-selecionadas > div.chip"
+  );
+
+  let disciplinas = [];
+  disciplinasChips.forEach((disciplinaChip) => {
+    disciplinas.push(disciplinaChip.getAttribute("data-disciplina-id"));
+  });
+
+  const descricao = document.getElementById("experiencia-descricao").value;
+
+  const reuniao = localStorage.getItem("conselhoAtual") || "";
+  const experiencia = localStorage.getItem("experiencia") || "";
+
+  let dados = {
+    acao: "Experiencias/cadastrar",
+    reuniao: reuniao,
+    titulo: titulo,
+    descricao: descricao,
+    classificacao: classificacao,
+    disciplinas: disciplinas,
+  };
+
+  if (experiencia !== "") {
+    (dados.acao = "Experiencia/alterar"), (dados.experiencia = experiencia);
+  }
+
+  return dados;
+};
 /**
  *
  * @param {string} nome Texto adicionado ao elemento
@@ -168,6 +241,26 @@ const addChip = (nome, id, local) => {
   chip.addEventListener("click", (event) => delChip(event));
   const estudantesSelecionados = document.getElementById(local);
   estudantesSelecionados.insertAdjacentElement("afterbegin", chip);
+};
+
+/**
+ *
+ * @param {string} nome Texto adicionado ao elemento
+ * @param {string} id Identificação do elemento
+ * @param {string} local Id do elemento DOM onde o chip será inserido
+ */
+const addChipDisciplina = (nome, id, local) => {
+  let chip = document.createElement("div");
+  chip.classList.add("chip", "item");
+  chip.setAttribute("data-disciplina-id", id);
+
+  chip.innerHTML += `
+    <span class="chip-text">${nome}</span>
+    <span class="chip-close">&times;</span>
+  `;
+  chip.addEventListener("click", (event) => delChip(event));
+  const disciplinasSelecionadas = document.getElementById(local);
+  disciplinasSelecionadas.insertAdjacentElement("afterbegin", chip);
 };
 
 /**
@@ -232,7 +325,11 @@ let autocompleteExperienciaDisciplinas = () => {
     console.log("> O brabo tem nome - Experiencia Estudantes");
     console.log(state);
 
-    addChip(state.label, state.value, "experiencia-disciplinas-selecionadas");
+    addChipDisciplina(
+      state.label,
+      state.value,
+      "experiencia-disciplinas-selecionadas"
+    );
 
     const input = document.querySelector("#experiencia-disciplinas");
     input.value = "";
@@ -557,6 +654,11 @@ const preencherAprendizado = (aprendizado) => {
 
 const abrirExperiencia = (event) => {
   console.log("Apertou a experiência!");
+};
+const listarAvaliacoes = () => {
+  document.querySelector(".avaliacoes").innerHTML = "";
+  listarAprendizados();
+  listarExperiencias();
 };
 listarAprendizados();
 listarExperiencias();
