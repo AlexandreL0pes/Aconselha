@@ -401,6 +401,7 @@ const listarAprendizados = () => {
   solicitarAprendizados()
     .then((aprendizados) => {
       aprendizados.map((aprendizado) => addAprendizadoCard(aprendizado));
+      atualizarAvaliacoes();
     })
     .catch((err) => {
       console.error(err);
@@ -462,15 +463,26 @@ const addExperienciaCard = (experiencia) => {
 };
 
 const listarExperiencias = () => {
+  atualizarAvaliacoes();
   solicitarExperiencias()
     .then((experiencias) => {
-      experiencias.map((experiencia) => {
-        addExperienciaCard(experiencia);
-      });
+      experiencias.map((experiencia) => addExperienciaCard(experiencia));
+      atualizarAvaliacoes();
     })
     .catch((err) => {
       console.error(err);
     });
+};
+const atualizarAvaliacoes = () => {
+  const cards = document.querySelectorAll(".card-avaliacao");
+  const qtdAvaliacoes = document.querySelector("#qtdAvaliacoes");
+
+  if (cards.length == 0) {
+    qtdAvaliacoes.innerHTML = "Nenhum encaminhamento foi cadastrado";
+  } else {
+    qtdAvaliacoes.innerHTML =
+      "Existem " + cards.length + " encaminhamentos salvos";
+  }
 };
 
 listarAprendizados();
