@@ -4,6 +4,7 @@ namespace core\controller;
 
 use core\model\Experiencia;
 use core\model\DisciplinaExperiencia;
+use core\model\Classificacao;
 
 
 class Experiencias
@@ -189,6 +190,36 @@ class Experiencias
         } else {
             http_response_code(500);
             return array('message' => 'Houve um erro na exclusão da experiência!');
+        }
+    }
+
+    public function listarExperienciasReuniao($dados)
+    {
+        $reuniao_id = $dados['reuniao'];
+        $campos = "e." . Experiencia::COL_ID . ", " . Experiencia::COL_ID_REUNIAO . ", " . Experiencia::COL_TITULO . ", c." . Classificacao::COL_ID . ", c." . Classificacao::COL_NOME;
+        $busca = [Experiencia::COL_ID_REUNIAO => $reuniao_id];
+
+        $experiencia = new Experiencia();
+        $experiencias = $experiencia->listar($campos, $busca, null, 1000);
+
+        $retorno = [];
+
+        if (!empty($experiencias) && !empty($experiencias[0])) {
+            foreach ($experiencias as $experiencia) {
+                $disciplinas = $this->disciplinasExperiencia($experiencia[Experiencia::COL_ID]);
+                $classificacao = ['id' => $experiencia[Classificacao::COL_ID], 'nome' => $experiencia[Classificacao::COL_NOME]];
+
+                array_push($retorno, [
+                    "experiencia" => $experiencia[Experiencia::COL_ID],
+                    "titulo" => $experiencia[Experiencia::COL_TITULO],
+                    "classificacao" => $classificacao,
+                ]);
+            }
+            http_response_code(200);
+            return json_encode($retorno);
+        } else {
+            http_response_code(500);
+            return json_encode(array('message' => 'Nenhuma experiência foi encontrada!'));
         }
     }
 }
