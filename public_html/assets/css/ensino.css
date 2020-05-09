@@ -96,7 +96,6 @@
 }
 
 .card-avaliacao.experiencia {
-  cursor: auto;
 
   border-left: 4px solid;
   border-image-source: linear-gradient(
@@ -108,7 +107,6 @@
   border-radius: 5px !important;
 }
 .card-avaliacao.ensino {
-  cursor: auto;
   border-left: 4px solid;
   border-image-source: linear-gradient(
     0deg,
