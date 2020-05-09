@@ -117,12 +117,15 @@ class Experiencias
 
         $experiencia = new Experiencia();
 
+        // $campos = "e.*, c." . Classificacao::COL_NOME;
         $campos = Experiencia::COL_ID . ", " .
-            Experiencia::COL_ID_REUNIAO . ", " .
-            Experiencia::COL_TITULO . ", " .
-            Experiencia::COL_OBSERVACAO . ", " .
-            Experiencia::COL_DATA . ", " .
-            Experiencia::COL_CLASSIFICACAO;
+        Experiencia::COL_ID_REUNIAO . ", " .
+        Experiencia::COL_TITULO . ", " .
+        Experiencia::COL_OBSERVACAO . ", " .
+        Experiencia::COL_DATA . ", " .
+        Experiencia::COL_CLASSIFICACAO
+        // Classificacao::COL_NOME;
+        ;
 
         $busca = [Experiencia::COL_ID => $experiencia_id];
 
@@ -155,11 +158,12 @@ class Experiencias
         $disciplinas_id = $disciplinasExperiencia->listar(DisciplinaExperiencia::COL_DISCIPLINA, $busca, null, 100);
 
         $disciplinas = [];
-
-        foreach ($disciplinas_id as $disciplina_id) {
-            // TODO: Colocar consultar aqui o nome da disciplina
-            $nome = "Disciplina " . $disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA];
-            array_push($disciplinas, ['id' => $disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA], 'nome' => $nome]);
+        if ($disciplinas_id && count($disciplinas_id[0]) > 0) {
+            foreach ($disciplinas_id as $disciplina_id) {
+                // TODO: Colocar consultar aqui o nome da disciplina
+                $nome = "Disciplina " . $disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA];
+                array_push($disciplinas, ['id' => $disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA], 'nome' => $nome]);
+            }
         }
 
         return $disciplinas;
@@ -196,7 +200,8 @@ class Experiencias
     public function listarExperienciasReuniao($dados)
     {
         $reuniao_id = $dados['reuniao'];
-        $campos = "e." . Experiencia::COL_ID . ", " . Experiencia::COL_ID_REUNIAO . ", " . Experiencia::COL_TITULO . ", c." . Classificacao::COL_ID . ", c." . Classificacao::COL_NOME;
+        $campos = "e." . Experiencia::COL_ID . ", " . Experiencia::COL_ID_REUNIAO . ", " . Experiencia::COL_TITULO . " c." . Classificacao::COL_NOME;
+        $campos = "e.*, c." . Classificacao::COL_NOME;
         $busca = [Experiencia::COL_ID_REUNIAO => $reuniao_id];
 
         $experiencia = new Experiencia();
@@ -207,12 +212,13 @@ class Experiencias
         if (!empty($experiencias) && !empty($experiencias[0])) {
             foreach ($experiencias as $experiencia) {
                 $disciplinas = $this->disciplinasExperiencia($experiencia[Experiencia::COL_ID]);
-                $classificacao = ['id' => $experiencia[Classificacao::COL_ID], 'nome' => $experiencia[Classificacao::COL_NOME]];
+                $classificacao = $experiencia[Classificacao::COL_NOME];
 
                 array_push($retorno, [
                     "experiencia" => $experiencia[Experiencia::COL_ID],
                     "titulo" => $experiencia[Experiencia::COL_TITULO],
                     "classificacao" => $classificacao,
+                    "disciplinas" => $disciplinas
                 ]);
             }
             http_response_code(200);

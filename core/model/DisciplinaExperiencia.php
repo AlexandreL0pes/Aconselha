@@ -26,7 +26,7 @@ class DisciplinaExperiencia extends CRUD
     public function alterar($dados)
     {
         if (!isset($dados[self::COL_ID])) {
-            throw new Exception("É necessário informar o ID da DisciplinaExperiencia");
+            throw new \Exception("É necessário informar o ID da DisciplinaExperiencia");
         }
 
         $where_condicao = self::COL_ID . " = ? ";
