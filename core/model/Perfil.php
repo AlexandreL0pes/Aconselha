@@ -6,7 +6,7 @@ use core\CRUD;
 use Exception;
 
 class Perfil extends CRUD {
-    const TABELA = "perfil";
+    const TABELA = "Perfil";
     const COL_ID = "id";
     const COL_NOME = "nome";
     const COL_DESCRICAO = "descricao";

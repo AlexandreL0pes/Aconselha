@@ -3,8 +3,9 @@
 
 namespace core\controller;
 
-use core\model\Avaliacao;
 use core\model\Analise;
+use core\model\Diagnostica;
+use core\model\Perfil;
 
 class Diagnosticas
 {
@@ -18,23 +19,23 @@ class Diagnosticas
         $perfis = $dados['perfis'];
         $dataAtual = date('Y-m-d h:i:s');
 
-        $avaliacao = new Avaliacao();
+        $diagnostica = new Diagnostica();
 
-        $resultadoAvaliacao = $avaliacao->adicionar([
-            Avaliacao::COL_ID_REUNIAO => $reuniao,
-            Avaliacao::COL_DATA => $dataAtual,
-            Avaliacao::COL_ESTUDANTE => $estudante,
-            Avaliacao::COL_PROFESSOR => $professor
+        $resultadoDiagnostica = $diagnostica->adicionar([
+            Diagnostica::COL_ID_REUNIAO => $reuniao,
+            Diagnostica::COL_DATA => $dataAtual,
+            Diagnostica::COL_ESTUDANTE => $estudante,
+            Diagnostica::COL_PROFESSOR => $professor
         ]);
 
-        if ($resultadoAvaliacao > 0) {
+        if ($resultadoDiagnostica > 0) {
             $analise = new Analise();
 
             $erros = array();
             // TODO: No alterar, excluir todos os registros q tem a avaliação e cadastrar novamente
             foreach ($perfis as $perfil) {
                 $resultadoAnalise = $analise->adicionar([
-                    Analise::COL_AVALIACAO => $resultadoAvaliacao,
+                    Analise::COL_DIAGNOSTICA => $resultadoDiagnostica,
                     Analise::COL_PERFIL => $perfil
                 ]);
 
@@ -58,27 +59,27 @@ class Diagnosticas
 
     public function alterar($dados)
     {
-        $avaliacao_id = $dados['avaliacao'];
+        $diagnostica_id = $dados['diagnostica'];
         $perfis = $dados['perfis'];
         $dataAtual = date('Y-m-d h:i:s');
 
 
-        $avaliacao = new Avaliacao();
+        $diagnostica = new Diagnostica();
 
-        $resultadoAvaliacao = $avaliacao->alterar([
-            Avaliacao::COL_ID => $avaliacao_id,
-            Avaliacao::COL_DATA => $dataAtual
+        $resultadoDiagnostica = $diagnostica->alterar([
+            Diagnostica::COL_ID => $diagnostica_id,
+            Diagnostica::COL_DATA => $dataAtual
         ]);
 
-        if ($resultadoAvaliacao > 0) {
+        if ($resultadoDiagnostica > 0) {
             $analise = new Analise();
 
-            $analise->excluir([Analise::COL_AVALIACAO => $avaliacao_id]);
+            $analise->excluir([Analise::COL_DIAGNOSTICA => $diagnostica_id]);
             $erros = array();
 
             foreach ($perfis as $perfil) {
                 $resultadoAnalise = $analise->adicionar([
-                    Analise::COL_AVALIACAO => $avaliacao_id,
+                    Analise::COL_DIAGNOSTICA => $diagnostica_id,
                     Analise::COL_PERFIL => $perfil
                 ]);
 
@@ -102,25 +103,24 @@ class Diagnosticas
 
     public function selecionarDiagnotica($dados)
     {
-        $avaliacao_id = $dados['avaliacao'];
-        $avaliacao = new Avaliacao();
+        $diagnostica_id = $dados['diagnostica'];
+        $diagnostica = new Diagnostica();
 
-        $campos = Avaliacao::COL_ID . ", " . Avaliacao::COL_ID_REUNIAO . ", " . Avaliacao::COL_PROFESSOR . ", " . Avaliacao::COL_ESTUDANTE . ", " . Avaliacao::COL_DATA;
-        $busca = [Avaliacao::COL_ID => $avaliacao_id];
-        $diagnostica = ($avaliacao->listar($campos, $busca, null, 1))[0];
+        $campos = Diagnostica::COL_ID . ", " . Diagnostica::COL_ID_REUNIAO . ", " . Diagnostica::COL_PROFESSOR . ", " . Diagnostica::COL_ESTUDANTE . ", " . Diagnostica::COL_DATA;
+        $busca = [Diagnostica::COL_ID => $diagnostica_id];
+        $diagnostica = ($diagnostica->listar($campos, $busca, null, 1))[0];
 
         if (!empty($diagnostica)) {
-            // $perfis = $this->perfisDiagnostica()
-            $perfis = [1];
+            $perfis = $this->perfisAnalise($diagnostica_id);
             // $aluno = $aluno->selecionarAluno(aluno_id);
-            $aluno = ['id' => $diagnostica[Avaliacao::COL_ESTUDANTE], 'nome' => 'Aluno de Tal'];
+            $aluno = ['id' => $diagnostica[Diagnostica::COL_ESTUDANTE], 'nome' => 'Aluno ' . $diagnostica[Diagnostica::COL_ESTUDANTE]];
             // $professor = $professor->selecionarProfessor(professor_id)
-            $professor = ['id' => $diagnostica[Avaliacao::COL_PROFESSOR], 'nome' => 'Professor de Tal'];
+            $professor = ['id' => $diagnostica[Diagnostica::COL_PROFESSOR], 'nome' => 'Professor ' . $diagnostica[Diagnostica::COL_PROFESSOR]];
 
 
             $diagnosticaCompleto = [
-                'avaliacao' => $diagnostica[Avaliacao::COL_ID],
-                'reuniao' => $diagnostica[Avaliacao::COL_ID_REUNIAO],
+                'diagnostica' => $diagnostica[Diagnostica::COL_ID],
+                'reuniao' => $diagnostica[Diagnostica::COL_ID_REUNIAO],
                 'estudante' => $aluno,
                 'professor' =>  $professor,
                 'perfis' => $perfis
@@ -134,22 +134,34 @@ class Diagnosticas
         }
     }
 
+    private function perfisAnalise($diagnostica_id)
+    {
+        $analise = new Analise();
+
+        $campos = "a." . Analise::COL_PERFIL . " as id, p." . Perfil::COL_NOME;
+        $busca = [Analise::COL_DIAGNOSTICA => $diagnostica_id];
+
+        $perfis = $analise->listar($campos, $busca, null, null);
+
+        return $perfis;
+    }
+
     public function excluirDiagnostica($dados)
     {
-        $avaliacao_id = $dados['avaliacao'];
+        $diagnostica_id = $dados['diagnostica'];
 
-        $condicao = [Analise::COL_AVALIACAO => $avaliacao_id];
+        $condicao = [Analise::COL_DIAGNOSTICA => $diagnostica_id];
         $analise = new Analise();
 
         $retornoAnalise = $analise->excluir($condicao);
 
         if ($retornoAnalise && $retornoAnalise > 0) {
-            $avaliacao = new Avaliacao();
+            $diagnostica = new Diagnostica();
 
-            $condicao = [Avaliacao::COL_ID => $avaliacao_id];
-            $retornoAvaliacao = $avaliacao->excluir($condicao);
+            $condicao = [Diagnostica::COL_ID => $diagnostica_id];
+            $retornoDiagnostica = $diagnostica->excluir($condicao);
 
-            if ($retornoAvaliacao && $retornoAvaliacao > 0) {
+            if ($retornoDiagnostica && $retornoDiagnostica > 0) {
                 http_response_code(200);
                 return array('message' => 'A avaliação dignóstica foi excluída!');
             } else {

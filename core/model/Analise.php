@@ -9,7 +9,7 @@ class Analise  extends CRUD
 {
     const TABELA = "Analise";
     const COL_ID = "id";
-    const COL_AVALIACAO = "idAvaliacao";
+    const COL_DIAGNOSTICA = "idDiagnostica";
     const COL_PERFIL = "idPerfil";
 
     public function adicionar($dados)
@@ -26,12 +26,12 @@ class Analise  extends CRUD
 
     public function alterar($dados)
     {
-        if (!isset($dados[self::COL_AVALIACAO])) {
+        if (!isset($dados[self::COL_DIAGNOSTICA])) {
             throw new Exception("É necessário informar o id da Analise");
         }
 
-        $where_condicao = self::COL_AVALIACAO . " = ? ";
-        $where_valor[] = $dados[self::COL_AVALIACAO];
+        $where_condicao = self::COL_DIAGNOSTICA . " = ? ";
+        $where_valor[] = $dados[self::COL_DIAGNOSTICA];
 
         try {
             $this->update(self::TABELA, $dados, $where_condicao, $where_valor);
@@ -52,10 +52,12 @@ class Analise  extends CRUD
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
 
+        $tabela = self::TABELA . " a INNER JOIN " . Perfil::TABELA . " p on a." . Analise::COL_PERFIL . " = p." . Perfil::COL_ID;
+
         if ($busca && count($busca) > 0) {
-            if (isset($busca[self::COL_AVALIACAO]) && !empty($busca[self::COL_AVALIACAO])) {
-                $where_condicao .= " AND " . self::COL_AVALIACAO . " = ? ";
-                $where_valor[] = $busca[self::COL_AVALIACAO];
+            if (isset($busca[self::COL_DIAGNOSTICA]) && !empty($busca[self::COL_DIAGNOSTICA])) {
+                $where_condicao .= " AND " . self::COL_DIAGNOSTICA . " = ? ";
+                $where_valor[] = $busca[self::COL_DIAGNOSTICA];
             }
             if (isset($busca[self::COL_ID]) && !empty($busca[self::COL_ID])) {
                 $where_condicao .= " AND " . self::COL_ID . " = ? ";
@@ -66,7 +68,7 @@ class Analise  extends CRUD
         $retorno = [];
 
         try {
-            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, null, null);
+            $retorno = $this->read(null, $tabela, $campos, $where_condicao, $where_valor, null, null, null);
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             return false;
@@ -81,9 +83,9 @@ class Analise  extends CRUD
         $where_valor = [];
 
         if ($condicao && count($condicao) > 0) {
-            if (isset($condicao[self::COL_AVALIACAO]) && !empty($condicao[self::COL_AVALIACAO])) {
-                $where_condicao .= " AND " . self::COL_AVALIACAO . " = ? ";
-                $where_valor[] = $condicao[self::COL_AVALIACAO];
+            if (isset($condicao[self::COL_DIAGNOSTICA]) && !empty($condicao[self::COL_DIAGNOSTICA])) {
+                $where_condicao .= " AND " . self::COL_DIAGNOSTICA . " = ? ";
+                $where_valor[] = $condicao[self::COL_DIAGNOSTICA];
             }
         }
 
