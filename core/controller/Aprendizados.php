@@ -33,7 +33,7 @@ class Aprendizados
 
             foreach ($estudantes as $estudante) {
                 $resultadoEstudante = $estudantesAprendizado->adicionar([
-                    EstudanteAprendizado::COL_ID_AVALIACAO => $resultadoAprendizado,
+                    EstudanteAprendizado::COL_ID_APRENDIZADO => $resultadoAprendizado,
                     EstudanteAprendizado::COL_MATRICULA => $estudante
                 ]);
 
@@ -76,13 +76,13 @@ class Aprendizados
 
         if ($resultadoAvaliacao > 0) {
             $estudantesAvaliacao = new EstudanteAprendizado();
-            $estudantesAvaliacao->excluir([EstudanteAprendizado::COL_ID_AVALIACAO => $aprendizado_id]);
+            $estudantesAvaliacao->excluir([EstudanteAprendizado::COL_ID_APRENDIZADO => $aprendizado_id]);
 
             $erros = array();
 
             foreach ($estudantes as $estudante) {
                 $resultadoEstudantes = $estudantesAvaliacao->adicionar([
-                    EstudanteAprendizado::COL_ID_AVALIACAO => $resultadoAvaliacao,
+                    EstudanteAprendizado::COL_ID_APRENDIZADO => $resultadoAvaliacao,
                     EstudanteAprendizado::COL_MATRICULA => $estudante
                 ]);
 
@@ -130,7 +130,8 @@ class Aprendizados
                 'reuniao' => $resultadoAprendizado[Aprendizado::COL_ID_REUNIAO],
                 'data' => $resultadoAprendizado[Aprendizado::COL_DATA],
                 'disciplina' => $disciplina,
-                'estudantes' => $estudantes
+                'estudantes' => $estudantes,
+                'observacao' => $resultadoAprendizado[Aprendizado::COL_OBSERVACAO]
             ];
 
             http_response_code(200);
@@ -161,7 +162,7 @@ class Aprendizados
     {
         $aprendizado_id = $dados['aprendizado'];
 
-        $condicao = [EstudanteAprendizado::COL_ID_AVALIACAO => $aprendizado_id];
+        $condicao = [EstudanteAprendizado::COL_ID_APRENDIZADO => $aprendizado_id];
 
         $estudantesAvaliacao = new EstudanteAprendizado();
 
