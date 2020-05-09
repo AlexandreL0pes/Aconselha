@@ -6,8 +6,8 @@ use core\CRUD;
 use Exception;
 
 class Classificacao extends CRUD {
-    const TABELA = "classificacao";
-    const COL_ID = "id";
+    const TABELA = "Classificacao";
+    const COL_ID = "idClassificacao";
     const COL_NOME = "nome";
     const COL_DESCRICAO = "descricao";
 
