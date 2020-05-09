@@ -173,4 +173,34 @@ class Diagnosticas
             return array('message' => 'Houve um erro na exclusão da avaliação diagnóstica');
         }
     }
+
+    public function listarDiagnosticasReuniao($dados)
+    {
+        $reuniao_id = $dados['reuniao'];
+        $campos = Diagnostica::COL_ID . ", " . Diagnostica::COL_ESTUDANTE;
+        $busca = [Diagnostica::COL_ID_REUNIAO => $reuniao_id];
+
+        $diagnostica = new Diagnostica();
+
+        $diagnosticas = $diagnostica->listar($campos, $busca, null, 1000);
+
+        $retorno = [];
+
+        if (!empty($diagnosticas) && !empty($diagnosticas[0])) {
+            foreach ($diagnosticas as $diagnostica) {
+                // TODO: Consultar o nome do aluno no banco QAcademico 
+                $aluno = ['id' => $diagnostica[Diagnostica::COL_ESTUDANTE], 'nome' => 'Aluno ' . $diagnostica[Diagnostica::COL_ESTUDANTE]];
+                array_push($retorno, [
+                    "diagnostica" => $diagnostica[Diagnostica::COL_ID],
+                    "aluno" => $aluno
+                ]);
+            }
+
+            http_response_code(200);
+            return json_encode($retorno);
+        }else{
+            http_response_code(500);
+            return json_encode(array('message' => 'Nenhuma avaliação diagnóstica foi encontrada!'));
+        }
+    }
 }
