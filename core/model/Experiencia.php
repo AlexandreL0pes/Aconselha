@@ -59,6 +59,8 @@ class Experiencia extends CRUD
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
 
+        $tabela = self::TABELA . " e INNER JOIN " . Classificacao::TABELA . " c ON e." . Experiencia::COL_CLASSIFICACAO . " = c." . Classificacao::COL_ID;
+
         if (isset($busca[self::COL_ID_REUNIAO]) && !empty($busca[self::COL_ID_REUNIAO])) {
             $where_condicao .= " AND " . self::COL_ID_REUNIAO . " = ?";
             $where_valor[] = $busca[self::COL_ID_REUNIAO];
@@ -78,7 +80,7 @@ class Experiencia extends CRUD
 
         try {
             
-            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
+            $retorno = $this->read(null, $tabela, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
 
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
