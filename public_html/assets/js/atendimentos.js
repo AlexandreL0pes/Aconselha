@@ -258,7 +258,6 @@ let autocompleteProfessor = () => {
  * @param {string} id Identificação do elemento
  */
 const addChip = (nome, id) => {
-
   let chip = document.createElement("div");
   chip.classList.add("chip");
   chip.setAttribute("data-professor-id", id);
