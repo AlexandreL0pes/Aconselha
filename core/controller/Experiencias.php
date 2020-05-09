@@ -50,14 +50,14 @@ class Experiencias
 
             if (empty($erros)) {
                 http_response_code(200);
-                return array('message' => 'A Experiência foi cadastrada!');
+                return json_encode(array('message' => 'A Experiência foi cadastrada!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Não foi possível cadastrar todos as disciplinas', 'errors' => $erros);
+                return json_encode(array('message' => 'Não foi possível cadastrar todos as disciplinas', 'errors' => $erros));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Não foi possível cadastrar a experiência');
+            return json_encode(array('message' => 'Não foi possível cadastrar a experiência'));
         }
     }
 
@@ -100,14 +100,14 @@ class Experiencias
 
             if (empty($erros)) {
                 http_response_code(200);
-                return array('message' => 'A experiência foi alterada com sucesso!');
+                return json_encode(array('message' => 'A experiência foi alterada com sucesso!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Houve erro na alteração das disciplinas em experiencia', 'errors' => $erros);
+                return json_encode(array('message' => 'Houve erro na alteração das disciplinas em experiencia', 'errors' => $erros));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Houve um erro na alteração das disciplinas');
+            return json_encode(array('message' => 'Houve um erro na alteração das disciplinas'));
         }
     }
 
@@ -146,7 +146,7 @@ class Experiencias
             return json_encode($experienciaCompleta);
         } else {
             http_response_code(500);
-            return array('message' => 'A experiência solicitada não foi encontrada!');
+            return json_encode(array('message' => 'A experiência solicitada não foi encontrada!'));
         }
     }
 
@@ -186,14 +186,14 @@ class Experiencias
 
             if ($retornoExperiencia && $retornoExperiencia > 0) {
                 http_response_code(200);
-                return array('message' => 'A experiência foi excluída!');
+                return json_encode(array('message' => 'A experiência foi excluída!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Houve um erro durante a exclusão das disciplinas!');
+                return json_encode(array('message' => 'Houve um erro durante a exclusão das disciplinas!'));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Houve um erro na exclusão da experiência!');
+            return json_encode(array('message' => 'Houve um erro na exclusão da experiência!'));
         }
     }
 
