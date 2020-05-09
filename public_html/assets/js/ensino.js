@@ -147,7 +147,7 @@ const pegarDadosAprendizado = (params) => {
   };
 
   if (aprendizado !== "") {
-    (dados.acao = "Apredizados/alterar"), (dados.aprendizado = aprendizado);
+    (dados.acao = "Aprendizados/alterar"), (dados.aprendizado = aprendizado);
   }
   return dados;
 };
@@ -168,8 +168,8 @@ const addChip = (nome, id, local) => {
     <span class="chip-close">&times;</span>
   `;
   chip.addEventListener("click", (event) => delChip(event));
-  const professoresSelecionados = document.getElementById(local);
-  professoresSelecionados.insertAdjacentElement("afterbegin", chip);
+  const estudantesSelecionados = document.getElementById(local);
+  estudantesSelecionados.insertAdjacentElement("afterbegin", chip);
 };
 
 /**
@@ -377,8 +377,8 @@ const solicitarAprendizados = async () => {
 };
 
 /**
- * Gera e adiciona um card aprendizado a partir do JSON especificado 
- * @param {JSON} aprendizado 
+ * Gera e adiciona um card aprendizado a partir do JSON especificado
+ * @param {JSON} aprendizado
  */
 const addAprendizadoCard = (aprendizado) => {
   let card = document.createElement("div");
@@ -398,14 +398,14 @@ const addAprendizadoCard = (aprendizado) => {
   `;
 
   card.addEventListener("click", (event) => {
-    console.log(event);
+    abrirAprendizado(event);
   });
   const avaliacoes = document.querySelector(".avaliacoes");
   avaliacoes.append(card);
 };
 
 /**
- * Faz a requisição dos aprendizados, impressão dos card's e atualiza a qtd de Avaliações 
+ * Faz a requisição dos aprendizados, impressão dos card's e atualiza a qtd de Avaliações
  */
 const listarAprendizados = () => {
   solicitarAprendizados()
@@ -455,8 +455,8 @@ const solicitarExperiencias = async () => {
 };
 
 /**
- * Gera e adiciona um card experiencia a partir do JSON especificado 
- * @param {JSON} experiencia 
+ * Gera e adiciona um card experiencia a partir do JSON especificado
+ * @param {JSON} experiencia
  */
 const addExperienciaCard = (experiencia) => {
   let card = document.createElement("div");
@@ -472,7 +472,7 @@ const addExperienciaCard = (experiencia) => {
   </div>
   `;
   card.addEventListener("click", (event) => {
-    console.log(event);
+    abrirExperiencia(event);
   });
 
   const avaliacoes = document.querySelector(".avaliacoes");
@@ -480,7 +480,7 @@ const addExperienciaCard = (experiencia) => {
 };
 
 /**
- * Faz a requisição das experiencias, impressão dos card's e atualiza a qtd de Avaliações 
+ * Faz a requisição das experiencias, impressão dos card's e atualiza a qtd de Avaliações
  */
 const listarExperiencias = () => {
   atualizarAvaliacoes();
@@ -509,6 +509,57 @@ const atualizarAvaliacoes = () => {
   }
 };
 
+const abrirAprendizado = (element) => {
+  console.log("Apertou o aprendizado!");
+
+  let aprendizado = element.currentTarget.getAttribute("data-aprendizado");
+
+  console.log(aprendizado);
+
+  const modalAprendizado = document.getElementById("avaliacao-aprendizado");
+
+  if (aprendizado) {
+    localStorage.setItem("aprendizado", aprendizado);
+    modalAprendizado.classList.toggle("is-active");
+
+    const dados = {
+      acao: "Aprendizados/selecionar",
+      aprendizado: aprendizado,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        preencherAprendizado(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    showMessage(
+      "Houve um erro!",
+      "Não foi possível abrir o aprendizado.",
+      "warning",
+      5000
+    );
+  }
+};
+
+const preencherAprendizado = (aprendizado) => {
+  aprendizado.estudantes.map((estudante) => {
+    addChip(estudante.nome, estudante.id, "ensino-estudantes-selecionados");
+  });
+
+  const disciplina = document.querySelector('#ensino-disciplina');
+  disciplina.value = aprendizado.disciplina.nome;
+  disciplina.setAttribute('data-disciplina', aprendizado.disciplina.id);
+
+  document.getElementById("ensino-descricao").value = aprendizado.observacao;
+}
+
+const abrirExperiencia = (event) => {
+  console.log("Apertou a experiência!");
+};
 listarAprendizados();
 listarExperiencias();
 
