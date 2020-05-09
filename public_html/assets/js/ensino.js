@@ -73,7 +73,7 @@ const fecharExperiencia = () => {
   const modal = document.getElementById("avaliacao-experiencia");
   modal.classList.toggle("is-active");
   if (localStorage.getItem("experiencia")) {
-    localStorage.setItem("experiencia", "");
+    localStorage.removeItem("experiencia");
   }
 
   document.getElementById("experiencia-titulo").value = "";
@@ -218,7 +218,7 @@ const pegarDadosExperiencia = (params) => {
   };
 
   if (experiencia !== "") {
-    (dados.acao = "Experiencia/alterar"), (dados.experiencia = experiencia);
+    (dados.acao = "Experiencias/alterar"), (dados.experiencia = experiencia);
   }
 
   return dados;
@@ -652,9 +652,72 @@ const preencherAprendizado = (aprendizado) => {
   document.getElementById("ensino-descricao").value = aprendizado.observacao;
 };
 
-const abrirExperiencia = (event) => {
+const abrirExperiencia = (element) => {
   console.log("Apertou a experiência!");
+  let experiencia = element.currentTarget.getAttribute("data-experiencia");
+
+  const modalExperiencia = document.getElementById("avaliacao-experiencia");
+
+  if (experiencia) {
+    localStorage.setItem("experiencia", experiencia);
+    modalExperiencia.classList.toggle("is-active");
+
+    const dados = {
+      acao: "Experiencias/selecionar",
+      experiencia: experiencia,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        preencherExperiencia(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    showMessage(
+      "Houve um erro!",
+      "Não foi possível abrir a experiência.",
+      "warning",
+      5000
+    );
+  }
 };
+
+const preencherExperiencia = (experiencia) => {
+  experiencia.disciplinas.map((disciplina) =>
+    addChipDisciplina(
+      disciplina.nome,
+      disciplina.id,
+      "experiencia-disciplinas-selecionadas"
+    )
+  );
+
+  document.getElementById("experiencia-titulo").value = experiencia.titulo;
+  document.getElementById("experiencia-categoria").value = experiencia.classificacao;
+  document.getElementById("experiencia-descricao").value = experiencia.descricao;
+
+
+};
+
+const listarCategorias = () => {
+  sendRequest({acao:"Classificacoes/listar"}).then((response) => {
+    preencherCategorias(response);
+  }).catch((err) => {
+    console.error(err);   
+  });
+}
+
+const preencherCategorias = (dados) => {
+  const selectCategoria = document.getElementById('experiencia-categoria');
+  dados.map((categoria) => {
+    let option = document.createElement("option");
+    option.setAttribute("value", categoria.idClassificacao);
+    option.appendChild(document.createTextNode(categoria.nome));
+    selectCategoria.appendChild(option);
+  });
+}
 const listarAvaliacoes = () => {
   document.querySelector(".avaliacoes").innerHTML = "";
   listarAprendizados();
@@ -663,6 +726,7 @@ const listarAvaliacoes = () => {
 listarAprendizados();
 listarExperiencias();
 
+listarCategorias();
 deleteProfessor();
 autocompleteEnsinoDisciplina();
 autocompleteEnsinoEstudantes();
