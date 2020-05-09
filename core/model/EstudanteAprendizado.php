@@ -10,7 +10,7 @@ class EstudanteAprendizado extends CRUD
     const TABELA = "EstudanteAprendizado";
     const COL_ID = "id";
     const COL_MATRICULA = "COD_MATRICULA";
-    const COL_ID_AVALIACAO = "idAprendizado";
+    const COL_ID_APRENDIZADO = "idAprendizado";
 
 
     public function adicionar($dados)
@@ -55,12 +55,12 @@ class EstudanteAprendizado extends CRUD
 
         if ($busca && count($busca) > 0) {
             if (isset($busca[self::COL_ID]) && !empty($busca[self::COL_ID])) {
-                $where_condicao .= " AND " . $busca[self::COL_ID] . " = ? ";
+                $where_condicao .= " AND " . self::COL_ID . " = ? ";
                 $where_valor[] = $busca[self::COL_ID];
             }
-            if (isset($busca[self::COL_ID_AVALIACAO]) && !empty($busca[self::COL_ID_AVALIACAO])) {
-                $where_condicao .= " AND " . $busca[self::COL_ID_AVALIACAO] . " = ? ";
-                $where_valor[] = $busca[self::COL_ID_AVALIACAO];
+            if (isset($busca[self::COL_ID_APRENDIZADO]) && !empty($busca[self::COL_ID_APRENDIZADO])) {
+                $where_condicao .= " AND " . self::COL_ID_APRENDIZADO . " = ? ";
+                $where_valor[] = $busca[self::COL_ID_APRENDIZADO];
             }
         }
 
@@ -86,9 +86,9 @@ class EstudanteAprendizado extends CRUD
                 $where_condicao .= " AND " . self::COL_ID . " = ? ";
                 $where_valor[] = $condicao[self::COL_ID];
             }
-            if (isset($condicao[self::COL_ID_AVALIACAO]) && !empty($condicao[self::COL_ID_AVALIACAO])) {
-                $where_condicao .= " AND " . self::COL_ID_AVALIACAO . " = ? ";
-                $where_valor[] = $condicao[self::COL_ID_AVALIACAO];
+            if (isset($condicao[self::COL_ID_APRENDIZADO]) && !empty($condicao[self::COL_ID_APRENDIZADO])) {
+                $where_condicao .= " AND " . self::COL_ID_APRENDIZADO . " = ? ";
+                $where_valor[] = $condicao[self::COL_ID_APRENDIZADO];
             }
         }
 

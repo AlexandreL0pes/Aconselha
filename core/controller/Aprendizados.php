@@ -145,11 +145,10 @@ class Aprendizados
     {
 
         $estudantesAvaliacao = new EstudanteAprendizado();
-        $busca = [EstudanteAprendizado::COL_ID_AVALIACAO => $aprendizado_id];
+        $busca = [EstudanteAprendizado::COL_ID_APRENDIZADO => $aprendizado_id];
 
         $estudantes_id = $estudantesAvaliacao->listar(EstudanteAprendizado::COL_MATRICULA, $busca, null, 100);
         $estudantes = [];
-
         foreach ($estudantes_id as $estudante_id) {
             $nome = "Estudante " . $estudante_id[EstudanteAprendizado::COL_MATRICULA];
             array_push($estudantes, ['id' => $estudante_id[EstudanteAprendizado::COL_MATRICULA], 'nome' => $nome]);
