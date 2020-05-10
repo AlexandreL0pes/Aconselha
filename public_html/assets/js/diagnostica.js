@@ -11,32 +11,26 @@ const listener = () => {
   perfis.forEach((perfil) =>
     perfil.addEventListener("click", (e) => selecionarPerfil(e))
   );
+
+  const modals = document.querySelectorAll(".modal");
+  modals.forEach((modal) => {
+    const closeBtn = modal.querySelector(".modal-close-btn");
+    closeBtn.addEventListener("click", (event) => fecharAvaliacao());
+
+    const bgModal = modal.querySelector(".modal-background");
+    bgModal.addEventListener("click", (event) => fecharAvaliacao());
+  });
 };
 
 /**
- * Listener
- * Muda o estilo do card de avaliação
+ * Abre um nova avaliação diagnóstica
+ * @param {*} element Elemento clicado
  */
-const concluirCard = (dataAluno, diagnostica) => {
-  const card = document.querySelector(
-    `.card-avaliacao[data-aluno="${dataAluno}"]`
-  );
-
-  card.removeEventListener("click", abrirNovaDiagnostica);
-  card.addEventListener("click", abrirDiagnostica);
-  card.classList.add("concluido");
-  card.setAttribute("data-diagnostica", diagnostica);
-  const titulo = card.querySelector("p:first-child");
-  titulo.innerHTML = "Concluída";
-};
-
-
-
-const abrirNovaDiagnostica = (event) => {
+const abrirNovaDiagnostica = (element) => {
   const modal = document.getElementById("avaliacao-diagnostica");
   let idAluno =
-    event.target.getAttribute("data-aluno") ||
-    event.target.parentElement.getAttribute("data-aluno");
+    element.target.getAttribute("data-aluno") ||
+    element.target.parentElement.getAttribute("data-aluno");
 
   if (idAluno) {
     localStorage.setItem("aluno", idAluno);
@@ -45,6 +39,10 @@ const abrirNovaDiagnostica = (event) => {
   preencherModal(modal, localStorage.getItem("aluno"));
 };
 
+/**
+ * Requisita os dados da avaliação no banco e preenche os perfis
+ * @param {*} element
+ */
 const abrirDiagnostica = (element) => {
   const modal = document.getElementById("avaliacao-diagnostica");
 
@@ -65,11 +63,10 @@ const abrirDiagnostica = (element) => {
       diagnostica: diagnostica,
     };
 
-    console.log(dados);
     sendRequest(dados)
       .then((response) => {
         console.log(response.perfis);
-        preencharPerfis(response.perfis);
+        preencherPerfis(response.perfis);
       })
       .catch((err) => {
         console.error(err);
@@ -84,42 +81,34 @@ const abrirDiagnostica = (element) => {
   }
 };
 
-const preencharPerfis = (perfis) => {
+/**
+ * Adiciona a classe selected nos chips de acordo com os perfis informados
+ * @param {JSON} perfis Perfis de uma avaliação diagnóstica
+ */
+const preencherPerfis = (perfis) => {
   const perfisChips = document.querySelectorAll("div.perfis > div.chip");
-  console.log(">> Perfis");
-  console.log(perfisChips);
   perfisChips.forEach((perfilChip) => {
     const perfilId = perfilChip.getAttribute("data-perfil-id");
     const resultado = perfis.find((el) => el.id == perfilId);
     if (resultado) {
-      console.log(">> Resultado Busca" + resultado.id);
       perfilChip.classList.toggle("selected");
     }
   });
 };
 
-//Listener
-const closeModal = (params) => {
-  const modals = document.querySelectorAll(".modal");
-  modals.forEach((modal) => {
-    const closeBtn = modal.querySelector(".modal-close-btn");
-    closeBtn.addEventListener("click", (event) => {
-      fecharAvaliacao();
-    });
-    const bgModal = modal.querySelector(".modal-background");
-    bgModal.addEventListener("click", (event) => {
-      fecharAvaliacao();
-    });
-  });
-};
 
-
+/**
+ * Adiciona a classe selected ao chip
+ * @param {Element} perfil Chip clicado
+ */
 const selecionarPerfil = (perfil) => {
   perfil.currentTarget.classList.toggle("selected");
 };
 
+/**
+ * Dispara um requisição para salvar/alterar a avaliação diagnóstica
+ */
 const salvarDiagnostica = () => {
-
   let dados = pegarDados();
   console.log(dados);
   if (
@@ -161,6 +150,25 @@ const salvarDiagnostica = () => {
   }
 };
 
+/**
+ * Altera o estilo do card de avaliação para concluído
+ */
+const concluirCard = (dataAluno, diagnostica) => {
+  const card = document.querySelector(
+    `.card-avaliacao[data-aluno="${dataAluno}"]`
+  );
+
+  card.removeEventListener("click", abrirNovaDiagnostica);
+  card.addEventListener("click", abrirDiagnostica);
+  card.classList.add("concluido");
+  card.setAttribute("data-diagnostica", diagnostica);
+  const titulo = card.querySelector("p:first-child");
+  titulo.innerHTML = "Concluída";
+};
+
+/**
+ * Obtem os dados necessários para efetuar o cadastro/alteração
+ */
 const pegarDados = () => {
   const perfisSelecionados = document.querySelectorAll(".chip.selected");
   let perfis = [];
@@ -188,6 +196,7 @@ const pegarDados = () => {
 
   return dados;
 };
+
 /**
  * Esconde o modal, remove o aluno do modal atual e apaga os perfis selecionados
  * @param {DOM Element} modal Modal de Avaliação Diagnóstica
@@ -213,6 +222,9 @@ const fecharAvaliacao = () => {
   });
 };
 
+/**
+ * Atualiza o contador de avaliações pendentes
+ */
 const atualizarAvaliacoesPendentes = () => {
   const cards = document.querySelectorAll(".card-avaliacao");
   const selectedCards = document.querySelectorAll(".card-avaliacao.concluido");
@@ -220,32 +232,11 @@ const atualizarAvaliacoesPendentes = () => {
   qtdAvaliacoes.innerHTML = cards.length - selectedCards.length;
 };
 
-const concluirAvaliacao = () => {
-  const btnSalvar = document.querySelector(".btnSalvar");
-  btnSalvar.addEventListener("click", (event) => {
-    console.log("O botão foi pressionado!");
-
-    const dados = {
-      acao: "Teste/teste",
-      nome: "2017103202030090",
-      dados: [
-        { name: "Alexandre12", age: 21, acao: "Teste/teste" },
-        { name: "Alexandre123", age: 21, acao: "Teste/teste" },
-        { name: "Alexandre124", age: 21, acao: "Teste/teste" },
-        { name: "Alexandre126", age: 21, acao: "Teste/teste" },
-      ],
-    };
-
-    sendRequest(dados)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  });
-};
-
+/**
+ * Preenche a identificação da avaliação diagnóstica com base no card de avaliação
+ * @param {*} modal Id do modal em que os dados serão colocados
+ * @param {*} idAluno Identificação do aluno clicado
+ */
 const preencherModal = (modal, idAluno) => {
   const cardAluno = document.querySelector(
     `.card-avaliacao[data-aluno="${idAluno}"]`
@@ -307,17 +298,24 @@ const marcarDiagnosticas = (dados) => {
   });
 };
 
+/**
+ * Requisita os perfis cadastrados no banco de dados
+ */
 const listarPerfis = () => {
   sendRequest({ acao: "Perfis/listarPerfis" })
     .then((response) => {
-      preencherPerfis(response);
+      adicionarPerfis(response);
     })
     .catch((err) => {
       console.error(err);
     });
 };
 
-const preencherPerfis = (perfis) => {
+/**
+ * Cria os chips de perfil dentro do modal diagnóstica
+ * @param {JSON} perfis
+ */
+const adicionarPerfis = (perfis) => {
   const opcoesPerfis = document.getElementById("opcoes-perfis");
 
   perfis.forEach((perfil) => {
@@ -325,13 +323,12 @@ const preencherPerfis = (perfis) => {
     perfilChip.classList.add("chip");
     perfilChip.setAttribute("data-perfil-id", perfil.id);
     perfilChip.appendChild(document.createTextNode(perfil.nome));
-    perfilChip.addEventListener('click', selecionarPerfil);
+    perfilChip.addEventListener("click", selecionarPerfil);
     opcoesPerfis.appendChild(perfilChip);
   });
 };
+
 listarPerfis();
 solicitarDiagnosticas();
 atualizarAvaliacoesPendentes();
-closeModal();
-concluirAvaliacao();
 listener();
