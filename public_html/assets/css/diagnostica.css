@@ -212,14 +212,16 @@
   border-radius: 3px;
   background: rgba(98, 98, 98, 0.1);
 	font-size: 1em !important;
-	
+  
+  cursor: pointer;
+  text-transform: capitalize;
 	transition: background 0.4s ease-in-out;
 }
-.chip > .chip-text {
+/* .chip > .chip-text {
   padding: 0px 5px;
 	text-transform: capitalize;
 	cursor: pointer;
-}
+} */
 
 .chip > .chip-close {
   /* margin: 5px;   */
