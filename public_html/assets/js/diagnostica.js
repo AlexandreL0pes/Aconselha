@@ -1,19 +1,26 @@
 const listener = () => {
   const btnSalvarDiagnostica = document.getElementById("salvar-diagnostica");
   btnSalvarDiagnostica.addEventListener("click", (e) => salvarDiagnostica(e));
+
+  const addDiagnostica = document.querySelectorAll(".alunos>div.cardbox");
+  addDiagnostica.forEach((card) =>
+    card.addEventListener("click", abrirNovaDiagnostica)
+  );
 };
 
 /**
  * Listener
  * Muda o estilo do card de avaliação
  */
-const concluirCard = (dataAluno,diagnostica) => {
+const concluirCard = (dataAluno, diagnostica) => {
   const card = document.querySelector(
     `.card-avaliacao[data-aluno="${dataAluno}"]`
   );
 
+  card.removeEventListener("click", abrirNovaDiagnostica);
+  card.addEventListener("click", abrirDiagnostica);
   card.classList.add("concluido");
-  card.setAttribute("diagnostica",diagnostica);
+  card.setAttribute("data-diagnostica", diagnostica);
   const titulo = card.querySelector("p:first-child");
   titulo.innerHTML = "Concluída";
 };
@@ -23,7 +30,9 @@ const concluirCard = (dataAluno,diagnostica) => {
  * Abre o modal para avaliação
  */
 const openModal = () => {
-  const cardsAvaliacao = document.querySelectorAll(".alunos>div.cardbox:not(.concluido)");
+  const cardsAvaliacao = document.querySelectorAll(
+    ".alunos>div.cardbox:not(.concluido)"
+  );
   const modal = document.querySelector("#avaliacao-diagnostica");
 
   cardsAvaliacao.forEach((card) => {
@@ -41,17 +50,83 @@ const openModal = () => {
   });
 };
 
+const abrirNovaDiagnostica = (event) => {
+  const modal = document.getElementById("avaliacao-diagnostica");
+  let idAluno =
+    event.target.getAttribute("data-aluno") ||
+    event.target.parentElement.getAttribute("data-aluno");
+
+  if (idAluno) {
+    localStorage.setItem("aluno", idAluno);
+  }
+  modal.classList.toggle("is-active");
+  preencherModal(modal, localStorage.getItem("aluno"));
+};
+
+const abrirDiagnostica = (element) => {
+  const modal = document.getElementById("avaliacao-diagnostica");
+
+  const diagnostica = element.currentTarget.getAttribute("data-diagnostica");
+
+  let aluno = event.currentTarget.getAttribute("data-aluno") || "";
+
+  if (aluno) {
+    localStorage.setItem("aluno", aluno);
+  }
+
+  if (diagnostica) {
+    localStorage.setItem("diagnostica", diagnostica);
+    modal.classList.toggle("is-active");
+
+    const dados = {
+      acao: "Diagnosticas/selecionarDiagnostica",
+      diagnostica: diagnostica,
+    };
+
+    console.log(dados);
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response.perfis);
+        preencharPerfis(response.perfis);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    showMessage(
+      "Houve um erro!",
+      "Não foi possível abrir a avaliação.",
+      "warning",
+      5000
+    );
+  }
+};
+
+const preencharPerfis = (perfis) => {
+  const perfisChips = document.querySelectorAll("div.perfis > div.chip");
+  console.log(">> Perfis");
+  console.log(perfisChips);
+  perfisChips.forEach((perfilChip) => {
+    const perfilId = perfilChip.getAttribute("data-perfil-id");
+    const resultado = perfis.find((el) => el.id == perfilId);
+    if (resultado) {
+      console.log(">> Resultado Busca" + resultado.id);
+      perfilChip.classList.toggle("selected");
+    }
+  });
+};
+
 //Listener
 const closeModal = (params) => {
   const modals = document.querySelectorAll(".modal");
   modals.forEach((modal) => {
     const closeBtn = modal.querySelector(".modal-close-btn");
     closeBtn.addEventListener("click", (event) => {
-      fecharAvaliacao(modal);
+      fecharAvaliacao();
     });
     const bgModal = modal.querySelector(".modal-background");
     bgModal.addEventListener("click", (event) => {
-      fecharAvaliacao(modal);
+      fecharAvaliacao();
     });
   });
 };
@@ -67,10 +142,10 @@ const selectPerfil = () => {
 };
 
 const salvarDiagnostica = () => {
-  console.log(localStorage.getItem("aluno"));
+  // console.log(localStorage.getItem("aluno"));
 
   let dados = pegarDados();
-
+  console.log(dados);
   if (
     dados.perfis.length > 0 &&
     dados.reuniao !== "" &&
@@ -78,7 +153,7 @@ const salvarDiagnostica = () => {
     dados.estudante !== ""
   ) {
     console.log(dados);
-    
+
     sendRequest(dados)
       .then((response) => {
         console.log(response);
@@ -148,6 +223,10 @@ const fecharAvaliacao = () => {
   if (localStorage.getItem("aluno")) {
     localStorage.removeItem("aluno");
   }
+
+  if (localStorage.getItem("diagnostica")) {
+    localStorage.removeItem("diagnostica");
+  }
   // Atualizar o contador de avaliações restantes
   atualizarAvaliacoesPendentes();
 
@@ -208,9 +287,53 @@ const preencherModal = (modal, idAluno) => {
     aluno.matricula;
 };
 
-// fecharAvaliacao();
+/**
+ * Requisita as avaliações diagnósticas realizadas
+ */
+const solicitarDiagnosticas = () => {
+  const reuniao = localStorage.getItem("conselhoAtual") || "";
+  const dados = {
+    acao: "Diagnosticas/listarDiagnosticasMatriculaReuniao",
+    reuniao: reuniao,
+  };
+
+  sendRequest(dados)
+    .then((response) => {
+      if (!response.message) {
+        marcarDiagnosticas(response);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      showMessage(
+        "Houve um erro!",
+        "Não foi possível obter as avaliações efetuadas!",
+        "error",
+        5000
+      );
+    });
+};
+
+/**
+ * Percorre todos os cards listados e marca como concluido os tem a matricula retornada
+ * @param {JSON} dados Lista de objetos com as matriculas e id das avaliações diagnósticas
+ */
+const marcarDiagnosticas = (dados) => {
+  const avaliacoesCard = document.querySelectorAll(".card-avaliacao");
+
+  avaliacoesCard.forEach((avaliacaoCard) => {
+    const matriculaCard = avaliacaoCard.getAttribute("data-aluno");
+    const resultado = dados.find((el) => el.matricula == matriculaCard);
+    if (resultado) {
+      console.log(">> Resultado Busca" + resultado.matricula);
+      concluirCard(resultado.matricula, resultado.diagnostica);
+    }
+  });
+};
+
+solicitarDiagnosticas();
 atualizarAvaliacoesPendentes();
-openModal();
+// openModal();
 closeModal();
 selectPerfil();
 concluirAvaliacao();
