@@ -10,6 +10,15 @@ const listener = () => {
 
   const btnSalvarExperiencia = document.getElementById("salvar-experiencia");
   btnSalvarExperiencia.addEventListener("click", (e) => salvarExperiencia(e));
+
+  const btnFiltrarExperiencia = document.getElementById("filtrarExperiencia");
+  btnFiltrarExperiencia.addEventListener("click", (e) => filtrarExperiencia());
+
+  const btnFiltrarEnsino = document.getElementById("filtrarEnsino");
+  btnFiltrarEnsino.addEventListener("click", (e) => filtrarEnsino());
+
+  const btnRemoverFiltro = document.getElementById("removerFiltro");
+  btnRemoverFiltro.addEventListener("click", (e) => removerFiltro());
 };
 
 /**
@@ -695,34 +704,51 @@ const preencherExperiencia = (experiencia) => {
   );
 
   document.getElementById("experiencia-titulo").value = experiencia.titulo;
-  document.getElementById("experiencia-categoria").value = experiencia.classificacao;
-  document.getElementById("experiencia-descricao").value = experiencia.descricao;
-
-
+  document.getElementById("experiencia-categoria").value =
+    experiencia.classificacao;
+  document.getElementById("experiencia-descricao").value =
+    experiencia.descricao;
 };
 
 const listarCategorias = () => {
-  sendRequest({acao:"Classificacoes/listar"}).then((response) => {
-    preencherCategorias(response);
-  }).catch((err) => {
-    console.error(err);   
-  });
-}
+  sendRequest({ acao: "Classificacoes/listar" })
+    .then((response) => {
+      preencherCategorias(response);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
 
 const preencherCategorias = (dados) => {
-  const selectCategoria = document.getElementById('experiencia-categoria');
+  const selectCategoria = document.getElementById("experiencia-categoria");
   dados.map((categoria) => {
     let option = document.createElement("option");
     option.setAttribute("value", categoria.idClassificacao);
     option.appendChild(document.createTextNode(categoria.nome));
     selectCategoria.appendChild(option);
   });
-}
+};
 const listarAvaliacoes = () => {
   document.querySelector(".avaliacoes").innerHTML = "";
   listarAprendizados();
   listarExperiencias();
 };
+
+const filtrarEnsino = () => {
+  document.querySelector(".avaliacoes").textContent = "";
+  listarAprendizados();
+};
+
+const filtrarExperiencia = () => {
+  document.querySelector(".avaliacoes").textContent = "";
+  listarExperiencias();
+};
+
+const removerFiltro = () => {
+  listarAvaliacoes();
+};
+
 listarAprendizados();
 listarExperiencias();
 
