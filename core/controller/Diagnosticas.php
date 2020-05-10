@@ -46,14 +46,14 @@ class Diagnosticas
 
             if (empty($erros)) {
                 http_response_code(200);
-                return array('message' => 'A avaliação diagnóstica foi salva!');
+                return json_encode(array('message' => 'A avaliação diagnóstica foi salva!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Não foi possível cadastrar todos os perfis', 'erros' => $erros);
+                return json_encode(array('message' => 'Não foi possível cadastrar todos os perfis', 'erros' => $erros));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Não foi possível cadastrar a avaliação diagnóstica!');
+            return json_encode(array('message' => 'Não foi possível cadastrar a avaliação diagnóstica!'));
         }
     }
 
@@ -90,14 +90,14 @@ class Diagnosticas
 
             if (empty($erros)) {
                 http_response_code(200);
-                return array('message' => 'Os perfis foram alterados!');
+                return json_encode(array('message' => 'Os perfis foram alterados!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Não foi possíve alterar os perfis!');
+                return json_encode(array('message' => 'Não foi possíve alterar os perfis!'));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Não foi possível encontrar a avaliação selecionada!');
+            return json_encode(array('message' => 'Não foi possível encontrar a avaliação selecionada!'));
         }
     }
 
@@ -130,7 +130,7 @@ class Diagnosticas
             return json_encode($diagnosticaCompleto);
         } else {
             http_response_code(500);
-            return array('message' => 'Não foi encontrada uma avaliação diagnóstica com o id especificado!');
+            return json_encode(array('message' => 'Não foi encontrada uma avaliação diagnóstica com o id especificado!'));
         }
     }
 
@@ -163,14 +163,14 @@ class Diagnosticas
 
             if ($retornoDiagnostica && $retornoDiagnostica > 0) {
                 http_response_code(200);
-                return array('message' => 'A avaliação dignóstica foi excluída!');
+                return json_encode(array('message' => 'A avaliação dignóstica foi excluída!'));
             } else {
                 http_response_code(500);
-                return array('message' => 'Houve um erro na exclusão da avaliação diagnóstica');
+                return json_encode(array('message' => 'Houve um erro na exclusão da avaliação diagnóstica'));
             }
         } else {
             http_response_code(500);
-            return array('message' => 'Houve um erro na exclusão da avaliação diagnóstica');
+            return json_encode(array('message' => 'Houve um erro na exclusão da avaliação diagnóstica'));
         }
     }
 
