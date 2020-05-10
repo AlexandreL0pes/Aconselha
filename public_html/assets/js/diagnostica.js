@@ -1,9 +1,13 @@
+const listener = () => {
+  const btnSalvarDiagnostica = document.getElementById("salvar-diagnostica");
+  btnSalvarDiagnostica.addEventListener("click", (e) => salvarDiagnostica(e));
+};
+
 /**
  * Listener
  * Muda o estilo do card de avaliação
  */
-
-const changeStyleCard = (dataAluno) => {
+const concluirCard = (dataAluno) => {
   const card = document.querySelector(
     `.card-avaliacao[data-aluno="${dataAluno}"]`
   );
@@ -18,7 +22,6 @@ const changeStyleCard = (dataAluno) => {
  * Listener
  * Abre o modal para avaliação
  */
-
 const openModal = () => {
   const cardsAvaliacao = document.querySelectorAll(".alunos>div.cardbox");
   const modal = document.querySelector("#avaliacao-diagnostica");
@@ -30,10 +33,10 @@ const openModal = () => {
         event.target.parentElement.getAttribute("data-aluno");
 
       if (idAluno) {
-        localStorage.setItem("avaliacaoAtual", idAluno);
+        localStorage.setItem("aluno", idAluno);
       }
       modal.classList.toggle("is-active");
-      preencherModal(modal, localStorage.getItem("avaliacaoAtual"));
+      preencherModal(modal, localStorage.getItem("aluno"));
     });
   });
 };
@@ -63,36 +66,87 @@ const selectPerfil = () => {
   });
 };
 
-const salvarAvaliacao = () => {
-  const modals = document.querySelectorAll(".modal");
+const salvarDiagnostica = () => {
+  console.log(localStorage.getItem("aluno"));
 
-  modals.forEach((modal) => {
-    const btnsalvarAvaliacao = modal.querySelector(
-      ".modal-card-foot > .save-avaliation"
+  let dados = pegarDados();
+
+  if (
+    dados.perfis.length > 0 &&
+    dados.reuniao !== "" &&
+    dados.professor !== "" &&
+    dados.estudante !== ""
+  ) {
+    console.log(dados);
+    
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        concluirCard(localStorage.getItem("aluno"));
+        fecharAvaliacao();
+
+        showMessage(
+          "Deu certo!",
+          "A avaliação diagnóstica foi salva!",
+          "success"
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+        showMessage(
+          "Ops, deu errado!",
+          "Não foi possível salvar a avaliação.",
+          "error",
+          5000
+        );
+      });
+  } else {
+    showMessage(
+      "Confira seus dados!",
+      "Pode existir algum erro nos dados informados!",
+      "warning",
+      5000
     );
-    btnsalvarAvaliacao.addEventListener("click", (params) => {
-      console.log(localStorage.getItem("avaliacaoAtual"));
-
-      changeStyleCard(localStorage.getItem("avaliacaoAtual"));
-      fecharAvaliacao(modal);
-
-      showMessage(
-        "Deu certo!",
-        "A avaliação diagnóstica foi salva!",
-        "success"
-      );
-    });
-  });
+  }
 };
 
+const pegarDados = () => {
+  const perfisSelecionados = document.querySelectorAll(".chip.selected");
+  let perfis = [];
+  perfisSelecionados.forEach((perfilSelecionado) => {
+    perfis.push(perfilSelecionado.getAttribute("data-perfil-id"));
+  });
+
+  // TODO: Pegar o ID do Professor que estará logado
+  const professor = localStorage.getItem("professor") || 10;
+  const estudante = localStorage.getItem("aluno") || "";
+  const diagnostica = localStorage.getItem("diagnostica") || "";
+  const reuniao = localStorage.getItem("conselhoAtual");
+
+  let dados = {
+    acao: "Diagnosticas/cadastrar",
+    reuniao: reuniao,
+    estudante: estudante,
+    professor: professor,
+    perfis: perfis,
+  };
+
+  if (diagnostica !== "") {
+    (dados.acao = "Diagnosticas/alterar"), (dados.diagnostica = diagnostica);
+  }
+
+  return dados;
+};
 /**
  * Esconde o modal, remove o aluno do modal atual e apaga os perfis selecionados
  * @param {DOM Element} modal Modal de Avaliação Diagnóstica
  */
-const fecharAvaliacao = (modal) => {
+const fecharAvaliacao = () => {
+  const modal = document.getElementById("avaliacao-diagnostica");
+
   modal.classList.toggle("is-active");
-  if (localStorage.getItem("avaliacaoAtual")) {
-    localStorage.removeItem("avaliacaoAtual");
+  if (localStorage.getItem("aluno")) {
+    localStorage.removeItem("aluno");
   }
   // Atualizar o contador de avaliações restantes
   atualizarAvaliacoesPendentes();
@@ -159,5 +213,5 @@ atualizarAvaliacoesPendentes();
 openModal();
 closeModal();
 selectPerfil();
-salvarAvaliacao();
 concluirAvaliacao();
+listener();
