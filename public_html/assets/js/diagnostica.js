@@ -30,30 +30,7 @@ const concluirCard = (dataAluno, diagnostica) => {
   titulo.innerHTML = "Concluída";
 };
 
-/**
- * Listener
- * Abre o modal para avaliação
- */
-const openModal = () => {
-  const cardsAvaliacao = document.querySelectorAll(
-    ".alunos>div.cardbox:not(.concluido)"
-  );
-  const modal = document.querySelector("#avaliacao-diagnostica");
 
-  cardsAvaliacao.forEach((card) => {
-    card.addEventListener("click", (event) => {
-      let idAluno =
-        event.target.getAttribute("data-aluno") ||
-        event.target.parentElement.getAttribute("data-aluno");
-
-      if (idAluno) {
-        localStorage.setItem("aluno", idAluno);
-      }
-      modal.classList.toggle("is-active");
-      preencherModal(modal, localStorage.getItem("aluno"));
-    });
-  });
-};
 
 const abrirNovaDiagnostica = (event) => {
   const modal = document.getElementById("avaliacao-diagnostica");
@@ -136,22 +113,12 @@ const closeModal = (params) => {
   });
 };
 
-// Listener
-const selectPerfil = () => {
-  const perfis = document.querySelectorAll(".perfil-aluno > .perfis > .chip");
-  perfis.forEach((perfil) => {
-    perfil.addEventListener("click", (element) => {
-      perfil.classList.toggle("selected");
-    });
-  });
-};
 
 const selecionarPerfil = (perfil) => {
   perfil.currentTarget.classList.toggle("selected");
 };
 
 const salvarDiagnostica = () => {
-  // console.log(localStorage.getItem("aluno"));
 
   let dados = pegarDados();
   console.log(dados);
@@ -365,8 +332,6 @@ const preencherPerfis = (perfis) => {
 listarPerfis();
 solicitarDiagnosticas();
 atualizarAvaliacoesPendentes();
-// openModal();
 closeModal();
-// selectPerfil();
 concluirAvaliacao();
 listener();
