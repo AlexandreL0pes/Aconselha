@@ -331,6 +331,28 @@ const marcarDiagnosticas = (dados) => {
   });
 };
 
+const listarPerfis = () => {
+  sendRequest({ acao: "Perfis/listarPerfis" })
+    .then((response) => {
+      preencherPerfis(response);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const preencherPerfis = (perfis) => {
+  const opcoesPerfis = document.getElementById("opcoes-perfis");
+
+  perfis.forEach((perfil) => {
+    let perfilChip = document.createElement("div");
+    perfilChip.classList.add("chip");
+    perfilChip.setAttribute("data-perfil-id", perfil.id);
+    perfilChip.appendChild(document.createTextNode(perfil.nome));
+    opcoesPerfis.appendChild(perfilChip);
+  });
+};
+listarPerfis();
 solicitarDiagnosticas();
 atualizarAvaliacoesPendentes();
 // openModal();
