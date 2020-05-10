@@ -90,7 +90,7 @@ class Diagnosticas
 
             if (empty($erros)) {
                 http_response_code(200);
-                return json_encode(array('message' => 'Os perfis foram alterados!'));
+                return json_encode(array('message' => 'Os perfis foram alterados!', 'diagnostica' => $resultadoDiagnostica));
             } else {
                 http_response_code(500);
                 return json_encode(array('message' => 'Não foi possíve alterar os perfis!'));
@@ -101,7 +101,7 @@ class Diagnosticas
         }
     }
 
-    public function selecionarDiagnotica($dados)
+    public function selecionarDiagnostica($dados)
     {
         $diagnostica_id = $dados['diagnostica'];
         $diagnostica = new Diagnostica();
@@ -198,9 +198,40 @@ class Diagnosticas
 
             http_response_code(200);
             return json_encode($retorno);
-        }else{
+        } else {
             http_response_code(500);
             return json_encode(array('message' => 'Nenhuma avaliação diagnóstica foi encontrada!'));
+        }
+    }
+
+    /**
+     * Retorna todos as diagnósticas e matriculas dentro da reunião
+     * @param $dados
+     * @return json
+     */
+    public function listarDiagnosticasMatriculaReuniao($dados)
+    {
+        $reuniao_id = $dados['reuniao'];
+        $campos = Diagnostica::COL_ID . ", " . Diagnostica::COL_ESTUDANTE;
+        $busca = [Diagnostica::COL_ID_REUNIAO => $reuniao_id];
+
+        $diagnostica = new Diagnostica();
+
+        $diagnosticas = $diagnostica->listar($campos, $busca, null, 1000);
+
+        $retorno = [];
+        if (!empty($diagnosticas) && !empty($diagnosticas[0])) {
+            foreach ($diagnosticas as $diagnostica) {
+                array_push($retorno, [
+                    "diagnostica" => $diagnostica[Diagnostica::COL_ID],
+                    "matricula" => $diagnostica[Diagnostica::COL_ESTUDANTE]
+                ]);
+            }
+            http_response_code(200);
+            return json_encode($retorno);
+        } else {
+            http_response_code(500);
+            return json_encode(array('message' => 'Não foi encontrada nenhuma avaliação diagnóstica!'));
         }
     }
 }
