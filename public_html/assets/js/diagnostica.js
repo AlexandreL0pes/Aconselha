@@ -7,13 +7,13 @@ const listener = () => {
  * Listener
  * Muda o estilo do card de avaliação
  */
-const concluirCard = (dataAluno) => {
+const concluirCard = (dataAluno,diagnostica) => {
   const card = document.querySelector(
     `.card-avaliacao[data-aluno="${dataAluno}"]`
   );
 
   card.classList.add("concluido");
-
+  card.setAttribute("diagnostica",diagnostica);
   const titulo = card.querySelector("p:first-child");
   titulo.innerHTML = "Concluída";
 };
@@ -23,7 +23,7 @@ const concluirCard = (dataAluno) => {
  * Abre o modal para avaliação
  */
 const openModal = () => {
-  const cardsAvaliacao = document.querySelectorAll(".alunos>div.cardbox");
+  const cardsAvaliacao = document.querySelectorAll(".alunos>div.cardbox:not(.concluido)");
   const modal = document.querySelector("#avaliacao-diagnostica");
 
   cardsAvaliacao.forEach((card) => {
@@ -82,9 +82,9 @@ const salvarDiagnostica = () => {
     sendRequest(dados)
       .then((response) => {
         console.log(response);
-        concluirCard(localStorage.getItem("aluno"));
+        concluirCard(localStorage.getItem("aluno"), response.diagnostica);
         fecharAvaliacao();
-
+        console.log(response.diagnostica);
         showMessage(
           "Deu certo!",
           "A avaliação diagnóstica foi salva!",

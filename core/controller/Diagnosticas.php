@@ -46,7 +46,7 @@ class Diagnosticas
 
             if (empty($erros)) {
                 http_response_code(200);
-                return json_encode(array('message' => 'A avaliação diagnóstica foi salva!'));
+                return json_encode(array('message' => 'A avaliação diagnóstica foi salva!', 'diagnostica' => $resultadoDiagnostica));
             } else {
                 http_response_code(500);
                 return json_encode(array('message' => 'Não foi possível cadastrar todos os perfis', 'erros' => $erros));
