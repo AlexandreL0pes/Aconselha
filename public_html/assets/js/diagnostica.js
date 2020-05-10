@@ -6,6 +6,11 @@ const listener = () => {
   addDiagnostica.forEach((card) =>
     card.addEventListener("click", abrirNovaDiagnostica)
   );
+
+  const perfis = document.querySelectorAll(".perfil-aluno > .perfis > .chip");
+  perfis.forEach((perfil) =>
+    perfil.addEventListener("click", (e) => selecionarPerfil(e))
+  );
 };
 
 /**
@@ -139,6 +144,10 @@ const selectPerfil = () => {
       perfil.classList.toggle("selected");
     });
   });
+};
+
+const selecionarPerfil = (perfil) => {
+  perfil.currentTarget.classList.toggle("selected");
 };
 
 const salvarDiagnostica = () => {
@@ -349,6 +358,7 @@ const preencherPerfis = (perfis) => {
     perfilChip.classList.add("chip");
     perfilChip.setAttribute("data-perfil-id", perfil.id);
     perfilChip.appendChild(document.createTextNode(perfil.nome));
+    perfilChip.addEventListener('click', selecionarPerfil);
     opcoesPerfis.appendChild(perfilChip);
   });
 };
@@ -357,6 +367,6 @@ solicitarDiagnosticas();
 atualizarAvaliacoesPendentes();
 // openModal();
 closeModal();
-selectPerfil();
+// selectPerfil();
 concluirAvaliacao();
 listener();
