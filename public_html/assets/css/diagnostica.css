@@ -148,6 +148,9 @@
 	
 }
 
+.card-avaliacao { 
+  animation: fadeIn .7s ease-in-out;
+}
 .button.is-success {
 }
 
