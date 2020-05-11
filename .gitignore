@@ -2,3 +2,4 @@ config-dev.json
 vendor
 *.bak
 dados/diagramas/diagrama-mysql.mwb.beforefix
+dados/diagramas/possivel-alteracao.mwb.beforefix
