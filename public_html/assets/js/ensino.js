@@ -364,12 +364,11 @@ let autocompleteEnsinoEstudantes = () => {
     )
       .then(function (resp) {
         return [
-          { label: "Adriano Braga", value: "1459180" },
-          { label: "Lucas Faria", value: "97312" },
-          { label: "Rangel Rigo", value: "417530" },
-          { label: "Marcos Morais", value: "914402" },
-          { label: "Jaqueline Ribeiro", value: "81183" },
-          { label: "Ramayane Braga", value: "41917" },
+          { label: "Alexandre Lopes", value: "1459180" },
+          { label: "Ana Luiza", value: "417530" },
+          { label: "Samuel Rocha", value: "97312" },
+          { label: "Ruan Muller", value: "914402" },
+          { label: "Leonardo Emanuel", value: "81183" },
         ];
         // return resp.json();
       })
