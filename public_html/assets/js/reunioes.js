@@ -1,7 +1,7 @@
-let eventos = () => {
-  abrirReuniao();
-  selecionarTurmas();
-  iniciarConselhos();
+const listener = () => {
+
+  const btnIniciarConselho = document.querySelector("#iniciarConselho");
+  btnIniciarConselho.addEventListener("click", iniciarConselhos);
 };
 
 /**
@@ -67,37 +67,48 @@ let habilitarBotao = () => {
   }
 };
 
-let iniciarConselhos = () => {
-  const botao = document.querySelector("#iniciarConselho");
-  botao.addEventListener("click", function (event) {
-    event.preventDefault();
-    const turmasSelecionadas = document.querySelectorAll(
-      ".turmas>div.cardbox.selected"
-    );
+/**
+ * Obtem e envia os dados para cadastrar a reunião
+ */
+const iniciarConselhos = () => {
+  const turmasSelecionadas = document.querySelectorAll(
+    ".turmas>div.cardbox.selected"
+  );
 
-    let codigoTurmas = [];
-    for (let i of turmasSelecionadas) {
-      // codigoTurmas.append(i.getAttribute('data-cod-turma'));
-      codigoTurmas.push(i.getAttribute("data-cod-turma"));
-    }
-    showMessage({
-      title: "Houve um erro!",
-      subtitle: "Agora",
-      content: "Não foi possível alterar o trabalho.",
-      type: "success",
-      durationTime: 4000,
-    });
-    // const xhr = new XMLHttpRequest();
+  let codigoTurmas = [];
+  for (let i of turmasSelecionadas) {
+    codigoTurmas.push(i.getAttribute("data-cod-turma"));
+  }
 
-    // xhr.onload = function () {
-    //   console.log(this.responseText);
-    // };
-
-    // xhr.open("POST", "dom.php");
-    // xhr.setRequestHeader("Content-type", "aplication/x-www-form-urlencoded");
-    // data = JSON.stringify({ firtsName: "Alexandre", lastName: "Lopes" });
-    // xhr.send(data);
-  });
+  if (codigoTurmas.length > 0) {
+    const dados = {
+      acao: "Reunioes/cadastrar",
+      turmas: codigoTurmas,
+    };
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        showMessage(
+          "Deu certo!",
+          "Os conselhos foram iniciados!",
+          "success",
+          5000
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  showMessage(
+    "Houve um erro!",
+    "Agora",
+    "Não foi possível alterar o trabalho.",
+    "success",
+    4000
+  );
 };
 
-eventos();
+listener();
+abrirReuniao();
+selecionarTurmas();
+iniciarConselhos();
