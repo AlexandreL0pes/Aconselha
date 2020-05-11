@@ -444,7 +444,7 @@ const excluirEncaminhamento = (params) => {
   if (encaminhamento) {
     const dados = {
       acao: "Atendimentos/excluirAtendimento",
-      avaliacao: encaminhamento,
+      atendimento: encaminhamento,
     };
 
     sendRequest(dados)
