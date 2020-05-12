@@ -26,4 +26,9 @@ class Login
         Autenticacao::logout();
         return true;
     }
+
+    public function verificarLogin()
+    {
+        return json_encode(Autenticacao::verificarLogin());
+    }
 }
