@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste</title>
+    <!-- <link rel="stylesheet" href="./assets/css/index.css" /> -->
+    <link rel="stylesheet" href="./assets/css/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="grid-container">
+      <main class="main">
+        <div class="container">
+          <div class="img">
+            <img src="./assets/images/studying.svg" />
+          </div>
+          <div class="login-content">
+            <form action="index.html">
+              <h2 class="title">Login</h2>
+              <div class="input-div one">
+                <div class="i">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="div">
+                  <h5>Usuário</h5>
+                  <input type="text" class="input" id="usuario" />
+                </div>
+              </div>
+              <div class="input-div pass">
+                <div class="i">
+                  <i class="fas fa-lock"></i>
+                </div>
+                <div class="div">
+                  <h5>Senha</h5>
+                  <input type="password" class="input" id="senha" />
+                </div>
+              </div>
+              <a href="#">Esqueceu a senha?</a>
+              <input class="btn" value="Entrar" id="btnLogar" />
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="toasts" id="toasts"></div>
+  </body>
+  <script src="./assets/js/login.js"></script>
+  <script src="./assets/js/index.js"></script>
+</html>
