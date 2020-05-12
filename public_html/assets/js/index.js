@@ -85,6 +85,7 @@ async function sendRequest(data) {
   const baseUrl = `http://localhost/public_html/api.php`;
   
   const response = await fetch(baseUrl, {
+    credentials:"same-origin",
     method: "post",
     body: JSON.stringify(data),
   });
