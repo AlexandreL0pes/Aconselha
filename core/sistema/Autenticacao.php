@@ -36,8 +36,8 @@ class Autenticacao
         // Define o tempo de validade do COOKIE
         $lembrar_acesso = $lembrar ? time() + 604800 : null;
 
-        setcookie(self::COOKIE_USUARIO, $usuario_id, $lembrar_acesso,  PATH_COOKIE);
-        setcookie(self::COOKIE_ACESSO, $nova_senha, $lembrar_acesso,  PATH_COOKIE);
+        setcookie(self::COOKIE_USUARIO, $usuario_id, $lembrar_acesso,  "/", PATH_COOKIE);
+        setcookie(self::COOKIE_ACESSO, $nova_senha, $lembrar_acesso,  "/", PATH_COOKIE);
 
         return true;
     }
@@ -45,17 +45,17 @@ class Autenticacao
     public static function logout()
     {
         if (isset($_COOKIE[self::COOKIE_USUARIO]) && isset($_COOKIE[self::COOKIE_ACESSO])) {
-            setcookie(self::COOKIE_USUARIO, "", time() - 1, PATH_COOKIE);
-            setcookie(self::COOKIE_ACESSO, "",  time() - 1, PATH_COOKIE);
+            setcookie(self::COOKIE_USUARIO, "", time() - 1, "/", PATH_COOKIE);
+            setcookie(self::COOKIE_ACESSO, "",  time() - 1, "/", PATH_COOKIE);
         }
     }
 
-    public function verificarLogin()
+    public static function verificarLogin()
     {
         if (isset($_COOKIE[self::COOKIE_USUARIO]) && isset($_COOKIE[self::COOKIE_ACESSO])) {
-            return true;
+            return json_encode(true);
         } else {
-            return false;
+            return json_encode(false);
         }
     }
 }
