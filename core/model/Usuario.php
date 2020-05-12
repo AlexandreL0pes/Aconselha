@@ -8,15 +8,15 @@ use Exception;
 class Usuario extends CRUD {
     
 
-    const TABELA = "usuario";
+    const TABELA = "Usuario";
     const COL_ID = "id";
-    const COL_COD = "senha";
-    const COL_TURMA = "cod_turma";
-    const COL_CURSO = "cod_curso";
+    const COL_MATRICULA = "COD_MATRICULA";
+    const COL_TURMA = "COD_TURMA";
+    const COL_CURSO = "COD_CURSO";
     const COL_DATA_INICIO = "data_inicio";
     const COL_DATA_FIM = "data_fim";
-    const COL_PERMISSAO = "tipo_usuario";
-
+    const COL_PERMISSAO = "permissao";
+    const COL_SENHA = "senha";
 
     public function adicionar($dados) {
         try {
@@ -60,9 +60,9 @@ class Usuario extends CRUD {
             $where_valor[] = $busca[self::COL_ID];
         }
 
-        if (isset($busca[self::COL_COD]) && !empty($busca[self::COL_COD])) {
-            $where_condicao .= " AND " . self::COL_COD . " = ?";
-            $where_valor[] = $busca[self::COL_COD];
+        if (isset($busca[self::COL_MATRICULA]) && !empty($busca[self::COL_MATRICULA])) {
+            $where_condicao .= " AND " . self::COL_MATRICULA . " = ?";
+            $where_valor[] = $busca[self::COL_MATRICULA];
         }
 
         if (isset($busca[self::COL_TURMA]) && !empty($busca[self::COL_TURMA])) {
@@ -106,6 +106,24 @@ class Usuario extends CRUD {
 
         return $retorno;
 
+    }
+
+    public function autenticarUsuario($usuario_login, $senha)
+    {
+        $campos = " * ";
+        $where_condicao = self::COL_MATRICULA . " = ? AND " . self::COL_SENHA . " = ?";
+        $where_valor = [$usuario_login, $senha];
+
+        $retorno = [];
+
+        try {
+            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, null, 1 ); 
+        } catch (\Throwable $th) {
+            echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
+            return false;
+        }
+
+        return $retorno[0];
     }
 
 }
