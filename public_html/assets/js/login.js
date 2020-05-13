@@ -1,12 +1,5 @@
 const listeners = () => {
-  const inputs = document.querySelectorAll(".input");
-  inputs.forEach((input) => {
-    input.addEventListener("focus", addcl);
-    input.addEventListener("blur", remcl);
-  });
 
-  const btnLogar = document.getElementById("btnLogar");
-  btnLogar.addEventListener("click", login);
 };
 
 const login = (params) => {

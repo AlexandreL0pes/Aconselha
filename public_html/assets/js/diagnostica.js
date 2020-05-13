@@ -1,3 +1,5 @@
+import {sendRequest, showMessage} from './utils.js';
+
 const listener = () => {
   const btnSalvarDiagnostica = document.getElementById("salvar-diagnostica");
   btnSalvarDiagnostica.addEventListener("click", (e) => salvarDiagnostica(e));

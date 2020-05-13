@@ -1,3 +1,5 @@
+import {sendRequest, showMessage} from './utils.js';
+
 const btnSalvarMemoria = document.getElementById("salvar-memoria");
 btnSalvarMemoria.addEventListener("click", (e) => salvarMemoria(e));
 

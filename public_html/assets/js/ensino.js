@@ -1,3 +1,5 @@
+import {sendRequest, showMessage} from './utils.js';
+
 const listener = () => {
   const btnModalEnsino = document.querySelector("#btnEnsino");
   btnModalEnsino.addEventListener("click", (e) => abrirNovoEnsino());

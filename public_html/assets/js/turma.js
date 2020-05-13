@@ -1,3 +1,5 @@
+import {sendRequest, showMessage} from './utils.js';
+
 const abrirMemoria = () => {
   const memoriaLink = document.querySelector(
     ".action-card.memoria, .action-card.memoria >* "
