@@ -48,6 +48,9 @@ async function sendRequest(data) {
   const url = window.location.pathname.split("/");
   // const baseUrl = `${base}/${url[1]}/api.php`;
   const baseUrl = `http://localhost/public_html/api.php`;
+  
+  if (data.acao === undefined)
+    throw new Error("A acao é necessária para efetuar a requisição!");
 
   const response = await fetch(baseUrl, {
     credentials: "same-origin",
