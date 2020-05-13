@@ -1,9 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
-:root {
-  --base-color: #f5d88e;
-}
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:300, 400, 700);
 
 :root {
   --size-sidebar: 40px;
@@ -108,11 +103,9 @@ html {
 
   /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,52,89,1) 0%, rgba(0,168,232,1) 90% ); */
 
-
   /* background: #bdc3c7;
 background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
 background: linear-gradient(to left, #2c3e50, #474849);  */
-
 }
 
 .information {
