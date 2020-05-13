@@ -53,7 +53,7 @@ async function sendRequest(data) {
     throw new Error("A acao é necessária para efetuar a requisição!");
 
   const response = await fetch(baseUrl, {
-    credentials: "same-origin",
+    // credentials: "same-origin",
     method: "post",
     body: JSON.stringify(data),
   });
