@@ -176,7 +176,6 @@ html {
 }
 
 a {
-  /* display: block; */
   text-align: right;
   text-decoration: none;
   color: #999 !important;
@@ -195,8 +194,7 @@ a:hover {
   border-radius: 20px;
   outline: none;
   border: none;
-  background-image: linear-gradient(to right, #ffc963, #c9a343, #ffc963);
-  background: #ffc963;
+
   background-size: 200%;
   font-size: 1.2rem;
   color: #fff;
@@ -206,6 +204,7 @@ a:hover {
   transition: 0.5s;
   text-align: center;
 
+  background: #ffc963;
   background: rgb(255,201,99);
   background: linear-gradient(36deg, rgba(255,201,99,1) 36%, rgba(255,203,76,1) 52%, rgba(255,201,99,1) 80%); 
 
