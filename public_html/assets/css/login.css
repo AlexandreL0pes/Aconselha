@@ -104,13 +104,17 @@ html {
 
   background: #55d189;
 
-  /* background: -webkit-linear-gradient(to right, #ffd194, #70e1f5);  
-  background: linear-gradient(to right, #ffd194, #70e1f5);  */
+  background-image: linear-gradient(16deg, #8bc6ec 0%, #9599e2 100%);
+
+  /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,52,89,1) 0%, rgba(0,168,232,1) 90% ); */
+
+
+  /* background: #bdc3c7;
+background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+background: linear-gradient(to left, #2c3e50, #474849);  */
+
 }
 
-/* .information > .head, .information > .text {
-  color: white;
-} */
 .information {
   display: flex;
   flex-flow: column;
@@ -205,8 +209,13 @@ a:hover {
   text-align: center;
 
   background: #ffc963;
-  background: rgb(255,201,99);
-  background: linear-gradient(36deg, rgba(255,201,99,1) 36%, rgba(255,203,76,1) 52%, rgba(255,201,99,1) 80%); 
+  background: rgb(255, 201, 99);
+  background: linear-gradient(
+    36deg,
+    rgba(255, 201, 99, 1) 36%,
+    rgba(255, 203, 76, 1) 52%,
+    rgba(255, 201, 99, 1) 80%
+  );
 
   /* button color #696969 */
   /* cor label #5a5e57 */
