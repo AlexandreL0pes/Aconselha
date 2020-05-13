@@ -1,5 +1,7 @@
+import {sendRequest, showMessage} from './utils.js';
 const listeners = () => {
-
+  const btnLogar = document.getElementById("btnLogar");
+  btnLogar.addEventListener("click", login);
 };
 
 const login = (params) => {
