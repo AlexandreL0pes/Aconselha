@@ -119,8 +119,9 @@ background: linear-gradient(to left, #2c3e50, #474849);  */
   display: flex;
   flex-flow: column;
   align-items: center;
-  justify-self: center;
   text-justify: center;
+  text-align: justify;
+  padding: 20px 40px;
 }
 .text,
 .head {
@@ -131,6 +132,7 @@ background: linear-gradient(to left, #2c3e50, #474849);  */
 .head {
   font-size: 1.3rem;
   font-weight: normal;
+  margin-bottom: 10px;
 }
 .img {
   margin-top: 50px;
