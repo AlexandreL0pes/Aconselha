@@ -2,59 +2,184 @@
 :root {
   --base-color: #f5d88e;
 }
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300, 400, 700);
+
+:root {
+  --size-sidebar: 40px;
+
+  /* Cores Base Layout */
+  --base-color: #eeb220;
+  --secondary-color: #c1ee20;
+  --terciary-color: #ee4c20;
+
+  /* Cores Cursos */
+  --info-color: rgb(40, 52, 153);
+  --amb-color: rgb(37, 165, 33);
+  --agro-color: #830c0c;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
-  font-weight: 100;
-  /* overflow: hidden; */
-}
-.wave {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  z-index: -1;
-  background-color: #f7b308;
+  margin: 0;
+  padding: 0;
+  color: #2f2f2d !important;
+  font-family: "Roboto", sans-serif !important;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
-.container {
-  width: 100vw;
-  height: 100vh;
+html {
+  /* border-box box model allows us to add padding and border to our elements without increasing their size */
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Assign grid instructions to our parent grid container, mobile-first (hide the sidenav) */
+.grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 7rem;
-  padding: 0 2rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 50px;
+  grid-template-areas:
+    "main"
+    "footer";
+  height: 100vh;
+}
+
+.main {
+  grid-area: main;
+  display: grid;
+  grid-template-rows: 100vh;
+}
+
+/* FOOTER */
+
+.footer {
+  grid-area: footer;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  color: black;
+  grid-template-rows: 1fr;
+  background: transparent;
+  font-size: 8px;
+  font-weight: 300;
+}
+.footer_nepeti {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+.footer_nepeti > .logo_nepeti {
+  height: 3rem;
+  width: auto;
+}
+/* FOOTER */
+
+/* Non-mobile styles, 750px breakpoint */
+@media only screen and (min-width: 46.875em) {
+  /* Show the sidenav */
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "main"
+      "footer";
+  }
+}
+
+.toasts {
+  background: transparent;
+  color: black;
+  display: inline-block;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 50;
+}
+.toast {
+  background-color: rgb(255, 255, 252);
+  border-radius: 2px;
+  box-shadow: 1 0.5em 1em -0.125em rgba(10, 10, 10, 0.8),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  color: #222424;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+  cursor: pointer;
+
+  font-size: 0.7em;
+  padding: 5px 10px 5px 10px;
+  margin: 10px;
+  min-width: 200px;
+}
+
+.toast-title {
+  font-weight: 600;
+}
+.toast-header {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-self: center;
+}
+.toast-time {
+  font-size: 0.9em;
+  font-weight: 300;
+  color: #7a7676;
+}
+
+.toast.success {
+  border-left: solid 4px green;
+}
+.toast.error {
+  border-left: solid 4px red;
+}
+.toast.warning {
+  border-left: solid 4px yellow;
+}
+.toast.info {
+  border-left: solid 4px blue;
+}
+
+.toast-content {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.container-img {
+  display: grid;
+  grid-template-columns: 40vw auto;
+  grid-gap: 10px;
 }
 
 .img {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  /* background-color: #f3c44c; */
+  padding: 20px 30px;
+  /* background: #fdecbf; */
+  
 }
 
 .login-content {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  text-align: center;
-}
 
-.img img {
-  width: 40vw;
-}
-
-form {
-  width: 60vh;
-}
-
-.login-content img {
-  height: 100px;
+  padding: 10px 10px;
+  /* background: linear-gradient(#222424, #f7b308); */
 }
 
 .login-content h2 {
@@ -63,80 +188,6 @@ form {
   text-transform: uppercase;
   font-size: 2rem;
   font-weight: normal;
-}
-
-.login-content .input-div {
-  position: relative;
-  display: grid;
-  grid-template-columns: 7% 93%;
-  margin: 25px 0;
-  padding: 5px 0;
-  border-bottom: 2px solid #d9d9d9;
-}
-
-.login-content .input-div.one {
-  margin-top: 0;
-}
-
-.i {
-  color: #d9d9d9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.i i {
-  transition: 0.3s;
-}
-
-.input-div > div {
-  position: relative;
-  height: 45px;
-}
-
-.input-div > div > h5 {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-  font-size: 18px;
-  transition: 0.3s;
-  font-weight: 200;
-}
-
-.input-div:before,
-.input-div:after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  width: 0%;
-  height: 2px;
-  background-color: var(--base-color);
-  transition: 0.4s;
-}
-
-.input-div:before {
-  right: 50%;
-}
-
-.input-div:after {
-  left: 50%;
-}
-
-.input-div.focus:before,
-.input-div.focus:after {
-  width: 50%;
-}
-
-.input-div.focus > div > h5 {
-  top: -5px;
-  font-size: 12px;
-  font-weight: normal;
-}
-
-.input-div.focus > .i > i {
-  color: var(--base-color);
 }
 
 .input-div > div > input {
@@ -193,41 +244,25 @@ a:hover {
   background-position: right;
 }
 
-@media screen and (max-width: 1050px) {
-  .container {
-    grid-gap: 5rem;
-  }
+.login > .field > .label {
+  font-weight: 100;
 }
-
-@media screen and (max-width: 1000px) {
-  form {
-    width: 290px;
-  }
-
-  .login-content h2 {
-    font-size: 2.4rem;
-    margin: 8px 0;
-  }
-
-  .img img {
-    width: 400px;
-  }
+.login > .field > .control > .input {
+  border: none;
+  background: none;
+  border-bottom: 1px solid rgb(194, 191, 191);
+  border-radius: 0px;
+}
+.login > .field > .control > .input:focus {
+  border-color: none;
+  box-shadow: none;
 }
 
 @media screen and (max-width: 800px) {
-  .container {
+  .container-img {
     grid-template-columns: 1fr;
   }
-
   .img {
     display: none;
-  }
-
-  .wave {
-    display: none;
-  }
-
-  .login-content {
-    justify-content: center;
   }
 }

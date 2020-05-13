@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste</title>
+    <!-- <link rel="stylesheet" href="./assets/css/index.css" /> -->
+    <link rel="stylesheet" href="./assets/css/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+    /> -->
+    <link rel="stylesheet" href="./assets/css/bulma.min.css" />
+  </head>
+  <body>
+    <div class="grid-container">
+      <main class="main">
+        <div class="container-img">
+          <div class="img">
+            <img src="./assets/images/studying.svg" />
+          </div>
+          <div class="login-content">
+            <div class="login">
+              <h2 class="title">Seja bem vindo ao SADC</h2>
+              <div class="field">
+                <label class="label">Matrícula</label>
+                <p class="control has-icons-left">
+                  <input class="input" type="email" placeholder="Email" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="field">
+                <label class="label">Senha</label>
+                <p class="control has-icons-left">
+                  <input class="input" type="password" placeholder="Password" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </p>
+              </div>
+              <input class="btn" value="Entrar" id="btnLogar" />
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer_nepeti">
+          <img
+            class="logo_nepeti"
+            src="./assets/images/logo_nepeti.png"
+            alt=""
+          />
+          <p class="text-nepeti">
+            &copy; 2020 - Núcleo de Estudos e Pesquisa em Tecnologia da
+            Informação
+          </p>
+        </div>
+      </footer>
+    </div>
+    <div class="toasts" id="toasts"></div>
+  </body>
+  <script src="./assets/js/login.js"></script>
+</html>
