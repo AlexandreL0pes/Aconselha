@@ -212,6 +212,16 @@
   margin-bottom: 0;
   justify-self: right;
 }
+.card-info {
+  font-size: 0.9em;
+  font-weight: 300;
+}
+
+.card-info > span:first-child {
+  font-size: 1em;
+  font-weight: 600;
+}
+
 .page-head {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -223,15 +233,7 @@
   justify-self: center;
 }
 
-.card-info {
-  font-size: 0.9em;
-  font-weight: 300;
-}
 
-.card-info > span:first-child {
-  font-size: 1em;
-  font-weight: 600;
-}
 
 .descricao {
   display: flex;
