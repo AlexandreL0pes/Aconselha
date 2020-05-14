@@ -121,3 +121,73 @@
     grid-template-rows: 1fr;
   }
 }
+
+
+
+
+
+
+.modal-close-btn {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modal-card-body > .avaliacao-aluno {
+  font-weight: 300;
+  font-size: 0.9em;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+}
+/* Modal */
+
+.avaliacao-aluno > .info {
+	padding: 5px;
+	margin: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap: 5px;
+	font-size: 1.2em;
+	box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+.info > p { 
+  text-align: center;
+}
+
+
+
+.disciplinas,
+.perfis {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 10px;
+  padding: 0px 5px;
+  margin: 5px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  padding: 10px 10px;
+
+  border-radius: 3px;
+  background: rgba(98, 98, 98, 0.1);
+	font-size: 1em !important;
+  
+  cursor: pointer;
+  text-transform: capitalize;
+	transition: background 0.4s ease-in-out;
+}
+
+
+
+.gray-text {
+	color:rgb(98, 98, 98) !important;
+}
