@@ -2792,7 +2792,7 @@ fieldset[disabled] .button {
 .content pre:not(:last-child),
 .content table:not(:last-child),
 .content ul:not(:last-child) {
- margin-bottom:1em
+ /* margin-bottom:1em */
 }
 .content h1,
 .content h2,
