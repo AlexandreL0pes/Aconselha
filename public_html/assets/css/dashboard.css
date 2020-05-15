@@ -34,15 +34,14 @@
   font-size: 0.7em;
   font-weight: 300;
   grid-template-columns: 1fr;
-	grid-template-rows: repeat(auto-fill, minmax(20px, 1fr));
-	box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
-
+  grid-template-rows: repeat(auto-fill, minmax(20px, 1fr));
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
 }
 
 .turma-info span:first-child {
-	font-size: 0.75rem;
-	font-weight: 400;
-	color: #121313;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #121313;
 }
 
 .reuniao-info {
@@ -50,13 +49,14 @@
   align-items: center;
   grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
   grid-gap: 5px;
+  padding-top: 5px;
 }
 
 .reuniao-info {
   /* border: solid red 1px; */
-  font-weight: 300 ;
-	font-size: 0.75em;
-	padding: 5px 10px;
+  font-weight: 300;
+  font-size: 0.75em;
+  padding: 5px 10px;
   display: grid;
   align-items: center;
   justify-items: left;
@@ -64,8 +64,7 @@
 
 .reuniao-info .info-titulo {
   font-weight: 400;
-  margin-bottom: 2px;
-  margin-top: 5px;
+  padding-top: 15px;
 }
 
 .reuniao-info .resultados {
@@ -86,7 +85,6 @@
   padding-top: 5px;
 }
 
-
 .color-positivo,
 .color-negativo,
 .color-aprendizado,
@@ -95,42 +93,24 @@
 }
 
 .color-experiencia {
-  border: 1px solid #3aafae;
+  border: 1px solid #7b61b2;
 }
 
 .color-aprendizado {
-  border: 1px solid #7b61b2;
-}
-.color-negativo {
   border: 1px solid #ffa751;
 }
-.color-positivo {
+.color-negativo {
   border: 1px solid #ff5151;
 }
-
+.color-positivo {
+  border: 1px solid #3aafae;
+}
 
 .actions {
   display: grid;
-  grid-template-rows: repeat(auto-fill, minmax(40px, 1fr));
-  grid-gap: 10px;
+  grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+  grid-gap: 5px;
 }
-.actions .action-card {
-  display: grid;
-	grid-template-columns: 1.2rem 1fr ;
-  justify-items: center;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 2px;
-  color: #4a4a4a;
-	
-	padding: 5px 5px;
-	font-size: .8rem;
-  cursor: pointer;
-	border: solid #4a4a4a 1px;
-}
-
-
-
 
 @media screen and (max-width: 800px) {
   .main {
@@ -143,11 +123,6 @@
     grid-template-rows: 1fr;
   }
 }
-
-
-
-
-
 
 .modal-close-btn {
   padding: 10px;
@@ -165,22 +140,20 @@
 /* Modal */
 
 .avaliacao-aluno > .info {
-	padding: 5px;
-	margin: 30px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	row-gap: 5px;
-	font-size: 1.2em;
-	box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
-	border-radius: 5px;
+  padding: 5px;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5px;
+  font-size: 1.2em;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
-.info > p { 
+.info > p {
   text-align: center;
 }
-
-
 
 .disciplinas,
 .perfis {
@@ -201,15 +174,13 @@
 
   border-radius: 3px;
   background: rgba(98, 98, 98, 0.1);
-	font-size: 1em !important;
-  
+  font-size: 1em !important;
+
   cursor: pointer;
   text-transform: capitalize;
-	transition: background 0.4s ease-in-out;
+  transition: background 0.4s ease-in-out;
 }
 
-
-
 .gray-text {
-	color:rgb(98, 98, 98) !important;
+  color: rgb(98, 98, 98) !important;
 }
