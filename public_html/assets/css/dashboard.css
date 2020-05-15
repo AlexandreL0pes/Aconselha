@@ -16,6 +16,11 @@
   padding: 0px 10px;
 }
 
+.reuniao {
+  display: grid;
+  row-gap: 15px;
+  /* padding: 5px 5px; */
+}
 .side {
   grid-area: side;
 
@@ -131,6 +136,99 @@
 
 /* TABS */
 
+/* avaliacoes */
+.avaliacoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* grid-auto-rows: minmax(50px, 1fr);
+   */
+  grid-template-rows: repeat(auto-fill, minmax(60px, 1fr));
+  grid-gap: 7px;
+  padding-left: 5px;
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+.avaliacao {
+  display: grid;
+  align-items: center;
+  justify-items: left;
+
+  grid-template-rows: 1rem auto 1rem;
+  background-color: #fff;
+  border-radius: 2px;
+
+  color: #222424;
+  margin: 0px;
+  padding: 7px 6px;
+
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.avaliacao.ensino {
+  border-left: 3px solid;
+  border-color: #ffa751;
+  border-image-slice: 1;
+}
+
+.avaliacao .tipo-avaliacao {
+  font-size: 0.65em;
+  font-weight: 400;
+  color: rgb(98, 98, 98) !important;
+}
+.avaliacao .titulo-avaliacao {
+  font-size: 0.75em;
+  font-weight: 400;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 5px;
+  /* row-gap: 5px; */
+  padding: 0px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 5px;
+
+  border-radius: 5px;
+  background: rgba(226, 226, 226, 0.267);
+  font-size: 0.7rem !important;
+
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.mostrar-mais {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: 1fr;
+
+  background: rgba(226, 226, 226, 0.267);
+  color: rgba(110, 109, 109, 0.774);
+  border-radius: 5px;
+  max-width: 5rem;
+  font-size: 1.5rem;
+}
+
+/* avaliacoes */
+
+.avaliacao.positiva {
+  border-left: 3px solid;
+  border-color: #3aafae;
+  border-image-slice: 1;
+}
+.avaliacao.negativa {
+  border-left: 3px solid;
+  border-color: #ff5151;
+  border-image-slice: 1;
+}
+
 @media screen and (max-width: 800px) {
   .main {
     grid-template-columns: 1fr;
@@ -172,32 +270,6 @@
 }
 .info > p {
   text-align: center;
-}
-
-.disciplinas,
-.perfis {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 10px;
-  row-gap: 10px;
-  padding: 0px 5px;
-  margin: 5px;
-}
-
-.chip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  column-gap: 10px;
-  padding: 10px 10px;
-
-  border-radius: 3px;
-  background: rgba(98, 98, 98, 0.1);
-  font-size: 1em !important;
-
-  cursor: pointer;
-  text-transform: capitalize;
-  transition: background 0.4s ease-in-out;
 }
 
 .gray-text {
