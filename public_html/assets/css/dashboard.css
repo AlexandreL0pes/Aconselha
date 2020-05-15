@@ -30,6 +30,10 @@
   row-gap: 5px;
 }
 
+.titulo-avaliacoes {
+  margin-bottom: 1rem;
+}
+
 .turma-info {
   display: grid;
   align-items: center;
@@ -164,6 +168,7 @@
 
   box-shadow: 0 5px 7px 5px rgba(0, 0, 0, 0.05);
   cursor: pointer;
+  grid-gap: 5px;
 }
 
 .avaliacao .tipo-avaliacao {
