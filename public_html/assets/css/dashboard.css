@@ -112,6 +112,7 @@
   display: grid;
   grid-template-rows: repeat(auto-fill, minmax(30px, 0.2fr));
   grid-gap: 5px;
+  padding-right: 10px;
 }
 
 /* TABS */
