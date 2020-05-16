@@ -6,6 +6,7 @@
     <title>Teste</title>
     <link rel="stylesheet" href="./assets/css/index.css" />
     <link rel="stylesheet" href="./assets/css/dashboard.css" />
+    <link rel="stylesheet" href="./assets/css/modals.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
@@ -117,10 +118,13 @@
             <section class="tab-content">
               <div class="reuniao">
                 <div class="ensino">
-                    <div class="titulo-avaliacoes">
-                      Dificuldades de Aprendizado
-                      <a class="mostrar-tudo">Mostrar mais <i class="fas fa-angle-down" aria-hidden="true"></i></a>
-                    </div>
+                  <div class="titulo-avaliacoes">
+                    Dificuldades de Aprendizado
+                    <a class="mostrar-tudo"
+                      >Mostrar mais
+                      <i class="fas fa-angle-down" aria-hidden="true"></i
+                    ></a>
+                  </div>
                   <div class="avaliacoes">
                     <div class="avaliacao ensino" data-aprendizado="9">
                       <p class="tipo-avaliacao gray-text" name="">
@@ -165,7 +169,10 @@
                 <div class="experiencia">
                   <div class="titulo-avaliacoes">
                     Experiências
-                    <a class="mostrar-tudo">Mostrar mais <i class="fas fa-angle-down" aria-hidden="true"></i></a>
+                    <a class="mostrar-tudo"
+                      >Mostrar mais
+                      <i class="fas fa-angle-down" aria-hidden="true"></i
+                    ></a>
                   </div>
 
                   <div class="avaliacoes">
@@ -226,7 +233,10 @@
                 <div class="diagnostica">
                   <div class="titulo-avaliacoes">
                     Avaliações Diagnósticas
-                    <a class="mostrar-tudo">Mostrar mais <i class="fas fa-angle-down" aria-hidden="true"></i></a>
+                    <a class="mostrar-tudo"
+                      >Mostrar mais
+                      <i class="fas fa-angle-down" aria-hidden="true"></i
+                    ></a>
                   </div>
 
                   <div class="avaliacoes">
@@ -382,7 +392,7 @@
         </div>
       </footer>
 
-      <div class="modal  visualizar" id="visualizar-ensino">
+      <div class="modal visualizar" id="visualizar-ensino">
         <div class="modal-background"></div>
         <div class="modal-card modal-avaliacao ensino">
           <header class="modal-card-head">
@@ -464,6 +474,59 @@
                   <div class="chips">
                     <div class="chip">
                       <span class="chip-text">Matemática</span>
+                    </div>
+                    <div class="chip">
+                      <span class="chip-text">História</span>
+                    </div>
+                    <div class="chip">
+                      <span class="chip-text">Artes</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <footer class="modal-card-foot"></footer>
+        </div>
+      </div>
+      <div class="modal visualizar is-active" id="visualizar-diagnostica">
+        <div class="modal-background"></div>
+        <div class="modal-card modal-avaliacao diagnostica positiva">
+          <header class="modal-card-head">
+            <div class="modal-card-title">
+              Alexandre Lopes
+              <div class="chip-categoria positivo">
+                Pontos Positivos
+              </div>
+            </div>
+            <div class="modal-close-btn">
+              <i class="fas fa-times sidenav__brand-close"></i>
+            </div>
+          </header>
+          <section class="modal-card-body">
+            <div class="modal-diagnostica">
+              <div class="info-disciplinas">
+                <h5 class="titulo-disciplina">Disciplinas</h5>
+                <div class="disciplinas">
+                  <div class="chips">
+                    <div class="chip">
+                      <span class="chip-text">Matemática</span>
+                    </div>
+                    <div class="chip">
+                      <span class="chip-text">História</span>
+                    </div>
+                    <div class="chip">
+                      <span class="chip-text">Artes</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="info-disciplinas">
+                <h5 class="titulo-disciplina">Perfis</h5>
+                <div class="disciplinas">
+                  <div class="chips">
+                    <div class="chip">
+                      <span class="chip-text">Apresentou progresso</span>
                     </div>
                     <div class="chip">
                       <span class="chip-text">História</span>
