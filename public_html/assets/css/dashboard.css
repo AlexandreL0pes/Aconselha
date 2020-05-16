@@ -18,7 +18,7 @@
 
 .reuniao {
   display: grid;
-  row-gap: 10px;
+  grid-gap: 10px;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-template-rows: repeat(auto-fit, minmax(15rem, 1fr));
 }
@@ -31,7 +31,18 @@
 }
 
 .titulo-avaliacoes {
-  margin-bottom: 1rem;
+  margin-bottom: .6rem;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5px;
+  align-content: center;
+}
+.mostrar-tudo {
+  font-weight: 300;
+  font-size: 0.7rem;
+  color: #222424;
+  align-self: center;
+
 }
 
 .turma-info {

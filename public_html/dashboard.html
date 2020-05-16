@@ -117,9 +117,10 @@
             <section class="tab-content">
               <div class="reuniao">
                 <div class="ensino">
-                  <p class="titulo-avaliacoes">
-                    Dificuldades de Aprendizado
-                  </p>
+                    <div class="titulo-avaliacoes">
+                      Dificuldades de Aprendizado
+                      <a class="mostrar-tudo">Mostrar mais <i class="fas fa-angle-down" aria-hidden="true"></i></a>
+                    </div>
                   <div class="avaliacoes">
                     <div class="avaliacao ensino" data-aprendizado="9">
                       <p class="tipo-avaliacao gray-text" name="">
@@ -162,9 +163,11 @@
                   </div>
                 </div>
                 <div class="experiencia">
-                  <p class="titulo-avaliacoes">
+                  <div class="titulo-avaliacoes">
                     Experiências
-                  </p>
+                    <a class="mostrar-tudo">Mostrar mais <i class="fas fa-angle-down" aria-hidden="true"></i></a>
+                  </div>
+
                   <div class="avaliacoes">
                     <div class="avaliacao experiencia" data-aprendizado="9">
                       <p class="tipo-avaliacao gray-text" name="">
@@ -221,9 +224,11 @@
                   </div>
                 </div>
                 <div class="diagnostica">
-                  <p class="titulo-avaliacoes">
+                  <div class="titulo-avaliacoes">
                     Avaliações Diagnósticas
-                  </p>
+                    <a class="mostrar-tudo">Mostrar mais <i class="fas fa-angle-down" aria-hidden="true"></i></a>
+                  </div>
+
                   <div class="avaliacoes">
                     <div
                       class="avaliacao diagnostica positiva"
@@ -235,7 +240,10 @@
                       <p class="titulo-avaliacao">Alexandre Lopes</p>
                       <div class="chips">
                         <div class="chip">
-                          <span class="chip-text">15 alunos</span>
+                          <span class="chip-text">Desenvolvimento Web</span>
+                        </div>
+                        <div class="chip">
+                          <span class="chip-text">História</span>
                         </div>
                       </div>
                     </div>
@@ -249,7 +257,10 @@
                       <p class="titulo-avaliacao">Láyza Lopes</p>
                       <div class="chips">
                         <div class="chip">
-                          <span class="chip-text">15 alunos</span>
+                          <span class="chip-text">Desenvolvimento Web</span>
+                        </div>
+                        <div class="chip">
+                          <span class="chip-text">História</span>
                         </div>
                       </div>
                     </div>
@@ -263,7 +274,10 @@
                       <p class="titulo-avaliacao">Alessandra Salgado</p>
                       <div class="chips">
                         <div class="chip">
-                          <span class="chip-text">15 alunos</span>
+                          <span class="chip-text">Desenvolvimento Web</span>
+                        </div>
+                        <div class="chip">
+                          <span class="chip-text">História</span>
                         </div>
                       </div>
                     </div>
@@ -368,7 +382,7 @@
         </div>
       </footer>
 
-      <div class="modal visualizar" id="visualizar-ensino">
+      <div class="modal  visualizar" id="visualizar-ensino">
         <div class="modal-background"></div>
         <div class="modal-card modal-avaliacao ensino">
           <header class="modal-card-head">
@@ -469,5 +483,6 @@
     <div class="toasts" id="toasts"></div>
   </body>
   <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/dashboard_turma.js"></script>
   <!-- <script src="./assets/js/atendimentos.js" type="module"></script> -->
 </html>
