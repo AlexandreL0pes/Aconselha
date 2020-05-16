@@ -26,7 +26,7 @@
   grid-area: side;
 
   display: grid;
-  grid-template-rows: auto .6fr 1fr;
+  grid-template-rows: auto 0.6fr 1fr;
   row-gap: 5px;
 }
 
@@ -59,7 +59,7 @@
   display: grid;
   align-items: center;
   align-content: center;
-  grid-template-rows: .4fr .4fr; 
+  grid-template-rows: 0.4fr 0.4fr;
   font-weight: 300;
   font-size: 0.75em;
   padding: 5px 10px;
@@ -222,21 +222,18 @@
 .modal-avaliacao.ensino {
   border-left: 5px solid;
   border-radius: 5px;
-  
 }
 
 .avaliacao.positiva,
-.modal-avaliacao.positiva
-{
+.modal-avaliacao.positiva {
   border-color: #3aafae;
 }
 .avaliacao.negativa,
-.modal-avaliacao.negativa
-{
+.modal-avaliacao.negativa {
   border-color: #ff5151;
 }
 .avaliacao.experiencia,
-.modal-avaliacao.experiencia{
+.modal-avaliacao.experiencia {
   border-color: #7b61b2;
 }
 .avaliacao.ensino,
@@ -244,13 +241,62 @@
   border-color: #ffa751;
 }
 
-
 /* avaliacoes */
 
+.modal-close-btn {
+  padding: 10px;
+  cursor: pointer;
+}
 
 
 /* MODAL ENSINO */
 
+.modal-card-body > .modal-ensino {
+  font-weight: 300;
+  font-size: 0.9em;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+}
+/* Modal */
+
+.modal-ensino .info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  /* box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2); */
+  border-radius: 5px;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+}
+.modal-ensino .info-alunos {
+}
+.modal-ensino .disciplina {
+  font-size: 2rem;
+}
+
+.modal-ensino .titulo-estudante {
+  font-size: 1.1rem !important;
+}
+.modal-ensino .chips {
+  padding: 10px 5px;
+}
+.modal-ensino .chip {
+  padding: 5px 10px;
+  font-weight: 300;
+  border-radius: 5px;
+  background: rgba(226, 226, 226, 0.596);
+  font-size: 0.9rem !important;
+
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.gray-text {
+  color: rgb(98, 98, 98) !important;
+}
 
 /* MODAL ENSINO */
 
@@ -266,56 +312,3 @@
   }
 }
 
-.modal-close-btn {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.modal-card-body > .modal-ensino {
-  font-weight: 300;
-  font-size: 0.9em;
-  
-  
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 10px;
-}
-/* Modal */
-
-.modal-ensino  .info {
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-  /* box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2); */
-  border-radius: 5px;
-  align-content: center;
-  align-items: center;
-  align-self: center;
-}
-.modal-ensino .info-alunos {
-}
-.modal-ensino .disciplina {
-  font-size: 2rem ;
-}
-
-
-.modal-ensino .titulo-estudante {
-  font-size: 1.1rem !important;
-}
-.modal-ensino .chips {
-  padding: 10px 5px;
-}
-.modal-ensino .chip {
-  padding: 5px 10px;
-  font-weight: 300;
-  border-radius: 5px;
-  background: rgba(226, 226, 226, 0.596);
-  font-size: .9rem !important;
-
-  cursor: pointer;
-  text-transform: capitalize;
-}
-
-.gray-text {
-  color: rgb(98, 98, 98) !important;
-}
