@@ -248,6 +248,9 @@
   cursor: pointer;
 }
 
+.modal.visualizar .modal-card-head {
+  padding-bottom: 5px !important;
+}
 /* MODAL ENSINO */
 
 .modal-card-body > .modal-ensino {
@@ -343,7 +346,7 @@
 }
 
 .chip-categoria {
-  padding: 2px 2px;
+  padding: 5px 6px;
   font-weight: 300;
   border-radius: 10px;
   font-size: 0.8rem !important;
