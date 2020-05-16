@@ -46,7 +46,7 @@
   font-weight: 300;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(auto-fill, minmax(20px, 1fr));
-  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
 }
 
 .turma-info span:first-child {
@@ -179,7 +179,7 @@
   display: flex;
   flex-wrap: wrap;
   column-gap: 5px;
-  /* row-gap: 5px; */
+  row-gap: 5px;
   padding: 0px;
 }
 
@@ -190,7 +190,7 @@
   padding: 2px 5px;
 
   border-radius: 5px;
-  background: rgba(226, 226, 226, 0.267);
+  background: rgba(226, 226, 226, 0.445);
   font-size: 0.7rem !important;
 
   cursor: pointer;
@@ -210,25 +210,49 @@
   font-size: 1.5rem;
 }
 
-/* avaliacoes */
 .avaliacao.positiva,
 .avaliacao.negativa,
 .avaliacao.experiencia,
 .avaliacao.ensino {
-  border-left: 3px solid;
+  border-left: 4px solid;
 }
-.avaliacao.positiva {
+.modal-avaliacao.positiva,
+.modal-avaliacao.negativa,
+.modal-avaliacao.experiencia,
+.modal-avaliacao.ensino {
+  border-left: 5px solid;
+  border-radius: 5px;
+  
+}
+
+.avaliacao.positiva,
+.modal-avaliacao.positiva
+{
   border-color: #3aafae;
 }
-.avaliacao.negativa {
+.avaliacao.negativa,
+.modal-avaliacao.negativa
+{
   border-color: #ff5151;
 }
-.avaliacao.experiencia {
+.avaliacao.experiencia,
+.modal-avaliacao.experiencia{
   border-color: #7b61b2;
 }
-.avaliacao.ensino {
+.avaliacao.ensino,
+.modal-avaliacao.ensino {
   border-color: #ffa751;
 }
+
+
+/* avaliacoes */
+
+
+
+/* MODAL ENSINO */
+
+
+/* MODAL ENSINO */
 
 @media screen and (max-width: 800px) {
   .main {
@@ -247,32 +271,51 @@
   cursor: pointer;
 }
 
-.modal-card-body > .avaliacao-aluno {
+.modal-card-body > .modal-ensino {
   font-weight: 300;
   font-size: 0.9em;
-
+  
+  
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 10px;
 }
 /* Modal */
 
-.avaliacao-aluno > .info {
-  padding: 5px;
-  margin: 30px;
+.modal-ensino  .info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   row-gap: 5px;
-  font-size: 1.2em;
-  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2); */
   border-radius: 5px;
+  align-content: center;
+  align-items: center;
+  align-self: center;
 }
-.info > p {
-  text-align: center;
+.modal-ensino .info-alunos {
+}
+.modal-ensino .disciplina {
+  font-size: 2rem ;
+}
+
+
+.modal-ensino .titulo-estudante {
+  font-size: 1.1rem !important;
+}
+.modal-ensino .chips {
+  padding: 10px 5px;
+}
+.modal-ensino .chip {
+  padding: 5px 10px;
+  font-weight: 300;
+  border-radius: 5px;
+  background: rgba(226, 226, 226, 0.596);
+  font-size: .9rem !important;
+
+  cursor: pointer;
+  text-transform: capitalize;
 }
 
 .gray-text {
-  /* color: rgb(98, 98, 98) !important; */
+  color: rgb(98, 98, 98) !important;
 }
