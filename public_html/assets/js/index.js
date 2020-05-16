@@ -62,7 +62,9 @@ let navegacaoTabs = () => {
     });
   });
 
-  tabs[0].click();
+  if (tabs.length > 0) {
+    tabs[0].click();
+  }
 };
 
 events();
