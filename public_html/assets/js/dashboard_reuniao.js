@@ -7,12 +7,8 @@ const listener = () => {
   const memoria = document.getElementById("abrirMemoria");
   memoria.addEventListener("click", (event) => abrirMemoria());
 
-  const mostrarMaisAprendizado = document.querySelector(
-    ".ensino .mostrar-tudo"
-  );
-  mostrarMaisAprendizado.addEventListener("click", listarAprendizados);
+  
   closeModal();
-
   listarPreviaAprendizados();
 };
 
@@ -425,5 +421,4 @@ const gerarPreviaExperiencia = (experiencias) => {
   }
 };
 
-listarPreviaExperiencias();
 listener();
