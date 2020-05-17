@@ -219,6 +219,8 @@
   border-radius: 5px;
   max-width: 7rem;
   font-size: 1.5rem;
+  
+  cursor: pointer;
 }
 
 .avaliacao.positiva,
