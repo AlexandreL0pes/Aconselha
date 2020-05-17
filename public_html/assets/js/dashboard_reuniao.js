@@ -253,6 +253,9 @@ const mostrarMais = (avaliacao) => {
   btnMostrarMais.addEventListener("click", previas[avaliacao]);
 };
 
+/**
+ * Dispara um requisição assíncrona para a obtenção de experiências
+ */
 const solicitarExperiencias = async () => {
   const reuniao = localStorage.getItem("conselhoAtual") || "";
 
@@ -286,6 +289,10 @@ const solicitarExperiencias = async () => {
     });
 };
 
+/**
+ * Gera um card de uma experiência
+ * @param {*} experiencia JSON Object contendo as informações de uma experiencia
+ */
 const addExperienciaCard = (experiencia) => {
   let card = document.createElement("div");
   card.classList.add("avaliacao", "experiencia");
@@ -309,6 +316,10 @@ const addExperienciaCard = (experiencia) => {
   experiencias.append(card);
 };
 
+/**
+ * Gera chips contendo as disciplinas da experiência
+ * @param {*} disciplinas JSON Object contendo as disciplinas de uma experiência'
+ */
 const gerarDisciplinasChip = (disciplinas) => {
   const QTD_PREVIA = 2;
 
@@ -335,6 +346,10 @@ const gerarDisciplinasChip = (disciplinas) => {
   return chips;
 };
 
+/**
+ * Gera um chip com o texto informado
+ * @param {*} nome Texto adicionado ao chip
+ */
 const gerarChips = (nome) => {
   const chip = document.createElement("div");
   chip.classList.add("chip");
@@ -346,6 +361,9 @@ const gerarChips = (nome) => {
   return chip;
 };
 
+/**
+ * Solicita e apresenta as experiências na página
+ */
 const listarExperiencias = () => {
   solicitarExperiencias()
     .then((experiencias) => {
@@ -359,6 +377,9 @@ const listarExperiencias = () => {
     });
 };
 
+/**
+ * Solicita e apresenta a prévia de experiência na página
+ */
 const listarPreviaExperiencias = () => {
   solicitarExperiencias()
     .then((experiencias) => {
@@ -371,6 +392,10 @@ const listarPreviaExperiencias = () => {
     });
 };
 
+/**
+ * Lista os 3 primeiro aprendizados e adiciona o card restante
+ * @param {*} experiencias JSON Object com todos os aprendizados
+ */
 const gerarPreviaExperiencia = (experiencias) => {
   const QTD_PREVIA = 3;
 
