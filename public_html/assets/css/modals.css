@@ -138,7 +138,7 @@
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 10px;
+  grid-gap: 5px;
 }
 
 .modal-diagnostica .info {
@@ -165,22 +165,39 @@
   padding-right: 10px;
 }
 .modal-diagnostica .chips {
-  padding: 6px 5px;
+  /* padding: 6px 5px; */
+    margin: 10px;
 }
 .modal-diagnostica .chip {
-  padding: 5px 5px;
+  padding: 5px 10px;
   font-weight: 300;
   border-radius: 5px;
-  background: rgba(226, 226, 226, 0.596);
+  background: rgba(233, 231, 231, 0.596);
   font-size: 0.9rem !important;
 
   cursor: pointer;
   text-transform: capitalize;
 }
 
+.modal-diagnostica .disciplinas .chip {
+    background: none;
+    border: solid 1px #353434;
+}
+
+.diagnostica.positiva .modal-diagnostica .perfis .chip {
+    border: #3aafae solid 1px;
+    color: #3aafae;
+    background: none;
+}
+.diagnostica.negativa .modal-diagnostica .perfis .chip {
+    border: #ff5151 solid 1px;
+    color: #ff5151;
+    background: none;
+}
+
 .diagnostica .chip-categoria {
-    margin-top: 2px;
-    margin-left: 2px;
+    margin-top: 5px;
+    margin-left: 10px;
     font-size: 0.7rem;
 }
 
