@@ -7,9 +7,11 @@ const listener = () => {
   const memoria = document.getElementById("abrirMemoria");
   memoria.addEventListener("click", (event) => abrirMemoria());
 
-  
+
   closeModal();
+
   listarPreviaAprendizados();
+  listarPreviaExperiencias();
 };
 
 /**
@@ -420,5 +422,6 @@ const gerarPreviaExperiencia = (experiencias) => {
     divExperiencias.append(restante);
   }
 };
+
 
 listener();
