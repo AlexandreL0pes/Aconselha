@@ -213,7 +213,7 @@ const mostrarMenos = (avaliacao) => {
   const element = document.querySelector("." + avaliacao);
   const btnMostraMenos = element.querySelector(".mostrar-tudo");
   btnMostraMenos.innerHTML =
-    "Mostrar Mais <i class='fas fa-angle-down' aria-hidden='true'></i>";
+    "Mostrar mais <i class='fas fa-angle-down' aria-hidden='true'></i>";
 
   let previas = {
     experiencia: listarPreviaExperiencias,
