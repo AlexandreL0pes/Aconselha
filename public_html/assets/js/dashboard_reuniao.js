@@ -7,9 +7,13 @@ const listener = () => {
   const memoria = document.getElementById("abrirMemoria");
   memoria.addEventListener("click", (event) => abrirMemoria());
 
-  const mostrarMaisAprendizado = document.querySelector('.ensino .mostrar-tudo');
-  mostrarMaisAprendizado.addEventListener('click', listarAprendizados);
+  const mostrarMaisAprendizado = document.querySelector(
+    ".ensino .mostrar-tudo"
+  );
+  mostrarMaisAprendizado.addEventListener("click", listarAprendizados);
   closeModal();
+
+  listarPreviaAprendizados();
 };
 
 /**
@@ -130,47 +134,49 @@ const addAprendizadoCard = (aprendizado) => {
   aprendizados.append(card);
 };
 
+/**
+ * Dispara uma requisição dos aprendizados e imprime todos na tela
+ */
 const listarAprendizados = () => {
   solicitarAprendizados()
     .then((aprendizados) => {
       console.log("> Listando todos os aprendizados!");
+
       removerPrevia("ensino");
       aprendizados.map((aprendizado) => addAprendizadoCard(aprendizado));
-
-      const mostrar = document.querySelector(".ensino .mostrar-tudo");
-      mostrar.innerHTML = "Mostrar menos <i class='fas fa-angle-down' aria-hidden='true'></i>";
-      mostrar.removeEventListener('click', listarAprendizados);
-      mostrar.addEventListener('click', listarPreviaAprendizados);
-      
+      mostrarMais("ensino");
     })
     .catch((err) => {
       console.error(err);
     });
 };
-// listarAprendizados();
 
+/**
+ * Função que faz a requisição dos aprendizados e imprime a prévia
+ */
 const listarPreviaAprendizados = () => {
   solicitarAprendizados()
     .then((aprendizados) => {
       console.log("> Listando Prévia!");
       gerarPrevia(aprendizados);
-      const mostrar = document.querySelector('.ensino .mostrar-tudo');
-      mostrar.removeEventListener('click', listarPreviaAprendizados);
-      mostrar.addEventListener("click", listarAprendizados);
+      mostrarMenos("ensino");
     })
     .catch((err) => {
       console.error(err);
     });
 };
 
-
+/**
+ * Lista os 3 primeiros aprendizados e  adiciona o card restante
+ * @param {*} aprendizados Lista JSON com todos os aprendizados
+ */
 const gerarPrevia = (aprendizados) => {
   const qtdPrevia = 3;
   if (aprendizados.length == 0 || aprendizados === undefined) {
     throw new Error("Não existem aprendizados!");
   }
   if (aprendizados.length > qtdPrevia) {
-    document.getElementById('aprendizados').innerHTML = "";
+    document.getElementById("aprendizados").innerHTML = "";
     for (let index = 0; index < qtdPrevia; index++) {
       addAprendizadoCard(aprendizados[index]);
     }
@@ -181,7 +187,7 @@ const gerarPrevia = (aprendizados) => {
       <p class="quantidade">
         + <span class="numero-quantidade">${qtdRestante}</span>
       </p>`;
-      
+
     restante.addEventListener("click", listarAprendizados);
     const divAprendizados = document.getElementById("aprendizados");
     divAprendizados.append(restante);
@@ -193,22 +199,39 @@ const gerarPrevia = (aprendizados) => {
  * @param {*} avaliacao String com o id do elemento onde o card está
  */
 const removerPrevia = (avaliacao) => {
-    const element = document.querySelector("." + avaliacao);
-    const previa = element.querySelector(".mostrar-mais");
-    if (previa) {
-      previa.remove();
-    }    
-    console.log("removendo essa merda");
+  const element = document.querySelector("." + avaliacao);
+  const previa = element.querySelector(".mostrar-mais");
+  previa.remove();
 
-    const mostrar = element.querySelector(".mostrar-tudo");
-    mostrar.innerHTML = "Mostrar menos <i class='fas fa-angle-up' aria-hidden='true'></i>";
-    mostrar.removeEventListener('click', listarPreviaAprendizados);
-    mostrar.addEventListener('click', listarAprendizados);
-    // console.log(mostrar);
-    
+  mostrarMenos(avaliacao);
+};
 
-}
+/**
+ * Muda o texto e os eventos do botão para mostrar menos
+ * @param {*} avaliacao Classe do elemento que engloba a avaliaão
+ */
+const mostrarMenos = (avaliacao) => {
+  console.log("> Mostrando menos!");
+  const element = document.querySelector("." + avaliacao);
+  const btnMostraMenos = element.querySelector(".mostrar-tudo");
+  btnMostraMenos.innerHTML =
+    "Mostrar Mais <i class='fas fa-angle-down' aria-hidden='true'></i>";
+  btnMostraMenos.removeEventListener("click", listarPreviaAprendizados);
+  btnMostraMenos.addEventListener("click", listarAprendizados);
+};
 
+/**
+ * Muda o texto e os eventos do botão para mostrar mais
+ * @param {*} avaliacao Classe do elemento que engloba a avaliaão
+ */
+const mostrarMais = (avaliacao) => {
+  console.log("> Mostrando mais!");
+  const element = document.querySelector("." + avaliacao);
+  const btnMostrarMais = element.querySelector(".mostrar-tudo");
+  btnMostrarMais.innerHTML =
+    "Mostrar menos <i class='fas fa-angle-up' aria-hidden='true'></i>";
+  btnMostrarMais.removeEventListener("click", listarAprendizados);
+  btnMostrarMais.addEventListener("click", listarPreviaAprendizados);
+};
 
-listarPreviaAprendizados(); 
 listener();
