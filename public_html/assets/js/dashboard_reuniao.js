@@ -216,8 +216,18 @@ const mostrarMenos = (avaliacao) => {
   const btnMostraMenos = element.querySelector(".mostrar-tudo");
   btnMostraMenos.innerHTML =
     "Mostrar Mais <i class='fas fa-angle-down' aria-hidden='true'></i>";
-  btnMostraMenos.removeEventListener("click", listarPreviaAprendizados);
-  btnMostraMenos.addEventListener("click", listarAprendizados);
+
+  let previas = {
+    experiencia: listarPreviaExperiencias,
+    ensino: listarPreviaAprendizados,
+  };
+
+  let total = {
+    experiencia: listarExperiencias,
+    ensino: listarAprendizados,
+  };
+  btnMostraMenos.removeEventListener("click", previas[avaliacao]);
+  btnMostraMenos.addEventListener("click", total[avaliacao]);
 };
 
 /**
@@ -230,8 +240,165 @@ const mostrarMais = (avaliacao) => {
   const btnMostrarMais = element.querySelector(".mostrar-tudo");
   btnMostrarMais.innerHTML =
     "Mostrar menos <i class='fas fa-angle-up' aria-hidden='true'></i>";
-  btnMostrarMais.removeEventListener("click", listarAprendizados);
-  btnMostrarMais.addEventListener("click", listarPreviaAprendizados);
+  let previas = {
+    experiencia: listarPreviaExperiencias,
+    ensino: listarPreviaAprendizados,
+  };
+
+  let total = {
+    experiencia: listarExperiencias,
+    ensino: listarAprendizados,
+  };
+  btnMostrarMais.removeEventListener("click", total[avaliacao]);
+  btnMostrarMais.addEventListener("click", previas[avaliacao]);
 };
 
+const solicitarExperiencias = async () => {
+  const reuniao = localStorage.getItem("conselhoAtual") || "";
+
+  if (reuniao === "") {
+    showMessage(
+      "Ops, deu errado!",
+      "Não foi possível identificar a reunião atual!",
+      "error",
+      5000
+    );
+    return false;
+  }
+
+  let dados = {
+    acao: "Experiencias/listarExperienciasReuniao",
+    reuniao: reuniao,
+  };
+
+  return await sendRequest(dados)
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      showMessage(
+        "Ops, deu Errado",
+        "Não foi possível acessar os aprendizados.",
+        "error",
+        5000
+      );
+      console.error(err);
+    });
+};
+
+const addExperienciaCard = (experiencia) => {
+  let card = document.createElement("div");
+  card.classList.add("avaliacao", "experiencia");
+  card.setAttribute("data-experiencia", experiencia.experiencia);
+
+  let label = document.createElement("p");
+  label.classList.add("titulo-avaliacao", "gray-text");
+  label.innerHTML = "Experiência";
+  card.appendChild(label);
+
+  let titulo = document.createElement("p");
+  titulo.classList.add("titulo-avaliacao", "gray-text");
+  titulo.innerHTML = experiencia.titulo;
+  card.appendChild(titulo);
+
+  card.appendChild(gerarDisciplinasChip(experiencia.disciplinas));
+
+  card.addEventListener("click", (e) => console.log("Clicou Experiencia!"));
+
+  const experiencias = document.getElementById("experiencias");
+  experiencias.append(card);
+};
+
+const gerarDisciplinasChip = (disciplinas) => {
+  const QTD_PREVIA = 2;
+
+  const chips = document.createElement("div");
+  chips.classList.add("chips");
+
+  if (disciplinas.length == 0) {
+    const chip = gerarChips("Nenhuma disciplina");
+    chips.appendChild(chip);
+  } else if (disciplinas.length <= QTD_PREVIA) {
+    disciplinas.map((disciplina) => {
+      const chip = gerarChips(disciplina.nome);
+      chips.appendChild(chip);
+    });
+  } else if (disciplinas.length > QTD_PREVIA) {
+    for (let index = 0; index < QTD_PREVIA; index++) {
+      const chip = gerarChips(disciplinas[index].nome);
+      chips.appendChild(chip);
+    }
+    const chip = gerarChips(`+${disciplinas.length - QTD_PREVIA}`);
+    chips.appendChild(chip);
+  }
+
+  return chips;
+};
+
+const gerarChips = (nome) => {
+  const chip = document.createElement("div");
+  chip.classList.add("chip");
+
+  const span = document.createElement("span");
+  span.classList.add("chip-text");
+  span.innerHTML = nome;
+  chip.appendChild(span);
+  return chip;
+};
+
+const listarExperiencias = () => {
+  solicitarExperiencias()
+    .then((experiencias) => {
+      console.log("> Listando todas as experiências!");
+      removerPrevia("experiencia");
+      experiencias.map((experiencia) => addExperienciaCard(experiencia));
+      mostrarMais("experiencia");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const listarPreviaExperiencias = () => {
+  solicitarExperiencias()
+    .then((experiencias) => {
+      console.log("> Listando Prévia!");
+      gerarPreviaExperiencia(experiencias);
+      mostrarMenos("experiencia");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const gerarPreviaExperiencia = (experiencias) => {
+  const QTD_PREVIA = 3;
+
+  if (experiencias.length == 0 || experiencias === undefined) {
+    throw new Error("Não existem experiências!");
+  }
+
+  if (experiencias.length > QTD_PREVIA) {
+    document.getElementById("experiencias").innerHTML = "";
+
+    for (let i = 0; i < QTD_PREVIA; i++) {
+      addExperienciaCard(experiencias[i]);
+    }
+
+    const qtdRestante = experiencias.length - QTD_PREVIA;
+    let restante = document.createElement("div");
+    restante.classList.add("mostrar-mais");
+    restante.innerHTML = `
+    <p class="quantidade">
+      + <span class="numero-quantidade">${qtdRestante}</span>
+    </p>
+    `;
+
+    restante.addEventListener("click", listarExperiencias);
+    const divExperiencias = document.getElementById("experiencias");
+    divExperiencias.append(restante);
+  }
+};
+
+listarPreviaExperiencias();
 listener();
