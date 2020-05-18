@@ -236,7 +236,8 @@
 .chip.selected {
 
 	/* background: rgb(238,178,32); */
-	background: #c1ee20;
+  color: rgb(236, 233, 233);
+  background: #eeb220;
 }
 
 .modal-card-foot > button:nth-child(2){
