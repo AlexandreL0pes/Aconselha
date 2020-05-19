@@ -84,4 +84,13 @@ class Perfil extends CRUD {
 
     }
 
+    public function selecionarPerfil($perfil_id)
+    {
+        $campos = self::COL_ID . ", " . self::COL_NOME;
+        $busca = [self::COL_ID => $perfil_id];
+        
+        $resultado = $this->listar($campos, $busca, null, 1);
+
+        return $resultado;
+    }
 }
