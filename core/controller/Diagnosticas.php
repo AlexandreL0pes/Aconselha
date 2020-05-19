@@ -258,13 +258,31 @@ class Diagnosticas
 
     /**
      * Retorna o tipo de uma diagnóstica, podendo ser positivo ou negativo 1 | 0
-     * @param $perfis   Lista com os valores booleanos de cada perfil
+     * @param $perfis   Lista com os perfis
      * @return array
      */
     public function verificarTipoDiagnostica($perfis = null)
     {
-        $result = array_count_values($perfis);
-        $tipo = ($result[1] > $result[0]) ? 1 : 0; 
+        $perfis = [1, 5, 6,8,8,8,8,8];
+
+        $perfil = new Perfil();
+        $campos = Perfil::COL_TIPO;
+
+        $positivo = 0;
+        $negativo = 0;
+        foreach ($perfis as $p) {
+            $busca = [Perfil::COL_ID => $p];
+            $resultado = $perfil->listar($campos, $busca, null, 1)[0];
+            if ($resultado['tipo'] == 1) {
+                $positivo++;
+            } else {
+                $negativo++;
+            }
+            ($resultado['tipo'] == 1) ? $positivo++ : $negativo++;
+        }
+
+        $tipo = $positivo > $negativo ? 'true' : 'false';
+
         return $tipo;
     }
 }
