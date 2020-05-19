@@ -7,7 +7,6 @@ const listener = () => {
   const memoria = document.getElementById("abrirMemoria");
   memoria.addEventListener("click", (event) => abrirMemoria());
 
-
   closeModal();
 
   listarPreviaAprendizados();
@@ -423,26 +422,87 @@ const gerarPreviaExperiencia = (experiencias) => {
   }
 };
 
-
 const solicitarDiagnosticas = async () => {
   const reuniao = localStorage.getItem("conselhoAtual") || "";
 
   if (reuniao === "") {
-    showMessage("Ops, deu errado!", "Não foi possível identificar a reunião atual!","error", 5000);
+    showMessage(
+      "Ops, deu errado!",
+      "Não foi possível identificar a reunião atual!",
+      "error",
+      5000
+    );
     return false;
   }
 
   let dados = {
     acao: "Diagnosticas/listarDiagnosticasRelevantes",
-    reuniao: reuniao
+    reuniao: reuniao,
   };
 
-  return await sendRequest(dados).then((response) => {
-    return response;
-  }).catch((err) => {
-    showMessage("Ops, deu errado", "Não foi possível acessar as avaliações diagnósticas!","error", 5000);
-    console.error(err);
-  });
-}
+  return await sendRequest(dados)
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      showMessage(
+        "Ops, deu errado",
+        "Não foi possível acessar as avaliações diagnósticas!",
+        "error",
+        5000
+      );
+      console.error(err);
+    });
+};
+
+const addDiagnosticaCard = (diagnostica) => {
+  let card = document.createElement("div");
+  // Verificação do tipo do card
+  const classeTipo = diagnostica.tipo ? "positiva" : "negativa";
+
+  card.classList.add("avaliacao", "diagnostica", classeTipo);
+  card.setAttribute("data-diagnostica", diagnostica.diagnostica);
+
+  let label = document.createElement("p");
+  label.classList.add("titulo-avaliacao", "gray-text");
+  label.innerHTML = "Diagnóstica";
+  card.appendChild(label);
+
+  let titulo = document.createElement("p");
+  titulo.classList.add("titulo-avaliacao", "gray-text");
+  titulo.innerHTML = diagnostica.aluno.nome;
+  card.appendChild(titulo);
+
+  card.appendChild(gerarProfessoresChip(diagnostica.professores));
+
+  card.addEventListener("click", (e) => console.log("Clicou Diagnóstica!"));
+
+  const diagnosticas = document.getElementById("diagnosticas");
+  diagnosticas.append(card);
+};
+
+const gerarProfessoresChip = (professores) => {
+  const QTD_PREVIA = 2;
+
+  const chips = document.createElement("div");
+  chips.classList.add("chips");
+
+  if (professores.length > QTD_PREVIA) {
+    professores.map((professor) => {
+      const chip = gerarChips(professor.nome);
+      chips.appendChild(chip);
+    });
+  } else if (professores.length > QTD_PREVIA) {
+    for (let index = 0; index < QTD_PREVIA; index++) {
+      const chip = gerarChips(professores[index].nome);
+      chips.appendChild(chip);
+    }
+
+    const chip = gerarChips(`+${professores.length - QTD_PREVIA}`);
+    chips.appendChild(chip);
+
+    return chips;
+  }
+};
 
 listener();
