@@ -10,6 +10,10 @@ class Perfil extends CRUD {
     const COL_ID = "id";
     const COL_NOME = "nome";
     const COL_DESCRICAO = "descricao";
+    // TIPO -> BOOLEAN
+    // 1 -> POSITIVO
+    // 0 -> NEGATIVO
+    const COL_TIPO = "tipo";
 
 
     public function adicionar($dados) {
