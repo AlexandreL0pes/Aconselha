@@ -54,6 +54,10 @@ class Diagnostica extends CRUD
 
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
+        $group_by = null;
+
+
+        $tabela = self::TABELA;
 
         if ($busca && count($busca) > 0) {
             if (isset($busca[self::COL_ID]) && !empty($busca[self::COL_ID])) {
@@ -61,16 +65,39 @@ class Diagnostica extends CRUD
                 $where_valor[] = $busca[self::COL_ID];
             }
             if (isset($busca[self::COL_ID_REUNIAO]) && !empty($busca[self::COL_ID_REUNIAO])) {
-                $where_condicao .= " AND " . self::COL_ID_REUNIAO . " = ? ";
+                $where_condicao .= " AND Diagnostica." . self::COL_ID_REUNIAO . " = ? ";
                 $where_valor[] = $busca[self::COL_ID_REUNIAO];
+            }
+
+            if (isset($busca['relevantes']) && !empty($busca['relevantes'])) {
+
+                $reuniao_id = ($busca['relevantes']['reuniao']) ? $busca['relevantes']['reuniao'] : null;
+                $condicao = ($reuniao_id) ? "WHERE " . self::COL_ID_REUNIAO . " = ? " : "";
+
+                $tabela = "( SELECT
+                            group_concat(DISTINCT COD_PROFESSOR) as professor,
+                            COD_MATRICULA as matricula,
+                            idPerfil as perfil,
+                            count(*) as qtdperfil
+                        from Diagnostica
+                        INNER JOIN Analise A on Diagnostica.id = A.idDiagnostica
+                        ". $condicao ."
+                        group by idPerfil,COD_MATRICULA
+                        having  qtdperfil >= 1
+                        order by qtdperfil desc ) as tabela";
+                $group_by = " matricula ";
+                $ordem = null;
+                array_unshift($where_valor, $reuniao_id);
             }
         }
 
         $retorno = [];
         try {
-            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
+            $retorno = $this->read(null, $tabela, $campos, $where_condicao, $where_valor, $group_by, $ordem, $limite);
+            echo $this->pegarUltimoSQL();
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
+            echo $this->pegarUltimoSQL();
             return false;
         }
 
