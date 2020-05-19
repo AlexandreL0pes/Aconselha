@@ -469,10 +469,9 @@ const addDiagnosticaCard = (diagnostica) => {
   card.appendChild(label);
 
   let titulo = document.createElement("p");
-  titulo.classList.add("titulo-avaliacao", "gray-text");
+  titulo.classList.add("titulo-avaliacao");
   titulo.innerHTML = diagnostica.aluno.nome;
   card.appendChild(titulo);
-
   card.appendChild(gerarProfessoresChip(diagnostica.professores));
 
   card.addEventListener("click", (e) => console.log("Clicou Diagnóstica!"));
@@ -487,7 +486,7 @@ const gerarProfessoresChip = (professores) => {
   const chips = document.createElement("div");
   chips.classList.add("chips");
 
-  if (professores.length > QTD_PREVIA) {
+  if (professores.length <= QTD_PREVIA) {
     professores.map((professor) => {
       const chip = gerarChips(professor.nome);
       chips.appendChild(chip);
@@ -500,9 +499,26 @@ const gerarProfessoresChip = (professores) => {
 
     const chip = gerarChips(`+${professores.length - QTD_PREVIA}`);
     chips.appendChild(chip);
-
-    return chips;
   }
+
+  return chips;
 };
 
+/**
+ * Solicita e apresenta as avaliações diagnósticas na página
+ */
+const listarDiagnosticas = () => {
+  solicitarDiagnosticas()
+    .then((diagnosticas) => {
+      console.log("Listando todas as diagnósticas");
+      removerPrevia("diagnostica");
+      diagnosticas.map((diagnostica) => addDiagnosticaCard(diagnostica));
+      mostrarMais("diagnostica");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+listarDiagnosticas();
 listener();
