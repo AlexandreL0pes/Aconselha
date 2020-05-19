@@ -11,6 +11,7 @@ const listener = () => {
 
   listarPreviaAprendizados();
   listarPreviaExperiencias();
+  listarPreviaDiagnosticas();
 };
 
 /**
@@ -520,5 +521,44 @@ const listarDiagnosticas = () => {
     });
 };
 
-listarDiagnosticas();
+const listarPreviaDiagnosticas = () => {
+  solicitarDiagnosticas()
+    .then((diagnosticas) => {
+      console.log("> Listando Prévia Diagnóstica!");
+      gerarPreviaDiagnostica(diagnosticas);
+      mostrarMenos("diagnostica");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const gerarPreviaDiagnostica = (diagnosticas) => {
+  const QTD_PREVIA = 3;
+
+  if (diagnosticas.length == 0 || experiencias === undefined) {
+    throw new Error("Não existem diagnósticas!");
+  }
+
+  if (diagnosticas.length > QTD_PREVIA) {
+    document.getElementById("diagnosticas").innerHTML = "";
+
+    for (let index = 0; index < QTD_PREVIA; index++) {
+      addDiagnosticaCard(diagnosticas[index]);
+    }
+
+    const qtdRestante = diagnosticas.length - QTD_PREVIA;
+    let restante = document.createElement("div");
+    restante.classList.add("mostrar-mais");
+    restante.innerHTML = `
+    <p class="quantidade">
+      + <span class="numero-quantidade">${qtdRestante}</span>
+    </p>
+    `;
+
+    restante.addEventListener("click", listarDiagnosticas);
+    const divDiagnosticas = document.getElementById("diagnosticas");
+    divDiagnosticas.append(restante);
+  }
+};
 listener();
