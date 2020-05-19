@@ -94,7 +94,6 @@ class Diagnostica extends CRUD
         $retorno = [];
         try {
             $retorno = $this->read(null, $tabela, $campos, $where_condicao, $where_valor, $group_by, $ordem, $limite);
-            echo $this->pegarUltimoSQL();
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             echo $this->pegarUltimoSQL();
