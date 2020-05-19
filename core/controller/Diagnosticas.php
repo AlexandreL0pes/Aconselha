@@ -252,8 +252,50 @@ class Diagnosticas
 
         $diagnosticasRelevantes = $diagnostica->listar($campos, $busca, null, null);
 
+        $diagnosticasCompletas = [];
 
-        return $diagnosticasRelevantes;
+
+        if (!empty($diagnosticasRelevantes) && !empty($diagnosticasRelevantes[0])) {
+            foreach ($diagnosticasRelevantes as $diagnostica) {
+                $professoresIds = explode(",", $diagnostica['professores']);
+                $perfisIds = explode(",", $diagnostica['perfis']);
+
+                $pf = new Perfil();
+
+                $perfis = [];
+                foreach ($perfisIds as $perfilId) {
+                    $perfil = $pf->selecionarPerfil($perfilId);
+                    array_push($perfis, $perfil);
+                }
+
+
+                $professores = [];
+
+                foreach ($professoresIds as $professorId) {
+                    // TODO: Selecionar o nome real do professor
+                    $professor = ['id' => $professorId, 'nome' => "Professor " . $professorId];
+                    array_push($professores, $professor);
+                }
+
+                $aluno = ['id' => $diagnostica['matricula'], 'nome' => "Nome " . $diagnostica['matricula']];
+
+                $tiposDiagnostica = $this->verificarTipoDiagnostica($perfisIds);
+
+                $diagnosticaCompleta = [
+                    'professores' => $professores,
+                    'aluno' => $aluno,
+                    'tipo' => $tiposDiagnostica
+                ];
+
+                array_push($diagnosticasCompletas, $diagnosticaCompleta);
+            }
+
+            http_response_code(200);
+            return json_encode($diagnosticasCompletas);
+        } else {
+            http_response_code(500);
+            return json_encode(array('message' => 'Nenhuma avaliação diagnóstica relevante foi encontrada!'));
+        }
     }
 
     /**
@@ -261,10 +303,9 @@ class Diagnosticas
      * @param $perfis   Lista com os perfis
      * @return array
      */
-    public function verificarTipoDiagnostica($perfis = null)
+    private function verificarTipoDiagnostica($perfis = null)
     {
-        $perfis = [1, 5, 6,8,8,8,8,8];
-
+        // $perfis = [1, 5, 6, 8, 8, 8, 8, 8];
         $perfil = new Perfil();
         $campos = Perfil::COL_TIPO;
 
