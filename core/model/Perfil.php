@@ -63,12 +63,17 @@ class Perfil extends CRUD {
                 $where_condicao .= " AND " . self::COL_NOME . " LIKE ? ";
                 $where_valor[] = "%{$busca[self::COL_NOME]}%";
             }
+            if (isset($busca[self::COL_ID]) && !empty($busca[self::COL_ID])){
+                $where_condicao .= " AND " . self::COL_ID . " LIKE ? ";
+                $where_valor[] = "%{$busca[self::COL_ID]}%";
+            }
         }
 
         $retorno = [];
 
         try {
-            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite);  
+            $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite); 
+            // echo $this->pegarUltimoSQL();
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             return false;
