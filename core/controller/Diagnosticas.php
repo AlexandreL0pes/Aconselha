@@ -234,4 +234,25 @@ class Diagnosticas
             return json_encode(array('message' => 'Não foi encontrada nenhuma avaliação diagnóstica!'));
         }
     }
+
+    public function listarDiagnosticasRelevantes($dados)
+    {
+        $reuniao_id = $dados['reuniao'];
+        $campos = "group_concat(DISTINCT professor) as professores " . ", " .
+            "matricula " . ", " .
+            "group_concat(perfil) as perfis ";
+
+        $busca = [
+            'relevantes' => [
+                'reuniao' => $reuniao_id
+            ]
+        ];
+
+        $diagnostica = new Diagnostica();
+
+        $diagnosticasRelevantes = $diagnostica->listar($campos, $busca, null, null);
+
+
+        return $diagnosticasRelevantes;
+    }
 }
