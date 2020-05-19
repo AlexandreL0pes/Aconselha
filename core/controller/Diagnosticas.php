@@ -254,7 +254,7 @@ class Diagnosticas
 
         $diagnosticasCompletas = [];
 
-
+        $count = 0;
         if (!empty($diagnosticasRelevantes) && !empty($diagnosticasRelevantes[0])) {
             foreach ($diagnosticasRelevantes as $diagnostica) {
                 $professoresIds = explode(",", $diagnostica['professores']);
@@ -282,6 +282,7 @@ class Diagnosticas
                 $tiposDiagnostica = $this->verificarTipoDiagnostica($perfisIds);
 
                 $diagnosticaCompleta = [
+                    'diagnostica' => ++$count,
                     'professores' => $professores,
                     'aluno' => $aluno,
                     'tipo' => $tiposDiagnostica
