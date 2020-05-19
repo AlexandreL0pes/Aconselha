@@ -218,11 +218,13 @@ const mostrarMenos = (avaliacao) => {
   let previas = {
     experiencia: listarPreviaExperiencias,
     ensino: listarPreviaAprendizados,
+    diagnostica: listarPreviaDiagnosticas
   };
 
   let total = {
     experiencia: listarExperiencias,
     ensino: listarAprendizados,
+    diagnostica: listarDiagnosticas
   };
   btnMostraMenos.removeEventListener("click", previas[avaliacao]);
   btnMostraMenos.addEventListener("click", total[avaliacao]);
@@ -241,11 +243,13 @@ const mostrarMais = (avaliacao) => {
   let previas = {
     experiencia: listarPreviaExperiencias,
     ensino: listarPreviaAprendizados,
+    diagnostica: listarPreviaDiagnosticas
   };
 
   let total = {
     experiencia: listarExperiencias,
     ensino: listarAprendizados,
+    diagnostica: listarDiagnosticas
   };
   btnMostrarMais.removeEventListener("click", total[avaliacao]);
   btnMostrarMais.addEventListener("click", previas[avaliacao]);
