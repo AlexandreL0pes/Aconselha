@@ -424,4 +424,25 @@ const gerarPreviaExperiencia = (experiencias) => {
 };
 
 
+const solicitarDiagnosticas = async () => {
+  const reuniao = localStorage.getItem("conselhoAtual") || "";
+
+  if (reuniao === "") {
+    showMessage("Ops, deu errado!", "Não foi possível identificar a reunião atual!","error", 5000);
+    return false;
+  }
+
+  let dados = {
+    acao: "Diagnosticas/listarDiagnosticasRelevantes",
+    reuniao: reuniao
+  };
+
+  return await sendRequest(dados).then((response) => {
+    return response;
+  }).catch((err) => {
+    showMessage("Ops, deu errado", "Não foi possível acessar as avaliações diagnósticas!","error", 5000);
+    console.error(err);
+  });
+}
+
 listener();
