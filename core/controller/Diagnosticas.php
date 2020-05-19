@@ -305,7 +305,6 @@ class Diagnosticas
      */
     private function verificarTipoDiagnostica($perfis = null)
     {
-        // $perfis = [1, 5, 6, 8, 8, 8, 8, 8];
         $perfil = new Perfil();
         $campos = Perfil::COL_TIPO;
 
