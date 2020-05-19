@@ -255,4 +255,16 @@ class Diagnosticas
 
         return $diagnosticasRelevantes;
     }
+
+    /**
+     * Retorna o tipo de uma diagnóstica, podendo ser positivo ou negativo 1 | 0
+     * @param $perfis   Lista com os valores booleanos de cada perfil
+     * @return array
+     */
+    public function verificarTipoDiagnostica($perfis = null)
+    {
+        $result = array_count_values($perfis);
+        $tipo = ($result[1] > $result[0]) ? 1 : 0; 
+        return $tipo;
+    }
 }
