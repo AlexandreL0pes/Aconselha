@@ -509,7 +509,7 @@ const addDiagnosticaCard = (diagnostica) => {
  * @param {*} professores JSON Object com professores
  */
 const gerarProfessoresChip = (professores) => {
-  const QTD_PREVIA = 2;
+  const QTD_PREVIA = 1;
 
   const chips = document.createElement("div");
   chips.classList.add("chips");
