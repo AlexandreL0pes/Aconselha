@@ -483,7 +483,6 @@ const solicitarDiagnosticas = async () => {
 const addDiagnosticaCard = (diagnostica) => {
   let card = document.createElement("div");
   // Verificação do tipo do card
-  console.log(diagnostica);
   const classeTipo = diagnostica.tipo === "true" ? "positiva" : "negativa";
 
   card.classList.add("avaliacao", "diagnostica", classeTipo);
@@ -845,8 +844,5 @@ const atualizarResultados = (avaliacao, quantidade) => {
   contador.innerHTML = quantidade;
 };
 
-atualizarResultados("aprendizado", 100);
-atualizarResultados("experiencia", 100);
-atualizarResultados("negativos", 100);
-atualizarResultados("positivos", 100);
+
 listener();
