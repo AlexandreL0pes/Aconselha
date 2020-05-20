@@ -19,17 +19,24 @@ const listener = () => {
  * @param {*} params
  */
 const closeModal = (params) => {
-  const modals = document.querySelectorAll(".modal");
-  modals.forEach((modal) => {
-    const closeBtn = modal.querySelector(".modal-close-btn");
-    closeBtn.addEventListener("click", (evnt) => {
-      fecharAvaliacao(modal);
-    });
-    const bgModal = modal.querySelector(".modal-background");
-    bgModal.addEventListener("click", (evnt) => {
-      fecharAvaliacao(modal);
-    });
-  });
+  const modalEnsino = document.getElementById("visualizar-ensino");
+  const modalExperiencia = document.getElementById("visualizar-experiencia");
+  const modalDiagnostica = document.getElementById("visualizar-diagnostica");
+
+  let closeBtn = modalEnsino.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", fecharEnsino);
+  let bgModal = modalEnsino.querySelector(".modal-background");
+  bgModal.addEventListener("click", fecharEnsino);
+
+  closeBtn = modalExperiencia.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", fecharExperiencia);
+  bgModal = modalExperiencia.querySelector(".modal-background");
+  bgModal.addEventListener("click", fecharExperiencia);
+
+  closeBtn = modalDiagnostica.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", fecharDiagnostica);
+  bgModal = modalDiagnostica.querySelector(".modal-background");
+  bgModal.addEventListener("click", fecharDiagnostica);
 };
 
 /**
@@ -218,13 +225,13 @@ const mostrarMenos = (avaliacao) => {
   let previas = {
     experiencia: listarPreviaExperiencias,
     ensino: listarPreviaAprendizados,
-    diagnostica: listarPreviaDiagnosticas
+    diagnostica: listarPreviaDiagnosticas,
   };
 
   let total = {
     experiencia: listarExperiencias,
     ensino: listarAprendizados,
-    diagnostica: listarDiagnosticas
+    diagnostica: listarDiagnosticas,
   };
   btnMostraMenos.removeEventListener("click", previas[avaliacao]);
   btnMostraMenos.addEventListener("click", total[avaliacao]);
@@ -243,13 +250,13 @@ const mostrarMais = (avaliacao) => {
   let previas = {
     experiencia: listarPreviaExperiencias,
     ensino: listarPreviaAprendizados,
-    diagnostica: listarPreviaDiagnosticas
+    diagnostica: listarPreviaDiagnosticas,
   };
 
   let total = {
     experiencia: listarExperiencias,
     ensino: listarAprendizados,
-    diagnostica: listarDiagnosticas
+    diagnostica: listarDiagnosticas,
   };
   btnMostrarMais.removeEventListener("click", total[avaliacao]);
   btnMostrarMais.addEventListener("click", previas[avaliacao]);
@@ -352,9 +359,13 @@ const gerarDisciplinasChip = (disciplinas) => {
  * Gera um chip com o texto informado
  * @param {*} nome Texto adicionado ao chip
  */
-const gerarChips = (nome) => {
+const gerarChips = (nome, tipo = null) => {
   const chip = document.createElement("div");
   chip.classList.add("chip");
+  if (tipo != null) {
+    tipo = tipo === "1" ? "positivo" : "negativo";
+    chip.classList.add(tipo);
+  }
 
   const span = document.createElement("span");
   span.classList.add("chip-text");
@@ -463,7 +474,8 @@ const solicitarDiagnosticas = async () => {
 const addDiagnosticaCard = (diagnostica) => {
   let card = document.createElement("div");
   // Verificação do tipo do card
-  const classeTipo = diagnostica.tipo ? "positiva" : "negativa";
+  console.log(diagnostica);
+  const classeTipo = diagnostica.tipo === "true" ? "positiva" : "negativa";
 
   card.classList.add("avaliacao", "diagnostica", classeTipo);
   card.setAttribute("data-diagnostica", diagnostica.diagnostica);
@@ -479,7 +491,7 @@ const addDiagnosticaCard = (diagnostica) => {
   card.appendChild(titulo);
   card.appendChild(gerarProfessoresChip(diagnostica.professores));
 
-  card.addEventListener("click", (e) => console.log("Clicou Diagnóstica!"));
+  card.addEventListener("click", abrirDiagnostica);
 
   const diagnosticas = document.getElementById("diagnosticas");
   diagnosticas.append(card);
@@ -519,6 +531,12 @@ const listarDiagnosticas = () => {
       removerPrevia("diagnostica");
       diagnosticas.map((diagnostica) => addDiagnosticaCard(diagnostica));
       mostrarMais("diagnostica");
+      console.log(diagnosticas);
+
+      localStorage.setItem(
+        "diagnosticasRelevantes",
+        JSON.stringify(diagnosticas)
+      );
     })
     .catch((err) => {
       console.error(err);
@@ -531,6 +549,10 @@ const listarPreviaDiagnosticas = () => {
       console.log("> Listando Prévia Diagnóstica!");
       gerarPreviaDiagnostica(diagnosticas);
       mostrarMenos("diagnostica");
+      localStorage.setItem(
+        "diagnosticasRelevantes",
+        JSON.stringify(diagnosticas)
+      );
     })
     .catch((err) => {
       console.error(err);
@@ -565,4 +587,117 @@ const gerarPreviaDiagnostica = (diagnosticas) => {
     divDiagnosticas.append(restante);
   }
 };
+
+const abrirDiagnostica = (element) => {
+  let diagnostica = element.currentTarget.getAttribute("data-diagnostica");
+  console.log("Diagnostica", diagnostica);
+  const modalDiagnostica = document.getElementById("visualizar-diagnostica");
+
+  if (diagnostica) {
+    if (!localStorage.getItem("diagnosticasRelevantes")) {
+      throw new Error("As diagnósticas não foram encontradas!");
+    }
+
+    const diagnosticasRelevantes = JSON.parse(
+      localStorage.getItem("diagnosticasRelevantes")
+    );
+
+    const diagnosticaSelecionada = diagnosticasRelevantes.find(
+      (element) => element.diagnostica == diagnostica
+    );
+
+    console.log(diagnosticaSelecionada);
+    preencherDiagnostica(diagnosticaSelecionada);
+  }
+};
+/* {
+  "diagnostica": 1,
+  "professores": [
+    {
+      "id": "11",
+      "nome": "Professor 11"
+    },
+    {
+      "id": "10",
+      "nome": "Professor 10"
+    },
+    {
+      "id": "10",
+      "nome": "Professor 10"
+    },
+    {
+      "id": "11",
+      "nome": "Professor 11"
+    }
+  ],
+  "aluno": {
+    "id": "2017103202030090",
+    "nome": "Nome 2017103202030090"
+  },
+  "perfis": [
+    [
+      {
+        "id": "1",
+        "nome": "Faltoso",
+        "tipo": "0"
+      }
+    ],
+    [
+      {
+        "id": "2",
+        "nome": "Indisciplina",
+        "tipo": "0"
+      }
+    ],
+    [
+      {
+        "id": "3",
+        "nome": "Problemas de Saúde",
+        "tipo": "0"
+      }
+    ]
+  ],
+  "tipo": "false"
+} */
+
+const preencherDiagnostica = (diagnostica) => {
+  const modalDiagnostica = document.getElementById("visualizar-diagnostica");
+  const professoresChips = modalDiagnostica.querySelector(
+    ".professores .chips"
+  );
+  const perfisChips = modalDiagnostica.querySelector(".perfis .chips");
+
+  modalDiagnostica.classList.toggle("is-active");
+  const classeTipo = diagnostica.tipo === "true" ? "positiva" : "negativa";
+  const modalCard = modalDiagnostica.querySelector(".modal-card");
+
+  modalCard.classList.add(classeTipo);
+  console.log(classeTipo);
+
+  diagnostica.professores.map((professor) => {
+    professoresChips.appendChild(gerarChips(professor.nome));
+  });
+
+  diagnostica.perfis.map((perfil) => {
+    perfisChips.appendChild(gerarChips(perfil.nome, perfil.tipo));
+    console.log(perfil);
+  });
+};
+
+const fecharDiagnostica = () => {
+  const modalDiagnostica = document.getElementById("visualizar-diagnostica");
+  modalDiagnostica.classList.toggle("is-active");
+  const modalCard = modalDiagnostica.querySelector(".modal-card");
+  modalCard.classList.remove("positiva", "negativa");
+
+  const professoresChips = (modalDiagnostica.querySelector(
+    ".professores .chips"
+  ).innerHTML = "");
+  const perfisChips = (modalDiagnostica.querySelector(
+    ".perfis .chips"
+  ).innerHTML = "");
+};
+
+const fecharEnsino = (params) => {};
+const fecharExperiencia = (params) => {};
 listener();
