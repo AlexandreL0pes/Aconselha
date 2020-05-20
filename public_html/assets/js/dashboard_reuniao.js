@@ -163,7 +163,7 @@ const listarPreviaAprendizados = () => {
   solicitarAprendizados()
     .then((aprendizados) => {
       console.log("> Listando Prévia!");
-      gerarPrevia(aprendizados);
+      gerarPreviaAprendizados(aprendizados);
       mostrarMenos("ensino");
     })
     .catch((err) => {
@@ -175,7 +175,7 @@ const listarPreviaAprendizados = () => {
  * Lista os 3 primeiros aprendizados e  adiciona o card restante
  * @param {*} aprendizados Lista JSON com todos os aprendizados
  */
-const gerarPrevia = (aprendizados) => {
+const gerarPreviaAprendizados = (aprendizados) => {
   const qtdPrevia = 3;
   if (aprendizados.length == 0 || aprendizados === undefined) {
     throw new Error("Não existem aprendizados!");
@@ -438,6 +438,9 @@ const gerarPreviaExperiencia = (experiencias) => {
   }
 };
 
+/**
+ * Solicita e apresenta todas as avaliações diagnósticas
+ */
 const solicitarDiagnosticas = async () => {
   const reuniao = localStorage.getItem("conselhoAtual") || "";
 
@@ -471,6 +474,10 @@ const solicitarDiagnosticas = async () => {
     });
 };
 
+/**
+ * Cria e adiciona o card de diagnóstica na tela
+ * @param {*} diagnostica JSON Object com uma avaliação diagnóstica
+ */
 const addDiagnosticaCard = (diagnostica) => {
   let card = document.createElement("div");
   // Verificação do tipo do card
@@ -497,6 +504,10 @@ const addDiagnosticaCard = (diagnostica) => {
   diagnosticas.append(card);
 };
 
+/**
+ * Gerar os chips com os professores informados
+ * @param {*} professores JSON Object com professores
+ */
 const gerarProfessoresChip = (professores) => {
   const QTD_PREVIA = 2;
 
@@ -543,6 +554,9 @@ const listarDiagnosticas = () => {
     });
 };
 
+/**
+ * Solicita e lista a prévia das avaliações diagnósticas
+ */
 const listarPreviaDiagnosticas = () => {
   solicitarDiagnosticas()
     .then((diagnosticas) => {
@@ -559,6 +573,10 @@ const listarPreviaDiagnosticas = () => {
     });
 };
 
+/**
+ *  Adiciona na tela a prévia das avaliações diagnósticas   
+ * @param {*} diagnosticas JSON Object
+ */
 const gerarPreviaDiagnostica = (diagnosticas) => {
   const QTD_PREVIA = 3;
 
@@ -588,6 +606,10 @@ const gerarPreviaDiagnostica = (diagnosticas) => {
   }
 };
 
+/**
+ * Seleciona a avaliação clicada e abre seu respectivo modal
+ * @param {*} element Elemento clicado
+ */
 const abrirDiagnostica = (element) => {
   let diagnostica = element.currentTarget.getAttribute("data-diagnostica");
   console.log("Diagnostica", diagnostica);
@@ -611,6 +633,11 @@ const abrirDiagnostica = (element) => {
   }
 };
 
+
+/**
+ * Preenche o modal de visualização com base da diagnóstica retornada
+ * @param {*} diagnostica JSON Object com diagnóstica selecionada
+ */
 const preencherDiagnostica = (diagnostica) => {
   const modalDiagnostica = document.getElementById("visualizar-diagnostica");
   const professoresChips = modalDiagnostica.querySelector(
@@ -635,6 +662,9 @@ const preencherDiagnostica = (diagnostica) => {
   });
 };
 
+/**
+ * Fecha o modal de diagnóstica
+ */
 const fecharDiagnostica = () => {
   const modalDiagnostica = document.getElementById("visualizar-diagnostica");
   modalDiagnostica.classList.toggle("is-active");
@@ -649,6 +679,10 @@ const fecharDiagnostica = () => {
   ).innerHTML = "");
 };
 
+/**
+ * Seleciona a avaliação clicada e abre seu respectivo modal
+ * @param {*} element Elemento clicado
+ */
 const abrirExperiencia = (element) => {
   console.log("> Abrindo a Experiencia!");
   let experiencia = element.currentTarget.getAttribute("data-experiencia");
@@ -681,6 +715,10 @@ const abrirExperiencia = (element) => {
   }
 };
 
+/**
+ * Preenche o modal de visualização com base da experiencia retornada
+ * @param {*} diagnostica JSON Object com diagnóstica selecionada
+ */
 const preencherExperiencia = (experiencia) => {
   const modalExperiencia = document.getElementById("visualizar-experiencia");
 
@@ -718,13 +756,16 @@ const preencherExperiencia = (experiencia) => {
   });
 };
 
+/**
+ * Seleciona a avaliação clicada e abre seu respectivo modal
+ * @param {*} element Elemento clicado
+ */
 const abrirAprendizado = (element) => {
   let aprendizado = element.currentTarget.getAttribute("data-aprendizado");
 
   console.log(aprendizado);
 
   if (aprendizado) {
-    // localStorage.setItem("aprendizado")
 
     const dados = {
       acao: "Aprendizados/selecionar",
@@ -733,7 +774,6 @@ const abrirAprendizado = (element) => {
 
     sendRequest(dados)
       .then((response) => {
-        console.log(response);
         preencherAprendizado(response);
       })
       .catch((err) => {
@@ -749,6 +789,10 @@ const abrirAprendizado = (element) => {
   }
 };
 
+/**
+ * Preenche o modal de visualização com base no aprendizado retornado
+ * @param {*} diagnostica JSON Object com aprendizado selecionada
+ */
 const preencherAprendizado = (ensino) => {
   const modalAprendizado = document.getElementById("visualizar-ensino");
 
@@ -770,11 +814,17 @@ const preencherAprendizado = (ensino) => {
 
 };
 
+/**
+ * Fecha o modal de Experiência
+ */
 const fecharExperiencia = () => {
   const modalExperiencia = document.getElementById("visualizar-experiencia");
   modalExperiencia.classList.toggle("is-active");
 };
 
+/**
+ * Fecha o modal de Aprendizado
+ */
 const fecharEnsino = () => {
   const modalEnsino = document.getElementById("visualizar-ensino");
   modalEnsino.classList.toggle("is-active");
