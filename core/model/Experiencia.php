@@ -75,6 +75,8 @@ class Experiencia extends CRUD
         if (isset($busca[self::COL_ID]) && !empty($busca[self::COL_ID])) {
             $where_condicao .= " AND " . self::COL_ID . " = ?";
             $where_valor[] = $busca[self::COL_ID];
+            $tabela = self::TABELA . " e INNER JOIN " . Classificacao::TABELA . " c ON e." . self::COL_CLASSIFICACAO . " = c." . Classificacao::COL_ID;
+ 
         }
 
         $retorno = [];

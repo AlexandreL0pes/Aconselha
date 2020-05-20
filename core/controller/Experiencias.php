@@ -5,7 +5,7 @@ namespace core\controller;
 use core\model\Experiencia;
 use core\model\DisciplinaExperiencia;
 use core\model\Classificacao;
-
+use core\model\Perfil;
 
 class Experiencias
 {
@@ -123,7 +123,9 @@ class Experiencias
         Experiencia::COL_TITULO . ", " .
         Experiencia::COL_OBSERVACAO . ", " .
         Experiencia::COL_DATA . ", " .
-        Experiencia::COL_CLASSIFICACAO
+        "c.".Classificacao::COL_ID . ", " . 
+        "c.".Classificacao::COL_NOME 
+
         // Classificacao::COL_NOME;
         ;
 
@@ -132,13 +134,14 @@ class Experiencias
         $resultadoExperiencia = $experiencia->listar($campos, $busca, null, 1)[0];
         if (!empty($resultadoExperiencia)) {
             $disciplinas = $this->disciplinasExperiencia($experiencia_id);
-
+            // print_r($resultadoExperiencia);
+            $classificacao = ['id' => $resultadoExperiencia[Perfil::COL_ID], 'nome' => $resultadoExperiencia[Perfil::COL_NOME]];
             $experienciaCompleta = [
                 'experiencia' => $resultadoExperiencia[Experiencia::COL_ID],
                 'titulo' => $resultadoExperiencia[Experiencia::COL_TITULO],
                 'descricao' => $resultadoExperiencia[Experiencia::COL_OBSERVACAO],
                 'data' => $resultadoExperiencia[Experiencia::COL_DATA],
-                'classificacao' => $resultadoExperiencia[Experiencia::COL_CLASSIFICACAO],
+                'classificacao' => $classificacao,
                 'disciplinas' => $disciplinas
             ];
 
