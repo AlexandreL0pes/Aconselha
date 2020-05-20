@@ -165,6 +165,7 @@ const listarPreviaAprendizados = () => {
       console.log("> Listando Prévia!");
       gerarPreviaAprendizados(aprendizados);
       mostrarMenos("ensino");
+      atualizarResultados("ensino", aprendizados.length);
     })
     .catch((err) => {
       console.error(err);
@@ -207,7 +208,7 @@ const removerPrevia = (avaliacao) => {
   const element = document.querySelector("." + avaliacao);
   const previa = element.querySelector(".mostrar-mais");
   previa.remove();
-
+  element.querySelector(".avaliacoes").innerHTML = "";
   mostrarMenos(avaliacao);
 };
 
@@ -399,6 +400,7 @@ const listarPreviaExperiencias = () => {
       console.log("> Listando Prévia!");
       gerarPreviaExperiencia(experiencias);
       mostrarMenos("experiencia");
+      atualizarResultados("experiencia", experiencias.length);
     })
     .catch((err) => {
       console.error(err);
@@ -563,6 +565,14 @@ const listarPreviaDiagnosticas = () => {
       console.log("> Listando Prévia Diagnóstica!");
       gerarPreviaDiagnostica(diagnosticas);
       mostrarMenos("diagnostica");
+      
+      
+      // Contabiliza as ocorrências negativas e positivas
+      const negativas = diagnosticas.filter((value) => value.tipo === "false");
+      const positivas = diagnosticas.filter((value) => value.tipo === "true");
+      atualizarResultados("positivos", positivas.length);
+      atualizarResultados("negativos", negativas.length);
+      
       localStorage.setItem(
         "diagnosticasRelevantes",
         JSON.stringify(diagnosticas)
@@ -574,7 +584,7 @@ const listarPreviaDiagnosticas = () => {
 };
 
 /**
- *  Adiciona na tela a prévia das avaliações diagnósticas   
+ *  Adiciona na tela a prévia das avaliações diagnósticas
  * @param {*} diagnosticas JSON Object
  */
 const gerarPreviaDiagnostica = (diagnosticas) => {
@@ -632,7 +642,6 @@ const abrirDiagnostica = (element) => {
     preencherDiagnostica(diagnosticaSelecionada);
   }
 };
-
 
 /**
  * Preenche o modal de visualização com base da diagnóstica retornada
@@ -766,7 +775,6 @@ const abrirAprendizado = (element) => {
   console.log(aprendizado);
 
   if (aprendizado) {
-
     const dados = {
       acao: "Aprendizados/selecionar",
       aprendizado: aprendizado,
@@ -811,7 +819,6 @@ const preencherAprendizado = (ensino) => {
   ensino.estudantes.map((estudante) =>
     estudantesChips.appendChild(gerarChips(estudante.nome))
   );
-
 };
 
 /**
@@ -829,4 +836,17 @@ const fecharEnsino = () => {
   const modalEnsino = document.getElementById("visualizar-ensino");
   modalEnsino.classList.toggle("is-active");
 };
+
+const atualizarResultados = (avaliacao, quantidade) => {
+  const resultados = document.querySelector(".reuniao-info");
+
+  const contador = resultados.querySelector(`.${avaliacao} .quantidade`);
+
+  contador.innerHTML = quantidade;
+};
+
+atualizarResultados("aprendizado", 100);
+atualizarResultados("experiencia", 100);
+atualizarResultados("negativos", 100);
+atualizarResultados("positivos", 100);
 listener();
