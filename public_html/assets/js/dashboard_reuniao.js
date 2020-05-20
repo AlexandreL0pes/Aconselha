@@ -671,7 +671,7 @@ const preencherDiagnostica = (diagnostica) => {
   const classeTipo = diagnostica.tipo === "true" ? "positiva" : "negativa";
   const modalCard = modalDiagnostica.querySelector(".modal-card");
 
-  modalCard.classList.add(classeTipo);
+  modalDiagnostica.classList.add(classeTipo);
   console.log(classeTipo);
 
   diagnostica.professores.map((professor) => {
@@ -688,7 +688,7 @@ const fecharDiagnostica = () => {
   const modalDiagnostica = document.getElementById("visualizar-diagnostica");
   modalDiagnostica.classList.toggle("is-active");
   const modalCard = modalDiagnostica.querySelector(".modal-card");
-  modalCard.classList.remove("positiva", "negativa");
+  modalDiagnostica.classList.remove("positiva", "negativa");
 
   const professoresChips = (modalDiagnostica.querySelector(
     ".professores .chips"

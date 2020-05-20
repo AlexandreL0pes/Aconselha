@@ -232,30 +232,34 @@
 .avaliacao.ensino {
   border-left: 4px solid;
 }
-.modal-avaliacao.positiva,
-.modal-avaliacao.negativa,
-.modal-avaliacao.experiencia,
-.modal-avaliacao.ensino {
+
+.modal.positiva .modal-avaliacao,
+.modal.negativa .modal-avaliacao,
+.modal.experiencia .modal-avaliacao,
+.modal.ensino  .modal-avaliacao{
   border-left: 5px solid;
   border-radius: 5px;
 }
 
 .avaliacao.positiva,
-.modal-avaliacao.positiva {
+.modal.positiva .modal-avaliacao {
   border-color: #3aafae;
 }
 .avaliacao.negativa,
-.modal-avaliacao.negativa {
+.modal.negativa .modal-avaliacao {
   border-color: #ff5151;
 }
 .avaliacao.experiencia,
-.modal-avaliacao.experiencia {
+.modal.experiencia .modal-avaliacao {
   border-color: #7b61b2;
 }
 .avaliacao.ensino,
-.modal-avaliacao.ensino {
+.modal.ensino .modal-avaliacao {
   border-color: #ffa751;
 }
+
+
+
 
 /* avaliacoes */
 
