@@ -610,55 +610,6 @@ const abrirDiagnostica = (element) => {
     preencherDiagnostica(diagnosticaSelecionada);
   }
 };
-/* {
-  "diagnostica": 1,
-  "professores": [
-    {
-      "id": "11",
-      "nome": "Professor 11"
-    },
-    {
-      "id": "10",
-      "nome": "Professor 10"
-    },
-    {
-      "id": "10",
-      "nome": "Professor 10"
-    },
-    {
-      "id": "11",
-      "nome": "Professor 11"
-    }
-  ],
-  "aluno": {
-    "id": "2017103202030090",
-    "nome": "Nome 2017103202030090"
-  },
-  "perfis": [
-    [
-      {
-        "id": "1",
-        "nome": "Faltoso",
-        "tipo": "0"
-      }
-    ],
-    [
-      {
-        "id": "2",
-        "nome": "Indisciplina",
-        "tipo": "0"
-      }
-    ],
-    [
-      {
-        "id": "3",
-        "nome": "Problemas de Saúde",
-        "tipo": "0"
-      }
-    ]
-  ],
-  "tipo": "false"
-} */
 
 const preencherDiagnostica = (diagnostica) => {
   const modalDiagnostica = document.getElementById("visualizar-diagnostica");
@@ -697,6 +648,45 @@ const fecharDiagnostica = () => {
     ".perfis .chips"
   ).innerHTML = "");
 };
+
+
+const preencherExperiencia = (experiencia) => {
+  const modalExperiencia = document.getElementById("visualizar-experiencia");
+
+  const titulo = modalExperiencia.querySelector(".modal-card-title");
+  const categoria = modalExperiencia.querySelector(
+    ".modal-experiencia .info .chip-categoria"
+  );
+  const observacao = modalExperiencia.querySelector(
+    ".modal-experiencia .info .observacao"
+  );
+
+  const disciplinasChip = modalExperiencia.querySelector(".disciplinas .chips");
+
+  modalExperiencia.classList.toggle("is-active");
+
+  titulo.innerHTML = experiencia.titulo;
+
+  const classeClassificacao = "";
+  if (experiencia.classificacao === "Pontos Positivos") {
+    classeClassificacao = "positivo";
+  } else if (experiencia.classificacao === "Pontos Negativos") {
+    classeClassificacao = "negativo";
+  } else {
+    classeClassificacao = "";
+  }
+
+  categoria.classList.add(classeClassificacao);
+  categoria.innerHTML = experiencia.classificacao;
+
+  observacao.innerHTML = experiencia.observacao;
+
+  experiencia.disciplinas.map((disciplina) => {
+    disciplinasChip.appendChild(gerarChips(disciplina.nome));
+  });
+};
+
+
 
 const fecharEnsino = (params) => {};
 const fecharExperiencia = (params) => {};
