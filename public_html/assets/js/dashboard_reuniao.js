@@ -133,7 +133,7 @@ const addAprendizadoCard = (aprendizado) => {
     </div>
   `;
 
-  card.addEventListener("click", (e) => console.log("Clicou Aprendizado!"));
+  card.addEventListener("click", (e) => abrirAprendizado(e));
 
   const aprendizados = document.getElementById("aprendizados");
   aprendizados.append(card);
@@ -718,11 +718,62 @@ const preencherExperiencia = (experiencia) => {
   });
 };
 
+const abrirAprendizado = (element) => {
+  let aprendizado = element.currentTarget.getAttribute("data-aprendizado");
+
+  console.log(aprendizado);
+
+  if (aprendizado) {
+    // localStorage.setItem("aprendizado")
+
+    const dados = {
+      acao: "Aprendizados/selecionar",
+      aprendizado: aprendizado,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        preencherAprendizado(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    showMessage(
+      "Ops, deu errado!",
+      "Não foi possível abrir a experiência!",
+      "error",
+      5000
+    );
+  }
+};
+
+const preencherAprendizado = (ensino) => {
+  const modalAprendizado = document.getElementById("visualizar-ensino");
+
+  const disciplina = modalAprendizado.querySelector(".modal-card-title");
+  const observacao = modalAprendizado.querySelector(".info .observacao");
+
+  const estudantesChips = modalAprendizado.querySelector(".estudantes .chips");
+
+  modalAprendizado.classList.toggle("is-active");
+
+  console.log(ensino);
+
+  disciplina.innerHTML = ensino.disciplina.nome;
+  observacao.innerHTML = ensino.observacao;
+  estudantesChips.innerHTML = "";
+  ensino.estudantes.map((estudante) =>
+    estudantesChips.appendChild(gerarChips(estudante.nome))
+  );
+
+};
+
 const fecharExperiencia = () => {
   const modalExperiencia = document.getElementById("visualizar-experiencia");
   modalExperiencia.classList.toggle("is-active");
 };
-
 
 const fecharEnsino = () => {
   const modalEnsino = document.getElementById("visualizar-ensino");
