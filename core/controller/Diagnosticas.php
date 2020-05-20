@@ -264,7 +264,7 @@ class Diagnosticas
 
                 $perfis = [];
                 foreach ($perfisIds as $perfilId) {
-                    $perfil = $pf->selecionarPerfil($perfilId);
+                    $perfil = $pf->selecionarPerfil($perfilId)[0];
                     array_push($perfis, $perfil);
                 }
 
@@ -285,6 +285,7 @@ class Diagnosticas
                     'diagnostica' => ++$count,
                     'professores' => $professores,
                     'aluno' => $aluno,
+                    'perfis' => $perfis,
                     'tipo' => $tiposDiagnostica
                 ];
 
