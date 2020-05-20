@@ -721,7 +721,11 @@ const preencherExperiencia = (experiencia) => {
 const fecharExperiencia = () => {
   const modalExperiencia = document.getElementById("visualizar-experiencia");
   modalExperiencia.classList.toggle("is-active");
-
 };
-const fecharEnsino = (params) => {};
+
+
+const fecharEnsino = () => {
+  const modalEnsino = document.getElementById("visualizar-ensino");
+  modalEnsino.classList.toggle("is-active");
+};
 listener();
