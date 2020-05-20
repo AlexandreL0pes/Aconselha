@@ -5,7 +5,7 @@
   grid-template-areas: "content side";
 
   grid-gap: 5px;
-  grid-template-columns: 76vw 10vw;
+  grid-template-columns: 76vw 16vw;
 
   margin: 0px;
   padding: 0px;
@@ -59,6 +59,7 @@
   grid-template-columns: 1fr;
   /* grid-template-rows: repeat(auto-fill, minmax(20px, 1fr)); */
   box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
+  grid-gap: 10px;
 }
 
 .turma-info span:first-child {
