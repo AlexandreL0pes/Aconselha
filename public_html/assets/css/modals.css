@@ -24,12 +24,10 @@
   row-gap: 5px;
   border-radius: 5px;
 }
-.modal-ensino .disciplina {
-  font-size: 2rem;
-}
 
 .modal-ensino .observacao {
   padding: 5px 5px;
+  font-size: 1rem;
 }
 
 .modal-ensino .titulo-estudante {
