@@ -1,5 +1,15 @@
 import { showMessage, sendRequest } from "./utils.js";
-import Aprendizado, { listarPreviaAprendizados, listarAprendizados } from './components/Aprendizado.js';
+
+import Aprendizado, {
+  listarPreviaAprendizados,
+  listarAprendizados,
+} from "./components/Aprendizado.js";
+
+import Experiencia, {
+  listarExperiencias,
+  listarPreviaExperiencias,
+} from "./components/Experiencia.js";
+
 
 const listener = () => {
   const atendimentos = document.getElementById("abrirAtendimento");
@@ -9,10 +19,10 @@ const listener = () => {
   memoria.addEventListener("click", (event) => abrirMemoria());
 
   Aprendizado();
-
+  Experiencia();
+  
   closeModal();
 
-  listarPreviaExperiencias();
   listarPreviaDiagnosticas();
 };
 
@@ -40,7 +50,6 @@ const closeModal = (params) => {
   bgModal = modalDiagnostica.querySelector(".modal-background");
   bgModal.addEventListener("click", fecharDiagnostica);
 };
-
 
 /**
  * Abre uma nova aba com a página de memória
@@ -72,70 +81,6 @@ const abrirAtendimentos = () => {
       5000
     );
   }
-};
-
-
-/**
- * Remove o card de prévia
- * @param {*} avaliacao String com o id do elemento onde o card está
- */
-const removerPrevia = (avaliacao) => {
-  const element = document.querySelector("." + avaliacao);
-  const previa = element.querySelector(".mostrar-mais");
-  previa.remove();
-  element.querySelector(".avaliacoes").innerHTML = "";
-  mostrarMenos(avaliacao);
-};
-
-/**
- * Muda o texto e os eventos do botão para mostrar menos
- * @param {*} avaliacao Classe do elemento que engloba a avaliaão
- */
-const mostrarMenos = (avaliacao) => {
-  console.log("> Mostrando menos!");
-  const element = document.querySelector("." + avaliacao);
-  const btnMostraMenos = element.querySelector(".mostrar-tudo");
-  btnMostraMenos.innerHTML =
-    "Mostrar mais <i class='fas fa-angle-down' aria-hidden='true'></i>";
-
-  let previas = {
-    experiencia: listarPreviaExperiencias,
-    // ensino: listarPreviaAprendizados,
-    diagnostica: listarPreviaDiagnosticas,
-  };
-
-  let total = {
-    experiencia: listarExperiencias,
-    // ensino: listarAprendizados,
-    diagnostica: listarDiagnosticas,
-  };
-  btnMostraMenos.removeEventListener("click", previas[avaliacao]);
-  btnMostraMenos.addEventListener("click", total[avaliacao]);
-};
-
-/**
- * Muda o texto e os eventos do botão para mostrar mais
- * @param {*} avaliacao Classe do elemento que engloba a avaliaão
- */
-const mostrarMais = (avaliacao) => {
-  console.log("> Mostrando mais!");
-  const element = document.querySelector("." + avaliacao);
-  const btnMostrarMais = element.querySelector(".mostrar-tudo");
-  btnMostrarMais.innerHTML =
-    "Mostrar menos <i class='fas fa-angle-up' aria-hidden='true'></i>";
-  let previas = {
-    experiencia: listarPreviaExperiencias,
-    ensino: listarPreviaAprendizados,
-    diagnostica: listarPreviaDiagnosticas,
-  };
-
-  let total = {
-    experiencia: listarExperiencias,
-    ensino: listarAprendizados,
-    diagnostica: listarDiagnosticas,
-  };
-  btnMostrarMais.removeEventListener("click", total[avaliacao]);
-  btnMostrarMais.addEventListener("click", previas[avaliacao]);
 };
 
 /**
@@ -250,37 +195,7 @@ const gerarChips = (nome, tipo = null) => {
   return chip;
 };
 
-/**
- * Solicita e apresenta as experiências na página
- */
-const listarExperiencias = () => {
-  solicitarExperiencias()
-    .then((experiencias) => {
-      console.log("> Listando todas as experiências!");
-      removerPrevia("experiencia");
-      experiencias.map((experiencia) => addExperienciaCard(experiencia));
-      mostrarMais("experiencia");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-};
 
-/**
- * Solicita e apresenta a prévia de experiência na página
- */
-const listarPreviaExperiencias = () => {
-  solicitarExperiencias()
-    .then((experiencias) => {
-      console.log("> Listando Prévia!");
-      gerarPreviaExperiencia(experiencias);
-      mostrarMenos("experiencia");
-      atualizarResultados("experiencia", experiencias.length);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-};
 
 /**
  * Lista os 3 primeiro aprendizados e adiciona o card restante
@@ -313,6 +228,69 @@ const gerarPreviaExperiencia = (experiencias) => {
     const divExperiencias = document.getElementById("experiencias");
     divExperiencias.append(restante);
   }
+};
+
+/**
+ * Remove o card de prévia
+ * @param {*} avaliacao String com o id do elemento onde o card está
+ */
+const removerPrevia = (avaliacao) => {
+  const element = document.querySelector("." + avaliacao);
+  const previa = element.querySelector(".mostrar-mais");
+  previa.remove();
+  element.querySelector(".avaliacoes").innerHTML = "";
+  mostrarMenos(avaliacao);
+};
+
+/**
+ * Muda o texto e os eventos do botão para mostrar menos
+ * @param {*} avaliacao Classe do elemento que engloba a avaliaão
+ */
+const mostrarMenos = (avaliacao) => {
+  console.log("> Mostrando menos!");
+  const element = document.querySelector("." + avaliacao);
+  const btnMostraMenos = element.querySelector(".mostrar-tudo");
+  btnMostraMenos.innerHTML =
+    "Mostrar mais <i class='fas fa-angle-down' aria-hidden='true'></i>";
+
+  let previas = {
+    experiencia: listarPreviaExperiencias,
+    // ensino: listarPreviaAprendizados,
+    diagnostica: listarPreviaDiagnosticas,
+  };
+
+  let total = {
+    experiencia: listarExperiencias,
+    // ensino: listarAprendizados,
+    diagnostica: listarDiagnosticas,
+  };
+  btnMostraMenos.removeEventListener("click", previas[avaliacao]);
+  btnMostraMenos.addEventListener("click", total[avaliacao]);
+};
+
+/**
+ * Muda o texto e os eventos do botão para mostrar mais
+ * @param {*} avaliacao Classe do elemento que engloba a avaliaão
+ */
+const mostrarMais = (avaliacao) => {
+  console.log("> Mostrando mais!");
+  const element = document.querySelector("." + avaliacao);
+  const btnMostrarMais = element.querySelector(".mostrar-tudo");
+  btnMostrarMais.innerHTML =
+    "Mostrar menos <i class='fas fa-angle-up' aria-hidden='true'></i>";
+  let previas = {
+    experiencia: listarPreviaExperiencias,
+    ensino: listarPreviaAprendizados,
+    diagnostica: listarPreviaDiagnosticas,
+  };
+
+  let total = {
+    experiencia: listarExperiencias,
+    ensino: listarAprendizados,
+    diagnostica: listarDiagnosticas,
+  };
+  btnMostrarMais.removeEventListener("click", total[avaliacao]);
+  btnMostrarMais.addEventListener("click", previas[avaliacao]);
 };
 
 /**
@@ -530,7 +508,7 @@ const preencherDiagnostica = (diagnostica) => {
   modalDiagnostica.classList.toggle("is-active");
   const classeTipo = diagnostica.tipo === "true" ? "positiva" : "negativa";
   const modalCard = modalDiagnostica.querySelector(".modal-card");
-  
+
   const titulo = modalDiagnostica.querySelector(".modal-card-title");
   titulo.innerHTML = diagnostica.aluno.nome;
   modalDiagnostica.classList.add(classeTipo);
@@ -683,7 +661,6 @@ const preencherAprendizado = (ensino) => {
   const estudantesChips = modalAprendizado.querySelector(".estudantes .chips");
 
   modalAprendizado.classList.toggle("is-active");
-
 
   disciplina.innerHTML = ensino.disciplina.nome;
   observacao.innerHTML = ensino.observacao;
