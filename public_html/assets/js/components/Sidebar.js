@@ -1,24 +1,45 @@
 const abrirTurmasEvent = () => {
-  console.log("Abriu as turmas");
   const items = document.querySelectorAll(".turmas");
 
-  items.forEach();
+  items.forEach((item) =>
+    item.addEventListener("click", (element) => {
+      window.location.href = "./reunioes.html";
+    })
+  );
 };
 
 const abrirAlunosEvent = () => {
-  console.log("Abriu alunos");
+  const items = document.querySelectorAll(".estudantes");
+
+  items.forEach((item) =>
+    item.addEventListener("click", (element) => {
+      window.location.href = "./estudantes.html";
+    })
+  );
 };
 
 const abrirReunioesEvent = () => {
-  console.log("Abriu Reuniões");
+  const items = document.querySelectorAll(".reunioes");
+
+  items.forEach((item) =>
+    item.addEventListener("click", (element) => {
+      window.location.href = "./reunioes.html";
+    })
+  );
 };
 
 const abrirConfiguracoes = () => {
-  console.log("Abriu configurações");
+  const items = document.querySelectorAll(".config");
+
+  items.forEach((item) =>
+    item.addEventListener("click", (element) => {
+      window.location.href = "./config.html";
+    })
+  );
 };
 
 export default () => {
-  console.log("SIDE BAR");
+  //   console.log("SIDE BAR");
   abrirTurmasEvent();
   abrirAlunosEvent();
   abrirReunioesEvent();
