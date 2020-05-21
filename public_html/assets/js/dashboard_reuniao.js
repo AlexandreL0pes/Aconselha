@@ -1,4 +1,5 @@
 import { showMessage, sendRequest } from "./utils.js";
+import Aprendizados, { listarPreviaAprendizados, listarAprendizados } from './components/Aprendizados.js';
 
 const listener = () => {
   const atendimentos = document.getElementById("abrirAtendimento");
@@ -7,9 +8,10 @@ const listener = () => {
   const memoria = document.getElementById("abrirMemoria");
   memoria.addEventListener("click", (event) => abrirMemoria());
 
+  Aprendizados();
+
   closeModal();
 
-  listarPreviaAprendizados();
   listarPreviaExperiencias();
   listarPreviaDiagnosticas();
 };
@@ -72,126 +74,6 @@ const abrirAtendimentos = () => {
   }
 };
 
-/**
- * Dispara uma requisição assíncrona para a obtenção de aprendizados
- */
-const solicitarAprendizados = async () => {
-  const reuniao = localStorage.getItem("conselhoAtual") || "";
-
-  if (reuniao === "") {
-    showMessage(
-      "Ops, deu errado!",
-      "Não foi possível identificar a reunião atual!",
-      "error",
-      5000
-    );
-    return false;
-  }
-
-  let dados = {
-    acao: "Aprendizados/listarAprendizadosReuniao",
-    reuniao: reuniao,
-  };
-
-  return await sendRequest(dados)
-    .then((response) => {
-      return response;
-    })
-    .catch((err) => {
-      showMessage(
-        "Ops, deu errado!",
-        "Não foi possível acessar os aprendizados.",
-        "error",
-        5000
-      );
-      console.error(err);
-    });
-};
-
-const addAprendizadoCard = (aprendizado) => {
-  let card = document.createElement("div");
-  card.classList.add("avaliacao", "ensino");
-  card.setAttribute("data-aprendizado", aprendizado.aprendizado);
-  let qtdEstudantes = aprendizado.estudantes.length;
-  let aluno = qtdEstudantes > 1 ? "alunos" : "aluno";
-  card.innerHTML = `
-    <p class="tipo-avaliacao gray-text" name="">
-      Ensino-Aprendizado
-    </p>
-    <p class="titulo-avaliacao">${aprendizado.disciplina.nome}</p>
-    <div class="chips">
-      <div class="chip">
-        <span class="chip-text">${qtdEstudantes} ${aluno}</span>
-      </div>
-    </div>
-  `;
-
-  card.addEventListener("click", (e) => abrirAprendizado(e));
-
-  const aprendizados = document.getElementById("aprendizados");
-  aprendizados.append(card);
-};
-
-/**
- * Dispara uma requisição dos aprendizados e imprime todos na tela
- */
-const listarAprendizados = () => {
-  solicitarAprendizados()
-    .then((aprendizados) => {
-      console.log("> Listando todos os aprendizados!");
-
-      removerPrevia("ensino");
-      aprendizados.map((aprendizado) => addAprendizadoCard(aprendizado));
-      mostrarMais("ensino");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-};
-
-/**
- * Função que faz a requisição dos aprendizados e imprime a prévia
- */
-const listarPreviaAprendizados = () => {
-  solicitarAprendizados()
-    .then((aprendizados) => {
-      console.log("> Listando Prévia!");
-      gerarPreviaAprendizados(aprendizados);
-      mostrarMenos("ensino");
-      atualizarResultados("ensino", aprendizados.length);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-};
-
-/**
- * Lista os 3 primeiros aprendizados e  adiciona o card restante
- * @param {*} aprendizados Lista JSON com todos os aprendizados
- */
-const gerarPreviaAprendizados = (aprendizados) => {
-  const qtdPrevia = 3;
-  if (aprendizados.length == 0 || aprendizados === undefined) {
-    throw new Error("Não existem aprendizados!");
-  }
-  if (aprendizados.length > qtdPrevia) {
-    document.getElementById("aprendizados").innerHTML = "";
-    for (let index = 0; index < qtdPrevia; index++) {
-      addAprendizadoCard(aprendizados[index]);
-    }
-    const qtdRestante = aprendizados.length - qtdPrevia;
-    let restante = document.createElement("div");
-    restante.classList.add("mostrar-mais");
-    restante.innerHTML = `
-      <p class="quantidade">
-        + <span class="numero-quantidade">${qtdRestante}</span>
-      </p>`;
-
-    restante.addEventListener("click", listarAprendizados);
-    const divAprendizados = document.getElementById("aprendizados");
-    divAprendizados.append(restante);
-  }
-};
 
 /**
  * Remove o card de prévia
@@ -218,13 +100,13 @@ const mostrarMenos = (avaliacao) => {
 
   let previas = {
     experiencia: listarPreviaExperiencias,
-    ensino: listarPreviaAprendizados,
+    // ensino: listarPreviaAprendizados,
     diagnostica: listarPreviaDiagnosticas,
   };
 
   let total = {
     experiencia: listarExperiencias,
-    ensino: listarAprendizados,
+    // ensino: listarAprendizados,
     diagnostica: listarDiagnosticas,
   };
   btnMostraMenos.removeEventListener("click", previas[avaliacao]);
