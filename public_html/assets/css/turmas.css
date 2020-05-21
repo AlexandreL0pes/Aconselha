@@ -1,0 +1,76 @@
+:root {
+  /* Cores Cursos */
+  --info-color: rgb(40, 52, 153);
+  --amb-color: rgb(37, 165, 33);
+  --agro-color: #830c0c;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.main .turmas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-auto-rows: minmax(100px, 1fr);
+  grid-gap: 10px;
+  margin: 10px;
+}
+
+.cardbox {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  text-justify: center;
+  text-align: center;
+
+  background-color: #fff;
+  border-radius: 2px;
+  color: #222424;
+  margin: 0px;
+  padding: 5px;
+  row-gap: 5px;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+  cursor: pointer;
+}
+
+.cardbox:hover {
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Estilo para os tiles */
+.cardbox.is-info {
+  border-top: 2px solid var(--info-color);
+}
+
+.cardbox.is-agro {
+  border-top: 2px solid var(--agro-color);
+}
+
+.cardbox.is-amb {
+  border-top: 2px solid var(--amb-color);
+}
+
+.cardbox p:nth-child(1),
+.cardbox p:nth-child(3) {
+  font-size: 0.8rem;
+  color: rgb(98, 98, 98);
+}
+.cardbox p:nth-child(2) {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.cardbox p:nth-child(3) {
+  font-size: 0.75rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.selected {
+  background: rgba(0, 0, 0, 0.1);
+}
