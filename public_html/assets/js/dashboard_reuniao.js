@@ -657,10 +657,8 @@ const preencherDiagnostica = (diagnostica) => {
   const modalCard = modalDiagnostica.querySelector(".modal-card");
   
   const titulo = modalDiagnostica.querySelector(".modal-card-title");
-  console.log(diagnostica);
   titulo.innerHTML = diagnostica.aluno.nome;
   modalDiagnostica.classList.add(classeTipo);
-  console.log(classeTipo);
 
   diagnostica.professores.map((professor) => {
     professoresChips.appendChild(gerarChips(professor.nome));
@@ -668,7 +666,6 @@ const preencherDiagnostica = (diagnostica) => {
 
   diagnostica.perfis.map((perfil) => {
     perfisChips.appendChild(gerarChips(perfil.nome, perfil.tipo));
-    console.log(perfil);
   });
 };
 
@@ -812,7 +809,6 @@ const preencherAprendizado = (ensino) => {
 
   modalAprendizado.classList.toggle("is-active");
 
-  console.log(ensino);
 
   disciplina.innerHTML = ensino.disciplina.nome;
   observacao.innerHTML = ensino.observacao;
