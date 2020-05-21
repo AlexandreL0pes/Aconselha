@@ -5,8 +5,8 @@
   --agro-color: #830c0c;
 }
 
-.reunioes,
-.turmas {
+.main .reunioes,
+.main .turmas {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-auto-rows: minmax(90px, 1fr);
