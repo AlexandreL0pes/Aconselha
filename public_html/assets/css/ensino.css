@@ -99,22 +99,12 @@
 .card-avaliacao.experiencia {
 
   border-left: 4px solid;
-  border-image-source: linear-gradient(
-    45deg,
-    rgb(21, 163, 219),
-    rgb(61, 211, 216)
-  );
-  border-image-slice: 1;
+  border-color: #7b61b2;
   border-radius: 5px !important;
 }
 .card-avaliacao.ensino {
   border-left: 4px solid;
-  border-image-source: linear-gradient(
-    0deg,
-    rgba(47, 53, 136, 0.938),
-    rgb(15, 39, 146)
-  );
-  border-image-slice: 1;
+  border-color: #ffa751;
   border-radius: 5px !important;
 }
 
