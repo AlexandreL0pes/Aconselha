@@ -39,13 +39,6 @@ const closeModal = (params) => {
   bgModal.addEventListener("click", fecharDiagnostica);
 };
 
-/**
- * Tira a classe active do modal
- * @param {*} modal Modal DOM Element
- */
-const fecharAvaliacao = (modal) => {
-  modal.classList.toggle("is-active");
-};
 
 /**
  * Abre uma nova aba com a página de memória
