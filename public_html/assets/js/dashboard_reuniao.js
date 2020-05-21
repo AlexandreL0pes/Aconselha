@@ -1,5 +1,5 @@
 import { showMessage, sendRequest } from "./utils.js";
-import Aprendizados, { listarPreviaAprendizados, listarAprendizados } from './components/Aprendizados.js';
+import Aprendizado, { listarPreviaAprendizados, listarAprendizados } from './components/Aprendizado.js';
 
 const listener = () => {
   const atendimentos = document.getElementById("abrirAtendimento");
@@ -8,7 +8,7 @@ const listener = () => {
   const memoria = document.getElementById("abrirMemoria");
   memoria.addEventListener("click", (event) => abrirMemoria());
 
-  Aprendizados();
+  Aprendizado();
 
   closeModal();
 
