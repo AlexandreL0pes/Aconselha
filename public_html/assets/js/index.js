@@ -1,3 +1,6 @@
+import Sidebar from "./components/Sidebar.js";
+
+
 let events = () => {
   resposiveNavbar();
   activeDropdown();
@@ -67,4 +70,5 @@ let navegacaoTabs = () => {
   }
 };
 
+Sidebar();
 events();
