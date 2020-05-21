@@ -564,14 +564,13 @@ const listarPreviaDiagnosticas = () => {
       console.log("> Listando Prévia Diagnóstica!");
       gerarPreviaDiagnostica(diagnosticas);
       mostrarMenos("diagnostica");
-      
-      
+
       // Contabiliza as ocorrências negativas e positivas
       const negativas = diagnosticas.filter((value) => value.tipo === "false");
       const positivas = diagnosticas.filter((value) => value.tipo === "true");
       atualizarResultados("positivos", positivas.length);
       atualizarResultados("negativos", negativas.length);
-      
+
       localStorage.setItem(
         "diagnosticasRelevantes",
         JSON.stringify(diagnosticas)
@@ -656,7 +655,10 @@ const preencherDiagnostica = (diagnostica) => {
   modalDiagnostica.classList.toggle("is-active");
   const classeTipo = diagnostica.tipo === "true" ? "positiva" : "negativa";
   const modalCard = modalDiagnostica.querySelector(".modal-card");
-
+  
+  const titulo = modalDiagnostica.querySelector(".modal-card-title");
+  console.log(diagnostica);
+  titulo.innerHTML = diagnostica.aluno.nome;
   modalDiagnostica.classList.add(classeTipo);
   console.log(classeTipo);
 
@@ -843,6 +845,5 @@ const atualizarResultados = (avaliacao, quantidade) => {
 
   contador.innerHTML = quantidade;
 };
-
 
 listener();
