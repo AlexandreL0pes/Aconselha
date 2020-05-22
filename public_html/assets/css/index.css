@@ -211,6 +211,7 @@ img.icone {
   margin: 20px;
   display: grid;
   row-gap: 10px;
+  transition: height 2s;
 }
 
 .main-header {
