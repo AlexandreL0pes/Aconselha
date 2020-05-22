@@ -492,10 +492,8 @@ img.icone {
 }
 
 .modal {
-  opacity: 0 ;
-  animation: fadeIn 0.2s ease-in-out;
+  animation: fadeIn 0.3s ease;
 }
-
 
 @keyframes fadeIn {
   0% {
