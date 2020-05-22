@@ -153,6 +153,80 @@ const atualizarResultados = (quantidade) => {
   contador.innerHTML = quantidade;
 };
 
+/**
+ * Gera um chip com o texto informado
+ * @param {*} nome Texto adicionado ao chip
+ */
+const gerarChips = (nome, tipo = null) => {
+  const chip = document.createElement("div");
+  chip.classList.add("chip");
+  if (tipo != null) {
+    tipo = tipo === "1" ? "positivo" : "negativo";
+    chip.classList.add(tipo);
+  }
+
+  const span = document.createElement("span");
+  span.classList.add("chip-text");
+  span.innerHTML = nome;
+  chip.appendChild(span);
+  return chip;
+};
+
+/**
+ * Seleciona a avaliação clicada e abre seu respectivo modal
+ * @param {*} element Elemento clicado
+ */
+const abrirAprendizado = (element) => {
+  let aprendizado = element.currentTarget.getAttribute("data-aprendizado");
+
+  console.log(aprendizado);
+
+  if (aprendizado) {
+    const dados = {
+      acao: "Aprendizados/selecionar",
+      aprendizado: aprendizado,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        preencherAprendizado(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    showMessage(
+      "Ops, deu errado!",
+      "Não foi possível abrir a experiência!",
+      "error",
+      5000
+    );
+  }
+};
+
+/**
+ * Preenche o modal de visualização com base no aprendizado retornado
+ * @param {*} diagnostica JSON Object com aprendizado selecionada
+ */
+const preencherAprendizado = (ensino) => {
+  const modalAprendizado = document.getElementById("visualizar-ensino");
+
+  const disciplina = modalAprendizado.querySelector(".modal-card-title");
+  const observacao = modalAprendizado.querySelector(".info .observacao");
+
+  const estudantesChips = modalAprendizado.querySelector(".estudantes .chips");
+
+  modalAprendizado.classList.toggle("is-active");
+
+  disciplina.innerHTML = ensino.disciplina.nome;
+  observacao.innerHTML = ensino.observacao;
+  estudantesChips.innerHTML = "";
+  ensino.estudantes.map((estudante) =>
+    estudantesChips.appendChild(gerarChips(estudante.nome))
+  );
+};
+
+
 export default () => {
   listarPreviaAprendizados();
 };
