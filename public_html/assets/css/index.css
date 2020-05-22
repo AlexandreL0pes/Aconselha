@@ -4,7 +4,7 @@
   --size-sidebar: 40px;
 
   /* Cores Base Layout */
-  --base-color: #eeb220;
+  --base-color: #f0b318;
   --secondary-color: #c1ee20;
   --terciary-color: #ee4c20;
 
@@ -140,7 +140,7 @@ html {
   transition: all 0.6s ease-in-out;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   z-index: 4; /* Needs to sit above the hamburger menu icon */
-  background-color: whitesmoke;
+  background-color: var(--base-color);
 }
 
 .sidenav-mobile.active {
@@ -329,9 +329,7 @@ img.icone {
     transition: all 0.6s ease-in-out;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
     z-index: 2; /* Needs to sit above the hamburger menu icon */
-    /* background-color: var(--base-color); */
-    background-color: whitesmoke;
-    color: yellow;
+    background-color: var(--base-color);
   }
 
   .sidenav {
