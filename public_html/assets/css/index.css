@@ -491,6 +491,12 @@ img.icone {
   color: rgb(98, 98, 98) !important;
 }
 
+.modal {
+  opacity: 0 ;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
