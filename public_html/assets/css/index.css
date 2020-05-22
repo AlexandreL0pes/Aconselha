@@ -92,7 +92,7 @@ html {
   grid-template-columns: 1fr;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  height: 100%;
+  height: 100vh;
   width: 150px;
   position: fixed;
   transform: translateX(-245px);
