@@ -10,7 +10,10 @@ import Experiencia, {
   listarPreviaExperiencias,
 } from "./components/Experiencia.js";
 
-import Diagnostica, {listarPreviaDiagnosticas, listarDiagnosticas} from './components/Diagnostica.js';
+import Diagnostica, {
+  listarPreviaDiagnosticas,
+  listarDiagnosticas,
+} from "./components/Diagnostica.js";
 
 const listener = () => {
   const atendimentos = document.getElementById("abrirAtendimento");
@@ -22,7 +25,7 @@ const listener = () => {
   Aprendizado();
   Experiencia();
   Diagnostica();
-  
+
   closeModal();
 
   // listarPreviaDiagnosticas();
@@ -54,59 +57,6 @@ const closeModal = (params) => {
 };
 
 /**
- * Abre uma nova aba com a página de memória
- */
-const abrirMemoria = () => {
-  if (localStorage.getItem("conselhoAtual")) {
-    window.open("./memoria.html", "_blank");
-  } else {
-    showMessage(
-      "Houve um erro!",
-      "Selecione um conselho antes de prosseguir.",
-      "error",
-      5000
-    );
-  }
-};
-
-/**
- * Redireciona para a página de atendimentos pedagógicos
- */
-const abrirAtendimentos = () => {
-  if (localStorage.getItem("conselhoAtual")) {
-    window.location = "./atendimentos.html";
-  } else {
-    showMessage(
-      "Houve um erro!",
-      "Selecione um conselho antes de prosseguir",
-      "error",
-      5000
-    );
-  }
-};
-
-
-/**
- * Gera um chip com o texto informado
- * @param {*} nome Texto adicionado ao chip
- */
-const gerarChips = (nome, tipo = null) => {
-  const chip = document.createElement("div");
-  chip.classList.add("chip");
-  if (tipo != null) {
-    tipo = tipo === "1" ? "positivo" : "negativo";
-    chip.classList.add(tipo);
-  }
-
-  const span = document.createElement("span");
-  span.classList.add("chip-text");
-  span.innerHTML = nome;
-  chip.appendChild(span);
-  return chip;
-};
-
-
-/**
  * Fecha o modal de diagnóstica
  */
 const fecharDiagnostica = () => {
@@ -123,7 +73,6 @@ const fecharDiagnostica = () => {
   ).innerHTML = "");
 };
 
-
 /**
  * Fecha o modal de Experiência
  */
@@ -138,14 +87,6 @@ const fecharExperiencia = () => {
 const fecharEnsino = () => {
   const modalEnsino = document.getElementById("visualizar-ensino");
   modalEnsino.classList.toggle("is-active");
-};
-
-const atualizarResultados = (avaliacao, quantidade) => {
-  const resultados = document.querySelector(".reuniao-info");
-
-  const contador = resultados.querySelector(`.${avaliacao} .quantidade`);
-
-  contador.innerHTML = quantidade;
 };
 
 listener();
