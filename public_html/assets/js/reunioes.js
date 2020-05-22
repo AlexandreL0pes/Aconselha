@@ -22,7 +22,7 @@ let abrirReuniao = () => {
       console.log(idReuniao);
       localStorage.setItem("conselhoAtual", idReuniao);
 
-      window.location = "./turma.html";
+      window.location = "./dashboard.html";
     });
   });
 };
