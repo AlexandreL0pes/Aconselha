@@ -196,6 +196,19 @@ html {
   display: none;
 }
 
+.sidenav .item-sair {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: black;
+  font-size: 1.2em;
+
+}
+.item-sair i {
+  padding: 10px;
+  cursor: pointer;
+}
 /* 
         SIDEBAR
 */
