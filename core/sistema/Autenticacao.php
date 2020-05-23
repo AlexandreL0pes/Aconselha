@@ -4,6 +4,7 @@
 namespace core\sistema;
 
 use core\model\Usuario;
+use \Firebase\JWT\JWT;
 
 
 class Autenticacao
@@ -57,5 +58,25 @@ class Autenticacao
         } else {
             return json_encode(false);
         }
+    }
+
+    public static function decodificarToken($token = null)
+    {
+        $file = file_get_contents(ROOT . 'config-dev.json');
+        $decoded_file = json_decode($file)->jwt;
+        $secret_key = $decoded_file->secret_key;
+        $alg = $decoded_file->alg;
+
+
+        if ($token) {
+            try {
+                $decoded = JWT::decode($token, $secret_key, array($alg));
+                return $decoded;
+            } catch (\Throwable $th) {
+                echo "Mensagem: \n " . $th->getMessage() . "\n Local: \n" . $th->getTraceAsString();
+                return false;
+            }
+        }
+        return $secret_key;
     }
 }
