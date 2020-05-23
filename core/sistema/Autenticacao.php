@@ -48,13 +48,6 @@ class Autenticacao
         return $retorno;
     }
 
-    public static function logout()
-    {
-        if (isset($_COOKIE[self::COOKIE_USUARIO]) && isset($_COOKIE[self::COOKIE_ACESSO])) {
-            setcookie(self::COOKIE_USUARIO, "", time() - 1, "/", PATH_COOKIE);
-            setcookie(self::COOKIE_ACESSO, "",  time() - 1, "/", PATH_COOKIE);
-        }
-    }
 
     public static function verificarLogin($token = null)
     {
