@@ -22,11 +22,6 @@ class Login
         }
     }
 
-    public function logout()
-    {
-        Autenticacao::logout();
-        return true;
-    }
 
     public function verificarLogin($dados)
     {
