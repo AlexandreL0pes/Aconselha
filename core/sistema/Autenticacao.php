@@ -34,12 +34,6 @@ class Autenticacao
         } else {
             return false;
         }
-
-        // Define o tempo de validade do COOKIE
-        // $lembrar_acesso = $lembrar ? time() + 604800 : null;
-
-        // setcookie(self::COOKIE_USUARIO, $usuario_id, $lembrar_acesso,  "/", PATH_COOKIE);
-        // setcookie(self::COOKIE_ACESSO, $nova_senha, $lembrar_acesso,  "/", PATH_COOKIE);
         
         $retorno = Autenticacao::codificarToken([
             "id" => $usuario_id,
@@ -51,13 +45,8 @@ class Autenticacao
 
     public static function verificarLogin($token = null)
     {
-        // if (isset($_COOKIE[self::COOKIE_USUARIO]) && isset($_COOKIE[self::COOKIE_ACESSO])) {
-        //     return json_encode(true);
-        // } else {
-        //     return json_encode(false);
-        // }
 
-        $jwt = $this->decodificarToken($token);
+        $jwt = Autenticacao::decodificarToken($token);
 
         if ($jwt) {
             return true;
@@ -79,7 +68,7 @@ class Autenticacao
                 $decoded = JWT::decode($token, $secret_key, array($alg));
                 return $decoded;
             } catch (\Throwable $th) {
-                echo "Mensagem: \n " . $th->getMessage() . "\n Local: \n" . $th->getTraceAsString();
+                // echo "Mensagem: \n " . $th->getMessage() . "\n Local: \n" . $th->getTraceAsString();
                 return false;
             }
         }
