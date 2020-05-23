@@ -26,7 +26,15 @@ class Login
     public function verificarLogin($dados)
     {
         if (isset($dados['token']) && $dados['token'] != null) {
-            return json_encode(Autenticacao::verificarLogin($dados['token']));
+            $retorno = Autenticacao::verificarLogin($dados['token']);
+
+            if ($retorno) {
+                http_response_code(200);
+                return json_encode(array('message'=> "Usuário Logado!"));
+            }else{
+                http_response_code(400);
+                return json_encode(array('message' => "Usuário não logado!"));
+            }
         }
 
         return false;
