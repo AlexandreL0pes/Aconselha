@@ -36,12 +36,16 @@ class Autenticacao
         }
 
         // Define o tempo de validade do COOKIE
-        $lembrar_acesso = $lembrar ? time() + 604800 : null;
+        // $lembrar_acesso = $lembrar ? time() + 604800 : null;
 
-        setcookie(self::COOKIE_USUARIO, $usuario_id, $lembrar_acesso,  "/", PATH_COOKIE);
-        setcookie(self::COOKIE_ACESSO, $nova_senha, $lembrar_acesso,  "/", PATH_COOKIE);
-
-        return true;
+        // setcookie(self::COOKIE_USUARIO, $usuario_id, $lembrar_acesso,  "/", PATH_COOKIE);
+        // setcookie(self::COOKIE_ACESSO, $nova_senha, $lembrar_acesso,  "/", PATH_COOKIE);
+        
+        $retorno = Autenticacao::codificarToken([
+            "id" => $usuario_id,
+            "permissao" => $permissao
+        ]);
+        return $retorno;
     }
 
     public static function logout()
