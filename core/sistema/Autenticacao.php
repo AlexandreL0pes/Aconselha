@@ -30,6 +30,7 @@ class Autenticacao
 
         if (count($resultado) > 0) {
             $usuario_id = $resultado[Usuario::COL_ID];
+            $permissao = $resultado[Usuario::COL_PERMISSAO];
         } else {
             return false;
         }
@@ -51,13 +52,21 @@ class Autenticacao
         }
     }
 
-    public static function verificarLogin()
+    public static function verificarLogin($token = null)
     {
-        if (isset($_COOKIE[self::COOKIE_USUARIO]) && isset($_COOKIE[self::COOKIE_ACESSO])) {
-            return json_encode(true);
-        } else {
-            return json_encode(false);
+        // if (isset($_COOKIE[self::COOKIE_USUARIO]) && isset($_COOKIE[self::COOKIE_ACESSO])) {
+        //     return json_encode(true);
+        // } else {
+        //     return json_encode(false);
+        // }
+
+        $jwt = $this->decodificarToken($token);
+
+        if ($jwt) {
+            return true;
         }
+
+        return false;
     }
 
     public static function decodificarToken($token = null)
