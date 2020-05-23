@@ -35,10 +35,12 @@ class Autenticacao
             return false;
         }
 
+        $validade_token = ($lembrar) ? 604800 : 18000;
+
         $retorno = Autenticacao::codificarToken([
             "id" => $usuario_id,
             "permissao" => $permissao
-        ]);
+        ], $validade_token);
         return $retorno;
     }
 
@@ -47,7 +49,6 @@ class Autenticacao
     {
 
         $jwt = Autenticacao::decodificarToken($token);
-
         if ($jwt) {
             return true;
         }
@@ -86,7 +87,7 @@ class Autenticacao
         return $secret_key;
     }
 
-    private static function codificarToken($dados = [])
+    private static function codificarToken($dados = [], $duration = null)
     {
         $file = file_get_contents(ROOT . 'config-dev.json');
         $decoded_file = json_decode($file)->jwt;
@@ -96,11 +97,13 @@ class Autenticacao
         $issuer_claim = $_SERVER['SERVER_NAME'];
         $issuedat_claim = time();
         $notbefore_claim = $issuedat_claim + 10;
+        $expire_claim = $issuedat_claim + $duration;
 
         $token = array(
             "iss" => $issuer_claim,
             "iat" => $issuedat_claim,
             "nbf" => $notbefore_claim,
+            "exp" => $expire_claim,
             "data" => $dados
         );
 
