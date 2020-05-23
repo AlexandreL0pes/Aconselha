@@ -79,4 +79,27 @@ class Autenticacao
         }
         return $secret_key;
     }
+
+    public static function codificarToken($dados = [])
+    {
+        $file = file_get_contents(ROOT . 'config-dev.json');
+        $decoded_file = json_decode($file)->jwt;
+        $secret_key = $decoded_file->secret_key;
+        $alg = $decoded_file->alg;
+
+        $issuer_claim = $_SERVER['SERVER_NAME'];
+        $issuedat_claim = time();
+        $notbefore_claim = $issuedat_claim + 10;
+
+        $token = array(
+            "iss" => $issuer_claim,
+            "iat" => $issuedat_claim,
+            "nbf" => $notbefore_claim,
+            "data" => $dados
+        );
+
+        $jwt = JWT::encode($token, $secret_key);
+
+        return $jwt;
+    }
 }
