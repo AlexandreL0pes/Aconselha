@@ -28,8 +28,12 @@ class Login
         return true;
     }
 
-    public function verificarLogin()
+    public function verificarLogin($dados)
     {
-        return json_encode(Autenticacao::verificarLogin());
+        if (isset($dados['token']) && $dados['token'] != null) {
+            return json_encode(Autenticacao::verificarLogin($dados['token']));
+        }
+
+        return false;
     }
 }
