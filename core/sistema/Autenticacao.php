@@ -34,7 +34,7 @@ class Autenticacao
         } else {
             return false;
         }
-        
+
         $retorno = Autenticacao::codificarToken([
             "id" => $usuario_id,
             "permissao" => $permissao
@@ -55,7 +55,18 @@ class Autenticacao
         return false;
     }
 
-    public static function decodificarToken($token = null)
+    public function verificarPermissao($token = null, $permissao = null)
+    {
+        $decoded = JWT::decodificarToken($token);
+
+        if ($decoded['data']['permissao'] == $permissao) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static function decodificarToken($token = null)
     {
         $file = file_get_contents(ROOT . 'config-dev.json');
         $decoded_file = json_decode($file)->jwt;
@@ -75,7 +86,7 @@ class Autenticacao
         return $secret_key;
     }
 
-    public static function codificarToken($dados = [])
+    private static function codificarToken($dados = [])
     {
         $file = file_get_contents(ROOT . 'config-dev.json');
         $decoded_file = json_decode($file)->jwt;
