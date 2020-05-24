@@ -39,7 +39,7 @@ class Autenticacao
             // Cria a token com os dados e a duração definida
             $retorno = Autenticacao::codificarToken($resultado, $validade_token);
 
-            return $retorno;
+            return array('jwt' => $retorno, 'expireAt' => $validade_token);
         } else {
             return false;
         }
