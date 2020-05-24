@@ -72,4 +72,57 @@ class Coordenadores
             return json_encode(array("message" => "Não foi possível alterar o coordenador!"));
         }
     }
+
+    public function selecionarCoordenadorAtual($curso)
+    {
+        $usuario = new Usuario();
+
+        $busca = [
+            Usuario::COL_CURSO => $curso,
+            'periodo' => 'atual'
+        ];
+
+        $coordenador = $usuario->listar(null, $busca, null, 1)[0];
+        return $coordenador;
+    }
+
+    private function desabilitarCoordenador($curso)
+    {
+        $coordenador = $this->selecionarCoordenadorAtual($curso);
+
+        $coordenador_id = $coordenador[Usuario::COL_ID];
+        $data_fim = date("Y-m-d");
+        $dados = [
+            Usuario::COL_ID => $coordenador_id,
+            Usuario::COL_DATA_FIM => $data_fim,
+            Usuario::COL_PERMISSAO => null
+        ];
+
+        $usuario = new Usuario();
+        $retorno = $usuario->alterar($dados);
+
+        return $retorno;
+    }
+
+    public function atualizarCoordenador($dados)
+    {
+
+        $curso_id = $dados['curso'];
+        $resultado = $this->desabilitarCoordenador($curso_id);
+
+        if ($resultado > 0) {
+            $retorno = $this->cadastrar([
+                'matricula' => $dados['matricula'],
+                'curso' => $dados['curso'],
+                'senha' => $dados['senha']
+            ]);
+
+            if ($retorno) {
+                http_response_code(200);
+                return json_encode(array("message" => "O coordenador foi atualizado com sucesso!"));
+            }
+            http_response_code(500);
+            return json_encode(array("message" => "Não foi possível desabilitar o atual coordenador"));
+        }
+    }
 }
