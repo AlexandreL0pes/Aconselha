@@ -1,4 +1,4 @@
-import {sendRequest, showMessage} from './utils.js';
+import { sendRequest, showMessage, setCookie, getCookie } from "./utils.js";
 const listeners = () => {
   const btnLogar = document.getElementById("btnLogar");
   btnLogar.addEventListener("click", login);
@@ -10,6 +10,8 @@ const login = (params) => {
   if (dados.login != "" && dados.senha != "") {
     sendRequest(dados)
       .then((response) => {
+        setCookie("token", response.jwt, response.expireAt);
+
         window.location.href = "./reunioes.html";
       })
       .catch((err) => {
@@ -18,8 +20,8 @@ const login = (params) => {
           "Não foi possível realizar o login",
           "error",
           5000
-				);
-				console.error(err);
+        );
+        console.error(err);
       });
   } else {
     showMessage(
