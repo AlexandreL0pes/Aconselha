@@ -83,4 +83,19 @@ class Login
             return json_encode(array('message' => 'O usuário não possui tal nível de acesso.'));
         }
     }
+
+    public function verificarGerente($dados)
+    {
+        $token = $dados['token'];
+
+        $acesso = Autenticacao::verificarPermissao($token, Autenticacao::GERENTE);
+
+        if ($acesso) {
+            http_response_code(200);
+            return json_encode(array('message' => 'Usuário logado'));
+        }else{
+            http_response_code(400);
+            return json_encode(array('message' => 'O usuário não possui tal nível de acesso.'));
+        }
+    }
 }
