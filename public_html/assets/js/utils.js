@@ -48,7 +48,7 @@ async function sendRequest(data) {
   const url = window.location.pathname.split("/");
   // const baseUrl = `${base}/${url[1]}/api.php`;
   const baseUrl = `http://localhost/public_html/api.php`;
-  
+
   if (data.acao === undefined)
     throw new Error("A acao é necessária para efetuar a requisição!");
 
@@ -63,4 +63,38 @@ async function sendRequest(data) {
   return responseData;
 }
 
-export { sendRequest, showMessage };
+/**
+ * Salva um cookie dentro do navegador
+ * @param {string} name Cookie Name
+ * @param {string} value Cookie Value
+ * @param {number} expire time for expire
+ */
+const setCookie = (name, value, expire) => {
+  let date = new Date();
+  date.setTime(date.getTime + expire);
+  let expires = "expires=" + date.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/; SameSite=Strict";
+};
+
+/**
+ * Obtem o valor do cookie especificado
+ * @param {string} cname Cookie name
+ */
+const getCookie = (cname) => {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(";");
+
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+};
+
+export { sendRequest, showMessage, setCookie, getCookie};
