@@ -15,7 +15,7 @@ class Login
 
         if ($retorno) {
             http_response_code(200);
-            return json_encode(array('message' => 'Logado com sucesso!', 'jwt' => $retorno, 'expireAt' => 5000));
+            return json_encode(array('message' => 'Logado com sucesso!', 'jwt' => $retorno['jwt'], 'expireAt' => $retorno['expireAt']));
         } else {
             http_response_code(401);
             return json_encode(array('message' => 'Não foi possível realizar o login!'));
