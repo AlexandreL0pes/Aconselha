@@ -48,6 +48,10 @@ const pegarDados = () => {
   return dados;
 };
 
+/**
+ * Redirecionamento de páginas conforme o usuário logado
+ * @param {string} type Tipo de usuario retornado pelo login  
+ */
 const redirecionamento = (type) => {
   const pages = {
     1: "./reunioes.html",
