@@ -112,7 +112,7 @@ class Usuario extends CRUD {
     public function autenticarUsuario($usuario_login, $senha)
     {
         $campos = " * ";
-        $where_condicao = self::COL_MATRICULA . " = ? AND " . self::COL_SENHA . " = ?";
+        $where_condicao = self::COL_MATRICULA . " = ? AND " . self::COL_SENHA . " = ? AND " . self::COL_DATA_FIM . " IS NULL ";
         $where_valor = [$usuario_login, $senha];
 
         $retorno = [];
