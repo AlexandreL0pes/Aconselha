@@ -28,20 +28,21 @@ class Autenticacao
 
         $resultado = $usuario->autenticarUsuario($usuario_login, $nova_senha);
 
+
         if (count($resultado) > 0) {
-            $usuario_id = $resultado[Usuario::COL_ID];
-            $permissao = $resultado[Usuario::COL_PERMISSAO];
+
+            // Define a duração do token
+            $validade_token = ($lembrar) ? 604800 : 18000;
+            //Remove os valores indesejados na token
+            unset($resultado[Usuario::COL_SENHA], $resultado[Usuario::COL_DATA_INICIO], $resultado[Usuario::COL_DATA_FIM]);
+
+            // Cria a token com os dados e a duração definida
+            $retorno = Autenticacao::codificarToken($resultado, $validade_token);
+
+            return $retorno;
         } else {
             return false;
         }
-
-        $validade_token = ($lembrar) ? 604800 : 18000;
-
-        $retorno = Autenticacao::codificarToken([
-            "id" => $usuario_id,
-            "permissao" => $permissao
-        ], $validade_token);
-        return $retorno;
     }
 
 
