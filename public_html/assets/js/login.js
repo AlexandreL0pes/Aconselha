@@ -11,8 +11,8 @@ const login = (params) => {
     sendRequest(dados)
       .then((response) => {
         setCookie("token", response.jwt, response.expireAt);
-
-        window.location.href = "./reunioes.html";
+        console.log(response);
+        redirecionamento(response.type);
       })
       .catch((err) => {
         showMessage(
@@ -48,16 +48,13 @@ const pegarDados = () => {
   return dados;
 };
 
-function addcl() {
-  let parent = this.parentNode.parentNode;
-  parent.classList.add("focus");
-}
-
-function remcl() {
-  let parent = this.parentNode.parentNode;
-  if (this.value == "") {
-    parent.classList.remove("focus");
-  }
-}
-
+const redirecionamento = (type) => {
+  const pages = {
+    1: "./reunioes.html",
+    2: "./reunioes.html",
+    3: "./turmas.html",
+    4: "./ensino.html",
+  };
+  window.location.href = pages[type];
+};
 listeners();
