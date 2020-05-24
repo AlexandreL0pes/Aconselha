@@ -43,4 +43,33 @@ class Coordenadores
             return json_encode(array('message' => "Não foi possível cadastrar o coordenador!"));
         }
     }
+
+    public function alterar($dados)
+    {
+        $coordenador = $dados['coordenador'];
+        $matricula = $dados['matricula'];
+        $curso = $dados['curso'];
+
+
+        $data = array(
+            Usuario::COL_ID => $coordenador,
+            Usuario::COL_MATRICULA => $matricula,
+            Usuario::COL_CURSO => $curso
+        );
+
+        if (isset($dados['senha']) && !empty($dados['senha'])) {
+            $data[Usuario::COL_SENHA] = $dados['senha'];
+        }
+
+        $usuario = new Usuario();
+        $retorno = $usuario->alterar($data);
+
+        if ($retorno > 0) {
+            http_response_code(200);
+            return json_encode(array("message" => "O usuário foi alterado"));
+        } else {
+            http_response_code(500);
+            return json_encode(array("message" => "Não foi possível alterar o coordenador!"));
+        }
+    }
 }
