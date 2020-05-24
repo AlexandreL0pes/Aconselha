@@ -58,11 +58,12 @@ class Autenticacao
         return false;
     }
 
-    public function verificarPermissao($token = null, $permissao = null)
+    public static function verificarPermissao($token = null, $permissao = null)
     {
-        $decoded = JWT::decodificarToken($token);
+        $decoded = Autenticacao::decodificarToken($token);
 
-        if ($decoded['data']['permissao'] == $permissao) {
+
+        if (isset($decoded->data->permissao) && $decoded->data->permissao == $permissao) {
             return true;
         }
 
