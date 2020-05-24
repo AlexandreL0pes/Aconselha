@@ -3,6 +3,7 @@
 namespace core\model;
 
 use core\CRUD;
+use core\sistema\Autenticacao;
 use Exception;
 
 class Usuario extends CRUD {
@@ -124,6 +125,21 @@ class Usuario extends CRUD {
         }
 
         return $retorno[0];
+    }
+
+    public function verificarCoordenador($dados)
+    {
+        $token = $dados['token'];
+
+        $acesso = Autenticacao::verificarPermissao($token, Autenticacao::COORDENADOR);
+
+        if ($acesso) {
+            http_response_code(200);
+            return json_encode(array('message' => 'Usuário logado'));
+        }else{
+            http_response_code(400);
+            return json_encode(array('message' => 'O usuário não possui tal nível de acesso.'));
+        }
     }
 
 }
