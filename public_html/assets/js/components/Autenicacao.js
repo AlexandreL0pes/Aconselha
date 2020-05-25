@@ -15,11 +15,24 @@ const autenticarCoordenador = () => {
   sendRequest(dados)
     .then((result) => console.log(result))
     .catch((err) => {
-    //   console.error(err);
+      //   console.error(err);
       /* Redireciona para a página anterior */
       window.history.back();
     });
 };
+
+const autenticarRepresentante = () => {
+  const token = getToken();
+
+  let dados = {
+    acao: "Login/verificarRepresentante",
+    token: token,
+  };
+
+  sendRequest(dados).catch((err) => window.history.back());
+};
+
+
 
 const getToken = () => {
   const token = getCookie("token") || null;
@@ -27,4 +40,4 @@ const getToken = () => {
   return token;
 };
 
-export { autenticarCoordenador };
+export { autenticarCoordenador, autenticarRepresentante };

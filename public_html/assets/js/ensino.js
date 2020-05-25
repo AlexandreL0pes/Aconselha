@@ -1,4 +1,7 @@
 import {sendRequest, showMessage} from './utils.js';
+import { autenticarRepresentante } from "./components/Autenicacao.js";
+
+autenticarRepresentante();
 
 const listener = () => {
   const btnModalEnsino = document.querySelector("#btnEnsino");
