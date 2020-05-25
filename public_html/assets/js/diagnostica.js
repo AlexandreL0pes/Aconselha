@@ -1,4 +1,4 @@
-import {sendRequest, showMessage} from './utils.js';
+import {sendRequest, showMessage, getCookie} from './utils.js';
 
 const listener = () => {
   const btnSalvarDiagnostica = document.getElementById("salvar-diagnostica");
@@ -22,6 +22,8 @@ const listener = () => {
     const bgModal = modal.querySelector(".modal-background");
     bgModal.addEventListener("click", (event) => fecharAvaliacao());
   });
+
+
 };
 
 /**
