@@ -73,9 +73,9 @@ class Login
     {
         $token = $dados['token'];
 
-        $acesso = Autenticacao::verificarPermissao($token, Autenticacao::PROFESSOR);
-
-        if ($acesso) {
+        $acessoProfessor = Autenticacao::verificarPermissao($token, Autenticacao::PROFESSOR);
+        $acessoCoordenador = Autenticacao::verificarPermissao($token,Autenticacao::COORDENADOR);
+        if ($acessoProfessor || $acessoCoordenador) {
             http_response_code(200);
             return json_encode(array('message' => 'Usuário logado'));
         }else{
