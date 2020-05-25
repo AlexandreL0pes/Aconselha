@@ -65,7 +65,7 @@ class Login
             return json_encode(array('message' => 'Usuário logado'));
         }else{
             http_response_code(400);
-            return json_encode(array('message' => 'O usuário não possui tal nível de acesso.'));
+            return json_encode(array('message' => 'O representante não possui tal nível de acesso.'));
         }
     }
 
