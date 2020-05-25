@@ -99,7 +99,7 @@ class Autenticacao
 
         $issuer_claim = $_SERVER['SERVER_NAME'];
         $issuedat_claim = time();
-        $notbefore_claim = $issuedat_claim + 10;
+        $notbefore_claim = $issuedat_claim;
         $expire_claim = $issuedat_claim + $duration;
 
         $token = array(
