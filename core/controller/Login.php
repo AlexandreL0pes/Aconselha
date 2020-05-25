@@ -30,7 +30,7 @@ class Login
 
             if ($retorno) {
                 http_response_code(200);
-                return json_encode(array('message'=> "Usuário Logado!"));
+                return json_encode(array('message'=> "Usuário Logado!", 'type' => $retorno['permissao']));
             }else{
                 http_response_code(400);
                 return json_encode(array('message' => "Usuário não logado!"));

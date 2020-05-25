@@ -52,7 +52,7 @@ class Autenticacao
 
         $jwt = Autenticacao::decodificarToken($token);
         if ($jwt) {
-            return true;
+            return (array) $jwt->data;
         }
 
         return false;
