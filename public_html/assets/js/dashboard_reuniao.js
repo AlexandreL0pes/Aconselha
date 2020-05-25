@@ -14,6 +14,9 @@ import Diagnostica, {
   listarPreviaDiagnosticas,
   listarDiagnosticas,
 } from "./components/Diagnostica.js";
+import { autenticarCoordenador } from "./components/Autenicacao.js";
+
+autenticarCoordenador();
 
 const listener = () => {
   const atendimentos = document.getElementById("abrirAtendimento");
@@ -27,7 +30,6 @@ const listener = () => {
   Diagnostica();
 
   closeModal();
-
 };
 
 /**
