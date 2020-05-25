@@ -1,7 +1,9 @@
 import { sendRequest, showMessage, setCookie, getCookie } from "./utils.js";
+
 const listeners = () => {
   const btnLogar = document.getElementById("btnLogar");
   btnLogar.addEventListener("click", login);
+  verificarLogin();
 };
 
 const login = (params) => {
@@ -50,7 +52,7 @@ const pegarDados = () => {
 
 /**
  * Redirecionamento de páginas conforme o usuário logado
- * @param {string} type Tipo de usuario retornado pelo login  
+ * @param {string} type Tipo de usuario retornado pelo login
  */
 const redirecionamento = (type) => {
   const pages = {
@@ -60,5 +62,26 @@ const redirecionamento = (type) => {
     4: "./ensino.html",
   };
   window.location.href = pages[type];
+};
+
+const verificarLogin = () => {
+  const token = getCookie("token");
+  if (token !== "") {
+    console.log(">> Token");
+    console.log(token);
+
+    let dados = {
+      acao: "Login/verificarLogin",
+      token: token,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        redirecionamento(response.type);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 };
 listeners();
