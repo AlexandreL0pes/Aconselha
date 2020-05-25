@@ -56,10 +56,10 @@ const pegarDados = () => {
  */
 const redirecionamento = (type) => {
   const pages = {
-    1: "./reunioes.html",
-    2: "./reunioes.html",
-    3: "./turmas.html",
-    4: "./ensino.html",
+    1: "./gerencia/reunioes.html",
+    2: "./coordenador/reunioes.html",
+    3: "./professor/turmas.html",
+    4: "./representante/ensino.html",
   };
   window.location.href = pages[type];
 };

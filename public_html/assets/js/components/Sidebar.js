@@ -46,7 +46,7 @@ const sair = () => {
   items.forEach((item) =>
     item.addEventListener("click", (element) => {
       setCookie("token", "", 0);
-      window.location.href = "./login.html";
+      window.location.href = "../login.html";
     })
   );
 };
