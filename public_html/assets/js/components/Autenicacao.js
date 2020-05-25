@@ -32,7 +32,26 @@ const autenticarRepresentante = () => {
   sendRequest(dados).catch((err) => window.history.back());
 };
 
+const autenticarProfessor = () => {
+  const token = getToken();
 
+  let dados = {
+    acao: "Login/verificarProfessor",
+    token: token,
+  };
+
+  sendRequest(dados).catch((err) => window.history.back());
+};
+
+const autenticarGerente = () => {
+  const token = getToken();
+  let dados = {
+    acao: "Login/verificarGerente",
+    token: token,
+  };
+
+  sendRequest(dados).catch((err) => window.history.back());
+};
 
 const getToken = () => {
   const token = getCookie("token") || null;
@@ -40,4 +59,9 @@ const getToken = () => {
   return token;
 };
 
-export { autenticarCoordenador, autenticarRepresentante };
+export {
+  autenticarCoordenador,
+  autenticarRepresentante,
+  autenticarProfessor,
+  autenticarGerente,
+};
