@@ -1,3 +1,5 @@
+import { setCookie } from "../utils.js";
+
 const abrirTurmasEvent = () => {
   const items = document.querySelectorAll("aside .turmas");
 
@@ -38,10 +40,22 @@ const abrirConfiguracoes = () => {
   );
 };
 
+const sair = () => {
+  const items = document.querySelectorAll("aside .item-sair");
+
+  items.forEach((item) =>
+    item.addEventListener("click", (element) => {
+      setCookie("token", "", 0);
+      window.location.href = "./login.html";
+    })
+  );
+};
+
 export default () => {
   //   console.log("SIDE BAR");
   abrirTurmasEvent();
   abrirAlunosEvent();
   abrirReunioesEvent();
   abrirConfiguracoes();
+  sair();
 };
