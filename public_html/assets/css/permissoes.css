@@ -18,13 +18,23 @@
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  align-items: center;
 }
 
 .conselho .head {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  align-items: center;
 }
+
+.representacao .head {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .cardbox {
   display: grid;
   align-items: center;
