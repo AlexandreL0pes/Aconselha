@@ -1,0 +1,81 @@
+:root {
+  --info-color: rgb(40, 52, 153);
+  --amb-color: rgb(37, 165, 33);
+  --agro-color: #830c0c;
+}
+
+.coordenadores,
+.conselheiros,
+.representantes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-auto-rows: minmax(80px,90px);
+  grid-gap: 10px;
+  margin: 10px;
+}
+
+.cardbox {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  background-color: #fff;
+  border-radius: 2px;
+
+
+  color: #222424;
+  margin: 0px;
+  padding: 10px;
+  row-gap: 0px;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+  cursor: pointer;
+
+  text-justify: center;
+  text-align: center;
+}
+
+.cardbox:hover {
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Estilo para os tiles */
+.cardbox.is-info {
+  /* background: green; */
+  border-top: 2px solid var(--info-color);
+}
+
+.cardbox.is-agro {
+  border-top: 2px solid var(--agro-color);
+}
+
+.cardbox.is-amb {
+  border-top: 2px solid var(--amb-color);
+}
+
+
+.card-coordenador p:nth-child(1){
+    font-size: 0.75em;
+}
+.card-coordenador p:nth-child(2){
+    font-size: 0.9rem;
+}
+.card-coordenador p:nth-child(2){}
+
+.card-conselheiro p:nth-child(1){
+    font-size: 0.75rem;
+}
+.card-conselheiro p:nth-child(2){
+    font-size: 0.9rem;
+}
+.card-conselheiro p:nth-child(3){
+    font-size: 0.8rem;
+}
+
+
+.card-representante p:nth-child(1){
+    font-size: 0.75rem;
+}
+.card-representante p:nth-child(2){
+    font-size: .95 rem;
+}
