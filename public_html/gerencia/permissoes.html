@@ -242,7 +242,7 @@
           </p>
         </div>
       </footer>
-      <div class="modal coordenador" id="modal-coordenador">
+      <div class="modal is-active coordenador" id="modal-coordenador" data-curso="2" data-coordenador="41917">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -282,15 +282,34 @@
                   </div>
                 </div>
               </div>
+              <div class="field">
+                <label class="label">Senha</label>
+                <div class="dropdown">
+                  <div class="dropdown-trigger">
+                    <div class="control has-icons-left has-icons-right">
+                      <input
+                        class="input"
+                        type="password"
+                        placeholder="Digite a senha"
+                        value=""
+                        id="senha-coordenador"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
           <footer class="modal-card-foot">
             <div></div>
             <div></div>
             <button
-              class="button is-success salvar-experiencia"
+              class="button is-success salvar-coordenador"
               name=""
-              id="salvar-experiencia"
+              id="salvar-coordenador"
             >
               <span class="icon is-small">
                 <i class="fa fa-check" aria-hidden="true"></i>
