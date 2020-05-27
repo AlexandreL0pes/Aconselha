@@ -1,7 +1,6 @@
-import {sendRequest, showMessage} from './utils.js';
+import { sendRequest, showMessage } from "./utils.js";
 
 const listener = () => {
-
   const btnIniciarConselho = document.querySelector("#iniciarConselho");
   btnIniciarConselho.addEventListener("click", iniciarConselhos);
 };
@@ -19,8 +18,13 @@ let abrirReuniao = () => {
       let idReuniao =
         event.target.getAttribute("data-turmaconselho") ||
         event.target.parentElement.getAttribute("data-turmaconselho");
-      console.log(idReuniao);
+
+      let idTurma =
+        event.target.getAttribute("data-turma") ||
+        event.target.parentElement.getAttribute("data-turma");
+
       localStorage.setItem("conselhoAtual", idReuniao);
+      localStorage.setItem("turmaAtual", idTurma);
 
       window.location = "./dashboard.html";
     });
