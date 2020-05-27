@@ -125,4 +125,29 @@ class Coordenadores
             return json_encode(array("message" => "Não foi possível desabilitar o atual coordenador"));
         }
     }
+
+
+    public function alterarSenha($dados)
+    {
+        $curso = $dados['curso'];
+
+        $coordenador = $this->selecionarCoordenadorAtual($curso);
+
+        $data = array(
+            Usuario::COL_ID => $coordenador[Usuario::COL_ID],
+            Usuario::COL_SENHA => $dados['senha']
+        );
+
+        $data[Usuario::COL_SENHA] = $dados['senha'];
+
+        $usuario = new Usuario();
+        $retorno = $usuario->alterar($data);
+        if ($retorno > 0) {
+            http_response_code(200);
+            return json_encode(array("message" => "A senha foi alterada!"));
+        } else {
+            http_response_code(500);
+            return json_encode(array("message" => "Não foi possível alterar a senha!"));
+        }
+    }
 }
