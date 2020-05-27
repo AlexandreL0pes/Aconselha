@@ -16,7 +16,7 @@ import Diagnostica, {
 } from "./components/Diagnostica.js";
 import { autenticarCoordenador } from "./components/Autenicacao.js";
 
-autenticarCoordenador();
+// autenticarCoordenador();
 
 const listener = () => {
   const atendimentos = document.getElementById("abrirAtendimento");
