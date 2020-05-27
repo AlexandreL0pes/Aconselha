@@ -124,7 +124,7 @@
         <section class="coordenacao" id="coordenacao">
           <div class="head">
             <h4 class="subtitulo is-6">Coordenadores</h4>
-            <button class="button is-small is-success">
+            <button class="button is-small is-success" id="add-coordenador">
               <span class="icon is-small">
                 <i class="fas fa-plus"></i>
               </span>
@@ -242,7 +242,7 @@
           </p>
         </div>
       </footer>
-      <div class="modal coordenador" id="coordenador">
+      <div class="modal coordenador" id="modal-coordenador">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -360,7 +360,7 @@
         </div>
       </div>
 
-      <div class="modal is-active representante" id="representante">
+      <div class="modal representante" id="representante">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -445,6 +445,7 @@
     </div>
     <div class="toasts" id="toasts"></div>
   </body>
+  <script src="https://cdn.rawgit.com/mattmezza/bulmahead/master/dist/bulmahead.bundle.js"></script>
   <script src="../assets/js/index.js" type="module"></script>
   <script src="../assets/js/permissoes.js" type="module"></script>
 </html>
