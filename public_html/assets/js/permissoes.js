@@ -11,6 +11,10 @@ import { sendRequest, showMessage } from "./utils.js";
 const btnSalvarCoordenador = document.querySelector(".salvar-coordenador");
 btnSalvarCoordenador.addEventListener("click", (e) => salvarCoordenador(e));
 
+const abrirCoordenador = (element) => {
+    let curso = element.currentTarget.getAttribute("data-curso");
+    let 
+}
 /**
  * Listener para o fechamento do modal
  * @param {*} params
