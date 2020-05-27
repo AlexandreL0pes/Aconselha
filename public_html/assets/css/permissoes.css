@@ -103,4 +103,29 @@
 .modal .modal-card-body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+}
+
+
+
+.modal.coordenador .info-curso {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  
+
+  padding: 10px 15px;
+
+}
+
+.coordenador .info-curso p:nth-child(1){
+  font-size: 1rem;
+}
+.coordenador .info-curso p:nth-child(2){
+  font-size: 1.2rem;
+}
+.coordenador .info-curso p:nth-child(3){
+  font-size: 1rem;
 }
