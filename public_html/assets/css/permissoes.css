@@ -108,14 +108,16 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 10px;
+  align-items: center;
 }
 
+/* Modal Coordenador */
 .modal.coordenador .info-curso {
   display: flex;
   flex-direction: column;
-
+  
   align-items: center;
-
+  
   padding: 10px 15px;
 }
 
@@ -128,3 +130,45 @@
 .coordenador .info-curso p:nth-child(3) {
   font-size: 1rem;
 }
+/* Modal Coordenador */
+
+
+/* Modal Conselheiro */
+.modal.conselheiro .info-turma {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.conselheiro .info-turma p:nth-child(1) {
+  font-size: 1.4rem;
+}
+.conselheiro .info-turma p:nth-child(2) {
+  font-size: 1rem;
+}
+.conselheiro .info-turma p:nth-child(3) {
+  font-size: .9rem;
+}
+/* Modal Conselheiro */
+
+
+/* Modal Representante */
+.modal.representante .info-turma {
+  display: flex;
+
+  flex-flow: column;
+  justify-self: center;
+  align-items: center;
+}
+
+.representante .info-turma p:nth-child(1) {
+  font-size: 1.4rem;
+}
+.representante .info-turma p:nth-child(2) {
+  font-size: 1rem;
+}
+.representante .info-turma p:nth-child(3) {
+  font-size: .9rem;
+}
+/* Modal Representante */

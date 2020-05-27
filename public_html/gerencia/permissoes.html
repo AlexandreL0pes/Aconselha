@@ -242,7 +242,7 @@
           </p>
         </div>
       </footer>
-      <div class="modal is-active coordenador" id="coordenador">
+      <div class="modal coordenador" id="coordenador">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -305,17 +305,42 @@
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
-            <p class="modal-card-title">Conselheiro</p>
+            <p class="modal-card-title">Conselheiro de Turma</p>
             <div class="modal-close-btn">
               <i class="fas fa-times sidenav__brand-close"></i>
             </div>
           </header>
           <section class="modal-card-body">
-            <div class="coordenador">
-              Conselheiro
+            <div class="info-turma">
+              <p class="">3°B</p>
+              <p class="gray-text">Informática para Internet</p>
+              <p class="gray-text">Técnico Integrado ao Ensino Médio</p>
             </div>
-            <div class="curso">
-              Curso
+            <div class="conselheiro">
+              <div class="field">
+                <label class="label">Conselheiro</label>
+                <div class="dropdown">
+                  <div class="dropdown-trigger">
+                    <div class="control has-icons-left has-icons-right">
+                      <input
+                        class="input"
+                        type="text"
+                        placeholder="Digite o nome do servidor"
+                        value=""
+                        id="conselheiro"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <div
+                      class="dropdown-menu"
+                      id="conselheiro-menu"
+                      role="menu"
+                    ></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
           <footer class="modal-card-foot">
@@ -335,21 +360,70 @@
         </div>
       </div>
 
-      <div class="modal representante" id="representante">
+      <div class="modal is-active representante" id="representante">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
-            <p class="modal-card-title">Conselheiro</p>
+            <p class="modal-card-title">Representantes</p>
             <div class="modal-close-btn">
               <i class="fas fa-times sidenav__brand-close"></i>
             </div>
           </header>
           <section class="modal-card-body">
-            <div class="coordenador">
-              Conselheiro
+            <div class="info-turma">
+              <p class="">3°B</p>
+              <p class="gray-text">Informática para Internet</p>
+              <p class="gray-text">Técnico Integrado ao Ensino Médio</p>
             </div>
-            <div class="curso">
-              Curso
+            <div class="representante">
+              <div class="field">
+                <label class="label">Líder</label>
+                <div class="dropdown">
+                  <div class="dropdown-trigger">
+                    <div class="control has-icons-left has-icons-right">
+                      <input
+                        class="input"
+                        type="text"
+                        placeholder="Digite o nome do líder"
+                        value=""
+                        id="lider"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <div
+                      class="dropdown-menu"
+                      id="lider-menu"
+                      role="menu"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Vice-Líder</label>
+                <div class="dropdown">
+                  <div class="dropdown-trigger">
+                    <div class="control has-icons-left has-icons-right">
+                      <input
+                        class="input"
+                        type="text"
+                        placeholder="Digite o nome do vice-líder"
+                        value=""
+                        id="vice"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <div
+                      class="dropdown-menu"
+                      id="vice-menu"
+                      role="menu"
+                    ></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
           <footer class="modal-card-foot">
