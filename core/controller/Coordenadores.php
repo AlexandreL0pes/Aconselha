@@ -150,4 +150,30 @@ class Coordenadores
             return json_encode(array("message" => "Não foi possível alterar a senha!"));
         }
     }
+    
+    public function selecionarCoordenador($dados)
+    {
+
+        $cursoId = $dados['curso'];
+
+        // TODO: Adicionar aqui um método que pega as informações do curso
+        $curso = ["id" => $cursoId, "nome" => "Curso " . $cursoId];
+
+        // TODO: Pelo id retornado, selecionar a pessoa
+        $coordenador = $this->selecionarCoordenadorAtual($cursoId);
+
+
+        $retorno = [
+            'curso' => $curso, 
+            'coordenador' => $coordenador
+        ];
+
+        if ($curso > 0 && $coordenador > 0) {
+            http_response_code(200);
+            return json_encode($retorno);
+        }else{
+            http_response_code(500);
+            return json_encode(array("message" => "Não foi possível selecionar o coordenador!"));
+        }
+    }
 }
