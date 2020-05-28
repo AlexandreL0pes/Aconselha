@@ -107,11 +107,7 @@ const obterInformacoesTurma = () => {
       });
   }
 };
-/* {
-  "codigo": "20181.03AMB10I.1A",
-  "nome": "1° A",
-  "curso": "Meio Ambiente"
-} */
+
 const apresentarInformacoesTurma = (dados) => {
   const cardInfoTurma = document.querySelector(".turma-info");
 
