@@ -103,6 +103,7 @@ const obterInformacoesTurma = () => {
       })
       .catch((err) => {
         console.error(err);
+        showMessage("Houve um erro!", "Não foi possível acessar as informações da turma.", "error", 4000);
       });
   }
 };
