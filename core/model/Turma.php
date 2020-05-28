@@ -44,6 +44,8 @@ class Turma extends CRUD {
 
         try {
             $retorno = $this->read($database, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, null);
+            // echo $this->pegarUltimoSQL();
+            // echo "\n";
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             return false;
