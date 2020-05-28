@@ -54,7 +54,7 @@
   color: #222424;
   margin: 0px;
   padding: 15px 10px;
-  font-size: 0.7em;
+  font-size: .9em;
   font-weight: 300;
   grid-template-columns: 1fr;
   /* grid-template-rows: repeat(auto-fill, minmax(20px, 1fr)); */
@@ -62,8 +62,8 @@
   grid-gap: 0px;
 }
 
-.turma-info span:first-child {
-  font-size: 0.75rem;
+.turma-info > span:first-child {
+  font-size: 1.1em;
   font-weight: 400;
   color: #121313;
 }
