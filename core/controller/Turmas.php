@@ -3,6 +3,7 @@
 
 namespace core\controller;
 
+use core\model\Aluno;
 use core\model\Turma;
 
 class Turmas
@@ -68,5 +69,19 @@ class Turmas
         $curso = (explode(" Integrado", $tecnico_removido))[0];
 
         return $curso;
+    }
+
+    public function listarEstudantes($dados)
+    {
+        $turma = $dados['turma'];
+
+        $aluno = new Aluno();
+        $campos = "MATRICULAS.MATRICULA as matricula, " .
+            "PESSOAS.NOME_PESSOA as nome ";
+
+        $busca = [Aluno::COL_COD_TURMA_ATUAL => $turma];
+        $retorno = $aluno->listar($campos, $busca, null, null);
+
+        return json_encode($retorno);
     }
 }
