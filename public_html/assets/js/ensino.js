@@ -1,4 +1,4 @@
-import {sendRequest, showMessage} from './utils.js';
+import { sendRequest, showMessage } from "./utils.js";
 import { autenticarRepresentante } from "./components/Autenicacao.js";
 
 // autenticarRepresentante();
@@ -753,6 +753,38 @@ const removerFiltro = () => {
   listarAvaliacoes();
 };
 
+const obterInformacoesTurma = () => {
+  const turma = localStorage.getItem("turmaAtual") || null;
+
+  if (turma !== null) {
+    const dados = { acao: "Turmas/informacoesTurma", turma: turma };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        apresentarInformacoesTurma(response);
+      })
+      .catch((err) => {
+        console.error(err);
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível acessar as informações da turma.",
+          "error",
+          4000
+        );
+      });
+  }
+};
+
+const apresentarInformacoesTurma = (dados) => {
+  const cardInfoTurma = document.querySelector(".turma-info");
+
+  cardInfoTurma.querySelector("#nome").innerHTML = dados.nome;
+  cardInfoTurma.querySelector("#curso").innerHTML = dados.curso;
+  cardInfoTurma.querySelector("#codigo").innerHTML = dados.codigo;
+};
+
+obterInformacoesTurma();
 listarAprendizados();
 listarExperiencias();
 

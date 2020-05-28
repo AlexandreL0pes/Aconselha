@@ -61,7 +61,11 @@
       <aside class="sidenav">
         <ul class="sidenav__list">
           <li class="sidenav__list-item first-item">
-            <img src="../assets/images/logo_sadc.svg" alt="" class="logo-icon" />
+            <img
+              src="../assets/images/logo_sadc.svg"
+              alt=""
+              class="logo-icon"
+            />
           </li>
           <li class="sidenav__list-item estudantes">
             <img src="../assets/images/student.svg" alt="" class="icone" />
@@ -77,7 +81,7 @@
           </li>
         </ul>
         <div class="item-sair">
-          <img src="../assets/images/logout.svg" alt="" class="sair-icone">
+          <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
         </div>
       </aside>
       <!-- Sidebar -->
@@ -106,7 +110,7 @@
           </li>
         </ul>
         <div class="item-sair">
-          <img src="../assets/images/logout.svg" alt="" class="sair-icone">
+          <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
           <p class="text">
             Sair
           </p>
@@ -117,18 +121,18 @@
       <main class="main">
         <div class="page-head">
           <h4 class="titulo is-5">Avaliação Diagnóstica</h4>
-          <div class="card-info">
-            <span><span name="turma">3° B</span> - <span name="curso">Informática para Internet</span></span>
-            <span class="subtitulo is-8 gray-text"
-              >Prof. Adriano Honorato Braga</span
+          <div class="card-info turma-info">
+            <span
+              ><span name="turma" id="nome">3° B</span> -
+              <span name="curso" id="curso">Informática para Internet</span></span
             >
-            <span class="subtitulo is-8 gray-text">20141.03INF10I.3B</span>
-            <button class="button is-small">
+            <!-- <span class="subtitulo is-8 gray-text"
+              >Prof. Adriano Honorato Braga</span
+            > -->
+            <span class="subtitulo is-8 gray-text" id="codigo">20141.03INF10I.3B</span>
+            <a class="button is-small" href="./diagnostica.html">
               <span>Informações</span>
-              <span class="icon is-small">
-                <i class="fas fa-chevron-right"></i>
-              </span>
-            </button>
+            </a>
           </div>
         </div>
         <div class="avaliacoes">
@@ -160,7 +164,9 @@
           </div>
           <div class="cardbox card-avaliacao" data-aluno="2017103202030092">
             <p class="subtitulo is-8">Pendente</p>
-            <p class="subtitulo is-7" name="nome">Alessandra Ferreira Salgado Novais de Souza Morais</p>
+            <p class="subtitulo is-7" name="nome">
+              Alessandra Ferreira Salgado Novais de Souza Morais
+            </p>
             <p class="subtitulo is-8" name="matricula">2017103202030092</p>
           </div>
           <div class="cardbox card-avaliacao" data-aluno="2017103202030093">
@@ -261,14 +267,17 @@
               </div>
               <div class="perfil-aluno">
                 <p>Selecione as categorias que se adequam ao aluno:</p>
-                <div class="perfis" id="opcoes-perfis">
-                </div>
+                <div class="perfis" id="opcoes-perfis"></div>
               </div>
             </div>
           </section>
           <footer class="modal-card-foot">
             <div></div>
-            <button class="button is-success save-avaliation" name="" id="salvar-diagnostica">
+            <button
+              class="button is-success save-avaliation"
+              name=""
+              id="salvar-diagnostica"
+            >
               <span class="icon is-small">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </span>

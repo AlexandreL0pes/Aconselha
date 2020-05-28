@@ -62,7 +62,11 @@
       <aside class="sidenav">
         <ul class="sidenav__list">
           <li class="sidenav__list-item first-item">
-            <img src="../assets/images/logo_sadc.svg" alt="" class="logo-icon" />
+            <img
+              src="../assets/images/logo_sadc.svg"
+              alt=""
+              class="logo-icon"
+            />
           </li>
           <li class="sidenav__list-item estudantes">
             <img src="../assets/images/student.svg" alt="" class="icone" />
@@ -78,7 +82,7 @@
           </li>
         </ul>
         <div class="item-sair">
-          <img src="../assets/images/logout.svg" alt="" class="sair-icone">
+          <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
         </div>
       </aside>
       <!-- Sidebar -->
@@ -107,7 +111,7 @@
           </li>
         </ul>
         <div class="item-sair">
-          <img src="../assets/images/logout.svg" alt="" class="sair-icone">
+          <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
           <p class="text">
             Sair
           </p>
@@ -118,15 +122,15 @@
       <main class="main">
         <div class="page-head">
           <h4 class="titulo is-5">Avaliação de Ensino-Aprendizagem</h4>
-          <div class="card-info">
+          <div class="card-info turma-info">
             <span
-              ><span name="turma">3° B</span> -
-              <span name="curso">Informática para Internet</span></span
-            >
-            <span class="subtitulo is-8 gray-text"
+              ><span name="turma" id="nome"></span> -
+              <span name="curso" id="curso"></span
+            ></span>
+            <!-- <span class="subtitulo is-8 gray-text"
               >Prof. Adriano Honorato Braga</span
-            >
-            <span class="subtitulo is-8 gray-text">20141.03INF10I.3B</span>
+            > -->
+            <span class="subtitulo is-8 gray-text" id="codigo"></span>
             <button class="button is-small">
               <span>Informações</span>
               <span class="icon is-small">
@@ -169,7 +173,10 @@
                 </button>
               </p>
               <p class="control">
-                <button class="button is-small align-center" id="filtrarExperiencia">
+                <button
+                  class="button is-small align-center"
+                  id="filtrarExperiencia"
+                >
                   <span>Experiências</span>
                 </button>
               </p>
@@ -184,8 +191,7 @@
             </a>
           </div>
         </div>
-        <div class="avaliacoes">
-        </div>
+        <div class="avaliacoes"></div>
       </main>
 
       <footer class="footer">
@@ -282,7 +288,11 @@
             <div></div>
             <div></div>
 
-            <button class="button is-success salvar-ensino" name="" id="salvar-ensino">
+            <button
+              class="button is-success salvar-ensino"
+              name=""
+              id="salvar-ensino"
+            >
               <span class="icon is-small">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </span>
@@ -307,7 +317,12 @@
                 <div class="field">
                   <label class="label">Título</label>
                   <p class="control">
-                    <input id="experiencia-titulo" class="input" type="text" placeholder="Breve descricão da experiência" />
+                    <input
+                      id="experiencia-titulo"
+                      class="input"
+                      type="text"
+                      placeholder="Breve descricão da experiência"
+                    />
                   </p>
                 </div>
               </div>
@@ -316,8 +331,7 @@
                   <label class="label">Categoria</label>
                   <div class="control">
                     <div class="select">
-                      <select id="experiencia-categoria">
-                      </select>
+                      <select id="experiencia-categoria"> </select>
                     </div>
                   </div>
                 </div>
@@ -357,7 +371,7 @@
               <label class="label">Descrição</label>
               <div class="control">
                 <textarea
-                id="experiencia-descricao"
+                  id="experiencia-descricao"
                   class="textarea"
                   placeholder="Detalhe aqui sua sugestão"
                 ></textarea>
@@ -367,7 +381,11 @@
           <footer class="modal-card-foot">
             <div></div>
             <div></div>
-            <button class="button is-success salvar-experiencia" name="" id="salvar-experiencia">
+            <button
+              class="button is-success salvar-experiencia"
+              name=""
+              id="salvar-experiencia"
+            >
               <span class="icon is-small">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </span>
