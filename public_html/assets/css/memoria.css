@@ -31,7 +31,7 @@
   transition: box-shadow ease-in-out 0.4s;
 }
 
-.card-info > button {
+.card-info > .button {
   margin-top: 5px;
   margin-bottom: 0;
   justify-self: right;
@@ -40,7 +40,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   column-gap: 10px;
-  row-gap: 10px;  
+  row-gap: 10px;
 }
 .page-head > h4 {
   grid-column: 1 / -1;
@@ -148,7 +148,6 @@
   min-height: 70%;
   max-height: 100%;
   overflow: hidden;
-
 }
 
 .titulo {
@@ -157,3 +156,31 @@
   align-items: flex-end;
 }
 /* TextArea */
+
+.turma-info {
+  display: grid;
+  align-items: center;
+  justify-items: left;
+  border-radius: 3px;
+  color: #222424;
+  margin: 0px;
+  padding: 15px 20px;
+  font-size: 0.9em;
+  font-weight: 300;
+  grid-template-columns: 1fr;
+  /* grid-template-rows: repeat(auto-fill, minmax(20px, 1fr)); */
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
+  grid-gap: 0px;
+}
+
+.turma-info > span:first-child {
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #121313;
+}
+
+.turma-info > .button {
+  margin-top: 5px;
+  margin-bottom: 0;
+  justify-self: right;
+}
