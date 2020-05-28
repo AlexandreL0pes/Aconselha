@@ -90,4 +90,34 @@ const fecharEnsino = () => {
   modalEnsino.classList.toggle("is-active");
 };
 
+const obterInformacoesTurma = () => {
+  const turma = localStorage.getItem("turmaAtual") || null;
+
+  if (turma !== null) {
+    const dados = { acao: "Turmas/informacoesTurma", turma: turma };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        apresentarInformacoesTurma(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+};
+/* {
+  "codigo": "20181.03AMB10I.1A",
+  "nome": "1° A",
+  "curso": "Meio Ambiente"
+} */
+const apresentarInformacoesTurma = (dados) => {
+  const cardInfoTurma = document.querySelector(".turma-info");
+
+  cardInfoTurma.querySelector("#nome").innerHTML = dados.nome;
+  cardInfoTurma.querySelector("#curso").innerHTML = dados.curso;
+  cardInfoTurma.querySelector("#codigo").innerHTML = dados.codigo;
+};
+
+obterInformacoesTurma();
 listener();
