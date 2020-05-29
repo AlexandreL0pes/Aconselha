@@ -3,6 +3,7 @@
 
 namespace core\controller;
 
+use core\model\Aluno;
 use core\model\Aprendizado;
 use core\model\EstudanteAprendizado;
 
@@ -150,9 +151,12 @@ class Aprendizados
 
         $estudantes_id = $estudantesAvaliacao->listar(EstudanteAprendizado::COL_MATRICULA, $busca, null, 100);
         $estudantes = [];
+
+        $aluno = new Alunos();
         foreach ($estudantes_id as $estudante_id) {
-            $nome = "Estudante " . $estudante_id[EstudanteAprendizado::COL_MATRICULA];
-            array_push($estudantes, ['id' => $estudante_id[EstudanteAprendizado::COL_MATRICULA], 'nome' => $nome]);
+            $retornoAluno = $aluno->selecionar(['matricula' => $estudante_id[EstudanteAprendizado::COL_MATRICULA]]);
+            $retornoAluno = json_decode($retornoAluno, true);
+            array_push($estudantes, ['id' => $estudante_id[EstudanteAprendizado::COL_MATRICULA], 'nome' => $retornoAluno['nome']]);
         }
 
         return $estudantes;
