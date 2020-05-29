@@ -364,31 +364,24 @@ let autocompleteExperienciaDisciplinas = () => {
  */
 let autocompleteEnsinoEstudantes = () => {
   var api = function (inputValue) {
-    return fetch(
-      "https://cdn.rawgit.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json"
-    )
-      .then(function (resp) {
-        return [
-          { label: "Alexandre Lopes", value: "1459180" },
-          { label: "Ana Luiza", value: "417530" },
-          { label: "Samuel Rocha", value: "97312" },
-          { label: "Ruan Muller", value: "914402" },
-          { label: "Leonardo Emanuel", value: "81183" },
-        ];
-        // return resp.json();
-      })
-      .then(function (states) {
-        return states.filter(function (state) {
-          return state.label.startsWith(inputValue);
+    const turma = localStorage.getItem("turmaAtual") || null;
+    let dados = { acao: "Turmas/listarEstudantes", turma: turma };
+
+    return sendRequest(dados)
+      .then((estudantes) => {
+        return estudantes.filter((estudante) => {
+          return estudante.nome
+            .toLowerCase()
+            .startsWith(inputValue.toLowerCase());
         });
       })
-      .then(function (filtered) {
-        return filtered.map(function (state) {
-          return { label: state.label, value: state.value };
+      .then((filtrado) => {
+        return filtrado.map((estudante) => {
+          return { label: estudante.nome, value: estudante.matricula };
         });
       })
-      .then(function (transformed) {
-        return transformed.slice(0, 5);
+      .then((transformado) => {
+        return transformado.slice(0, 5);
       });
   };
 
