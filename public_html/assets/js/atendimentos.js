@@ -178,7 +178,9 @@ let autocompleteAluno = () => {
     return sendRequest(dados)
       .then((estudantes) => {
         return estudantes.filter((estudante) => {
-          return estudante.nome.startsWith(inputValue);
+          return estudante.nome
+            .toLowerCase()
+            .startsWith(inputValue.toLowerCase());
         });
       })
       .then((filtrado) => {
@@ -278,7 +280,7 @@ const salvarEncaminhamento = (e) => {
   let dados = pegarDados();
   if (
     dados.estudante != "" &&
-    dados.estudante != null && 
+    dados.estudante != null &&
     dados.professores.length > 0 &&
     dados.queixa != "" &&
     dados.intervencao != "" &&
@@ -319,7 +321,7 @@ const pegarDados = () => {
   const professoresChips = document.querySelectorAll(
     ".professores-selecionados > div.chip"
   );
-console.log(estudante);
+  console.log(estudante);
   let professores = [];
   professoresChips.forEach((professorChip) => {
     professores.push(professorChip.getAttribute("data-professor-id"));
