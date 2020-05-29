@@ -18,7 +18,7 @@ class Aluno extends CRUD
         $database = "academico";
 
         $campos = $campos != null ? $campos : " * ";
-        $ordem = $ordem != null ? $ordem : " ";
+        $ordem = $ordem != null ? $ordem : self::COL_MATRICULA;
         $limite = $limite != null ? " TOP {$limite} " : " TOP 1000 ";
 
         $campos = $limite . " " . $campos;
@@ -30,7 +30,7 @@ class Aluno extends CRUD
 
 
         if ($busca && count($busca) > 0) {
-            if ($busca[self::COL_COD_TURMA_ATUAL] && !empty($busca[self::COL_COD_TURMA_ATUAL])) {
+            if (isset($busca[self::COL_COD_TURMA_ATUAL]) && !empty($busca[self::COL_COD_TURMA_ATUAL])) {
                 $where_condicao .= " AND " . self::COL_COD_TURMA_ATUAL . " = ? ";
                 $where_valor[] = $busca[self::COL_COD_TURMA_ATUAL];
 
@@ -40,6 +40,17 @@ class Aluno extends CRUD
 
                 $ordem = "PESSOAS.NOME_PESSOA";
             }
+            if (isset($busca[self::COL_MATRICULA]) && !empty($busca[self::COL_MATRICULA])) {
+                $where_condicao .= " AND " . self::COL_MATRICULA . " = ? ";
+                $where_valor[] = $busca[self::COL_MATRICULA];
+
+                $tabela = self::TABELA .
+                    " INNER JOIN MATRICULAS ON ALUNOS.COD_ALUNO = MATRICULAS.COD_ALUNO " .
+                    " INNER JOIN PESSOAS ON ALUNOS.COD_PESSOA = PESSOAS.COD_PESSOA ";
+
+            }
+
+
         }
 
         $retorno = [];
