@@ -172,29 +172,22 @@ const delChip = (event) => {
 let autocompleteAluno = () => {
   // Quando tiver fazendo request pro server, utilizar essa função
   var api = function (inputValue) {
-    return fetch(
-      "https://cdn.rawgit.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json"
-    )
-      .then(function (resp) {
-        return [
-          { label: "Alexandre Lopes", value: "1" },
-          { label: "Alexandre", value: "2" },
-          { label: "Alexandre", value: "3" },
-        ];
-        // return resp.json();
-      })
-      .then(function (states) {
-        return states.filter(function (state) {
-          return state.label.startsWith(inputValue);
+    const turma = localStorage.getItem("turmaAtual") || null;
+    let dados = { acao: "Turmas/listarEstudantes", turma: turma };
+
+    return sendRequest(dados)
+      .then((estudantes) => {
+        return estudantes.filter((estudante) => {
+          return estudante.nome.startsWith(inputValue);
         });
       })
-      .then(function (filtered) {
-        return filtered.map(function (state) {
-          return { label: state.label, value: state.value };
+      .then((filtrado) => {
+        return filtrado.map((estudante) => {
+          return { label: estudante.nome, value: estudante.matricula };
         });
       })
-      .then(function (transformed) {
-        return transformed.slice(0, 5);
+      .then((transformado) => {
+        return transformado.slice(0, 5);
       });
   };
 
@@ -285,6 +278,7 @@ const salvarEncaminhamento = (e) => {
   let dados = pegarDados();
   if (
     dados.estudante != "" &&
+    dados.estudante != null && 
     dados.professores.length > 0 &&
     dados.queixa != "" &&
     dados.intervencao != "" &&
@@ -325,7 +319,7 @@ const pegarDados = () => {
   const professoresChips = document.querySelectorAll(
     ".professores-selecionados > div.chip"
   );
-
+console.log(estudante);
   let professores = [];
   professoresChips.forEach((professorChip) => {
     professores.push(professorChip.getAttribute("data-professor-id"));
