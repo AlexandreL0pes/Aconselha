@@ -83,5 +83,13 @@ class Turmas
         $retorno = $aluno->listar($campos, $busca, null, null);
 
         return json_encode($retorno);
+
+        if ($retorno && $retorno > 0) {
+            http_response_code(200);
+            return json_encode($retorno);
+        }else{
+            http_response_code(200);
+            return json_encode([]);
+        }
     }
 }
