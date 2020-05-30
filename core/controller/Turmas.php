@@ -87,9 +87,24 @@ class Turmas
         if ($retorno && $retorno > 0) {
             http_response_code(200);
             return json_encode($retorno);
-        }else{
+        } else {
             http_response_code(200);
             return json_encode([]);
         }
+    }
+
+    public function verificarTurmaCurso($codTurma, $codCurso)
+    {
+        $campos = Turma::COL_ID . ", " .
+            Turma::COL_CURSO;
+        $busca = [Turma::COL_ID => $codTurma];
+
+        $turma = new Turma();
+        $retornoTurma = ($turma->listar($campos, $busca, null, 1))[0];
+
+        if ($retornoTurma[Turma::COL_CURSO] == $codCurso) {
+            return true;
+        }
+        return false;
     }
 }
