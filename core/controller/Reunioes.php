@@ -3,6 +3,7 @@
 namespace core\controller;
 
 use core\model\Reuniao;
+use core\model\Turma;
 
 class Reunioes
 {
@@ -111,9 +112,65 @@ class Reunioes
 		if (count($memoriaReuniao) > 0) {
 			http_response_code(200);
 			return json_encode($memoriaReuniao);
-		}else{
+		} else {
 			http_response_code(500);
 			return json_encode(array('message' => 'Não foi possível obter a memória da reunião solicitada!'));
+		}
+	}
+
+
+	/**
+	 * Lista as reuniões não finalizadas
+	 */
+	public function listarReunioesAndamento($dados)
+	{
+
+		$reuniao = new Reuniao();
+
+
+		$campos = Reuniao::COL_ID . ", " .
+			Reuniao::COL_COD_TURMA;
+
+		$busca = [Reuniao::COL_FINALIZADO => '0'];
+		$reunioes = $reuniao->listar($campos, $busca, null, 1000);
+
+
+		$turmas = new Turmas();
+
+		$reunioesFiltradas = [];
+
+		// Caso o curso seja passado, lista apenas as reuniões do curso
+		// Caso não exista curso, todas as reuniões serão retornadas
+
+		if (isset($dados['curso']) && !empty($dados['curso'])) {
+
+			foreach ($reunioes as $reuniao) {
+				if ($turmas->verificarTurmaCurso($reuniao[Turma::COL_ID], $dados['curso'])) {
+					$turma = $turmas->informacoesTurma(['turma' => $reuniao[Turma::COL_ID]]);
+
+					$turma = json_decode($turma, true);
+					$turma['reuniao'] = $reuniao[Reuniao::COL_ID];
+
+					array_push($reunioesFiltradas, $turma);
+				}
+			}
+		} else {
+
+			foreach ($reunioes as $reuniao) {
+				$turma = $turmas->informacoesTurma(['turma' => $reuniao[Turma::COL_ID]]);
+
+				$turma = json_decode($turma, true);
+				$turma['reuniao'] = $reuniao[Reuniao::COL_ID];
+
+				array_push($reunioesFiltradas, $turma);
+			}
+		}
+
+
+
+		if (count($reunioesFiltradas) > 0) {
+			http_response_code(200);
+			return json_encode($reunioesFiltradas);
 		}
 	}
 }
