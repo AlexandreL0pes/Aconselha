@@ -10,7 +10,7 @@ class Reuniao extends CRUD
 
     const TABELA = 'Reuniao';
     const COL_ID = 'id';
-    const COL_COD_TURMA = 'cod_turma';
+    const COL_COD_TURMA = 'COD_TURMA';
     const COL_DATA = 'data';
     const COL_ETAPA_CONSELHO = 'etapaConselho';
     const COL_FINALIZADO = 'finalizado';
@@ -82,7 +82,7 @@ class Reuniao extends CRUD
                 $where_valor[] = $busca[self::COL_ETAPA_CONSELHO];
             }
         
-            if (isset($busca[self::COL_FINALIZADO]) && !empty($busca[self::COL_FINALIZADO])) {
+            if (isset($busca[self::COL_FINALIZADO])) {
                 $where_condicao .= " AND " . self::COL_FINALIZADO . " = ?";
                 $where_valor[] = $busca[self::COL_FINALIZADO];
             }
@@ -98,6 +98,7 @@ class Reuniao extends CRUD
         try {
 
             $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
+            // echo $this->pegarUltimoSQL();
         } catch (Exception $e) {
             echo "Mensagem: " . $e->getMessage() . "\n Local: " . $e->getTraceAsString();
         }
