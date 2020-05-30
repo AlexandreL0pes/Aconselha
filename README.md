@@ -45,9 +45,19 @@ Depois, é necessário configurar a conexão com o banco de dados MSSQL local, p
 
 ```
 
+Por fim, defina as váriaveis responsáveis pela encriptação das tokens de acesso geradas pelo sistemas, ainda dentro do arquivo `config-dev.json`, adicione os dados.
+
+```json
+  "jwt": {
+    "key": "sua_chave_super_secreta",
+    "alg": "seu_algoritmo_de_encriptação",
+  }
+```
+
 **Configurando o Docker** 🐳
 
 ### Iniciando os containers
+
 ```bash
 $ docker-compose up -d
 ```
