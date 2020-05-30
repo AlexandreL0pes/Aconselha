@@ -70,7 +70,5 @@ O serviço ainda não está disponível! :/
 - SQL Server 2017 - Base de dados Acadêmicos (Legada)
 - Bulma - Framework CSS
 - Vanilla JS - Linguagem do Front-End
-## Licença
 
-[MIT](https://opensource.org/licenses/MIT)
 
