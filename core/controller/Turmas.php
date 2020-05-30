@@ -24,11 +24,6 @@ class Turmas
             $nomeTurma = $this->processarNome($retornoTurma[Turma::COL_ID]);
             $cursoTurma = $this->processarCurso($retornoTurma[Turma::COL_DESC_TURMA]);
 
-            // print_r($nomeTurma);
-            // echo "\n";
-            // print_r($cursoTurma);
-            // echo "\n";
-            // print_r($retornoTurma);
 
             $turmaJson = [
                 'codigo' => $codigoTurma,
