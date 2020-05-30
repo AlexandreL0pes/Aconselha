@@ -13,9 +13,6 @@ SADC é um sistema de apoio à decisão para conselhos de classe. O objetivo pri
 ## Pré-Requisitos
 - Docker 
 
-## Utilização 
-O serviço ainda não está disponível! :/
-
 ## Instalação/Execução
 
 **Configurando as credenciais** 
@@ -63,6 +60,9 @@ $ docker-compose up -d
 ```
 
 #### Após a execução dos comandos, o servidor estará disponível em [localhost:80/](http://localhost:80/)
+
+## Utilização 
+O serviço ainda não está disponível! :/
 
 ## Licença
 
