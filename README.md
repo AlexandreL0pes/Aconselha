@@ -67,6 +67,6 @@ O serviço ainda não está disponível! :/
 - MySQL 5.7 - Base de Dados Principal
 - SQL Server 2017 - Base de dados Acadêmicos (Legada)
 - Bulma - Framework CSS
-- Vanilla JS - Linguagem do Front-End
+- [Vanilla JS](http://vanilla-js.com/) - Framework Javascript 😂
 
 
