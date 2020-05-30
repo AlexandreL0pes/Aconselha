@@ -69,4 +69,8 @@ O serviço ainda não está disponível! :/
 - Bulma - Framework CSS
 - [Vanilla JS](http://vanilla-js.com/) - Framework Javascript 😂
 
+## Autores
+[NEPeTI - Núcleo de Estudos e Pesquisa em Tecnologia da Informação](https://informatica.ifgoiano.edu.br/index.php/nepeti)
+
+
 
