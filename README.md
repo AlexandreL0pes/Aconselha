@@ -54,9 +54,9 @@ Por fim, defina as váriaveis responsáveis pela encriptação das tokens de ace
   }
 ```
 
-**Configurando o Docker** 🐳
+### Configurando o Docker 🐳
 
-### Iniciando os containers
+#### Iniciando os containers
 
 ```bash
 $ docker-compose up -d
