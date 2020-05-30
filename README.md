@@ -20,7 +20,7 @@ O serviço ainda não está disponível! :/
 
 **Configurando as credenciais** 
 
-Caso seja necessário, para configurar a conexão com o banco de dados, é preciso criar o arquivo `config-dev.json`.
+Primeiramente, é necessário configurar a conexão com o banco de dados MySQL local, para isso crie o arquivo `config-dev.json`, adicionando credenciais válidas.
 ```json
 {
   "database": {
@@ -29,9 +29,22 @@ Caso seja necessário, para configurar a conexão com o banco de dados, é preci
     "password": "senha",
     "db": "nome_banco",
     "drive": "mysql"
-  }
+  },
 }
 ```
+
+Depois, é necessário configurar a conexão com o banco de dados MSSQL local, para isso, dentro do arquivo `config-dev.json`, adicione as credenciais válidas.
+```json
+  "academico": {
+    "host": "db",
+    "user": "usuario",
+    "password": "senha",
+    "db": "nome_banco",
+    "drive": "mssql"
+  },
+
+```
+
 **Configurando o Docker** 🐳
 
 ### Iniciando os containers
