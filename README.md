@@ -19,7 +19,6 @@ SADC é um sistema de apoio à decisão para conselhos de classe. O objetivo pri
 
 Primeiramente, é necessário configurar a conexão com o banco de dados MySQL local, para isso crie o arquivo `config-dev.json`, adicionando credenciais válidas.
 ```json
-{
   "database": {
     "host": "localhost",
     "user": "usuario",
@@ -27,7 +26,6 @@ Primeiramente, é necessário configurar a conexão com o banco de dados MySQL l
     "db": "nome_banco",
     "drive": "mysql"
   },
-}
 ```
 
 Depois, é necessário configurar a conexão com o banco de dados MSSQL local, para isso, dentro do arquivo `config-dev.json`, adicione as credenciais válidas.
