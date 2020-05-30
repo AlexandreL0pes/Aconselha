@@ -64,6 +64,12 @@ $ docker-compose up -d
 ## Utilização 
 O serviço ainda não está disponível! :/
 
+## Tecnologias utilizadas
+- PHP 7.2 - Linguagem do Back-End
+- MySQL 5.7 - Base de Dados Principal
+- SQL Server 2017 - Base de dados Acadêmicos (Legada)
+- Bulma - Framework CSS
+- Vanilla JS - Linguagem do Front-End
 ## Licença
 
 [MIT](https://opensource.org/licenses/MIT)
