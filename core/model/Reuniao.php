@@ -60,7 +60,8 @@ class Reuniao extends CRUD
     {
 
         $campos = $campos != null ? $campos : " * ";
-        $ordem = $ordem != null ? $ordem : " " . self::COL_COD_TURMA . ", " . self::COL_ETAPA_CONSELHO;
+        // $ordem = $ordem != null ? $ordem : " " . self::COL_COD_TURMA . ", " . self::COL_ETAPA_CONSELHO;
+        $ordem = $ordem != null ? $ordem : "";
         $limite = $limite != null ? $limite : 10;
 
 
@@ -116,6 +117,7 @@ class Reuniao extends CRUD
             // echo $this->pegarUltimoSQL();
         } catch (Exception $e) {
             echo "Mensagem: " . $e->getMessage() . "\n Local: " . $e->getTraceAsString();
+            // echo $this->pegarUltimoSQL();
         }
 
         return $retorno;
