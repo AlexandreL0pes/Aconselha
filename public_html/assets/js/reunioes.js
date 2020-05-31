@@ -10,25 +10,18 @@ const listener = () => {
  * Redireciona o usuário para a página da reunião, correpondente ao card clicado
  */
 let abrirReuniao = () => {
-  const cardsReuniao = document.querySelectorAll(
-    ".reunioes>div.cardbox, .reunioes>div.cardbox *"
-  );
-  cardsReuniao.forEach(function (card) {
-    card.addEventListener("click", function (event) {
-      let idReuniao =
-        event.target.getAttribute("data-turmaconselho") ||
-        event.target.parentElement.getAttribute("data-turmaconselho");
+  let idReuniao =
+    event.target.getAttribute("data-turmaconselho") ||
+    event.target.parentElement.getAttribute("data-turmaconselho");
 
-      let idTurma =
-        event.target.getAttribute("data-turma") ||
-        event.target.parentElement.getAttribute("data-turma");
+  let idTurma =
+    event.target.getAttribute("data-turma") ||
+    event.target.parentElement.getAttribute("data-turma");
 
-      localStorage.setItem("conselhoAtual", idReuniao);
-      localStorage.setItem("turmaAtual", idTurma);
+  localStorage.setItem("conselhoAtual", idReuniao);
+  localStorage.setItem("turmaAtual", idTurma);
 
-      window.location = "./dashboard.html";
-    });
-  });
+  window.location.href = "./dashboard.html";
 };
 
 /**
@@ -114,7 +107,68 @@ const iniciarConselhos = () => {
   );
 };
 
+const solicitarReunioes = () => {
+  const curso = localStorage.getItem("curso");
+
+  const dados = { acao: "Reunioes/listarReunioesAndamento" };
+
+  if (curso != null) {
+    dados.curso = curso;
+  }
+
+  sendRequest(dados)
+    .then((response) => {
+      console.log(response);
+      if (response.length > 0) {
+        response.forEach((reuniao) => addReuniaoCard(reuniao));
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+{
+  /* <div
+  class="cardbox card-turma is-amb"
+  data-turma="20181.03AMB10I.1A"
+  data-turmaconselho="1"
+>
+  <p class="subtitulo is-8 gray-text">Meio Ambiente</p>
+  <p class="subtitulo is-7">1° B</p>
+  <p class="subtitulo is-9 gray-text">INFI.2019/1.A</p>
+</div>; */
+}
+const addReuniaoCard = (reuniao) => {
+  let card = document.createElement("div");
+
+  let classCurso = "";
+  if (reuniao.curso === "Informática para Internet") {
+    classCurso = "is-info";
+  } else if (reuniao.curso === "Meio Ambiente") {
+    classCurso = "is-amb";
+  } else {
+    classCurso = "is-agro";
+  }
+
+  card.classList.add("cardbox", "card-turma", classCurso);
+  card.setAttribute("data-turma", reuniao.codigo);
+  card.setAttribute("data-turmaconselho", reuniao.reuniao);
+
+  card.innerHTML += `
+    <p class="subtitulo is-8 gray-text">${reuniao.curso}</p>
+    <p class="subtitulo is-7">${reuniao.nome}</p>
+    <p class="subtitulo is-9 gray-text">${reuniao.codigo}</p>
+  `;
+
+  card.addEventListener("click", (event) => abrirReuniao(event));
+
+  const reunioesDiv = document.getElementById("reunioes");
+
+  reunioesDiv.appendChild(card);
+};
+
+solicitarReunioes();
 listener();
-abrirReuniao();
+// abrirReuniao();
 selecionarTurmas();
 iniciarConselhos();
