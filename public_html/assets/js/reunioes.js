@@ -121,6 +121,13 @@ const solicitarReunioes = () => {
       console.log(response);
       if (response.length > 0) {
         response.forEach((reuniao) => addReuniaoCard(reuniao));
+      } else {
+        const reunioesDiv = document.getElementById("reunioes");
+        const msg = document.createElement("div");
+        msg.classList.add("nenhum-resultado");
+        msg.innerHTML = "Nenhum conselho de classe foi iniciado!";
+
+        reunioesDiv.appendChild(msg);
       }
     })
     .catch((err) => {
@@ -172,14 +179,12 @@ const obterCurso = () => {
 
   const dados = { acao: "Coordenadores/obterCurso", token: token };
 
-  sendRequest(dados)
-    .then((response) => {
-      console.log(response);
-      if (response.curso) {
-        localStorage.setItem("curso", response.curso);
-      }
-    })
-    .catch((err) => console.error(err));
+  sendRequest(dados).then((response) => {
+    console.log(response);
+    if (response.curso) {
+      localStorage.setItem("curso", response.curso);
+    }
+  });
 };
 
 obterCurso();
