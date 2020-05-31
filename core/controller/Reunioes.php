@@ -170,4 +170,27 @@ class Reunioes
 		http_response_code(200);
 		return json_encode($reunioesFiltradas);
 	}
+
+	public function reunioesNaoIniciadas($dados)
+	{
+	}
+
+	/**
+	 * Retorna uma lista contendo os COD_TURMA de turmas que não participam do conselho a mais de 30 dias
+	 */
+	public function turmasReunioesFinalizadas($dados)
+	{
+		$reuniao = new Reuniao();
+
+		$campos = Reuniao::COL_COD_TURMA;
+
+		$busca = [Reuniao::COL_FINALIZADO => '1', 'periodo' => 30, 'ano' => 'atual'];
+
+		$retorno = $reuniao->listar($campos, $busca, null, 1000);
+
+		$turmasIds = array_map(function ($id){ return $id[Reuniao::COL_COD_TURMA];},$retorno );
+
+		return $turmasIds;
+		
+	}
 }
