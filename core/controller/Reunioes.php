@@ -185,15 +185,27 @@ class Reunioes
 		// Retorna uma lista das turmas que nunca participaram do conselho
 		$turmasForaReuniao = $turmas->turmasForaReuniao($turmasParticipantesReunioesPassadas);
 
-		echo "\nRetorna uma lista contendo os COD_TURMA de turmas que não participam do conselho a mais de 30 dias\n";
-		print_r($turmasForaReuniaoAtual);
-		echo "\nRetorna uma lista das turmas que nunca participaram do conselho";
-		print_r($turmasForaReuniao);
-		// $reunioesNaoIniciadas = array_merge($turmasForaReuniao, $turmasForaReuniaoAtual);
 
-		// print_r($reunioesNaoIniciadas);
+		$turmasCompletas = [];
 
+		foreach ($turmasForaReuniaoAtual as $t) {
+			$retorno = $turmas->informacoesTurma(['turma' => $t]);
 
+			$retorno = json_decode($retorno, true);
+			array_push($turmasCompletas, $retorno);
+		}
+
+		foreach ($turmasForaReuniao as $t) {
+			$retorno = $turmas->informacoesTurma(['turma' => $t]);
+
+			$retorno = json_decode($retorno, true);
+			array_push($turmasCompletas, $retorno);
+		}
+
+		// print_r($turmasCompletas);
+
+		http_response_code(200);
+		return json_encode($turmasCompletas);
 	}
 
 	/**
@@ -231,7 +243,7 @@ class Reunioes
 		$busca = ['ano' => 'atual'];
 
 		$retorno = $reuniao->listar($campos, $busca, null, 1000);
-		
+
 		$turmasIds = [];
 		if (count($retorno) > 0 && !empty($retorno[0])) {
 			$turmasIds = array_map(function ($id) {
