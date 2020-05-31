@@ -102,4 +102,28 @@ class Turmas
         }
         return false;
     }
+
+
+    /**
+     * Retorna uma lista das turmas que nunca participaram do conselho
+     * @param array $turmasAvaliadas Lista com todas as turmas atuais que já participaram de um conselho
+     */
+    public function turmasForaReuniao($turmasAvaliadas = [])
+    {
+        $turma = new Turma();
+
+        $campos = Turma::COL_ID;
+
+        $turmas = implode("', '", $turmasAvaliadas);
+        $turmas = "'" . $turmas . "'";
+
+        $busca = ['avaliadas' => $turmas, 'ano' => 'atual'];
+        $retorno = $turma->listar($campos, $busca, null, 10000);
+
+        $retorno = array_map(function ($id) {
+            return $id[Turma::COL_ID];
+        }, $retorno);
+
+        return $retorno;
+    }
 }
