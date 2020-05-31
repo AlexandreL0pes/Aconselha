@@ -47,6 +47,7 @@ const sair = () => {
     item.addEventListener("click", (element) => {
       setCookie("token", "", 0);
       window.location.href = "../login.html";
+      localStorage.clear();
     })
   );
 };
