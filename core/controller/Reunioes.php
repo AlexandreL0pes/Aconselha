@@ -167,10 +167,7 @@ class Reunioes
 		}
 
 
-
-		if (count($reunioesFiltradas) > 0) {
-			http_response_code(200);
-			return json_encode($reunioesFiltradas);
-		}
+		http_response_code(200);
+		return json_encode($reunioesFiltradas);
 	}
 }
