@@ -150,7 +150,7 @@ class Coordenadores
             return json_encode(array("message" => "Não foi possível alterar a senha!"));
         }
     }
-    
+
     public function selecionarCoordenador($dados)
     {
 
@@ -164,16 +164,33 @@ class Coordenadores
 
 
         $retorno = [
-            'curso' => $curso, 
+            'curso' => $curso,
             'coordenador' => $coordenador
         ];
 
         if ($curso > 0 && $coordenador > 0) {
             http_response_code(200);
             return json_encode($retorno);
-        }else{
+        } else {
             http_response_code(500);
             return json_encode(array("message" => "Não foi possível selecionar o coordenador!"));
+        }
+    }
+
+    public function obterCurso($dados)
+    {
+        $token = $dados['token'];
+
+        $data = Autenticacao::verificarLogin($token);
+
+        $curso = $data[Usuario::COL_CURSO];
+
+        if (isset($curso) && !empty($curso)) {
+            http_response_code(200);
+            return json_encode(array('curso' => $curso));
+        } else {
+            http_response_code(400);
+            return json_encode(array('message' => 'Não existe curso anexado ao coordenador!'));
         }
     }
 }

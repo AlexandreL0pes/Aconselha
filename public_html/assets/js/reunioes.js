@@ -1,4 +1,4 @@
-import { sendRequest, showMessage } from "./utils.js";
+import { sendRequest, showMessage, getCookie } from "./utils.js";
 
 const listener = () => {
   const btnIniciarConselho = document.querySelector("#iniciarConselho");
@@ -167,6 +167,22 @@ const addReuniaoCard = (reuniao) => {
   reunioesDiv.appendChild(card);
 };
 
+const obterCurso = () => {
+  const token = getCookie("token");
+
+  const dados = { acao: "Coordenadores/obterCurso", token: token };
+
+  sendRequest(dados)
+    .then((response) => {
+      console.log(response);
+      if (response.curso) {
+        localStorage.setItem("curso", response.curso);
+      }
+    })
+    .catch((err) => console.error(err));
+};
+
+obterCurso();
 solicitarReunioes();
 listener();
 // abrirReuniao();
