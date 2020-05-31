@@ -173,12 +173,33 @@ class Reunioes
 
 	public function reunioesNaoIniciadas($dados)
 	{
+
+		//  Retorna uma lista contendo os COD_TURMA de turmas que não participam do conselho a mais de 30 dias
+		$turmasForaReuniaoAtual = $this->turmasReunioesFinalizadas();
+
+		// Retorna uma lista de turmas que já participaram de uma reunião
+		$turmasParticipantesReunioesPassadas = $this->turmasAvaliadasReuniao();
+
+		$turmas = new Turmas();
+
+		// Retorna uma lista das turmas que nunca participaram do conselho
+		$turmasForaReuniao = $turmas->turmasForaReuniao($turmasParticipantesReunioesPassadas);
+
+		echo "\nRetorna uma lista contendo os COD_TURMA de turmas que não participam do conselho a mais de 30 dias\n";
+		print_r($turmasForaReuniaoAtual);
+		echo "\nRetorna uma lista das turmas que nunca participaram do conselho";
+		print_r($turmasForaReuniao);
+		// $reunioesNaoIniciadas = array_merge($turmasForaReuniao, $turmasForaReuniaoAtual);
+
+		// print_r($reunioesNaoIniciadas);
+
+
 	}
 
 	/**
 	 * Retorna uma lista contendo os COD_TURMA de turmas que não participam do conselho a mais de 30 dias
 	 */
-	public function turmasReunioesFinalizadas($dados)
+	public function turmasReunioesFinalizadas()
 	{
 		$reuniao = new Reuniao();
 
@@ -188,9 +209,12 @@ class Reunioes
 
 		$retorno = $reuniao->listar($campos, $busca, null, 1000);
 
-		$turmasIds = array_map(function ($id) {
-			return $id[Reuniao::COL_COD_TURMA];
-		}, $retorno);
+		$turmasIds = [];
+		if (count($retorno) > 0 && !empty($retorno[0])) {
+			$turmasIds = array_map(function ($id) {
+				return $id[Reuniao::COL_COD_TURMA];
+			}, $retorno);
+		}
 
 		return $turmasIds;
 	}
@@ -207,10 +231,14 @@ class Reunioes
 		$busca = ['ano' => 'atual'];
 
 		$retorno = $reuniao->listar($campos, $busca, null, 1000);
+		
+		$turmasIds = [];
+		if (count($retorno) > 0 && !empty($retorno[0])) {
+			$turmasIds = array_map(function ($id) {
+				return $id[Reuniao::COL_COD_TURMA];
+			}, $retorno);
+		}
 
-		$turmasIds = array_map(function ($id) {
-			return $id[Reuniao::COL_COD_TURMA];
-		}, $retorno);
 
 		return $turmasIds;
 	}
