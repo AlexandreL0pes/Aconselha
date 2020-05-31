@@ -126,4 +126,38 @@ class Turmas
 
         return $retorno;
     }
+
+    public function informacoesTurmas($dados)
+    {
+        $turmas = $dados['turmas'];
+
+        $t = new Turma();
+
+        $informacoesCompletas = [];
+        foreach ($turmas as $turma) {
+            $campos = Turma::COL_ID . ", " . 
+                Turma::COL_DESC_TURMA;
+    
+            $busca = [Turma::COL_ID => $turma];
+
+            $retorno = ($t->listar($campos, $busca, null, 1))[0];
+
+            if (!empty($retorno)) {
+                $nomeTurma = $this->processarNome($retorno[Turma::COL_ID]);
+                $cursoTurma = $this->processarCurso($retorno[Turma::COL_DESC_TURMA]);
+
+                $informacaoCompleta = [
+                    'codigo' => $turma, 
+                    'nome' => $nomeTurma,
+                    'curso' => $cursoTurma
+                ];
+
+                array_push($informacoesCompletas, $informacaoCompleta);
+
+            }
+        }
+
+        http_response_code(200);
+        return json_encode($informacoesCompletas);
+    }
 }
