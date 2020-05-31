@@ -188,9 +188,30 @@ class Reunioes
 
 		$retorno = $reuniao->listar($campos, $busca, null, 1000);
 
-		$turmasIds = array_map(function ($id){ return $id[Reuniao::COL_COD_TURMA];},$retorno );
+		$turmasIds = array_map(function ($id) {
+			return $id[Reuniao::COL_COD_TURMA];
+		}, $retorno);
 
 		return $turmasIds;
-		
+	}
+
+	/**
+	 * Retorna uma lista de turmas que já participaram de uma reunião
+	 */
+	public function turmasAvaliadasReuniao()
+	{
+		$reuniao = new Reuniao();
+
+		$campos = " DISTINCT " . Reuniao::COL_COD_TURMA;
+
+		$busca = ['ano' => 'atual'];
+
+		$retorno = $reuniao->listar($campos, $busca, null, 1000);
+
+		$turmasIds = array_map(function ($id) {
+			return $id[Reuniao::COL_COD_TURMA];
+		}, $retorno);
+
+		return $turmasIds;
 	}
 }
