@@ -6,13 +6,15 @@ namespace core\model;
 
 use core\CRUD;
 
-class Turma extends CRUD {
+class Turma extends CRUD
+{
 
     const TABELA = "TURMAS";
     const COL_ID = "COD_TURMA";
     const COL_CURSO = "COD_CURSO";
     const COL_SIGLA_TURMA = "SIGLA_TURMA";
-    const COL_DESC_TURMA = "DESC_TURMA"; 
+    const COL_DESC_TURMA = "DESC_TURMA";
+    const COL_ANO_LET = "ANO_LET";
 
 
     public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
@@ -33,13 +35,23 @@ class Turma extends CRUD {
                 $where_condicao .= " AND " . self::COL_ID . " = ? ";
                 $where_valor[] = $busca[self::COL_ID];
             }
+
+            if (isset($busca['avaliadas'])) {
+                $where_condicao .= " AND " . self::COL_ID . " NOT IN ({$busca['avaliadas']}) ";
+            }
+
+            if (isset($busca['ano'])) {
+                if ($busca['ano'] == 'atual') {
+                    $where_condicao .= " AND " . self::COL_ANO_LET . " = YEAR(GETDATE())";
+                }
+            }
         }
 
         $where_condicao .= " AND " . self::COL_ID . " NOT LIKE ? ";
         $where_valor[] = '%DEP%';
         $where_condicao .= " AND " . self::COL_ID . " NOT LIKE ? ";
         $where_valor[] = '%VER';
-        
+
         $retorno = [];
 
         try {
@@ -53,5 +65,4 @@ class Turma extends CRUD {
 
         return $retorno;
     }
-
 }
