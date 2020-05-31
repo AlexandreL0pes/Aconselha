@@ -38,7 +38,8 @@ class Reuniao extends CRUD
      * @param $dados
      * @return bool
      */
-    public function alterar($dados) {
+    public function alterar($dados)
+    {
         if (!isset($dados[self::COL_ID])) {
             throw new Exception("É necessário informar o ID da reunião");
         }
@@ -55,7 +56,8 @@ class Reuniao extends CRUD
         return $dados[self::COL_ID];
     }
 
-    public function listar($campos = null, $busca = [], $ordem = null, $limite = null) {
+    public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
+    {
 
         $campos = $campos != null ? $campos : " * ";
         $ordem = $ordem != null ? $ordem : " " . self::COL_COD_TURMA . ", " . self::COL_ETAPA_CONSELHO;
@@ -81,7 +83,7 @@ class Reuniao extends CRUD
                 $where_condicao .= " AND " . self::COL_ETAPA_CONSELHO . " = ?";
                 $where_valor[] = $busca[self::COL_ETAPA_CONSELHO];
             }
-        
+
             if (isset($busca[self::COL_FINALIZADO])) {
                 $where_condicao .= " AND " . self::COL_FINALIZADO . " = ?";
                 $where_valor[] = $busca[self::COL_FINALIZADO];
@@ -89,6 +91,19 @@ class Reuniao extends CRUD
             if (isset($busca[self::COL_ID]) && !empty($busca[self::COL_ID])) {
                 $where_condicao .= " AND " . self::COL_ID . " = ? ";
                 $where_valor[] = $busca[self::COL_ID];
+            }
+            if (isset($busca['periodo']) && !empty($busca['periodo'])) {
+                $where_condicao .= " AND " . "PERIOD_DIFF(CURDATE(), " .
+                    Reuniao::COL_DATA .
+                    ") " .
+                    " > ? ";
+                $where_valor[] = $busca['periodo'];
+            }
+
+            if (isset($busca['ano'])) {
+                if ($busca['ano'] == 'atual') {
+                    $where_condicao .= " AND LEFT(" . Reuniao::COL_COD_TURMA . ", 4) = YEAR(CURRENT_DATE())";
+                }
             }
         }
 
