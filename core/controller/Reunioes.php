@@ -142,10 +142,25 @@ class Reunioes
 		// Caso o curso seja passado, lista apenas as reuniões do curso
 		// Caso não exista curso, todas as reuniões serão retornadas
 
-		if (isset($dados['curso']) && !empty($dados['curso'])) {
+		// Verifica se existem reuniões retornadas 
+		if (count($reunioes) > 0 && !empty($reunioes[0])) {
+			
+			// Verifica se existe curso especificado
+			if (isset($dados['curso']) && !empty($dados['curso'])) {
 
-			foreach ($reunioes as $reuniao) {
-				if ($turmas->verificarTurmaCurso($reuniao[Turma::COL_ID], $dados['curso'])) {
+				foreach ($reunioes as $reuniao) {
+					if ($turmas->verificarTurmaCurso($reuniao[Turma::COL_ID], $dados['curso'])) {
+						$turma = $turmas->informacoesTurma(['turma' => $reuniao[Turma::COL_ID]]);
+
+						$turma = json_decode($turma, true);
+						$turma['reuniao'] = $reuniao[Reuniao::COL_ID];
+
+						array_push($reunioesFiltradas, $turma);
+					}
+				}
+			} else {
+
+				foreach ($reunioes as $reuniao) {
 					$turma = $turmas->informacoesTurma(['turma' => $reuniao[Turma::COL_ID]]);
 
 					$turma = json_decode($turma, true);
@@ -153,16 +168,6 @@ class Reunioes
 
 					array_push($reunioesFiltradas, $turma);
 				}
-			}
-		} else {
-
-			foreach ($reunioes as $reuniao) {
-				$turma = $turmas->informacoesTurma(['turma' => $reuniao[Turma::COL_ID]]);
-
-				$turma = json_decode($turma, true);
-				$turma['reuniao'] = $reuniao[Reuniao::COL_ID];
-
-				array_push($reunioesFiltradas, $turma);
 			}
 		}
 
