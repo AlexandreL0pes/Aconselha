@@ -66,6 +66,11 @@ let habilitarBotao = () => {
   }
 };
 
+const zerarResultados = () => {
+  document.querySelector("#qtdTurmas").innerHTML = "Nenhuma";
+  document.querySelector("#iniciarConselho").disabled = true;
+}
+
 /**
  * Obtem e envia os dados para cadastrar a reunião
  */
@@ -94,6 +99,7 @@ const iniciarConselhos = () => {
         );
         solicitarReunioes();
         solicitarTurmas();
+        zerarResultados();
       })
       .catch((err) => {
         console.error(err);
