@@ -13,7 +13,6 @@ const login = (params) => {
     sendRequest(dados)
       .then((response) => {
         setCookie("token", response.jwt, response.expireAt);
-        console.log(response);
         redirecionamento(response.type);
       })
       .catch((err) => {
