@@ -118,7 +118,6 @@ const solicitarReunioes = () => {
 
   sendRequest(dados)
     .then((response) => {
-      console.log(response);
       if (response.length > 0) {
         response.forEach((reuniao) => addReuniaoCard(reuniao));
       } else {
@@ -170,7 +169,7 @@ const obterCurso = () => {
   const dados = { acao: "Coordenadores/obterCurso", token: token };
 
   sendRequest(dados).then((response) => {
-    console.log(response);
+    // console.log(response);
     if (response.curso) {
       localStorage.setItem("curso", response.curso);
     }
@@ -188,7 +187,6 @@ const solicitarTurmas = () => {
 
   sendRequest(dados)
     .then((response) => {
-      console.log(response);
       if (response.length > 0) {
         response.map((turma) => addTurmaCard(turma));
       }else {
