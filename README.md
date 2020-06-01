@@ -44,7 +44,7 @@ Por fim, defina as váriaveis responsáveis pela encriptação das tokens de ace
 
 ```json
   "jwt": {
-    "key": "sua_chave_super_secreta",
+    "secret_key": "sua_chave_super_secreta",
     "alg": "seu_algoritmo_de_encriptação",
   }
 ```
