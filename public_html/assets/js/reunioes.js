@@ -90,12 +90,14 @@ const iniciarConselhos = () => {
         showMessage(
           "Deu certo!",
           "Os conselhos foram iniciados!",
-          "success",
-          5000
+          "success"
         );
+        solicitarReunioes();
+        solicitarTurmas();
       })
       .catch((err) => {
         console.error(err);
+        showMessage("Houve um erro!", "Não foi possível iniciar os conselhos selecionados!", "error");
       });
   }
   showMessage(
@@ -119,6 +121,7 @@ const solicitarReunioes = () => {
   sendRequest(dados)
     .then((response) => {
       if (response.length > 0) {
+        document.getElementById("reunioes").innerHTML = "";
         response.forEach((reuniao) => addReuniaoCard(reuniao));
       } else {
         const reunioesDiv = document.getElementById("reunioes");
@@ -188,6 +191,7 @@ const solicitarTurmas = () => {
   sendRequest(dados)
     .then((response) => {
       if (response.length > 0) {
+        document.getElementById("turmas").innerHTML = "";
         response.map((turma) => addTurmaCard(turma));
       }else {
         const reunioesDiv = document.getElementById("turmas");
