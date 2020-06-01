@@ -3,6 +3,11 @@ import { sendRequest, showMessage, getCookie } from "./utils.js";
 const listener = () => {
   const btnIniciarConselho = document.querySelector("#iniciarConselho");
   btnIniciarConselho.addEventListener("click", iniciarConselhos);
+
+  const cardsTurmas = document.querySelectorAll(".turmas>div.cardbox");
+  cardsTurmas.forEach(function (card) {
+    card.addEventListener("click", (e) => selecionarTurmas(e));
+  });
 };
 
 /**
@@ -29,21 +34,16 @@ let abrirReuniao = () => {
  * Seleciona as turmas para iniciar o conselho
  */
 let selecionarTurmas = () => {
-  const cardsTurmas = document.querySelectorAll(".turmas>div.cardbox");
-  cardsTurmas.forEach(function (card) {
-    card.addEventListener("click", function (event) {
-      let item = null;
+  let item = null;
 
-      if (event.currentTarget.classList.contains("cardbox")) {
-        item = event.currentTarget;
-      }
-      if (event.currentTarget.parentNode.classList.contains("cardbox")) {
-        item = event.currentTarget.parentNode;
-      }
-      item.classList.toggle("selected");
-      habilitarBotao();
-    });
-  });
+  if (event.currentTarget.classList.contains("cardbox")) {
+    item = event.currentTarget;
+  }
+  if (event.currentTarget.parentNode.classList.contains("cardbox")) {
+    item = event.currentTarget.parentNode;
+  }
+  item.classList.toggle("selected");
+  habilitarBotao();
 };
 
 /**
@@ -76,7 +76,7 @@ const iniciarConselhos = () => {
 
   let codigoTurmas = [];
   for (let i of turmasSelecionadas) {
-    codigoTurmas.push(i.getAttribute("data-cod-turma"));
+    codigoTurmas.push(i.getAttribute("data-turma"));
   }
 
   if (codigoTurmas.length > 0) {
@@ -134,17 +134,7 @@ const solicitarReunioes = () => {
       console.error(err);
     });
 };
-{
-  /* <div
-  class="cardbox card-turma is-amb"
-  data-turma="20181.03AMB10I.1A"
-  data-turmaconselho="1"
->
-  <p class="subtitulo is-8 gray-text">Meio Ambiente</p>
-  <p class="subtitulo is-7">1° B</p>
-  <p class="subtitulo is-9 gray-text">INFI.2019/1.A</p>
-</div>; */
-}
+
 const addReuniaoCard = (reuniao) => {
   let card = document.createElement("div");
 
@@ -187,9 +177,57 @@ const obterCurso = () => {
   });
 };
 
+const solicitarTurmas = () => {
+  const curso = localStorage.getItem("curso");
+
+  const dados = { acao: "Reunioes/reunioesNaoIniciadas" };
+
+  if (curso != null) {
+    dados.curso = curso;
+  }
+
+  sendRequest(dados)
+    .then((response) => {
+      console.log(response);
+      if (response.length > 0) {
+        response.map((turma) => addTurmaCard(turma));
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const addTurmaCard = (turma) => {
+  let card = document.createElement("div");
+
+  let classCurso = "";
+  if (turma.curso === "Informática para Internet") {
+    classCurso = "is-info";
+  } else if (turma.curso === "Meio Ambiente") {
+    classCurso = "is-amb";
+  } else {
+    classCurso = "is-agro";
+  }
+
+  card.classList.add("cardbox", "card-turma", classCurso);
+  card.setAttribute("data-turma", turma.codigo);
+  card.addEventListener("click", selecionarTurmas);
+
+  card.innerHTML += `
+    <p class="subtitulo is-8 gray-text">${turma.curso}</p>
+    <p class="subtitulo is-7">${turma.nome}</p>
+    <p class="subtitulo is-9 gray-text">${turma.codigo}</p>
+  `;
+
+  const turmasDiv = document.getElementById("turmas");
+
+  turmasDiv.appendChild(card);
+};
+
 obterCurso();
 solicitarReunioes();
+solicitarTurmas();
 listener();
 // abrirReuniao();
-selecionarTurmas();
 iniciarConselhos();
