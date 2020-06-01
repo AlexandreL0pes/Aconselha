@@ -69,7 +69,7 @@ let habilitarBotao = () => {
 const zerarResultados = () => {
   document.querySelector("#qtdTurmas").innerHTML = "Nenhuma";
   document.querySelector("#iniciarConselho").disabled = true;
-}
+};
 
 /**
  * Obtem e envia os dados para cadastrar a reunião
@@ -92,18 +92,18 @@ const iniciarConselhos = () => {
     sendRequest(dados)
       .then((response) => {
         console.log(response);
-        showMessage(
-          "Deu certo!",
-          "Os conselhos foram iniciados!",
-          "success"
-        );
+        showMessage("Deu certo!", "Os conselhos foram iniciados!", "success");
         solicitarReunioes();
         solicitarTurmas();
         zerarResultados();
       })
       .catch((err) => {
         console.error(err);
-        showMessage("Houve um erro!", "Não foi possível iniciar os conselhos selecionados!", "error");
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível iniciar os conselhos selecionados!",
+          "error"
+        );
       });
   }
   showMessage(
@@ -185,9 +185,14 @@ const obterCurso = () => {
   });
 };
 
-const solicitarTurmas = () => {
-  const curso = localStorage.getItem("curso");
+const solicitarTurmas = async () => {
+  let curso = await requisitarCurso();
+  
+  if (curso == null) {
+    curso = localStorage.getItem("curso");
+  }
 
+  console.log(curso);
   const dados = { acao: "Reunioes/reunioesNaoIniciadas" };
 
   if (curso != null) {
@@ -199,7 +204,7 @@ const solicitarTurmas = () => {
       if (response.length > 0) {
         document.getElementById("turmas").innerHTML = "";
         response.map((turma) => addTurmaCard(turma));
-      }else {
+      } else {
         const reunioesDiv = document.getElementById("turmas");
         const msg = document.createElement("div");
         msg.classList.add("nenhum-resultado");
@@ -240,6 +245,19 @@ const addTurmaCard = (turma) => {
   turmasDiv.appendChild(card);
 };
 
+const requisitarCurso = async () => {
+  const token = getCookie("token");
+
+  const dados = { acao: "Coordenadores/obterCurso", token: token };
+
+  const response = await sendRequest(dados);
+  if (response.curso) {
+    return response.curso;
+  }
+  return null;
+};
+
+requisitarCurso();
 obterCurso();
 solicitarReunioes();
 solicitarTurmas();
