@@ -13,7 +13,9 @@ class Turmas
         $codigoTurma = $dados['turma'];
 
         $campos = Turma::COL_ID . ", " .
-            Turma::COL_DESC_TURMA;
+            Turma::COL_DESC_TURMA . ", " .
+            Turma::COL_CURSO
+            ;
 
         $busca = [Turma::COL_ID => $codigoTurma];
 
@@ -28,7 +30,8 @@ class Turmas
             $turmaJson = [
                 'codigo' => $codigoTurma,
                 'nome' => $nomeTurma,
-                'curso' => $cursoTurma
+                'curso' => $cursoTurma,
+                'codigo_curso' => $retornoTurma[Turma::COL_CURSO]
             ];
 
             http_response_code(200);
@@ -136,7 +139,8 @@ class Turmas
         $informacoesCompletas = [];
         foreach ($turmas as $turma) {
             $campos = Turma::COL_ID . ", " . 
-                Turma::COL_DESC_TURMA;
+                Turma::COL_DESC_TURMA . ", " . 
+                Turma::COL_CURSO;
     
             $busca = [Turma::COL_ID => $turma];
 
@@ -149,7 +153,8 @@ class Turmas
                 $informacaoCompleta = [
                     'codigo' => $turma, 
                     'nome' => $nomeTurma,
-                    'curso' => $cursoTurma
+                    'curso' => $cursoTurma,
+                    'codigo_curso' => $retorno[Turma::COL_CURSO]
                 ];
 
                 array_push($informacoesCompletas, $informacaoCompleta);
