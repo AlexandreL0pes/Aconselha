@@ -191,6 +191,13 @@ const solicitarTurmas = () => {
       console.log(response);
       if (response.length > 0) {
         response.map((turma) => addTurmaCard(turma));
+      }else {
+        const reunioesDiv = document.getElementById("turmas");
+        const msg = document.createElement("div");
+        msg.classList.add("nenhum-resultado");
+        msg.innerHTML = "Nenhum outro conselho pode ser iniciado!";
+
+        reunioesDiv.appendChild(msg);
       }
     })
     .catch((err) => {
