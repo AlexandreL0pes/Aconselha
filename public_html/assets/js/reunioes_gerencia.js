@@ -166,18 +166,6 @@ const addReuniaoCard = (reuniao) => {
   reunioesDiv.appendChild(card);
 };
 
-const obterCurso = () => {
-  const token = getCookie("token");
-
-  const dados = { acao: "Coordenadores/obterCurso", token: token };
-
-  sendRequest(dados).then((response) => {
-    // console.log(response);
-    if (response.curso) {
-      localStorage.setItem("curso", response.curso);
-    }
-  });
-};
 
 const solicitarTurmas = async () => {
   const dados = { acao: "Reunioes/reunioesNaoIniciadas" };
