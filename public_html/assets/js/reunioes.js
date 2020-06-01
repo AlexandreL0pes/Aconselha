@@ -262,5 +262,4 @@ obterCurso();
 solicitarReunioes();
 solicitarTurmas();
 listener();
-// abrirReuniao();
 iniciarConselhos();
