@@ -12,9 +12,9 @@ const btnSalvarCoordenador = document.querySelector(".salvar-coordenador");
 btnSalvarCoordenador.addEventListener("click", (e) => salvarCoordenador(e));
 
 const abrirCoordenador = (element) => {
-    let curso = element.currentTarget.getAttribute("data-curso");
-    let 
-}
+  let curso = element.currentTarget.getAttribute("data-curso");
+  console.log("Abrindo Coordenador!");
+};
 /**
  * Listener para o fechamento do modal
  * @param {*} params
@@ -154,7 +154,6 @@ const pegarDados = () => {
     dados.acao = "Coordenadores/adicionar";
   }
 
-
   // Caso o novo id seja diferente do antigo
   if (coordenadorNovo !== coordenadorAtual && coordenadorAtual !== "") {
     dados = {
@@ -166,5 +165,65 @@ const pegarDados = () => {
   }
   return dados;
 };
+{
+  /* <div class="cardbox card-coordenador is-info" data-curso="1">
+              <p class="gray-text">Informática para Internet</p>
+              <p class=" ">Adriano Braga</p>
+      </div>
+ */
+}
+const addCursoCard = (curso) => {
+  let card = document.createElement("div");
+
+  let classCurso = "";
+  if (curso.nome === "Informática para Internet") {
+    classCurso = "is-info";
+  } else if (curso.nome === "Meio Ambiente") {
+    classCurso = "is-amb";
+  } else {
+    classCurso = "is-agro";
+  }
+
+  card.classList.add("cardbox", "card-coordenador", classCurso);
+  card.setAttribute("data-curso", curso.codigo);
+
+  let texto = curso.coordenador.nome || "";
+  let codigoCoordenador = curso.coordenador.codigo || "";
+
+  card.setAttribute("data-coordenador", codigoCoordenador);
+
+  card.innerHTML += `
+    <p class="gray-text">${curso.nome}</p>
+    <p class="">${texto}</p>
+  `;
+
+  card.addEventListener("click", (e) => abrirCoordenador(e));
+
+  const coordenadoresDiv = document.getElementById("coordenadores");
+  coordenadoresDiv.appendChild(card);
+};
+
+const solicitarCursos = () => {
+  const dados = { acao: "Cursos/listarCursos" };
+  sendRequest(dados)
+    .then((response) => {
+      if (response.length > 0) {
+        document.getElementById("coordenadores").innerHTML = "";
+        response.map((curso) => addCursoCard(curso));
+      } else {
+        const coordenadoresDiv = documet.getElementById("coordenadores");
+        const msg = document.createElement("div");
+        msg.classList.add("nenhum-resultado");
+        msg.innerHTML = "Nenhum curso foi encontrado!";
+
+        coordenadoresDiv.append(msg);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+solicitarCursos();
 autocompleteCoordenador();
 closeModal();
