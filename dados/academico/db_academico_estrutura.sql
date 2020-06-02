@@ -883,6 +883,26 @@ create table NOTAS
     )
 go
 
+create table VW_PROFESSORES_FUNCIONARIOS
+(
+	COD_PESSOA int,
+	COD_PROFESSOR int,
+	NOME varchar,
+	NOME_PESSOA varchar,
+	NOME_USUAL varchar,
+	TEXTO_SEM_ACENTO varchar,
+	TEXTO_ENCODED varchar,
+	CODIGO int,
+	ID_FUNCIONARIO varchar,
+	COD_DEPARTAMENTO smallint,
+	TITULARIDADE tinyint,
+	SIT_FUNCIONARIO varchar,
+	SIT_PROFESSOR tinyint,
+	COD_INSTITUICAO int,
+	TIPO varchar,
+	ATIVO int
+)
+go
 
 
 
