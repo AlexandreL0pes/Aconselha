@@ -25,7 +25,6 @@ class Alunos {
 
         $retornoAluno = ($aluno->listar($campos, $busca, null, 1))[0];
 
-        // print_r($retornoAluno);
         if (!empty($retornoAluno)) {
             
             $alunoJSON = [
