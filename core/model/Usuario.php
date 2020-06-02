@@ -18,6 +18,7 @@ class Usuario extends CRUD {
     const COL_DATA_FIM = "data_fim";
     const COL_PERMISSAO = "permissao";
     const COL_SENHA = "senha";
+    const COL_PESSOA = "COD_PESSOA";
 
     public function adicionar($dados) {
         try {
