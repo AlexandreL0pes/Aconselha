@@ -14,7 +14,11 @@ btnSalvarCoordenador.addEventListener("click", (e) => salvarCoordenador(e));
 const abrirCoordenador = (element) => {
   let curso = element.currentTarget.getAttribute("data-curso");
   console.log("Abrindo Coordenador!");
+
+  const modalCoordenador = document.getElementById("modal-coordenador");
+  modalCoordenador.classList.toggle("is-active");
 };
+
 /**
  * Listener para o fechamento do modal
  * @param {*} params
@@ -35,32 +39,23 @@ const closeModal = (params) => {
 
 let autocompleteCoordenador = () => {
   var api = function (inputValue) {
-    return fetch(
-      "https://cdn.rawgit.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json"
-    )
-      .then(function (resp) {
-        return [
-          { label: "Adriano Braga", value: "1459180" },
-          { label: "Lucas Faria", value: "97312" },
-          { label: "Rangel Rigo", value: "417530" },
-          { label: "Marcos Morais", value: "914402" },
-          { label: "Jaqueline Ribeiro", value: "81183" },
-          { label: "Ramayane Braga", value: "41917" },
-        ];
-        // return resp.json();
-      })
-      .then(function (states) {
-        return states.filter(function (state) {
-          return state.label.startsWith(inputValue);
+    const dados = { acao: "Servidores/listarServidores" };
+
+    return sendRequest(dados)
+      .then((servidores) => {
+        return servidores.filter((servidor) => {
+          return servidor.nome
+            .toLowerCase()
+            .startsWith(inputValue.toLowerCase());
         });
       })
-      .then(function (filtered) {
-        return filtered.map(function (state) {
-          return { label: state.label, value: state.value };
+      .then((filtrado) => {
+        return filtrado.map((servidor) => {
+          return { label: servidor.nome, value: servidor.codigo };
         });
       })
-      .then(function (transformed) {
-        return transformed.slice(0, 5);
+      .then((transformado) => {
+        return transformado.slice(0, 5);
       });
   };
 
@@ -165,13 +160,7 @@ const pegarDados = () => {
   }
   return dados;
 };
-{
-  /* <div class="cardbox card-coordenador is-info" data-curso="1">
-              <p class="gray-text">Informática para Internet</p>
-              <p class=" ">Adriano Braga</p>
-      </div>
- */
-}
+
 const addCursoCard = (curso) => {
   let card = document.createElement("div");
 
