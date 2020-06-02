@@ -201,7 +201,6 @@ class Coordenadores
         $cursoId = $dados['curso'];
 
 
-        // TODO: Pelo id retornado, selecionar a pessoa
         $coordenador = $this->selecionarCoordenadorAtual($cursoId);
 
 
