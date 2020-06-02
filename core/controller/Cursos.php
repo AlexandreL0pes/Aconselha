@@ -6,18 +6,19 @@ namespace core\controller;
 use core\model\Curso;
 
 
-class Cursos {
+class Cursos
+{
 
     public function selecionarCurso($dados)
     {
         $codigoCurso = $dados['curso'];
 
-        $campos = Curso::COL_ID . ", " . 
-                     Curso::COL_DESC_CURSO;
-        
+        $campos = Curso::COL_ID . ", " .
+            Curso::COL_DESC_CURSO;
+
         $busca = [Curso::COL_ID => $codigoCurso];
 
-        $curso = new Curso;
+        $curso = new Curso();
 
         $retornoCurso = ($curso->listar($campos, $busca, null, 1))[0];
 
@@ -25,17 +26,16 @@ class Cursos {
             $nome = $this->processarCurso($retornoCurso[Curso::COL_DESC_CURSO]);
 
             $curso = [
-                'codigo' => $codigoCurso, 
+                'codigo' => $codigoCurso,
                 'nome' => $nome
             ];
 
             http_response_code(200);
             return json_encode($curso);
-        }else {
+        } else {
             http_response_code(500);
             return json_encode(array('message' => "Nenhum curso foi encontrado!"));
         }
-
     }
 
     private function processarCurso($descricaoCurso = null)
@@ -52,6 +52,32 @@ class Cursos {
 
     public function listarCursos()
     {
-        echo "Oi";
+        $campos = Curso::COL_ID . ", " .
+            Curso::COL_DESC_CURSO;
+
+        $curso = new Curso();
+
+        $retornoCursos = $curso->listar($campos, null, null, null);
+
+        $cursos = [];
+
+        $c = new Coordenadores();
+        if (count($retornoCursos) > 0 && !empty($retornoCursos[0])) {
+            foreach ($retornoCursos as $retornoCurso) {
+                $nome = $this->processarCurso($retornoCurso[Curso::COL_DESC_CURSO]);
+                $coordenador = $c->obterCoordenadorCurso(['curso' => $retornoCurso[Curso::COL_ID]]);
+                $coordenador = json_decode($coordenador, true);
+                $curso = [
+                    'codigo' => $retornoCurso[Curso::COL_ID],
+                    'nome' => $nome,
+                    'coordenador' => $coordenador
+                ];
+
+                array_push($cursos, $curso);
+            }
+        }
+
+        http_response_code(200);
+        return json_encode($cursos);
     }
 }
