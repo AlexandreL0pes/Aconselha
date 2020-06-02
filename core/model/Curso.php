@@ -11,6 +11,7 @@ class Curso extends CRUD
     const COL_ID = "COD_CURSO";
     const COL_TIPO_CURSO = "COD_TIPO_CURSO";
     const COL_DESC_CURSO = "DESC_CURSO";
+    const COL_INSTITUICAO = "COD_INSTITUICAO";
 
 
     public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
@@ -33,6 +34,14 @@ class Curso extends CRUD
                 $where_valor[] = $busca[self::COL_ID];
             }
         }
+
+        // Filtra apenas o cursos técnicos
+        $where_condicao .= " AND " . self::COL_TIPO_CURSO . " = ? ";
+        $where_valor[] = '265';
+
+        // Filtra apenas os cursos do IF CERES 
+        $where_condicao .= " AND " . self::COL_INSTITUICAO . " = ? ";
+        $where_valor[] = '3';
 
         $retorno = [];
 
