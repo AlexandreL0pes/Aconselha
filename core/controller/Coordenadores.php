@@ -193,4 +193,27 @@ class Coordenadores
             return json_encode(array('message' => 'Não existe curso anexado ao coordenador!'));
         }
     }
+
+    public function obterCoordenadorCurso($dados)
+    {
+
+        $cursoId = $dados['curso'];
+
+
+        // TODO: Pelo id retornado, selecionar a pessoa
+        $coordenador = $this->selecionarCoordenadorAtual($cursoId);
+
+
+        $retorno = [];
+
+        if (count($coordenador) > 0 ) {
+            $retorno = [
+                'codigo' => $coordenador[Usuario::COL_ID],
+                'nome' => 'Nome estático'
+            ];
+        }
+
+        http_response_code(200);
+        return json_encode($retorno);
+    }
 }
