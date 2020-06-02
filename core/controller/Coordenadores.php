@@ -3,6 +3,7 @@
 
 namespace core\controller;
 
+use core\model\Servidor;
 use core\model\Usuario;
 use core\sistema\Autenticacao;
 
@@ -207,9 +208,11 @@ class Coordenadores
         $retorno = [];
 
         if (count($coordenador) > 0 ) {
+            $s = new Servidores();
+            $servidor = $s->selecionarServidor($coordenador[Usuario::COL_PESSOA]);
             $retorno = [
                 'codigo' => $coordenador[Usuario::COL_ID],
-                'nome' => 'Nome estático'
+                'nome' => $servidor['nome']
             ];
         }
 
