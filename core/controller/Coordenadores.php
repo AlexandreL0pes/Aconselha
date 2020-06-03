@@ -11,15 +11,9 @@ class Coordenadores
 {
 
 
-    /*     {
-        "acao": "Coordenadores/cadastrar",
-        "matricula": "123123",
-        "curso": 1,
-        "senha": "criptografia"
-    } */
     public function cadastrar($dados)
     {
-        // $matricula = $dados['matricula'];
+
         $curso = $dados['curso'];
         $data_inicio = date('Y-m-d');
         $permissao = Autenticacao::COORDENADOR;
@@ -30,7 +24,7 @@ class Coordenadores
 
         $servidor = $s->selecionarServidor($pessoa);
 
-        $matricula = (isset($servidor[Servidor::COL_EMAIL])) ? $servidor[Servidor::COL_EMAIL] : ""; 
+        $matricula = (isset($servidor[Servidor::COL_EMAIL])) ? $servidor[Servidor::COL_EMAIL] : "";
 
         $usuario = new Usuario();
 
