@@ -14,12 +14,13 @@ class Servidores
 
         $campos = Servidor::COL_COD_PESSOA . ", " .
             // "CONCAT(SUBSTRING(NOME_PESSOA, 1, CHARINDEX(' ', NOME_PESSOA) - 1),' ', REVERSE(SUBSTRING(REVERSE(NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(NOME_PESSOA)) - 1))) as nome";
-            "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome";
+            "{fn CONCAT(SUBSTRING(NOME_PESSOA, 1, CHARINDEX(' ', NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(NOME_PESSOA)) - 1)))})} as nome";
 
         $servidor = new Servidor();
 
         $servidores = $servidor->listar($campos, null, null, null);
 
+        // print_r($servidores);
         $retorno = [];
 
         if (!empty($servidores)) {
