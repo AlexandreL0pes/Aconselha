@@ -38,8 +38,9 @@ class Servidores
     public function selecionarServidor($servidorId)
     {
 
-        $campos = Servidor::COL_COD_PESSOA . ", " .
-            // "CONCAT(SUBSTRING(NOME_PESSOA, 1, CHARINDEX(' ', NOME_PESSOA) - 1),' ', REVERSE(SUBSTRING(REVERSE(NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(NOME_PESSOA)) - 1))) as nome";;
+        $campos = Servidor::TABELA . "." . Servidor::COL_COD_PESSOA . ", " .
+                "PESSOAS." . Servidor::COL_EMAIL . ", " . 
+            // "CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1),' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1))) as nome";
             "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome";
 
             $busca = [Servidor::COL_COD_PESSOA => $servidorId];
@@ -56,6 +57,7 @@ class Servidores
 
         $servidorId = $dados['servidor'];
         $campos = Servidor::TABELA . "." . Servidor::COL_COD_PESSOA . ", " .
+                "PESSOAS." . Servidor::COL_EMAIL . ", " . 
             // "CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1),' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1))) as nome";
             "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome";
 
@@ -65,7 +67,7 @@ class Servidores
 
         $servidor = ($s->listar($campos, $busca, null, null))[0];
 
-        print_r($servidor);
+        // print_r($servidor);
         return json_encode($servidor);
     }
 }
