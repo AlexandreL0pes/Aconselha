@@ -14,19 +14,19 @@ class Coordenadores
     public function cadastrar($dados)
     {
 
+        // print_r($dados);
+
         $curso = $dados['curso'];
         $data_inicio = date('Y-m-d');
         $permissao = Autenticacao::COORDENADOR;
         $senha = $dados['senha'];
-        $pessoa = $dados['pessoa'];
+        $pessoa = $dados['coordenador'];
+        $matricula = $dados['email'];
 
-        $s = new Servidores();
-
-        $servidor = $s->selecionarServidor($pessoa);
-
-        $matricula = (isset($servidor[Servidor::COL_EMAIL])) ? $servidor[Servidor::COL_EMAIL] : "";
+        // $matricula = (isset($servidor[Servidor::COL_EMAIL])) ? $servidor[Servidor::COL_EMAIL] : "";
 
         $usuario = new Usuario();
+
 
         $retorno = $usuario->adicionar([
             Usuario::COL_MATRICULA => $matricula,
@@ -117,7 +117,8 @@ class Coordenadores
             $retorno = $this->cadastrar([
                 'curso' => $dados['curso'],
                 'senha' => $dados['senha'],
-                'pessoa' => $dados['pessoa']
+                'email' => $dados['email'],
+                'coordenador' => $dados['coordenador']
             ]);
 
             if ($retorno) {
@@ -133,15 +134,16 @@ class Coordenadores
     public function alterarSenha($dados)
     {
         $curso = $dados['curso'];
+        $email = $dados['email'];
 
         $coordenador = $this->selecionarCoordenadorAtual($curso);
 
         $data = array(
             Usuario::COL_ID => $coordenador[Usuario::COL_ID],
+            Usuario::COL_MATRICULA => $dados['email'],
             Usuario::COL_SENHA => $dados['senha']
         );
 
-        $data[Usuario::COL_SENHA] = $dados['senha'];
 
         $usuario = new Usuario();
         $retorno = $usuario->alterar($data);
