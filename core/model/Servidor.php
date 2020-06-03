@@ -23,7 +23,7 @@ class Servidor extends CRUD
         $database = "academico";
 
         $campos = $campos != null ? $campos : " * ";
-        $ordem = $ordem != null ? $ordem : self::COL_COD_PESSOA;
+        $ordem = $ordem != null ? $ordem : "PESSOAS." . self::COL_COD_PESSOA;
         $limite = $limite != null ? " TOP {$limite} " : " TOP 1000 ";
 
         $campos = $limite . " " . $campos;
@@ -36,9 +36,11 @@ class Servidor extends CRUD
 
         if ($busca && count($busca) > 0) {
             if (isset($busca[self::COL_COD_PESSOA]) && !empty($busca[self::COL_COD_PESSOA])) {
-                $where_condicao .= " AND " . self::COL_COD_PESSOA . " = ? ";
+                $where_condicao .= " AND " . self::TABELA .".". self::COL_COD_PESSOA . " = ? ";
                 $where_valor[] = $busca[self::COL_COD_PESSOA];
-                
+
+                $tabela = self::TABELA .
+                    " INNER JOIN PESSOAS ON PESSOAS.COD_PESSOA = VW_PROFESSORES_FUNCIONARIOS.COD_PESSOA ";
             }
         }
 
@@ -49,13 +51,13 @@ class Servidor extends CRUD
         $where_condicao .= " AND ATIVO = ? ";
         $where_valor[] = '1';
 
-        $where_condicao .= " AND CHARINDEX(' ', NOME_PESSOA) > 0";
+        $where_condicao .= " AND CHARINDEX(' ', ".self::TABELA.".NOME_PESSOA) > 0";
 
 
         $retorno = [];
 
         try {
-            $retorno = $this->read($database, $tabela, $campos, $where_condicao, $where_valor, null, $ordem, null);
+            $retorno = $this->read($database, $tabela, $campos, $where_condicao, $where_valor, null, null, null);
             // echo $this->pegarUltimoSQL();
         } catch (\Throwable $th) {
             echo $this->pegarUltimoSQL();
