@@ -19,12 +19,18 @@ class Coordenadores
     } */
     public function cadastrar($dados)
     {
-        $matricula = $dados['matricula'];
+        // $matricula = $dados['matricula'];
         $curso = $dados['curso'];
         $data_inicio = date('Y-m-d');
         $permissao = Autenticacao::COORDENADOR;
         $senha = $dados['senha'];
+        $pessoa = $dados['pessoa'];
 
+        $s = new Servidores();
+
+        $servidor = $s->selecionarServidor($pessoa);
+
+        $matricula = (isset($servidor[Servidor::COL_EMAIL])) ? $servidor[Servidor::COL_EMAIL] : ""; 
 
         $usuario = new Usuario();
 
@@ -33,7 +39,8 @@ class Coordenadores
             Usuario::COL_CURSO => $curso,
             Usuario::COL_DATA_INICIO => $data_inicio,
             Usuario::COL_PERMISSAO => $permissao,
-            Usuario::COL_SENHA => $senha
+            Usuario::COL_SENHA => $senha,
+            Usuario::COL_PESSOA => $pessoa
         ]);
 
         if ($retorno > 0) {
@@ -111,11 +118,12 @@ class Coordenadores
         $curso_id = $dados['curso'];
         $resultado = $this->desabilitarCoordenador($curso_id);
 
+
         if ($resultado > 0) {
             $retorno = $this->cadastrar([
-                'matricula' => $dados['matricula'],
                 'curso' => $dados['curso'],
-                'senha' => $dados['senha']
+                'senha' => $dados['senha'],
+                'pessoa' => $dados['pessoa']
             ]);
 
             if ($retorno) {
@@ -206,7 +214,7 @@ class Coordenadores
 
         $retorno = [];
 
-        if (count($coordenador) > 0 ) {
+        if (count($coordenador) > 0) {
             $s = new Servidores();
             $servidor = $s->selecionarServidor($coordenador[Usuario::COL_PESSOA]);
             $retorno = [
