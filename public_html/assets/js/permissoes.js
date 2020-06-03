@@ -13,6 +13,11 @@ btnSalvarCoordenador.addEventListener("click", (e) => salvarCoordenador(e));
 
 const abrirCoordenador = (element) => {
   let curso = element.currentTarget.getAttribute("data-curso");
+  let coordenadorAtual = element.currentTarget.getAttribute("data-coordenador");
+
+  localStorage.setItem("cursoAtual", curso);
+  localStorage.setItem("coordenadorAtual", coordenadorAtual);
+
   console.log("Abrindo Coordenador!");
 
   const modalCoordenador = document.getElementById("modal-coordenador");
@@ -29,10 +34,12 @@ const closeModal = (params) => {
     const closeBtn = modal.querySelector(".modal-close-btn");
     closeBtn.addEventListener("click", (evnt) => {
       modal.classList.toggle("is-active");
+      localStorage.removeItem("cursoAtual", "");
     });
     const bgModal = modal.querySelector(".modal-background");
     bgModal.addEventListener("click", (evnt) => {
       modal.classList.toggle("is-active");
+      localStorage.removeItem("cursoAtual", "");
     });
   });
 };
@@ -77,14 +84,16 @@ const salvarCoordenador = (e) => {
 
   console.log(dados);
 
-  if (dados.acao !== "Coordenadores/alterarSenha" && dados.matricula == null) {
+  if (
+    dados.acao !== "Coordenadores/alterarSenha" &&
+    dados.coordenador == null
+  ) {
     showMessage(
       "Confira seus dados!",
       "É necessário informar o novo coordenador.",
       "warning",
       4000
     );
-    return false;
   }
 
   if (dados.curso != "") {
@@ -122,38 +131,41 @@ const pegarDados = () => {
     .getElementById("coordenador")
     .getAttribute("data-coordenador");
   const senha = document.getElementById("senha-coordenador").value;
-  const curso = document
-    .getElementById("modal-coordenador")
-    .getAttribute("data-curso");
+  const curso = localStorage.getItem("cursoAtual");
+  const email = document.getElementById("email-coordenador").value;
 
-  const coordenadorAtual =
-    document
-      .getElementById("modal-coordenador")
-      .getAttribute("data-coordenador") || "";
+  const coordenadorAtual = localStorage.getItem("coordenadorAtual") || "";
 
   let dados = {
     curso: curso,
+    email: email,
     senha: senha,
   };
 
   // Caso de trocar a senha
   dados.acao = "Coordenadores/alterarSenha";
 
+  console.log(coordenadorAtual);
   // Caso não exista coordenador atual
   if (coordenadorAtual === "") {
     dados = {
       curso: curso,
-      matricula: coordenadorNovo,
+      coordenador: coordenadorNovo,
+      email: email,
       senha: senha,
     };
-    dados.acao = "Coordenadores/adicionar";
+    dados.acao = "Coordenadores/cadastrar";
   }
 
   // Caso o novo id seja diferente do antigo
+  console.log("CN", coordenadorNovo);
+  console.log("CA", coordenadorAtual);
+  
   if (coordenadorNovo !== coordenadorAtual && coordenadorAtual !== "") {
     dados = {
       curso: curso,
-      matricula: coordenadorNovo,
+      coordenador: coordenadorNovo,
+      email: email,
       senha: senha,
     };
     dados.acao = "Coordenadores/atualizarCoordenador";
