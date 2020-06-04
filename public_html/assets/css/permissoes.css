@@ -105,7 +105,8 @@
 }
 
 .modal.conselheiro .modal-card-body,
-.modal.coordenador .modal-card-body
+.modal.coordenador .modal-card-body,
+.modal.representante .modal-card-body
 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -160,15 +161,6 @@
 
 /* Modal Representante */
 
-.modal.representante .modal-card-body .representantes {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 10px;
-  align-items: center;
-  justify-items: center;
-  min-height: 200px;
-  margin-top: 30px;
-}
 .modal.representante .info-turma {
   display: flex;
 
@@ -176,6 +168,16 @@
   justify-self: center;
   align-items: left;
   padding: 15px 10px;
+}
+
+.modal.representante .modal-card-body {
+  align-items: center;
+  justify-items: center;
+}
+
+
+.modal.representante .modal-card-body {
+  row-gap: 20px;
 }
 
 .representante .info-turma p:nth-child(1) {
