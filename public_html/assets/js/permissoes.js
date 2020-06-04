@@ -224,14 +224,19 @@ const solicitarCursos = () => {
       console.error(err);
     });
 };
-
+const abrirRepresentante = (params) => {
+  console.log("Representante");
+};
+const abrirConselheiro = (e) => {
+  console.log("Conselheiro");
+};
 const addTurmaCard = (turma) => {
   let card = document.createElement("div");
 
   let classCurso = "";
-  if (turma.nome === "Informática para Internet") {
+  if (turma.curso === "Informática para Internet") {
     classCurso = "is-info";
-  } else if (turma.nome === "Meio Ambiente") {
+  } else if (turma.curso === "Meio Ambiente") {
     classCurso = "is-amb";
   } else {
     classCurso = "is-agro";
@@ -266,6 +271,29 @@ const addTurmaCard = (turma) => {
   divCards.appendChild(card);
 };
 
+const solicitarRepresentantes = () => {
+  const dados = { acao: "Turmas/listarTurmasLideres" };
+
+  sendRequest(dados)
+    .then((response) => {
+      if (response.length > 0) {
+        document.getElementById("representantes").innerHTML = "";
+        response.map((turma) => addTurmaCard(turma));
+      } else {
+        const representantesDiv = document.getElementById("representantes");
+        const msg = document.createElement("div");
+        msg.classList.add("nenhum-resultado");
+        msg.innerHTML = "Nenhum curso foi encontrado!";
+
+        representantesDiv.append(msg);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 solicitarCursos();
+solicitarRepresentantes();
 autocompleteCoordenador();
 closeModal();
