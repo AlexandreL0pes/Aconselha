@@ -104,7 +104,9 @@
   cursor: pointer;
 }
 
-.modal .modal-card-body {
+.modal.conselheiro .modal-card-body,
+.modal.coordenador .modal-card-body,
+{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 10px;
@@ -157,21 +159,34 @@
 
 
 /* Modal Representante */
+
+.modal.representante .modal-card-body .representantes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+  align-items: center;
+  justify-items: center;
+  min-height: 200px;
+  margin-top: 30px;
+}
 .modal.representante .info-turma {
   display: flex;
 
   flex-flow: column;
   justify-self: center;
-  align-items: center;
+  align-items: left;
+  padding: 15px 10px;
 }
 
 .representante .info-turma p:nth-child(1) {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 .representante .info-turma p:nth-child(2) {
   font-size: 1rem;
+  padding: 2px;
 }
 .representante .info-turma p:nth-child(3) {
+  padding: 2px;
   font-size: .9rem;
 }
 /* Modal Representante */
