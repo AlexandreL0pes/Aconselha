@@ -204,6 +204,7 @@ class Turmas
             }
         }
 
-        return $turmas;
+        http_response_code(200);
+        return json_encode($turmas);
     }
 }
