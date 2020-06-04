@@ -14,8 +14,7 @@ class Turmas
 
         $campos = Turma::COL_ID . ", " .
             Turma::COL_DESC_TURMA . ", " .
-            Turma::COL_CURSO
-            ;
+            Turma::COL_CURSO;
 
         $busca = [Turma::COL_ID => $codigoTurma];
 
@@ -139,10 +138,10 @@ class Turmas
 
         $informacoesCompletas = [];
         foreach ($turmas as $turma) {
-            $campos = Turma::COL_ID . ", " . 
-                Turma::COL_DESC_TURMA . ", " . 
+            $campos = Turma::COL_ID . ", " .
+                Turma::COL_DESC_TURMA . ", " .
                 Turma::COL_CURSO;
-    
+
             $busca = [Turma::COL_ID => $turma];
 
             $retorno = ($t->listar($campos, $busca, null, 1))[0];
@@ -152,18 +151,59 @@ class Turmas
                 $cursoTurma = $this->processarCurso($retorno[Turma::COL_DESC_TURMA]);
 
                 $informacaoCompleta = [
-                    'codigo' => $turma, 
+                    'codigo' => $turma,
                     'nome' => $nomeTurma,
                     'curso' => $cursoTurma,
                     'codigo_curso' => $retorno[Turma::COL_CURSO]
                 ];
 
                 array_push($informacoesCompletas, $informacaoCompleta);
-
             }
         }
 
         http_response_code(200);
         return json_encode($informacoesCompletas);
+    }
+
+
+    //Lista todas as turmas atuais com seus líderes
+    public function listarTurmasLideres()
+    {
+        $campos = Turma::COL_ID . ", " .
+            Turma::COL_DESC_TURMA . ", " .
+            Turma::COL_CURSO;
+
+        $busca = ['ano' => 'atual'];
+
+        $t = new Turma();
+        $r = new Representantes();
+        $retornoTurmas = $t->listar($campos, $busca, null, null);
+
+        // print_r($retornoTurmas);
+
+        $turmas = [];
+        if (count($retornoTurmas) > 0 && !empty($retornoTurmas[0])) {
+
+            foreach ($retornoTurmas as $retornoTurma) {
+                $nome = $this->processarNome($retornoTurma[Turma::COL_ID]);
+
+                $curso = $this->processarCurso($retornoTurma[Turma::COL_DESC_TURMA]);
+
+                $representantes = $r->obterRepresentantes($retornoTurma[Turma::COL_ID]);
+                $representantes = json_decode($representantes, true);
+
+                $turma = [
+                    'codigo' => $retornoTurma[Turma::COL_ID],
+                    'nome' => $nome,
+                    'curso' => $curso,
+                    'codigo_curso' => $retornoTurma[Turma::COL_CURSO],
+                    'representantes' => $representantes
+                ];
+
+                array_push($turmas, $turma);
+            }
+        }
+
+        return $turmas;
     }
 }
