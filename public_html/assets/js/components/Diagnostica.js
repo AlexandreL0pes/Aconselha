@@ -142,6 +142,9 @@ const gerarPreviaDiagnostica = (diagnosticas) => {
     restante.addEventListener("click", listarDiagnosticas);
     const divDiagnosticas = document.getElementById("diagnosticas");
     divDiagnosticas.append(restante);
+  } else {
+    document.getElementById("diagnosticas").innerHTML = "";
+    diagnosticas.map((diagnostica) => addDiagnosticaCard(diagnostica));
   }
 };
 

@@ -37,6 +37,7 @@ const solicitarAprendizados = async () => {
 };
 
 const addAprendizadoCard = (aprendizado) => {
+  console.log(aprendizado);
   let card = document.createElement("div");
   card.classList.add("avaliacao", "ensino");
   card.setAttribute("data-aprendizado", aprendizado.aprendizado);
@@ -83,7 +84,7 @@ export const listarAprendizados = () => {
 export const listarPreviaAprendizados = () => {
   solicitarAprendizados()
     .then((aprendizados) => {
-      console.log("> Listando Prévia!");
+      console.log("> Listando Prévia Aprendizado!");
       gerarPreviaAprendizados(aprendizados);
       mostrarMenos();
       atualizarResultados(aprendizados.length);
@@ -99,6 +100,7 @@ export const listarPreviaAprendizados = () => {
  */
 const gerarPreviaAprendizados = (aprendizados) => {
   const qtdPrevia = 3;
+  console.log(aprendizados);
   if (aprendizados.length == 0 || aprendizados === undefined) {
     throw new Error("Não existem aprendizados!");
   }
@@ -118,6 +120,10 @@ const gerarPreviaAprendizados = (aprendizados) => {
     restante.addEventListener("click", listarAprendizados);
     const divAprendizados = document.getElementById("aprendizados");
     divAprendizados.append(restante);
+  } else {
+    document.getElementById("aprendizados").innerHTML = "";
+    aprendizados.map((aprendizado) => addAprendizadoCard(aprendizado));
+
   }
 };
 
@@ -225,7 +231,6 @@ const preencherAprendizado = (ensino) => {
     estudantesChips.appendChild(gerarChips(estudante.nome))
   );
 };
-
 
 export default () => {
   listarPreviaAprendizados();

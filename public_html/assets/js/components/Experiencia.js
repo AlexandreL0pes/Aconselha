@@ -98,6 +98,9 @@ const gerarPreviaExperiencia = (experiencias) => {
     restante.addEventListener("click", listarExperiencias);
     const divExperiencias = document.getElementById("experiencias");
     divExperiencias.append(restante);
+  } else {
+    document.getElementById("experiencias").innerHTML = "";
+    experiencias.map((experiencia) => addExperienciaCard(experiencia));
   }
 };
 
