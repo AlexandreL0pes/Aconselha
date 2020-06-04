@@ -292,12 +292,11 @@ class Diagnosticas
                 array_push($diagnosticasCompletas, $diagnosticaCompleta);
             }
 
-            http_response_code(200);
-            return json_encode($diagnosticasCompletas);
-        } else {
-            http_response_code(500);
-            return json_encode(array('message' => 'Nenhuma avaliação diagnóstica relevante foi encontrada!'));
         }
+
+        http_response_code(200);
+        return json_encode($diagnosticasCompletas);
+
     }
 
     /**

@@ -216,10 +216,9 @@ class Aprendizados
                 ]);
             }
 
-            return json_encode($retorno);
-        } else {
-            http_response_code(500);
-            return json_encode(array('message' => 'Nenhum aprendizado foi encontrado!'));
-        }
+        } 
+
+        return json_encode($retorno);
+
     }
 }

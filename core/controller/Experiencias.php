@@ -224,11 +224,10 @@ class Experiencias
                     "disciplinas" => $disciplinas
                 ]);
             }
-            http_response_code(200);
-            return json_encode($retorno);
-        } else {
-            http_response_code(500);
-            return json_encode(array('message' => 'Nenhuma experiência foi encontrada!'));
         }
+
+        http_response_code(200);
+        return json_encode($retorno);
+
     }
 }
