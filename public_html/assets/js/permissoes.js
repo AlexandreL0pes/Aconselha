@@ -24,6 +24,17 @@ const abrirCoordenador = (element) => {
   modalCoordenador.classList.toggle("is-active");
 };
 
+const abrirRepresentante = (element) => {
+  const modalRepresentante = document.getElementById("representante");
+  modalRepresentante.classList.toggle("is-active");
+  
+  let turmaAtual = element.currentTarget.getAttribute("data-turma");
+
+
+  localStorage.setItem("turmaAtual", turmaAtual);
+
+}
+
 /**
  * Listener para o fechamento do modal
  * @param {*} params
@@ -35,11 +46,14 @@ const closeModal = (params) => {
     closeBtn.addEventListener("click", (evnt) => {
       modal.classList.toggle("is-active");
       localStorage.removeItem("cursoAtual", "");
+      localStorage.removeItem("turmaAtual","");
     });
     const bgModal = modal.querySelector(".modal-background");
     bgModal.addEventListener("click", (evnt) => {
       modal.classList.toggle("is-active");
       localStorage.removeItem("cursoAtual", "");
+      localStorage.removeItem("turmaAtual","");
+
     });
   });
 };
@@ -224,9 +238,7 @@ const solicitarCursos = () => {
       console.error(err);
     });
 };
-const abrirRepresentante = (params) => {
-  console.log("Representante");
-};
+
 const abrirConselheiro = (e) => {
   console.log("Conselheiro");
 };
