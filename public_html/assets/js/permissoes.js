@@ -160,7 +160,7 @@ const pegarDados = () => {
   // Caso o novo id seja diferente do antigo
   console.log("CN", coordenadorNovo);
   console.log("CA", coordenadorAtual);
-  
+
   if (coordenadorNovo !== coordenadorAtual && coordenadorAtual !== "") {
     dados = {
       curso: curso,
@@ -223,6 +223,47 @@ const solicitarCursos = () => {
     .catch((err) => {
       console.error(err);
     });
+};
+
+const addTurmaCard = (turma) => {
+  let card = document.createElement("div");
+
+  let classCurso = "";
+  if (turma.nome === "Informática para Internet") {
+    classCurso = "is-info";
+  } else if (turma.nome === "Meio Ambiente") {
+    classCurso = "is-amb";
+  } else {
+    classCurso = "is-agro";
+  }
+
+  let classCard = "";
+  let evento = null;
+  let divCards = "";
+
+  if ("representantes" in turma) {
+    classCard = "card-representantes";
+    evento = abrirRepresentante;
+    divCards = "representantes";
+  }
+
+  if ("conselheiros" in turma) {
+    classCard = "card-conselheiro";
+    evento = abrirConselheiro;
+    divCards = "conselheiros";
+  }
+
+  card.classList.add("cardbox", classCard, classCurso);
+  card.setAttribute("data-turma", turma.codigo);
+
+  card.innerHTML = `
+    <p class="subtitulo is-7 gray-text">${turma.curso}</p>
+    <p class="subtitulo is-6">${turma.nome}</p>
+  `;
+
+  card.addEventListener("click", (e) => evento(e));
+  divCards = document.getElementById(divCards);
+  divCards.appendChild(card);
 };
 
 solicitarCursos();
