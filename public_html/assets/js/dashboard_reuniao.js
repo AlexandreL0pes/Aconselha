@@ -19,11 +19,7 @@ import { autenticarCoordenador } from "./components/Autenicacao.js";
 // autenticarCoordenador();
 
 const listener = () => {
-  const atendimentos = document.getElementById("abrirAtendimento");
-  atendimentos.addEventListener("click", (e) => abrirAtendimentos());
 
-  const memoria = document.getElementById("abrirMemoria");
-  memoria.addEventListener("click", (event) => abrirMemoria());
 
   Aprendizado();
   Experiencia();
