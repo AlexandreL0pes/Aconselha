@@ -102,6 +102,7 @@ class Usuario extends CRUD {
 
         try {
             $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
+            // echo $this->pegarUltimoSQL();
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
         }
