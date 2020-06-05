@@ -178,6 +178,7 @@ class Turmas
         $r = new Representantes();
         $retornoTurmas = $t->listar($campos, $busca, null, null);
 
+        $c = new Conselheiros();
         // print_r($retornoTurmas);
 
         $turmas = [];
@@ -191,12 +192,16 @@ class Turmas
                 $representantes = $r->obterRepresentantes($retornoTurma[Turma::COL_ID]);
                 $representantes = json_decode($representantes, true);
 
+                $conselheiro = $c->obterConselheiro($retornoTurma[Turma::COL_ID]);
+                $conselheiro = json_decode($conselheiro, true);
+
                 $turma = [
                     'codigo' => $retornoTurma[Turma::COL_ID],
                     'nome' => $nome,
                     'curso' => $curso,
                     'codigo_curso' => $retornoTurma[Turma::COL_CURSO],
-                    'representantes' => $representantes
+                    'representantes' => $representantes,
+                    'conselheiro' => $conselheiro
                 ];
 
                 array_push($turmas, $turma);
