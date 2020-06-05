@@ -90,6 +90,7 @@
   margin: 0px;
   padding: 5px 10px;
 
+  max-height: 150px;
   box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.1);
   transition: box-shadow ease-in-out 0.4s;
   cursor: pointer;
