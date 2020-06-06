@@ -397,7 +397,7 @@ const addEstudanteCard = (estudante) => {
     <p class="subtitulo is-8" name="matricula">${estudante.matricula}</p>
     `;
 
-  card.addEventListener("click", (event) => abrirNovaDiagnostica(event));
+  card.addEventListener("click", abrirNovaDiagnostica);
 
   const alunosDiv = document.getElementById("alunos");
 
