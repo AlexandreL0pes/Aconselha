@@ -904,6 +904,34 @@ create table VW_PROFESSORES_FUNCIONARIOS
 )
 go
 
+create table DISCIPLINAS_MATRIZES_CURRICULARES
+(
+    COD_MATRIZ_CURRICULAR          int      not null,
+    COD_DISCIPLINA                 int      not null,
+    COD_HABILITACAO                int      not null,
+    N_PERIODO                      tinyint  not null,
+    OPTATIVA                       tinyint  not null,
+    CREDITOS                       decimal(15, 2),
+    NUCLEO_DISCIPLINA              tinyint  not null,
+    CREDITOS_NECESSARIOS           smallint not null,
+    COD_MODULO                     int,
+    ORDEM                          tinyint,
+    COD_TIPO_CURSO                 smallint not null,
+    NAO_PERMITE_DEPENDENCIA        tinyint  not null,
+    CARGA_HOR_PRESENCIAL           float    not null,
+    COD_MATERIA                    int,
+    TIPO_DISCIPLINA                tinyint  not null,
+    POSSUI_PRATICA_PROFISSIONAL    tinyint  not null,
+    CARGA_HOR_PRATICA_PROFISSIONAL float,
+    OPTATIVA_EXCLUSIVA             tinyint  not null,
+    GRUPO_OPTATIVA_EXCLUSIVA       int,
+    EXIBICAO_HISTORICO             tinyint  not null,
+    COD_EAD_CURSO_MODELO           int,
+    constraint XPKDISCIPLINAS_MATRIZES_CURRICULARES
+        primary key (COD_MATRIZ_CURRICULAR, COD_DISCIPLINA, COD_HABILITACAO)
+)
+go
+
 
 
 
