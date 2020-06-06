@@ -369,6 +369,7 @@ const solicitarEstudantes = () => {
     sendRequest(dados)
       .then((response) => {
         console.log(response);
+        response.map((estudante) => addEstudanteCard(estudante));
       })
       .catch((err) => {
         console.error(err);
@@ -376,6 +377,32 @@ const solicitarEstudantes = () => {
   }
 };
 
+/* 
+
+<div class="cardbox card-avaliacao" data-aluno="2017103202030090">
+  <p class="subtitulo is-8" name="">Pendente</p>
+  <p class="subtitulo is-7" name="nome">Alexandre Lopes</p>
+  <p class="subtitulo is-8" name="matricula">2017103202030090</p>
+</div>
+
+*/
+const addEstudanteCard = (estudante) => {
+  let card = document.createElement("div");
+  card.classList.add("cardbox", "card-avaliacao");
+  card.setAttribute("data-aluno", estudante.matricula);
+
+  card.innerHTML += `
+    <p class="subtitulo is-8" name="">Pendente</p>
+    <p class="subtitulo is-7" name="nome">${estudante.nome}</p>
+    <p class="subtitulo is-8" name="matricula">${estudante.matricula}</p>
+    `;
+
+  card.addEventListener("click", (event) => abrirNovaDiagnostica(event));
+
+  const alunosDiv = document.getElementById("alunos");
+
+  alunosDiv.appendChild(card);
+};
 solicitarEstudantes();
 obterInformacoesTurma();
 listarPerfis();
