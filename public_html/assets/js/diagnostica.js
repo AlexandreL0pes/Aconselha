@@ -267,8 +267,10 @@ const solicitarDiagnosticas = () => {
 
   sendRequest(dados)
     .then((response) => {
-      if (!response.message) {
+      if (response.length > 0) {
         marcarDiagnosticas(response);
+      }else {
+        atualizarAvaliacoesPendentes();
       }
     })
     .catch((err) => {
@@ -370,6 +372,7 @@ const solicitarEstudantes = () => {
       .then((response) => {
         console.log(response);
         response.map((estudante) => addEstudanteCard(estudante));
+        solicitarDiagnosticas();
       })
       .catch((err) => {
         console.error(err);
@@ -406,6 +409,5 @@ const addEstudanteCard = (estudante) => {
 solicitarEstudantes();
 obterInformacoesTurma();
 listarPerfis();
-solicitarDiagnosticas();
 atualizarAvaliacoesPendentes();
 listener();
