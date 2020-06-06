@@ -19,7 +19,7 @@ class Disciplina extends CRUD
         $database = "academico";
 
         $campos = $campos != null ? $campos : " * ";
-        $ordem = $ordem != null ? $ordem : self::COL_COD_DISCIPLINA;
+        $ordem = $ordem != null ? $ordem : self::TABELA . "." . self::COL_COD_DISCIPLINA;
         $limite = $limite != null ? " TOP {$limite} " : " TOP 1000 ";
 
         $campos = $limite . " " . $campos;
@@ -31,18 +31,18 @@ class Disciplina extends CRUD
 
 
         if ($busca && count($busca) > 0) {
-            if (isset($busca[self::COL_CURSO]) && !empty($busca[self::COL_CURSO])) {
-                $where_condicao .= " AND " . self::COL_CURSO . " = ? ";
-                $where_valor[] = $busca[self::COL_CURSO];
+            if (isset($busca['curso']) && !empty($busca['curso'])) {
+                $where_condicao .= " AND " . 'COD_CURSO' . " = ? ";
+                $where_valor[] = $busca['curso'];
 
                 $tabela = self::TABELA .
                     " INNER JOIN DISCIPLINAS_MATRIZES_CURRICULARES on DISCIPLINAS.COD_DISCIPLINA = DISCIPLINAS_MATRIZES_CURRICULARES.COD_DISCIPLINA " .
                     " INNER JOIN TURMAS on DISCIPLINAS_MATRIZES_CURRICULARES.COD_MATRIZ_CURRICULAR = TURMAS.COD_MATRIZ_CURRICULAR ";
             }
 
-            if (isset($busca[self::COL_TURMA]) && !empty($busca[self::COL_TURMA])) {
-                $where_condicao .= " AND " . self::COL_TURMA . " = ? ";
-                $where_valor[] = $busca[self::COL_TURMA];
+            if (isset($busca['turma']) && !empty($busca['turma'])) {
+                $where_condicao .= " AND " . 'COD_TURMA' . " = ? ";
+                $where_valor[] = $busca['turma'];
 
                 $tabela = self::TABELA .
                     " INNER JOIN DISCIPLINAS_MATRIZES_CURRICULARES on DISCIPLINAS.COD_DISCIPLINA = DISCIPLINAS_MATRIZES_CURRICULARES.COD_DISCIPLINA " .
@@ -56,6 +56,7 @@ class Disciplina extends CRUD
             $retorno = $this->read($database, $tabela, $campos, $where_condicao, $where_valor, null, $ordem, null);
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
+            // echo $this->pegarUltimoSQL();
             return false;
         }
 

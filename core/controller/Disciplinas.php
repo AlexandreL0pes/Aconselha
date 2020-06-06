@@ -14,8 +14,8 @@ class Disciplinas
         $codigoTurma = $dados['turma'];
 
 
-        $campos = Disciplina::COL_COD_DISCIPLINA . ", " .
-            Disciplina::COL_DESC_DISCIPLINA;
+        $campos = Disciplina::TABELA . "." . Disciplina::COL_COD_DISCIPLINA . " as codigo, " .
+            Disciplina::COL_DESC_DISCIPLINA . " as nome";
 
         $busca = ['turma' => $codigoTurma];
 
