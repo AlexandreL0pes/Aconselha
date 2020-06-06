@@ -77,17 +77,19 @@ class Turmas
             "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome";
 
         $busca = [Aluno::COL_COD_TURMA_ATUAL => $turma];
-        $retorno = $aluno->listar($campos, $busca, null, null);
+        $alunos = $aluno->listar($campos, $busca, null, null);
 
+        $retorno = [];
+
+
+        if (count($alunos) > 0) {
+            $retorno = $alunos;
+        }
+
+        http_response_code(200);
         return json_encode($retorno);
 
-        if ($retorno && $retorno > 0) {
-            http_response_code(200);
-            return json_encode($retorno);
-        } else {
-            http_response_code(200);
-            return json_encode([]);
-        }
+
     }
 
     public function verificarTurmaCurso($codTurma, $codCurso)
