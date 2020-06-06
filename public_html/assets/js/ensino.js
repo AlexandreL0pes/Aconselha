@@ -306,32 +306,24 @@ const delChip = (event) => {
  */
 let autocompleteExperienciaDisciplinas = () => {
   var api = function (inputValue) {
-    return fetch(
-      "https://cdn.rawgit.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json"
-    )
-      .then(function (resp) {
-        return [
-          { label: "Matemática", value: "1459180" },
-          { label: "Língua Portuguesa", value: "97312" },
-          { label: "História", value: "417530" },
-          { label: "Artes", value: "914402" },
-          { label: "Geografia", value: "81183" },
-          { label: "Filosofia", value: "41917" },
-        ];
-        // return resp.json();
-      })
-      .then(function (states) {
-        return states.filter(function (state) {
-          return state.label.startsWith(inputValue);
+    const turma = localStorage.getItem("turmaAtual");
+    let dados = { acao: "Disciplinas/listarDisciplinasTurma", turma: turma };
+
+    return sendRequest(dados)
+      .then((disciplinas) => {
+        return disciplinas.filter((disciplina) => {
+          return disciplina.nome
+            .toLowerCase()
+            .startsWith(inputValue.toLowerCase());
         });
       })
-      .then(function (filtered) {
-        return filtered.map(function (state) {
-          return { label: state.label, value: state.value };
+      .then((filtrado) => {
+        return filtrado.map((estudante) => {
+          return { label: estudante.nome, value: estudante.matricula };
         });
       })
-      .then(function (transformed) {
-        return transformed.slice(0, 5);
+      .then((transformado) => {
+        return transformado.slice(0, 5);
       });
   };
 
