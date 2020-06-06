@@ -44,6 +44,8 @@ class Disciplina extends CRUD
                 $where_condicao .= " AND " . 'COD_TURMA' . " = ? ";
                 $where_valor[] = $busca['turma'];
 
+                $where_condicao .= " AND N_PERIODO = PERIODO";
+
                 $tabela = self::TABELA .
                     " INNER JOIN DISCIPLINAS_MATRIZES_CURRICULARES on DISCIPLINAS.COD_DISCIPLINA = DISCIPLINAS_MATRIZES_CURRICULARES.COD_DISCIPLINA " .
                     " INNER JOIN TURMAS on DISCIPLINAS_MATRIZES_CURRICULARES.COD_MATRIZ_CURRICULAR = TURMAS.COD_MATRIZ_CURRICULAR ";
