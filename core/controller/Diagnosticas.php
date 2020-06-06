@@ -227,12 +227,10 @@ class Diagnosticas
                     "matricula" => $diagnostica[Diagnostica::COL_ESTUDANTE]
                 ]);
             }
-            http_response_code(200);
-            return json_encode($retorno);
-        } else {
-            http_response_code(500);
-            return json_encode(array('message' => 'Não foi encontrada nenhuma avaliação diagnóstica!'));
         }
+
+        http_response_code(200);
+        return json_encode($retorno);
     }
 
     public function listarDiagnosticasRelevantes($dados)
@@ -291,12 +289,10 @@ class Diagnosticas
 
                 array_push($diagnosticasCompletas, $diagnosticaCompleta);
             }
-
         }
 
         http_response_code(200);
         return json_encode($diagnosticasCompletas);
-
     }
 
     /**
