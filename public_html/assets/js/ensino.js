@@ -397,29 +397,24 @@ let autocompleteEnsinoEstudantes = () => {
 let autocompleteEnsinoDisciplina = () => {
   // Quando tiver fazendo request pro server, utilizar essa função
   var api = function (inputValue) {
-    return fetch(
-      "https://cdn.rawgit.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json"
-    )
-      .then(function (resp) {
-        return [
-          { label: "Matemática", value: "3" },
-          { label: "Artes", value: "2" },
-          { label: "História", value: "1" },
-        ];
-        // return resp.json();
-      })
-      .then(function (states) {
-        return states.filter(function (state) {
-          return state.label.startsWith(inputValue);
+    const turma = localStorage.getItem("turmaAtual");
+    let dados = { acao: "Disciplinas/listarDisciplinasTurma", turma: turma };
+
+    return sendRequest(dados)
+      .then((disciplinas) => {
+        return disciplinas.filter((disciplina) => {
+          return disciplina.nome
+            .toLowerCase()
+            .startsWith(inputValue.toLowerCase());
         });
       })
-      .then(function (filtered) {
-        return filtered.map(function (state) {
-          return { label: state.label, value: state.value };
+      .then((filtrado) => {
+        return filtrado.map((estudante) => {
+          return { label: estudante.nome, value: estudante.matricula };
         });
       })
-      .then(function (transformed) {
-        return transformed.slice(0, 5);
+      .then((transformado) => {
+        return transformado.slice(0, 5);
       });
   };
 
