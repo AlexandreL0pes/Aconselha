@@ -95,5 +95,6 @@ select * from MATRICULAS;
 select * from ETAPAS where COD_TIPO_CURSO = 265;
 
 select  * from ETAPAS_PAUTAS;
-
+select * from DISCIPLINAS;
+select * from TURMAS;
 
