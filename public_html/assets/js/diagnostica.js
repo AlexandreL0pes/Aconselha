@@ -1,4 +1,4 @@
-import {sendRequest, showMessage, getCookie} from './utils.js';
+import { sendRequest, showMessage, getCookie } from "./utils.js";
 
 const listener = () => {
   const btnSalvarDiagnostica = document.getElementById("salvar-diagnostica");
@@ -22,8 +22,6 @@ const listener = () => {
     const bgModal = modal.querySelector(".modal-background");
     bgModal.addEventListener("click", (event) => fecharAvaliacao());
   });
-
-
 };
 
 /**
@@ -99,7 +97,6 @@ const preencherPerfis = (perfis) => {
     }
   });
 };
-
 
 /**
  * Adiciona a classe selected ao chip
@@ -345,7 +342,12 @@ const obterInformacoesTurma = () => {
       })
       .catch((err) => {
         console.error(err);
-        showMessage("Houve um erro!", "Não foi possível acessar as informações da turma.", "error", 4000);
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível acessar as informações da turma.",
+          "error",
+          4000
+        );
       });
   }
 };
@@ -358,6 +360,23 @@ const apresentarInformacoesTurma = (dados) => {
   cardInfoTurma.querySelector("#codigo").innerHTML = dados.codigo;
 };
 
+const solicitarEstudantes = () => {
+  const turma = localStorage.getItem("turmaAtual");
+
+  if (turma !== null) {
+    const dados = { acao: "Turmas/listarEstudantes", turma: turma };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+};
+
+solicitarEstudantes();
 obterInformacoesTurma();
 listarPerfis();
 solicitarDiagnosticas();
