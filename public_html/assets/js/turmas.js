@@ -125,7 +125,14 @@ const addTurmaCard = (turma) => {
 };
 
 const abrirTurma = (params) => {
-  console.log("> Abrindo a turma né");
+	console.log("> Abrindo a turma né");
+	
+	let turma = event.target.getAttribute("data-turma") || event.target.parentElement.getAttribute("data-turma");
+
+	localStorage.setItem("turmaAtual", turma);
+	localStorage.removeItem("conselhoAtual");
+
+	window.location.href = "./turma.html";
 };
 
 solicitarTurmas();
