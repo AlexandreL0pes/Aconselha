@@ -217,6 +217,7 @@ const pegarDadosExperiencia = (params) => {
     disciplinas.push(disciplinaChip.getAttribute("data-disciplina-id"));
   });
 
+  console.log(disciplinas);
   const descricao = document.getElementById("experiencia-descricao").value;
 
   const reuniao = localStorage.getItem("conselhoAtual") || "";
@@ -637,11 +638,12 @@ const preencherAprendizado = (aprendizado) => {
   aprendizado.estudantes.map((estudante) => {
     addChip(estudante.nome, estudante.id, "ensino-estudantes-selecionados");
   });
-
   const disciplina = document.querySelector("#ensino-disciplina");
   disciplina.value = aprendizado.disciplina.nome;
   disciplina.setAttribute("data-disciplina", aprendizado.disciplina.id);
 
+  console.log("Preenchendo Aprendizado!");
+  console.log(aprendizado);
   document.getElementById("ensino-descricao").value = aprendizado.observacao;
 };
 
@@ -682,11 +684,12 @@ const preencherExperiencia = (experiencia) => {
   experiencia.disciplinas.map((disciplina) =>
     addChipDisciplina(
       disciplina.nome,
-      disciplina.id,
+      disciplina.codigo,
       "experiencia-disciplinas-selecionadas"
     )
   );
-
+    console.log("Preenchendo Experiência");
+    console.log(experiencia);
   document.getElementById("experiencia-titulo").value = experiencia.titulo;
   document.getElementById("experiencia-categoria").value =
     experiencia.classificacao;
