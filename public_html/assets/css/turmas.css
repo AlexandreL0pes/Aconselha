@@ -10,12 +10,15 @@
   margin-bottom: 20px;
 }
 
-.main .turmas {
+.main .reunioes,
+.main .turmas
+ {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   grid-auto-rows: minmax(100px, 1fr);
   grid-gap: 10px;
   margin: 10px;
+  margin-top: 20px;
 }
 
 .cardbox {
@@ -73,4 +76,8 @@ a {
 
 .selected {
   background: rgba(0, 0, 0, 0.1);
+}
+.nenhum-resultado {
+  grid-column: span 2;
+  font-size: .9em;
 }
