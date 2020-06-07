@@ -692,7 +692,7 @@ const preencherExperiencia = (experiencia) => {
     console.log(experiencia);
   document.getElementById("experiencia-titulo").value = experiencia.titulo;
   document.getElementById("experiencia-categoria").value =
-    experiencia.classificacao;
+    experiencia.classificacao.id;
   document.getElementById("experiencia-descricao").value =
     experiencia.descricao;
 };
