@@ -8,6 +8,19 @@ use core\model\Disciplina;
 class Disciplinas
 {
 
+    public function selecionar($disciplina)
+    {
+        $campos = Disciplina::TABELA . "." . Disciplina::COL_COD_DISCIPLINA . " as codigo, " .
+            Disciplina::COL_DESC_DISCIPLINA . " as nome";
+
+        $busca = [Disciplina::COL_COD_DISCIPLINA => $disciplina];
+
+        $d = new Disciplina();
+
+        $disciplina = ($d->listar($campos, $busca, null, 1))[0];
+
+        return $disciplina;
+    }
     public function listarDisciplinasTurma($dados = [])
     {
 
