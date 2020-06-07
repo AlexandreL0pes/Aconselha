@@ -29,8 +29,6 @@ const solicitarReunioes = () => {
 };
 
 const addReuniaoCard = (reuniao) => {
-  console.log("> Imprimindo né");
-
   let card = document.createElement("div");
   let classCurso = "";
 
@@ -73,4 +71,62 @@ const abrirReuniao = () => {
 
   window.location.href = "./dashboard.html";
 };
+
+const solicitarTurmas = () => {
+  const professor = localStorage.getItem("professor") || "121415";
+  const dados = {
+    acao: "Professores/obterTurmasProfessor",
+    professor: professor,
+  };
+
+  sendRequest(dados)
+    .then((response) => {
+      if (response.length > 0) {
+        document.getElementById("turmas").innerHTML = "";
+        response.map((turma) => addTurmaCard(turma));
+      } else {
+        const turmaDiv = document.getElementById("turmas");
+        const msg = document.createElement("div");
+        msg.classList.add("nenhum-resultado");
+        msg.innerHTML = "Nenhuma turma foi encontrada!";
+        turmaDiv.appendChild(msg);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const addTurmaCard = (turma) => {
+  console.log("> Imprimindo né");
+  let card = document.createElement("div");
+
+  let classCurso = "";
+
+  if (turma.curso === "Informática para Internet") {
+    classCurso = "is-info";
+  } else if (turma.curso === "Meio Ambiente") {
+    classCurso = "is-amb";
+  } else {
+    classCurso = "is-agro";
+  }
+
+  card.classList.add("cardbox", "card-turma", classCurso);
+  card.setAttribute("data-turma", turma.codigo);
+  card.addEventListener("click", abrirTurma);
+
+  card.innerHTML += `
+    <p class="subtitulo is-8 gray-text">${turma.curso}</p>
+    <p class="subtitulo is-7">${turma.nome}</p>
+    <p class="subtitulo is-9 gray-text">${turma.codigo}</p>
+    `;
+  const turmasDiv = document.getElementById("turmas");
+  turmasDiv.appendChild(card);
+};
+
+const abrirTurma = (params) => {
+  console.log("> Abrindo a turma né");
+};
+
+solicitarTurmas();
 solicitarReunioes();
