@@ -50,6 +50,12 @@ class Disciplina extends CRUD
                     " INNER JOIN DISCIPLINAS_MATRIZES_CURRICULARES on DISCIPLINAS.COD_DISCIPLINA = DISCIPLINAS_MATRIZES_CURRICULARES.COD_DISCIPLINA " .
                     " INNER JOIN TURMAS on DISCIPLINAS_MATRIZES_CURRICULARES.COD_MATRIZ_CURRICULAR = TURMAS.COD_MATRIZ_CURRICULAR ";
             }
+            if (isset($busca[self::COL_COD_DISCIPLINA]) && !empty($busca[self::COL_COD_DISCIPLINA])) {
+                $where_condicao .= " AND " . self::COL_COD_DISCIPLINA . " = ? ";
+                $where_valor[] = $busca[self::COL_COD_DISCIPLINA];
+
+            }
+            
         }
 
         $retorno = [];
