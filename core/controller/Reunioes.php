@@ -122,7 +122,7 @@ class Reunioes
 	/**
 	 * Lista as reuniões não finalizadas
 	 */
-	public function listarReunioesAndamento($dados)
+	public function listarReunioesAndamento($dados = [])
 	{
 
 		$reuniao = new Reuniao();
@@ -144,7 +144,7 @@ class Reunioes
 
 		// Verifica se existem reuniões retornadas 
 		if (count($reunioes) > 0 && !empty($reunioes[0])) {
-			
+
 			// Verifica se existe curso especificado
 			if (isset($dados['curso']) && !empty($dados['curso'])) {
 
@@ -176,6 +176,21 @@ class Reunioes
 		return json_encode($reunioesFiltradas);
 	}
 
+	public function listarTurmasEmReuniao($dados = [])
+	{
+		$reunioes = $this->listarReunioesAndamento($dados);
+		$reunioes = json_decode($reunioes, true);
+
+		$turmas = [];
+
+		if (count($reunioes) > 0 && !empty($reunioes[0])) {
+			$turmas = array_map(function ($turma) {
+				return $turma['codigo'];
+			}, $reunioes);
+		}
+
+		return $turmas;
+	}
 	public function reunioesNaoIniciadas($dados)
 	{
 
