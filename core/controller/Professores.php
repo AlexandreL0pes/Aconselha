@@ -12,7 +12,24 @@ class Professores
     // Lista todas as turmas que um professor já deu aula
     public function listarTurmas($dados = [])
     {
-        # code...
+        $pessoa = $dados['professor'];
+
+        $campos = Turma::COL_ID;
+
+        $busca = [Professor::COL_COD_PESSOA => $pessoa];
+
+
+        $professor = new Professor();
+
+        $turmas = $professor->listar($campos, $busca, null, null);
+
+        $turmas_id = [];
+        if (count($turmas) > 0 && !empty($turmas[0])) {
+            $turmas_id = array_map(function ($turma) {
+                return $turma[Turma::COL_ID];
+            }, $turmas);
+        }
+        return $turmas_id;
     }
 
     // Lista todas as turmas que um professor está dando aula
@@ -68,5 +85,20 @@ class Professores
         // echo "Intersecção \n";
         // print_r($reunioes_professor);
         return json_encode($reunioes_professor);
+    }
+
+    public function obterTurmasProfessor($dados = [])
+    {
+
+        $codigos = $this->listarTurmasAtuais($dados);
+
+        $t = new Turmas();
+        $turmas = [];
+        foreach ($codigos as $codigo) {
+            $turma = $t->informacoesTurma(['turma' => $codigo]);
+            $turma = json_decode($turma, true);
+            array_push($turmas, $turma);
+        }
+        return json_encode($turmas);
     }
 }
