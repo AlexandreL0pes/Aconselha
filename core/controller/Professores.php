@@ -48,7 +48,8 @@ class Professores
 
         $r = new Reunioes();
         // Obtem as turmas que estão em reunião
-        $reunioes = $r->listarTurmasEmReuniao();
+        $reunioes = $r->listarReunioesAndamento();
+        $reunioes = json_decode($reunioes, true);
 
         // echo "Turmas Professor\n";
         // print_r($turmas_professor);
@@ -56,16 +57,16 @@ class Professores
         // echo "Turmas Reunião\n";
         // print_r($reunioes);
 
-        $t = new Turmas();
         $reunioes_professor = [];
-        foreach ($turmas_professor as $turma_professor) {
-            if (in_array($turma_professor, $reunioes)) {
-                $turma = $t->informacoesTurma(['turma' => $turma_professor]);
-                $turma = json_decode($turma, true);
-                array_push($reunioes_professor, $turma);
+
+        foreach ($reunioes as $reuniao) {
+            if (in_array($reuniao['codigo'], $turmas_professor)) {
+                array_push($reunioes_professor, $reuniao);
             }
         }
 
+        // echo "Intersecção \n";
+        // print_r($reunioes_professor);
         return json_encode($reunioes_professor);
     }
 }
