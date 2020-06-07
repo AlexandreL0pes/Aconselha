@@ -32,7 +32,6 @@ class Diagnosticas
             $analise = new Analise();
 
             $erros = array();
-            // TODO: No alterar, excluir todos os registros q tem a avaliação e cadastrar novamente
             foreach ($perfis as $perfil) {
                 $resultadoAnalise = $analise->adicionar([
                     Analise::COL_DIAGNOSTICA => $resultadoDiagnostica,
@@ -275,6 +274,7 @@ class Diagnosticas
                     array_push($professores, $professor);
                 }
 
+                // TODO: Selecionar o estudante
                 $aluno = ['id' => $diagnostica['matricula'], 'nome' => "Nome " . $diagnostica['matricula']];
 
                 $tiposDiagnostica = $this->verificarTipoDiagnostica($perfisIds);

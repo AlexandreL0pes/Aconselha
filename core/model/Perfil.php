@@ -7,7 +7,7 @@ use Exception;
 
 class Perfil extends CRUD {
     const TABELA = "Perfil";
-    const COL_ID = "idClassificacao";
+    const COL_ID = "id";
     const COL_NOME = "nome";
     const COL_DESCRICAO = "descricao";
     // TIPO -> BOOLEAN

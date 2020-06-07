@@ -165,8 +165,6 @@ class Experiencias
 
         if ($disciplinas_id && count($disciplinas_id[0]) > 0) {
             foreach ($disciplinas_id as $disciplina_id) {
-                // TODO: Colocar consultar aqui o nome da disciplina
-                $nome = "Disciplina " . $disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA];
                 $disciplina = $d->selecionar($disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA]);
 
                 // array_push($disciplinas, ['id' => $disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA], 'nome' => $nome]);
