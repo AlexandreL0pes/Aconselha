@@ -318,8 +318,8 @@ let autocompleteExperienciaDisciplinas = () => {
         });
       })
       .then((filtrado) => {
-        return filtrado.map((estudante) => {
-          return { label: estudante.nome, value: estudante.matricula };
+        return filtrado.map((disciplina) => {
+          return { label: disciplina.nome, value: disciplina.codigo };
         });
       })
       .then((transformado) => {
@@ -409,8 +409,8 @@ let autocompleteEnsinoDisciplina = () => {
         });
       })
       .then((filtrado) => {
-        return filtrado.map((estudante) => {
-          return { label: estudante.nome, value: estudante.matricula };
+        return filtrado.map((disciplina) => {
+          return { label: disciplina.nome, value: disciplina.codigo };
         });
       })
       .then((transformado) => {
