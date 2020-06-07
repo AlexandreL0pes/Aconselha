@@ -119,12 +119,15 @@ class Aprendizados
 
         $busca = [Aprendizado::COL_ID => $aprendizado_id];
 
+
         $resultadoAprendizado = $avaliacao->listar($campos, $busca, null, 1)[0];
+        $d = new Disciplinas();
         if (!empty($resultadoAprendizado)) {
             $estudantes = $this->estudantesAprendizado($aprendizado_id);
 
             // TODO: Selecionar o nome da disciplina pelo id e retornar o nome
-            $disciplina = ['id' => $resultadoAprendizado[Aprendizado::COL_DISCIPLINA], 'nome' => 'Disciplina ' . $resultadoAprendizado[Aprendizado::COL_DISCIPLINA]];
+            // $disciplina = ['id' => $resultadoAprendizado[Aprendizado::COL_DISCIPLINA], 'nome' => 'Disciplina ' . $resultadoAprendizado[Aprendizado::COL_DISCIPLINA]];
+            $disciplina = $d->selecionar($resultadoAprendizado[Aprendizado::COL_DISCIPLINA]);
 
             $aprendizadoCompleto = [
                 'aprendizado' => $resultadoAprendizado[Aprendizado::COL_ID],
@@ -204,9 +207,12 @@ class Aprendizados
 
         $retorno = [];
 
+        $d = new Disciplinas();
         if (!empty($aprendizados) && !empty($aprendizados[0])) {
             foreach ($aprendizados as $aprendizado) {
                 $disciplina = ['id' => $aprendizado[Aprendizado::COL_DISCIPLINA], 'nome' => 'Disciplina ' . $aprendizado[Aprendizado::COL_DISCIPLINA]];
+                $disciplina = $d->selecionar($aprendizado[Aprendizado::COL_DISCIPLINA]);
+
                 $estudantes = $this->estudantesAprendizado($aprendizado[Aprendizado::COL_ID]);
 
                 array_push($retorno, [
@@ -215,10 +221,8 @@ class Aprendizados
                     "estudantes" => $estudantes
                 ]);
             }
-
-        } 
+        }
 
         return json_encode($retorno);
-
     }
 }
