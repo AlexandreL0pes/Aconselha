@@ -119,14 +119,14 @@ class Experiencias
 
         // $campos = "e.*, c." . Classificacao::COL_NOME;
         $campos = Experiencia::COL_ID . ", " .
-        Experiencia::COL_ID_REUNIAO . ", " .
-        Experiencia::COL_TITULO . ", " .
-        Experiencia::COL_OBSERVACAO . ", " .
-        Experiencia::COL_DATA . ", " .
-        "c.".Classificacao::COL_ID . ", " . 
-        "c.".Classificacao::COL_NOME 
+            Experiencia::COL_ID_REUNIAO . ", " .
+            Experiencia::COL_TITULO . ", " .
+            Experiencia::COL_OBSERVACAO . ", " .
+            Experiencia::COL_DATA . ", " .
+            "c." . Classificacao::COL_ID . ", " .
+            "c." . Classificacao::COL_NOME
 
-        // Classificacao::COL_NOME;
+            // Classificacao::COL_NOME;
         ;
 
         $busca = [Experiencia::COL_ID => $experiencia_id];
@@ -161,11 +161,16 @@ class Experiencias
         $disciplinas_id = $disciplinasExperiencia->listar(DisciplinaExperiencia::COL_DISCIPLINA, $busca, null, 100);
 
         $disciplinas = [];
+        $d = new Disciplinas();
+
         if ($disciplinas_id && count($disciplinas_id[0]) > 0) {
             foreach ($disciplinas_id as $disciplina_id) {
                 // TODO: Colocar consultar aqui o nome da disciplina
                 $nome = "Disciplina " . $disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA];
-                array_push($disciplinas, ['id' => $disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA], 'nome' => $nome]);
+                $disciplina = $d->selecionar($disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA]);
+
+                // array_push($disciplinas, ['id' => $disciplina_id[DisciplinaExperiencia::COL_DISCIPLINA], 'nome' => $nome]);
+                array_push($disciplinas, $disciplina);
             }
         }
 
@@ -228,6 +233,5 @@ class Experiencias
 
         http_response_code(200);
         return json_encode($retorno);
-
     }
 }
