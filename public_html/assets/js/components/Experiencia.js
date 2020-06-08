@@ -265,7 +265,6 @@ const preencherExperiencia = (experiencia) => {
   );
 
   const disciplinasChip = modalExperiencia.querySelector(".disciplinas .chips");
-    disciplinasChip.innerHTML = "";
   modalExperiencia.classList.toggle("is-active");
 
   console.log(experiencia);
@@ -277,12 +276,12 @@ const preencherExperiencia = (experiencia) => {
   } else if (experiencia.classificacao.nome === "Pontos Negativos") {
     classeClassificacao = "negativo";
   } else {
-    classeClassificacao = "";
+    classeClassificacao = "nenhum";
   }
 
   categoria.classList.add(classeClassificacao);
   categoria.innerHTML = experiencia.classificacao.nome;
-
+  
   observacao.innerHTML = experiencia.descricao;
 
   experiencia.disciplinas.map((disciplina) => {
