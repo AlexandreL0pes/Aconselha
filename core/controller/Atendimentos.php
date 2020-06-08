@@ -214,7 +214,6 @@ class Atendimentos
         $reuniao_id = $dados['reuniao'];
 
         $campos = "at." . Atendimento::COL_ID . ", at." . Atendimento::COL_ID_REUNIAO . ", a." . Acao::COL_NOME . ", at." . Atendimento::COL_ESTUDANTE;
-        // $campos = "av." . Avaliacao::COL_ID . ", av." . Avaliacao::COL_ID_REUNIAO . ", a." . Acao::COL_NOME . ", av." . Avaliacao::COL_ESTUDANTE;
         $busca = [Atendimento::COL_ID_REUNIAO => $reuniao_id];
 
         $ordem = Atendimento::COL_DATA . " DESC ";
@@ -223,11 +222,10 @@ class Atendimentos
         $atendimentos = $atendimento->listar($campos, $busca, $ordem, 100);
         $retorno = [];
 
+        $a = new Alunos();
         if (!empty($atendimentos) && !empty($atendimentos[0])) {
             foreach ($atendimentos as $atendimento) {
-                // TODO: Consultar o Q-Academico os dados do aluno
-                $aluno = ['matricula' => $atendimento[Atendimento::COL_ESTUDANTE], 'nome' => 'Um nome estático', 'curso' => 'Informática para Interte'];
-
+                $aluno = $a->selecionar($atendimento[Atendimento::COL_ESTUDANTE]);
                 array_push($retorno, ['encaminhamento' => $atendimento[Atendimento::COL_ID], 'intervencao' => $atendimento[Acao::COL_NOME], 'aluno' => $aluno]);
             }
 
