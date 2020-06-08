@@ -9,33 +9,30 @@ use core\model\Curso;
 class Cursos
 {
 
-    public function selecionarCurso($dados)
+    public function selecionarCurso($cod_curso)
     {
-        $codigoCurso = $dados['curso'];
 
         $campos = Curso::COL_ID . ", " .
             Curso::COL_DESC_CURSO;
 
-        $busca = [Curso::COL_ID => $codigoCurso];
+        $busca = [Curso::COL_ID => $cod_curso];
 
         $curso = new Curso();
 
         $retornoCurso = ($curso->listar($campos, $busca, null, 1))[0];
 
+        $curso = [];
         if (!empty($retornoCurso)) {
             $nome = $this->processarCurso($retornoCurso[Curso::COL_DESC_CURSO]);
 
             $curso = [
-                'codigo' => $codigoCurso,
+                'codigo' => $cod_curso,
                 'nome' => $nome
             ];
 
-            http_response_code(200);
-            return json_encode($curso);
-        } else {
-            http_response_code(500);
-            return json_encode(array('message' => "Nenhum curso foi encontrado!"));
         }
+
+        return $curso;
     }
 
     private function processarCurso($descricaoCurso = null)
