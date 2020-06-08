@@ -101,4 +101,24 @@ class Professores
         }
         return json_encode($turmas);
     }
+
+    public function selecionar($cod_pessoa = null)
+    {
+        $campos = "PROFESSORES" . "." . Professor::COL_COD_PESSOA . ", " .
+            "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome";
+
+        $busca = [Professor::COL_COD_PESSOA => $cod_pessoa];
+
+        $p = new Professor();
+        $professor = ($p->listar($campos, $busca, null, 1))[0];
+
+        if (!empty($professor)) {
+            $professor = [
+                'nome' => $professor['nome'],
+                'id' => $professor[Professor::COL_COD_PESSOA]
+            ];
+        }
+
+        return $professor;
+    }
 }
