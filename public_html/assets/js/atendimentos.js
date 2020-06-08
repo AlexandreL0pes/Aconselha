@@ -205,33 +205,25 @@ let autocompleteAluno = () => {
 };
 
 let autocompleteProfessor = () => {
-  var api = function (inputValue) {
-    return fetch(
-      "https://cdn.rawgit.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json"
-    )
-      .then(function (resp) {
-        return [
-          { label: "Adriano Braga", value: "1459180" },
-          { label: "Lucas Faria", value: "97312" },
-          { label: "Rangel Rigo", value: "417530" },
-          { label: "Marcos Morais", value: "914402" },
-          { label: "Jaqueline Ribeiro", value: "81183" },
-          { label: "Ramayane Braga", value: "41917" },
-        ];
-        // return resp.json();
-      })
-      .then(function (states) {
-        return states.filter(function (state) {
-          return state.label.startsWith(inputValue);
+  let api = (inputValue) => {
+    const turma = localStorage.getItem("turmaAtual");
+    let dados = { acao: "Turmas/listarProfessoresAtuais", turma: turma };
+
+    return sendRequest(dados)
+      .then((professores) => {
+        return professores.filter((professor) => {
+          return professor.nome
+            .toLowerCase()
+            .startsWith(inputValue.toLowerCase());
         });
       })
-      .then(function (filtered) {
-        return filtered.map(function (state) {
-          return { label: state.label, value: state.value };
+      .then((filtrado) => {
+        return filtrado.map((professor) => {
+          return { label: professor.nome, value: professor.id };
         });
       })
-      .then(function (transformed) {
-        return transformed.slice(0, 5);
+      .then((transformado) => {
+        return transformado.slice(0, 5);
       });
   };
 
