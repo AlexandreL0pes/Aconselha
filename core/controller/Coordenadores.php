@@ -162,13 +162,10 @@ class Coordenadores
 
         $cursoId = $dados['curso'];
 
-        // TODO: Adicionar aqui um método que pega as informações do curso
-        $curso = ["id" => $cursoId, "nome" => "Curso " . $cursoId];
         $c = new Cursos();
         $curso = $c->selecionarCurso($cursoId);
 
-        // TODO: Pelo id retornado, selecionar a pessoa
-        $coordenador = $this->selecionarCoordenadorAtual($cursoId);
+        $coordenador = $this->obterInfoCoordenadorAtual($cursoId);
 
 
         $retorno = [
@@ -183,6 +180,19 @@ class Coordenadores
             http_response_code(500);
             return json_encode(array("message" => "Não foi possível selecionar o coordenador!"));
         }
+    }
+
+    public function obterInfoCoordenadorAtual($cod_curso)
+    {
+        $coordenador = $this->selecionarCoordenadorAtual($cod_curso);
+
+        $coordenador = [
+            'id' => $coordenador['id'],
+            'login' => $coordenador[Usuario::COL_MATRICULA],
+            'pessoa' => $coordenador[Usuario::COL_PESSOA]
+        ];
+
+        return $coordenador;
     }
 
     public function obterCurso($dados)
