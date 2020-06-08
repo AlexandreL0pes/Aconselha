@@ -125,8 +125,6 @@ class Aprendizados
         if (!empty($resultadoAprendizado)) {
             $estudantes = $this->estudantesAprendizado($aprendizado_id);
 
-            // TODO: Selecionar o nome da disciplina pelo id e retornar o nome
-            // $disciplina = ['id' => $resultadoAprendizado[Aprendizado::COL_DISCIPLINA], 'nome' => 'Disciplina ' . $resultadoAprendizado[Aprendizado::COL_DISCIPLINA]];
             $disciplina = $d->selecionar($resultadoAprendizado[Aprendizado::COL_DISCIPLINA]);
 
             $aprendizadoCompleto = [
