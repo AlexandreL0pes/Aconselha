@@ -376,22 +376,23 @@ const listarEncaminhamentos = (params) => {
 const addEncaminhamentoCard = (dados) => {
   let card = document.createElement("div");
 
-  let classCurso = "";
-  if (dados.aluno.curso === "Informática para Internet") {
-    classCurso = "is-info";
-  } else if (dados.aluno.curso === "Meio Ambiente") {
-    classCurso = "is-amb";
+  let classIntervencao = "";
+  if (dados.intervencao === "Conversar com Responsável") {
+    classIntervencao = "intervencao-resp";
+  } else if (dados.intervencao === "Conversar com Aluno") {
+    classIntervencao = "intervencao-aluno";
+  } else if (dados.intervencao === "Conversar com Psicólogo") {
+    classIntervencao = "intervencao-psi";
   } else {
-    classCurso = "is-agro";
+    classIntervencao = "intervencao";
   }
 
-  card.classList.add("cardbox", "card-encaminhamento", classCurso);
+  card.classList.add("cardbox", "card-encaminhamento", classIntervencao);
   card.setAttribute("data-encaminhamento", dados.encaminhamento);
 
   card.innerHTML += `
-    <p class="subtitulo gray-text is-8">${dados.aluno.curso}</p>
-    <p class="subtitulo is-7">${dados.aluno.nome}</p>
-    <p class="gray-text subtitulo is-7">${dados.intervencao}</p>
+    <p class="subtitulo is-6">${dados.aluno.nome}</p>
+    <p class="gray-text subtitulo is-6">${dados.intervencao}</p>
   `;
   card.addEventListener("click", (event) => abrirEncaminhamento(event));
 

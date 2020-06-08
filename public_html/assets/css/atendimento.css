@@ -35,7 +35,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   /* grid-template-rows: repeat(auto-fill, minmax(100px, 1fr)); */
-  grid-auto-rows: minmax(100px, 1fr);
+  grid-auto-rows: minmax(100px, 120px);
   grid-gap: 10px;
   margin: 10px;
 }
@@ -59,26 +59,33 @@
   text-justify: center;
   text-align: center;
 
-  animation: fadeIn .7s ease-in-out;
+  animation: fadeIn 0.7s ease-in-out;
 }
 .cardbox:hover {
   box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.3);
   transform: translateY(-1px);
 }
 
-
-
 /* Estilo para os cards */
-.cardbox.is-info {
-  border-top: 2px solid var(--info-color);
+.cardbox.intervencao-aluno,
+.cardbox.intervencao-psi,
+.cardbox.intervencao-resp,
+.cardbox.intervencao {
+  border-left: 3px solid;
 }
 
-.cardbox.is-agro {
-  border-top: 2px solid var(--agro-color);
+.cardbox.intervencao-aluno {
+  border-color: #84a233;
+}
+.cardbox.intervencao-resp {
+  border-color: #c5953d;
+}
+.cardbox.intervencao-psi {
+  border-color: #a52f2f;
 }
 
-.cardbox.is-amb {
-  border-top: 2px solid var(--amb-color);
+.cardbox.intervencao {
+  border-color: #3faadb;
 }
 
 .professores-selecionados {
@@ -233,8 +240,6 @@
   justify-self: center;
 }
 
-
-
 .descricao {
   display: flex;
   justify-content: space-between;
@@ -249,7 +254,6 @@
   font-size: 0.6em;
 }
 
-
 .turma-info {
   display: grid;
   align-items: center;
@@ -258,7 +262,7 @@
   color: #222424;
   margin: 0px;
   padding: 15px 10px;
-  font-size: .9em;
+  font-size: 0.9em;
   font-weight: 300;
   grid-template-columns: 1fr;
   /* grid-template-rows: repeat(auto-fill, minmax(20px, 1fr)); */
