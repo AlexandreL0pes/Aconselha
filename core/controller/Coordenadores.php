@@ -3,6 +3,7 @@
 
 namespace core\controller;
 
+use core\model\Curso;
 use core\model\Servidor;
 use core\model\Usuario;
 use core\sistema\Autenticacao;
@@ -163,6 +164,8 @@ class Coordenadores
 
         // TODO: Adicionar aqui um método que pega as informações do curso
         $curso = ["id" => $cursoId, "nome" => "Curso " . $cursoId];
+        $c = new Cursos();
+        $curso = $c->selecionarCurso($cursoId);
 
         // TODO: Pelo id retornado, selecionar a pessoa
         $coordenador = $this->selecionarCoordenadorAtual($cursoId);
