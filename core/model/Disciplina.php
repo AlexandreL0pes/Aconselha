@@ -55,7 +55,7 @@ class Disciplina extends CRUD
                 $where_valor[] = $busca[self::COL_COD_DISCIPLINA];
             }
 
-            if (isset($busca['pauta']) && !empty($busca['pautoa'])) {
+            if (isset($busca['pauta']) && !empty($busca['pauta'])) {
                 $where_condicao .= " AND COD_PAUTA = ? ";
                 $where_valor[] = $busca['pauta'];
 
