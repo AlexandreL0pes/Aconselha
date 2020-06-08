@@ -53,9 +53,14 @@ class Disciplina extends CRUD
             if (isset($busca[self::COL_COD_DISCIPLINA]) && !empty($busca[self::COL_COD_DISCIPLINA])) {
                 $where_condicao .= " AND " . self::COL_COD_DISCIPLINA . " = ? ";
                 $where_valor[] = $busca[self::COL_COD_DISCIPLINA];
-
             }
-            
+
+            if (isset($busca['pauta']) && !empty($busca['pautoa'])) {
+                $where_condicao .= " AND COD_PAUTA = ? ";
+                $where_valor[] = $busca['pauta'];
+
+                $tabela = self::TABELA . " INNER JOIN PAUTAS ON DISCIPLINAS.COD_DISCIPLINA = PAUTAS.COD_DISCIPLINA ";
+            }
         }
 
         $retorno = [];
