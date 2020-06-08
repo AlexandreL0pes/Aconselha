@@ -67,6 +67,7 @@ class Disciplina extends CRUD
 
         try {
             $retorno = $this->read($database, $tabela, $campos, $where_condicao, $where_valor, null, $ordem, null);
+            // echo $this->pegarUltimoSQL();
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             // echo $this->pegarUltimoSQL();
