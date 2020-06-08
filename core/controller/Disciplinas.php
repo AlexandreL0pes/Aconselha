@@ -10,6 +10,7 @@ class Disciplinas
 
     public function selecionar($disciplina)
     {
+        // Selecionar disciplina pelo código pauta
         $campos = Disciplina::TABELA . "." . Disciplina::COL_COD_DISCIPLINA . " as codigo, " .
             Disciplina::COL_DESC_DISCIPLINA . " as nome";
 
@@ -38,5 +39,19 @@ class Disciplinas
 
         http_response_code(200);
         return json_encode($disciplinas);
+    }
+
+    // Obtem a disciplina com base na pauta
+    public function selecionarDiscplinaPauta($pauta = null)
+    {
+        $campos = Disciplina::TABELA . "." . Disciplina::COL_COD_DISCIPLINA . " as codigo, " .
+            Disciplina::COL_DESC_DISCIPLINA . " as nome";
+
+        $busca = ['pauta' => $pauta];
+
+        $d = new Disciplina();
+        $disciplina = ($d->listar($campos, $busca, null, 1))[0];
+
+        return $disciplina;
     }
 }
