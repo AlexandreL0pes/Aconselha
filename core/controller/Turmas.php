@@ -4,6 +4,7 @@
 namespace core\controller;
 
 use core\model\Aluno;
+use core\model\Professor;
 use core\model\Turma;
 
 class Turmas
@@ -88,8 +89,6 @@ class Turmas
 
         http_response_code(200);
         return json_encode($retorno);
-
-
     }
 
     public function verificarTurmaCurso($codTurma, $codCurso)
@@ -212,5 +211,26 @@ class Turmas
 
         http_response_code(200);
         return json_encode($turmas);
+    }
+
+    public function listarProfessoresAtuais($dados = [])
+    {
+
+        $turma = $dados['turma'];
+
+        $p = new Professores();
+        $pessoas = $p->professoresAtuaisTurma($turma);
+
+
+        $professores = [];
+
+        if (!empty($pessoas)) {
+            foreach ($pessoas as $pessoa) {
+                $professor = $p->selecionar($pessoa);
+                array_push($professores, $professor);
+            }
+        }
+
+        return json_encode($professores);
     }
 }

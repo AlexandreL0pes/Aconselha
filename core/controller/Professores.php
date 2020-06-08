@@ -121,4 +121,21 @@ class Professores
 
         return $professor;
     }
+
+    public function professoresAtuaisTurma($cod_turma = null)
+    {
+        $campos = Professor::TABELA . "." . Professor::COL_COD_PESSOA;
+        $busca = ['turma' => $cod_turma, 'ano_letivo' => 'atual'];
+
+        $p = new Professor();
+        $cod_pessoas = $p->listar($campos, $busca, null, null);
+        $pessoas = [];
+        if (!empty($cod_pessoas[0])) {
+            $pessoas = array_map(function ($pessoa) {
+                return $pessoa[Professor::COL_COD_PESSOA];
+            }, $cod_pessoas);
+        }
+
+        return $pessoas;
+    }
 }

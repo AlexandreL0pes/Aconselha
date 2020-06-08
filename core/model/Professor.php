@@ -13,7 +13,7 @@ class Professor extends CRUD
     const TABELA = "PROFESSORES";
     const COL_COD_PESSOA = "COD_PESSOA";
     const COL_COD_INSTITUICAO = "COD_INSTITUICAO";
-    
+
     public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
     {
         $database = "academico";
@@ -48,6 +48,16 @@ class Professor extends CRUD
                     $where_valor[] = $busca['ano_letivo'];
                 }
             }
+
+            if (isset($busca['turma']) && !empty($busca['turma'])) {
+                $where_condicao .= " AND " .  Turma::COL_ID . " = ? ";
+                $where_valor[] = $busca['turma'];
+
+                $tabela = self::TABELA .
+                    " INNER JOIN PAUTAS ON PROFESSORES.COD_PROFESSOR = PAUTAS.COD_PROFESSOR" .
+                    " INNER JOIN PESSOAS ON PROFESSORES.COD_PESSOA = PESSOAS.COD_PESSOA ";
+
+            }
         }
 
         // Filtrando apenas os professores do CAMPUS CERES
@@ -55,7 +65,7 @@ class Professor extends CRUD
         $where_valor[] = '3';
 
         // Filtratndo apenas as pautas dos cursos técnicos integrados
-        $where_condicao .= " AND COD_TIPO_CURSO = ?";
+        $where_condicao .= " AND COD_TIPO_CURSO = ? ";
         $where_valor[] = '265';
 
         $retorno = [];
