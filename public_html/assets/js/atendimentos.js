@@ -81,7 +81,7 @@ const preencherEncaminhamento = (dados) => {
   });
   const estudante = document.querySelector("#aluno");
   estudante.value = dados.estudante.nome;
-  estudante.setAttribute("data-aluno", dados.estudante.id);
+  estudante.setAttribute("data-aluno", dados.estudante.matricula);
 
   document.getElementById("queixa").value = dados.queixa;
   document.getElementById("intervencao").value = dados.intervencao;
