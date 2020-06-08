@@ -146,8 +146,7 @@ class Atendimentos
 
             // Obtem as informações do aluno, com base na matrícula
             $a = new Alunos();
-            $aluno = $a->selecionar(['matricula' => $atendimento[Atendimento::COL_ESTUDANTE]]);
-            $aluno = json_decode($aluno, true);
+            $aluno = $a->selecionar($atendimento[Atendimento::COL_ESTUDANTE]);
 
             $atendimentoCompleto = [
                 'atendimento' => $atendimento[Atendimento::COL_ID],
@@ -174,7 +173,7 @@ class Atendimentos
 
         $p = new Professores();
         $professores = [];
-        
+
         // Obtem os dados dos professores, com base no COD_PESSOA
         foreach ($professores_id as $professor_id) {
             $professor = $p->selecionar($professor_id[Encaminhamento::COL_PROFESSOR]);

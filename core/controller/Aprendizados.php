@@ -157,9 +157,9 @@ class Aprendizados
 
         $aluno = new Alunos();
         foreach ($estudantes_id as $estudante_id) {
-            $retornoAluno = $aluno->selecionar(['matricula' => $estudante_id[EstudanteAprendizado::COL_MATRICULA]]);
-            $retornoAluno = json_decode($retornoAluno, true);
-            array_push($estudantes, ['id' => $estudante_id[EstudanteAprendizado::COL_MATRICULA], 'nome' => $retornoAluno['nome']]);
+            $retornoAluno = $aluno->selecionar($estudante_id[EstudanteAprendizado::COL_MATRICULA]);
+
+            array_push($estudantes, $retornoAluno);
         }
 
         return $estudantes;

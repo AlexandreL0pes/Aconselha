@@ -186,9 +186,12 @@ class Diagnosticas
         $retorno = [];
 
         if (!empty($diagnosticas) && !empty($diagnosticas[0])) {
+
+            $a = new Alunos();
             foreach ($diagnosticas as $diagnostica) {
                 // TODO: Consultar o nome do aluno no banco QAcademico 
                 $aluno = ['id' => $diagnostica[Diagnostica::COL_ESTUDANTE], 'nome' => 'Aluno ' . $diagnostica[Diagnostica::COL_ESTUDANTE]];
+                $aluno = $a->selecionar($diagnostica[Diagnostica::COL_ESTUDANTE]);
                 array_push($retorno, [
                     "diagnostica" => $diagnostica[Diagnostica::COL_ID],
                     "aluno" => $aluno

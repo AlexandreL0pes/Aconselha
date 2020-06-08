@@ -89,10 +89,10 @@ class Representantes
 
         if (count($representantes) > 0 && !empty($representantes[0])) {
             foreach ($representantes as $representante) {
+
                 $aluno = new Alunos();
-                $representante = $aluno->selecionar(['matricula' => $representante[Usuario::COL_MATRICULA]]);
-                // print_r($representante);
-                $representante = json_decode($representante, true);
+                $representante = $aluno->selecionar($representante[Usuario::COL_MATRICULA]);
+
                 $representante = [
                     'codigo' => $representante['matricula'],
                     'nome' => $representante['nome']
