@@ -143,8 +143,11 @@ class Atendimentos
 
         if (!empty($atendimento)) {
             $professores = $this->professoresAtendimento($atendimento_id);
-            // TODO: Consultar o id do aluno e retornar o nome
-            $aluno = ['id' => $atendimento[Atendimento::COL_ESTUDANTE], 'nome' => 'Aluno de tal'];
+
+            // Obtem as informações do aluno, com base na matrícula
+            $a = new Alunos();
+            $aluno = $a->selecionar(['matricula' => $atendimento[Atendimento::COL_ESTUDANTE]]);
+            $aluno = json_decode($aluno, true);
 
             $atendimentoCompleto = [
                 'atendimento' => $atendimento[Atendimento::COL_ID],
