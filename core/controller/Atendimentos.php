@@ -172,12 +172,13 @@ class Atendimentos
         $busca = [Encaminhamento::COL_ID_ATENDIMENTO => $atendimento_id];
         $professores_id = $encaminhamento->listar(Encaminhamento::COL_PROFESSOR, $busca, null, null);
 
+        $p = new Professores();
         $professores = [];
+        
+        // Obtem os dados dos professores, com base no COD_PESSOA
         foreach ($professores_id as $professor_id) {
-            // TODO: Atribuir aqui o nome do professor vindo do Q-Acadêmico
-            $nome = 'Fulano de Tal';
-
-            array_push($professores, ['id' => $professor_id[Encaminhamento::COL_PROFESSOR], 'nome' => $nome]);
+            $professor = $p->selecionar($professor_id[Encaminhamento::COL_PROFESSOR]);
+            array_push($professores, $professor);
         }
         return $professores;
     }
