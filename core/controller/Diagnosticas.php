@@ -269,14 +269,16 @@ class Diagnosticas
 
                 $professores = [];
 
+                $p = new Professores();
                 foreach ($professoresIds as $professorId) {
-                    // TODO: Selecionar o nome real do professor
-                    $professor = ['id' => $professorId, 'nome' => "Professor " . $professorId];
+                    // Obtem os dados dos professores, com base do COD_PESSO
+                    $professor = $p->selecionar($professorId);
                     array_push($professores, $professor);
                 }
 
-                // TODO: Selecionar o estudante
-                $aluno = ['id' => $diagnostica['matricula'], 'nome' => "Nome " . $diagnostica['matricula']];
+                // Obtem os dados do aluno, com base em sua MATRÍCULA
+                $a = new Alunos();
+                $aluno = $a->selecionar($diagnostica['matricula']);
 
                 $tiposDiagnostica = $this->verificarTipoDiagnostica($perfisIds);
 
