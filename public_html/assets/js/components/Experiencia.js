@@ -265,7 +265,7 @@ const preencherExperiencia = (experiencia) => {
   );
 
   const disciplinasChip = modalExperiencia.querySelector(".disciplinas .chips");
-
+    disciplinasChip.innerHTML = "";
   modalExperiencia.classList.toggle("is-active");
 
   console.log(experiencia);
