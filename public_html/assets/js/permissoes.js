@@ -40,6 +40,7 @@ const abrirConselheiro = (element) => {
 
   let turmaAtual = element.currentTarget.getAttribute("data-turma");
   localStorage.setItem("turmaAtual", turmaAtual);
+  console.log(turmaAtual);
 };
 /**
  * Listener para o fechamento do modal
