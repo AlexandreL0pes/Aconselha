@@ -223,8 +223,8 @@ class Coordenadores
 
         $retorno = [];
 
-        // print_r($coordenador);
-        if (count($coordenador) > 0 && !empty($coordenador[0])) {
+        print_r($coordenador);
+        if (!empty($coordenador) && $coordenador[Usuario::COL_PESSOA] != null) {
             $s = new Servidores();
             $servidor = $s->selecionarServidor($coordenador[Usuario::COL_PESSOA]);
             $retorno = [
