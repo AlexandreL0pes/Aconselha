@@ -35,6 +35,11 @@ const abrirRepresentante = (element) => {
 
 const abrirConselheiro = (element) => {
   console.log("> Abrindo conselheiro!");
+  const modalConselheiro = document.getElementById("conselheiro");
+  modalConselheiro.classList.toggle("is-active");
+
+  let turmaAtual = element.currentTarget.getAttribute("data-turma");
+  localStorage.setItem("turmaAtual", turmaAtual);
 };
 /**
  * Listener para o fechamento do modal
