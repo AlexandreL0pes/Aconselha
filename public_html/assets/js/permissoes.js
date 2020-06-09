@@ -27,14 +27,15 @@ const abrirCoordenador = (element) => {
 const abrirRepresentante = (element) => {
   const modalRepresentante = document.getElementById("representante");
   modalRepresentante.classList.toggle("is-active");
-  
+
   let turmaAtual = element.currentTarget.getAttribute("data-turma");
 
-
   localStorage.setItem("turmaAtual", turmaAtual);
+};
 
-}
-
+const abrirConselheiro = (element) => {
+  console.log("> Abrindo conselheiro!");
+};
 /**
  * Listener para o fechamento do modal
  * @param {*} params
@@ -46,14 +47,13 @@ const closeModal = (params) => {
     closeBtn.addEventListener("click", (evnt) => {
       modal.classList.toggle("is-active");
       localStorage.removeItem("cursoAtual", "");
-      localStorage.removeItem("turmaAtual","");
+      localStorage.removeItem("turmaAtual", "");
     });
     const bgModal = modal.querySelector(".modal-background");
     bgModal.addEventListener("click", (evnt) => {
       modal.classList.toggle("is-active");
       localStorage.removeItem("cursoAtual", "");
-      localStorage.removeItem("turmaAtual","");
-
+      localStorage.removeItem("turmaAtual", "");
     });
   });
 };
@@ -239,9 +239,6 @@ const solicitarCursos = () => {
     });
 };
 
-const abrirConselheiro = (e) => {
-  console.log("Conselheiro");
-};
 const addTurmaCard = (turma) => {
   let card = document.createElement("div");
 
@@ -257,26 +254,32 @@ const addTurmaCard = (turma) => {
   let classCard = "";
   let evento = null;
   let divCards = "";
-
+  let content = `
+  <p class="subtitulo is-7 gray-text">${turma.curso}</p>
+  <p class="subtitulo is-6">${turma.nome}</p>
+`;
   if ("representantes" in turma) {
     classCard = "card-representantes";
     evento = abrirRepresentante;
     divCards = "representantes";
   }
 
-  if ("conselheiros" in turma) {
+  if ("conselheiro" in turma) {
     classCard = "card-conselheiro";
     evento = abrirConselheiro;
     divCards = "conselheiros";
+    let conselheiro = turma.conselheiro.nome || "";
+    content = `
+      <p class="subtitulo is-8 gray-text">${turma.curso}</p>
+      <p class="subtitulo is-7">${conselheiro}</p>
+      <p class="subtitulo is-8 gray-text">${turma.nome}</p>
+    `;
   }
 
   card.classList.add("cardbox", classCard, classCurso);
   card.setAttribute("data-turma", turma.codigo);
 
-  card.innerHTML = `
-    <p class="subtitulo is-7 gray-text">${turma.curso}</p>
-    <p class="subtitulo is-6">${turma.nome}</p>
-  `;
+  card.innerHTML = content;
 
   card.addEventListener("click", (e) => evento(e));
   divCards = document.getElementById(divCards);
@@ -305,7 +308,30 @@ const solicitarRepresentantes = () => {
     });
 };
 
+const solicitarConselheiros = () => {
+  const dados = { acao: "Turmas/listarTurmasConselheiros" };
+
+  sendRequest(dados)
+    .then((response) => {
+      if (response.length > 0) {
+        document.getElementById("conselheiros").innerHTML = "";
+        response.map((conselheiro) => addTurmaCard(conselheiro));
+      } else {
+        const conselheirosDiv = document.getElementById("conselheiros");
+        const msg = document.createElement("div");
+        msg.classList.add("nenhum-resultado");
+        msg.innerHTML = "Nenhum conselheiro foi encontrado!";
+
+        conselheirosDiv.appendChild(msg);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 solicitarCursos();
+solicitarConselheiros();
 solicitarRepresentantes();
 autocompleteCoordenador();
 closeModal();
