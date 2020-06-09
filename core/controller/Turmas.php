@@ -193,16 +193,12 @@ class Turmas
                 $representantes = $r->obterRepresentantes($retornoTurma[Turma::COL_ID]);
                 $representantes = json_decode($representantes, true);
 
-                $conselheiro = $c->obterConselheiro($retornoTurma[Turma::COL_ID]);
-                $conselheiro = json_decode($conselheiro, true);
-
                 $turma = [
                     'codigo' => $retornoTurma[Turma::COL_ID],
                     'nome' => $nome,
                     'curso' => $curso,
                     'codigo_curso' => $retornoTurma[Turma::COL_CURSO],
-                    'representantes' => $representantes,
-                    'conselheiro' => $conselheiro
+                    'representantes' => $representantes
                 ];
 
                 array_push($turmas, $turma);
