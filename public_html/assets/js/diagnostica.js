@@ -178,7 +178,7 @@ const pegarDados = () => {
   });
 
   // TODO: Pegar o ID do Professor que estará logado
-  const professor = localStorage.getItem("professor") || 121415;
+  const professor = localStorage.getItem("professor") || 26873;
   const estudante = localStorage.getItem("aluno") || "";
   const diagnostica = localStorage.getItem("diagnostica") || "";
   const reuniao = localStorage.getItem("conselhoAtual");
