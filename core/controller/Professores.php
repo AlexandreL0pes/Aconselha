@@ -61,7 +61,7 @@ class Professores
     {
 
         // $pessoa = $dados['professor'];
-        $pessoa =  Autenticacao::obterProfessor($dados['token']);
+        $pessoa = Autenticacao::obterProfessor($dados['token']);
         // Obtem todas as turmas de um professor
         $turmas_professor = $this->listarTurmasAtuais(['professor' => $pessoa]);
 
@@ -91,8 +91,8 @@ class Professores
 
     public function obterTurmasProfessor($dados = [])
     {
-
-        $codigos = $this->listarTurmasAtuais($dados);
+        $pessoa = Autenticacao::obterProfessor($dados['token']);
+        $codigos = $this->listarTurmasAtuais(['professor' => $pessoa]);
 
         $t = new Turmas();
         $turmas = [];

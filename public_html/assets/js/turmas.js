@@ -72,10 +72,11 @@ const abrirReuniao = () => {
 };
 
 const solicitarTurmas = () => {
-  const professor = localStorage.getItem("professor") || "121415";
+  // const professor = localStorage.getItem("professor") || "121415";
+  const token = getCookie("token");
   const dados = {
     acao: "Professores/obterTurmasProfessor",
-    professor: professor,
+    token: token,
   };
 
   sendRequest(dados)
