@@ -13,10 +13,13 @@ class Autenticacao
     const COOKIE_ACESSO = "acesso";
     const COOKIE_PERMISSAO = "token";
 
+    const PERMISSAO_RETIRADA = 0;
     const GERENTE = 1;
     const COORDENADOR = 2;
     const PROFESSOR = 3;
-    const REPRESENTANTE = 4;
+    const CONSELHEIRO = 4;
+    const REPRESENTANTE = 5;
+    const VICE_REPRESENTANTE = 6;
 
 
     public static function login($usuario_login, $senha, $lembrar, $criptografar_senha = false)
