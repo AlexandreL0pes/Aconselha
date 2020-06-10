@@ -260,9 +260,13 @@ const preencherModal = (modal, idAluno) => {
  */
 const solicitarDiagnosticas = () => {
   const reuniao = localStorage.getItem("conselhoAtual") || "";
+  const token = getCookie("token");
+  console.log("> Token aqui olha só");
+  console.log(token);
   const dados = {
     acao: "Diagnosticas/listarDiagnosticasMatriculaReuniao",
     reuniao: reuniao,
+    token: token
   };
 
   sendRequest(dados)
