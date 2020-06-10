@@ -129,4 +129,14 @@ class Autenticacao
     {
         return $this->verificarPermissao($token, Autenticacao::CONSELHEIRO);
     }
+
+    public static function obterProfessor($token = null)
+    {
+        $dados = Autenticacao::decodificarToken($token);
+        $dados = (array) $dados;
+
+        $cod_professor = (isset($dados[Usuario::COL_PESSOA])) ? $dados[Usuario::COL_PESSOA] : false;
+
+        return $cod_professor;
+    }
 }
