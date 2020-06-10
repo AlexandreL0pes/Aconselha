@@ -133,7 +133,7 @@ class Autenticacao
     public static function obterProfessor($token = null)
     {
         $dados = Autenticacao::decodificarToken($token);
-        $dados = (array) $dados;
+        $dados = (array) $dados->data;
 
         $cod_professor = (isset($dados[Usuario::COL_PESSOA])) ? $dados[Usuario::COL_PESSOA] : false;
 

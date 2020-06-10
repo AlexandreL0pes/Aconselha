@@ -1,11 +1,10 @@
 import { sendRequest, showMessage, getCookie } from "./utils.js";
 
 const solicitarReunioes = () => {
-  const professor = localStorage.getItem("professor") || "121415";
-
+  const token = getCookie("token");
   const dados = {
     acao: "Professores/listarTurmasReuniao",
-    professor: professor,
+    token: token,
   };
 
   sendRequest(dados)

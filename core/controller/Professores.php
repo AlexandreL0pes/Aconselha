@@ -5,6 +5,7 @@ namespace core\controller;
 
 use core\model\Professor;
 use core\model\Turma;
+use core\sistema\Autenticacao;
 
 class Professores
 {
@@ -59,7 +60,8 @@ class Professores
     public function listarTurmasReuniao($dados = [])
     {
 
-        $pessoa = $dados['professor'];
+        // $pessoa = $dados['professor'];
+        $pessoa =  Autenticacao::obterProfessor($dados['token']);
         // Obtem todas as turmas de um professor
         $turmas_professor = $this->listarTurmasAtuais(['professor' => $pessoa]);
 
