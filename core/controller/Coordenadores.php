@@ -103,7 +103,8 @@ class Coordenadores
 
         $busca = [
             Usuario::COL_CURSO => $curso,
-            'periodo' => 'atual'
+            'periodo' => 'atual',
+            'permissao' => Autenticacao::COORDENADOR
         ];
 
         $coordenador = $usuario->listar(null, $busca, null, 1)[0];
@@ -122,16 +123,15 @@ class Coordenadores
         // TODO: Apenas tirar a permissão de coordenador do usuário, visto que o usuário também pode ser um professor ...
         $coordenador = $this->selecionarCoordenadorAtual($curso);
         $coordenador_id = $coordenador[Usuario::COL_ID];
-        echo "COORDENADOR ATUAL " . $coordenador_id;
         $data_fim = date("Y-m-d");
-        $dados = [
-            Usuario::COL_ID => $coordenador_id,
-            Usuario::COL_DATA_FIM => $data_fim,
-        //     // Usuario::COL_PERMISSAO => null
-        ];
+        // $dados = [
+        //     Usuario::COL_ID => $coordenador_id,
+        //     Usuario::COL_DATA_FIM => $data_fim,
+        // //     // Usuario::COL_PERMISSAO => null
+        // ];
 
-        $usuario = new Usuario();
-        $retorno = $usuario->alterar($dados);
+        // $usuario = new Usuario();
+        // $retorno = $usuario->alterar($dados);
 
         $retorno = $this->delPermissao($coordenador_id);
 
