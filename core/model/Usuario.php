@@ -44,6 +44,7 @@ class Usuario extends CRUD {
             $this->update(self::TABELA, $dados, $where_condicao, $where_valor);
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
+            return false;
         }
 
         return $dados[self::COL_ID];
@@ -105,6 +106,7 @@ class Usuario extends CRUD {
             // echo $this->pegarUltimoSQL();
         } catch (\Throwable $th) {
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
+            return false;
         }
 
         return $retorno;
