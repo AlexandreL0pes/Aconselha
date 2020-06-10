@@ -11,7 +11,12 @@ use core\sistema\Autenticacao;
 class Coordenadores
 {
 
-
+    /**
+     * Cadastra um usuário com privilégios de Coordenador 
+     *
+     * @param $dados
+     * @return json 
+     */
     public function cadastrar($dados)
     {
 
@@ -38,6 +43,8 @@ class Coordenadores
             Usuario::COL_PESSOA => $pessoa
         ]);
 
+        // Salvar aqui a permissao do coordenador
+
         if ($retorno > 0) {
             http_response_code(200);
             return json_encode(array('message' => "O coordenador foi cadastrado!"));
@@ -47,6 +54,11 @@ class Coordenadores
         }
     }
 
+    /**
+     * Altera as credenciais de um usuário com permissão de Coordenador 
+     * @param $dados
+     * @return json
+     */
     public function alterar($dados)
     {
         $coordenador = $dados['coordenador'];
@@ -76,6 +88,12 @@ class Coordenadores
         }
     }
 
+    /**
+     * Obtem os dados de um Coornenador, com base no curso 
+     *
+     * @param $curso
+     * @return array
+     */
     public function selecionarCoordenadorAtual($curso)
     {
         $usuario = new Usuario();
@@ -89,8 +107,17 @@ class Coordenadores
         return $coordenador;
     }
 
+    /**
+     * Desabilita o coordenador colocando uma data fim para o usuário
+     * Assim, tal usuário não é mais capaz de logar no sistema 
+     *
+     * @param $usuario_id
+     * @param $acesso_id
+     * @return bool
+     */
     private function desabilitarCoordenador($curso)
     {
+        // TODO: Apenas tirar a permissão de coordenador do usuário, visto que o usuário também pode ser um professor ...
         $coordenador = $this->selecionarCoordenadorAtual($curso);
 
         $coordenador_id = $coordenador[Usuario::COL_ID];
@@ -98,7 +125,7 @@ class Coordenadores
         $dados = [
             Usuario::COL_ID => $coordenador_id,
             Usuario::COL_DATA_FIM => $data_fim,
-            Usuario::COL_PERMISSAO => null
+            // Usuario::COL_PERMISSAO => null
         ];
 
         $usuario = new Usuario();
@@ -107,9 +134,14 @@ class Coordenadores
         return $retorno;
     }
 
+    /**
+     * Atualiza um coordenador de curso, desabilitando o antigo
+     *
+     * @param $dados
+     * @return json
+     */
     public function atualizarCoordenador($dados)
     {
-
         $curso_id = $dados['curso'];
         $resultado = $this->desabilitarCoordenador($curso_id);
 
@@ -131,7 +163,12 @@ class Coordenadores
         }
     }
 
-
+    /**
+     * Altera a senha de um usuário 
+     *
+     * @param $dados
+     * @return json
+     */
     public function alterarSenha($dados)
     {
         $curso = $dados['curso'];
@@ -157,6 +194,12 @@ class Coordenadores
         }
     }
 
+    /**
+     * Obtem as informações de um usuário coordenador 
+     *
+     * @param $dados
+     * @return json
+     */
     public function selecionarCoordenador($dados)
     {
 
@@ -182,6 +225,13 @@ class Coordenadores
         }
     }
 
+
+    /**
+     * Obtem as informações de um usuário coordenador atual, com base no curso 
+     *
+     * @param $cod_curso Código do curso
+     * @return json
+     */
     public function obterInfoCoordenadorAtual($cod_curso)
     {
         $coordenador = $this->selecionarCoordenadorAtual($cod_curso);
@@ -195,6 +245,12 @@ class Coordenadores
         return $coordenador;
     }
 
+    /**
+     * Obtem o curso do coordenador, com base na token de acesso 
+     *
+     * @param $dados
+     * @return json
+     */
     public function obterCurso($dados)
     {
         $token = $dados['token'];
@@ -212,6 +268,12 @@ class Coordenadores
         }
     }
 
+    /**
+     * Obtem todas as informações de um usuário coordenador atual, com base no curso 
+     *
+     * @param $cod_curso Código do curso
+     * @return json
+     */
     public function obterCoordenadorCurso($dados)
     {
 
