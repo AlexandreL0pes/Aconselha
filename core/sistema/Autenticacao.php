@@ -3,6 +3,7 @@
 
 namespace core\sistema;
 
+use core\model\Permissao;
 use core\model\Usuario;
 use \Firebase\JWT\JWT;
 
@@ -32,6 +33,13 @@ class Autenticacao
         $resultado = $usuario->autenticarUsuario($usuario_login, $nova_senha);
 
 
+        if ($resultado) {
+            $p = new Permissao();
+            $permissao = $p->obterPermissoes($resultado[Usuario::COL_ID])[0];
+            $permissao = $permissao[Permissao::COL_ACESSO];
+        }
+
+
         if (count($resultado) > 0) {
 
             // Define a duração do token
@@ -43,7 +51,7 @@ class Autenticacao
             $retorno = Autenticacao::codificarToken($resultado, $validade_token);
 
             // print_r($resultado);
-            return array('jwt' => $retorno, 'expireAt' => $validade_token, 'type' => $resultado[Usuario::COL_PERMISSAO]);
+            return array('jwt' => $retorno, 'expireAt' => $validade_token, 'type' => $permissao);
         } else {
             return false;
         }
@@ -57,7 +65,6 @@ class Autenticacao
         if ($jwt) {
             return (array) $jwt->data;
         }
-
         return false;
     }
 
