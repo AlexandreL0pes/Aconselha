@@ -117,4 +117,9 @@ class Autenticacao
 
         return $jwt;
     }
+
+    public function isCoordenador($token = null)
+    {
+        return $this->verificarPermissao($token, Autenticacao::CONSELHEIRO);
+    }
 }
