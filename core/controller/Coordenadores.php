@@ -4,6 +4,7 @@
 namespace core\controller;
 
 use core\model\Curso;
+use core\model\Permissao;
 use core\model\Servidor;
 use core\model\Usuario;
 use core\sistema\Autenticacao;
@@ -44,8 +45,9 @@ class Coordenadores
         ]);
 
         // Salvar aqui a permissao do coordenador
+        $permissao = $this->addPermissao($retorno);
 
-        if ($retorno > 0) {
+        if ($retorno > 0 && $permissao) {
             http_response_code(200);
             return json_encode(array('message' => "O coordenador foi cadastrado!"));
         } else {
@@ -296,5 +298,22 @@ class Coordenadores
 
         http_response_code(200);
         return json_encode($retorno);
+    }
+
+    /**
+     * Adiciona ao usuário a permissão de Coordenador
+     * 
+     * @param $usuario_id
+     * @return bool
+     */
+
+    public function addPermissao($usuario_id)
+    {
+        if (!isset($usuario_id)) {
+            throw new \Exception("É necessário informar o id do usuário");
+        }
+        $permissao = new Permissao();
+        $resultado = $permissao->adicionar($usuario_id, Autenticacao::COORDENADOR);
+        return $resultado;
     }
 }
