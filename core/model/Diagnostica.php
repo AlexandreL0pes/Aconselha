@@ -64,9 +64,15 @@ class Diagnostica extends CRUD
                 $where_condicao .= " AND " . self::COL_ID . " = ? ";
                 $where_valor[] = $busca[self::COL_ID];
             }
+
             if (isset($busca[self::COL_ID_REUNIAO]) && !empty($busca[self::COL_ID_REUNIAO])) {
                 $where_condicao .= " AND Diagnostica." . self::COL_ID_REUNIAO . " = ? ";
                 $where_valor[] = $busca[self::COL_ID_REUNIAO];
+            }
+
+            if (isset($busca[self::COL_PROFESSOR]) && !empty($busca[self::COL_PROFESSOR])) {
+                $where_condicao .= " AND " . self::COL_PROFESSOR . " = ? ";
+                $where_valor[] = $busca[self::COL_PROFESSOR];
             }
 
             if (isset($busca['relevantes']) && !empty($busca['relevantes'])) {

@@ -6,6 +6,7 @@ namespace core\controller;
 use core\model\Analise;
 use core\model\Diagnostica;
 use core\model\Perfil;
+use core\sistema\Autenticacao;
 
 class Diagnosticas
 {
@@ -214,6 +215,12 @@ class Diagnosticas
         $reuniao_id = $dados['reuniao'];
         $campos = Diagnostica::COL_ID . ", " . Diagnostica::COL_ESTUDANTE;
         $busca = [Diagnostica::COL_ID_REUNIAO => $reuniao_id];
+
+        $cod_professor = Autenticacao::obterProfessor($dados['token']);
+
+        if ($cod_professor) {
+            $busca[Diagnostica::COL_PROFESSOR] = $cod_professor;
+        }
 
         $diagnostica = new Diagnostica();
 
