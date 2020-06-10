@@ -8,6 +8,7 @@ use core\model\Permissao;
 use core\model\Servidor;
 use core\model\Usuario;
 use core\sistema\Autenticacao;
+use \Exception;
 
 class Coordenadores
 {
@@ -113,7 +114,6 @@ class Coordenadores
      * Desabilita o coordenador colocando uma data fim para o usuário
      * Assim, tal usuário não é mais capaz de logar no sistema 
      *
-     * @param $usuario_id
      * @param $acesso_id
      * @return bool
      */
@@ -121,17 +121,19 @@ class Coordenadores
     {
         // TODO: Apenas tirar a permissão de coordenador do usuário, visto que o usuário também pode ser um professor ...
         $coordenador = $this->selecionarCoordenadorAtual($curso);
-
         $coordenador_id = $coordenador[Usuario::COL_ID];
+        echo "COORDENADOR ATUAL " . $coordenador_id;
         $data_fim = date("Y-m-d");
         $dados = [
             Usuario::COL_ID => $coordenador_id,
             Usuario::COL_DATA_FIM => $data_fim,
-            // Usuario::COL_PERMISSAO => null
+        //     // Usuario::COL_PERMISSAO => null
         ];
 
         $usuario = new Usuario();
         $retorno = $usuario->alterar($dados);
+
+        $retorno = $this->delPermissao($coordenador_id);
 
         return $retorno;
     }
@@ -148,7 +150,7 @@ class Coordenadores
         $resultado = $this->desabilitarCoordenador($curso_id);
 
 
-        if ($resultado > 0) {
+        if ($resultado) {
             $retorno = $this->cadastrar([
                 'curso' => $dados['curso'],
                 'senha' => $dados['senha'],
@@ -310,10 +312,28 @@ class Coordenadores
     public function addPermissao($usuario_id)
     {
         if (!isset($usuario_id)) {
-            throw new \Exception("É necessário informar o id do usuário");
+            throw new Exception("É necessário informar o id do usuário");
         }
         $permissao = new Permissao();
         $resultado = $permissao->adicionar($usuario_id, Autenticacao::COORDENADOR);
+        return $resultado;
+    }
+
+    /**
+     * Remove a permissão de coordenador de um usuário
+     * 
+     * @param $usuario_id
+     * @return bool
+     */
+
+    public function delPermissao($usuario_id)
+    {
+        if (!isset($usuario_id)) {
+            throw new Exception("É necessário informar o usuário");
+        }
+
+        $p = new Permissao();
+        $resultado = $p->remover($usuario_id, Autenticacao::COORDENADOR);
         return $resultado;
     }
 }
