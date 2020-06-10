@@ -80,4 +80,14 @@ class Permissao extends CRUD
         // Caso o retorno não esteja vazio, o usuário tem o acesso especificado
         return !empty($retorno);
     }
+
+    public function obterPermissoes($usuario_id = null)
+    {
+        $where_condicao = self::COL_USUARIO . " = ? ";
+        $where_valor[] = $usuario_id;
+
+        $retorno = $this->read(null, self::TABELA, self::COL_ACESSO, $where_condicao, $where_valor, null, self::COL_ACESSO . " DESC ", null);
+
+        return $retorno;
+    }
 }
