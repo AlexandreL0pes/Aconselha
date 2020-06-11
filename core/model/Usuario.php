@@ -104,6 +104,11 @@ class Usuario extends CRUD
                 self::COL_ID . " = " . Permissao::COL_USUARIO;
         }
 
+        if (isset($busca[self::COL_PESSOA]) && !empty($busca[self::COL_PESSOA])) {
+            $where_condicao .= " AND " . self::COL_PESSOA . " = ? ";
+            $where_valor[] = $busca[self::COL_PESSOA];
+        }
+
         $retorno = [];
 
         try {
