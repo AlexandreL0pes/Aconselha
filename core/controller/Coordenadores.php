@@ -30,7 +30,7 @@ class Coordenadores
         $matricula = $dados['email'];
 
 
-        
+
         $u = new Usuario();
 
         // Verifica se já existe um usuário da pessoa
@@ -177,13 +177,12 @@ class Coordenadores
      */
     public function alterarSenha($dados)
     {
-        $curso = $dados['curso'];
-        $email = $dados['email'];
+        $usuario = $dados['codigo'];
 
-        $coordenador = $this->selecionarCoordenadorAtual($curso);
+        // $coordenador = $this->selecionarCoordenadorAtual($curso);
 
         $data = array(
-            Usuario::COL_ID => $coordenador[Usuario::COL_ID],
+            Usuario::COL_ID => $usuario,
             Usuario::COL_MATRICULA => $dados['email'],
             Usuario::COL_SENHA => $dados['senha']
         );
@@ -332,7 +331,6 @@ class Coordenadores
      * @param $usuario_id
      * @return bool
      */
-
     public function delPermissao($usuario_id)
     {
         if (!isset($usuario_id)) {
