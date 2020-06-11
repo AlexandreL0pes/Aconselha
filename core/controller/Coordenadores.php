@@ -314,11 +314,11 @@ class Coordenadores
             throw new Exception("É necessário informar o id do usuário");
         }
         $resultado = true;
-        $permissao = new Permissao();
-        
+        $p = new Permissao();
+
         // Verifica se o usuário já tem a permissão
-        if ($permissao->verificarPermissao($usuario_id, Autenticacao::COORDENADOR)) {
-            $resultado = $permissao->adicionar($usuario_id, Autenticacao::COORDENADOR);
+        if ($p->verificarPermissao($usuario_id, Autenticacao::COORDENADOR)) {
+            $resultado = $p->adicionar($usuario_id, Autenticacao::COORDENADOR);
         }
         return $resultado;
     }
@@ -335,9 +335,12 @@ class Coordenadores
         if (!isset($usuario_id)) {
             throw new Exception("É necessário informar o usuário");
         }
-        
+
+        $resultado = true;
         $p = new Permissao();
-        $resultado = $p->remover($usuario_id, Autenticacao::COORDENADOR);
+        if ($p->verificarPermissao($usuario_id, Autenticacao::COORDENADOR)) {
+            $resultado = $p->remover($usuario_id, Autenticacao::COORDENADOR);
+        }
         return $resultado;
     }
 
