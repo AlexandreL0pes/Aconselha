@@ -33,6 +33,7 @@ class Conselheiros
 
     public function selecionarConselheiroAtual($turma)
     {
+        // $turma = '20201.03AGP10I.1A';
         $usuario = new Usuario();
 
         $campos = Usuario::COL_ID . ", " .
@@ -40,7 +41,7 @@ class Conselheiros
             Usuario::COL_PESSOA;
         $busca = [
             Usuario::COL_TURMA => $turma,
-            Usuario::COL_PERMISSAO => Autenticacao::PROFESSOR,
+            'permissao' => Autenticacao::PROFESSOR,
             'periodo' => 'atual'
         ];
 
