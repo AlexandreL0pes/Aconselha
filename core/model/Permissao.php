@@ -72,7 +72,7 @@ class Permissao extends CRUD
         $where_valor = [$usuario_id, $acesso_id];
 
         try {
-            $retorno = ($this->read(self::TABELA, $where_condicao, $where_valor))[0];
+            $retorno = ($this->read(null, self::TABELA, null, $where_condicao, $where_valor))[0];
         } catch (\Throwable $th) {
             echo "Mensage: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
         }
