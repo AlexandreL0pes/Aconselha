@@ -30,6 +30,7 @@ class Coordenadores
         $matricula = $dados['email'];
 
 
+        
         $u = new Usuario();
 
         // Verifica se já existe um usuário da pessoa
@@ -39,9 +40,13 @@ class Coordenadores
 
         // Caso o usuário exista
         if ($usuario) {
-            if ($this->verificarPermissao($usuario)) {
-                $permissao = $this->addPermissao($usuario);
-            }
+            $permissao = $this->addPermissao($usuario);
+            $usuario = $u->alterar([
+                Usuario::COL_ID => $usuario,
+                Usuario::COL_MATRICULA => $matricula,
+                Usuario::COL_CURSO => $curso,
+                Usuario::COL_SENHA => $senha
+            ]);
         } else {
             // Caso o usuário não exista
             $usuario = $u->adicionar([
@@ -52,9 +57,7 @@ class Coordenadores
                 Usuario::COL_PESSOA => $pessoa
             ]);
 
-            if ($usuario) {
-                $permissao = $this->addPermissao($usuario);
-            }
+            $permissao = $this->addPermissao($usuario);
         }
 
         if ($usuario > 0 && $permissao) {
@@ -317,7 +320,7 @@ class Coordenadores
         $p = new Permissao();
 
         // Verifica se o usuário já tem a permissão
-        if ($p->verificarPermissao($usuario_id, Autenticacao::COORDENADOR)) {
+        if (!$p->verificarPermissao($usuario_id, Autenticacao::COORDENADOR)) {
             $resultado = $p->adicionar($usuario_id, Autenticacao::COORDENADOR);
         }
         return $resultado;
@@ -338,7 +341,7 @@ class Coordenadores
 
         $resultado = true;
         $p = new Permissao();
-        if ($p->verificarPermissao($usuario_id, Autenticacao::COORDENADOR)) {
+        if (!$p->verificarPermissao($usuario_id, Autenticacao::COORDENADOR)) {
             $resultado = $p->remover($usuario_id, Autenticacao::COORDENADOR);
         }
         return $resultado;
