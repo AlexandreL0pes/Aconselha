@@ -242,10 +242,14 @@ class Coordenadores
         $coordenador = $this->selecionarCoordenadorAtual($cod_curso);
 
         if (!empty($coordenador)) {
+
+            $s = new Servidores();
+            $servidor = $s->selecionarServidor($coordenador[Usuario::COL_PESSOA]);
             $coordenador = [
                 'id' => $coordenador['id'],
                 'login' => $coordenador[Usuario::COL_MATRICULA],
-                'pessoa' => $coordenador[Usuario::COL_PESSOA]
+                'pessoa' => $coordenador[Usuario::COL_PESSOA],
+                'nome' => $servidor['nome']
             ];
         } else {
             $coordenador = [];
