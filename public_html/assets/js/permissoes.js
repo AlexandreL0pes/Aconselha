@@ -11,6 +11,10 @@ import { sendRequest, showMessage } from "./utils.js";
 const btnSalvarCoordenador = document.querySelector(".salvar-coordenador");
 btnSalvarCoordenador.addEventListener("click", (e) => salvarCoordenador(e));
 
+/**
+ * Abre o modal com as informações do coordenador 
+ * @param {DOM element} element Card de coordenador clicado
+ */
 const abrirCoordenador = (element) => {
   let curso = element.currentTarget.getAttribute("data-curso");
   let coordenadorAtual = element.currentTarget.getAttribute("data-coordenador");
@@ -24,6 +28,10 @@ const abrirCoordenador = (element) => {
   modalCoordenador.classList.toggle("is-active");
 };
 
+/**
+ * Abre o modal com as informações do representante
+ * @param {DOM element} element Card de representante clicado   
+ */
 const abrirRepresentante = (element) => {
   const modalRepresentante = document.getElementById("representante");
   modalRepresentante.classList.toggle("is-active");
@@ -33,6 +41,10 @@ const abrirRepresentante = (element) => {
   localStorage.setItem("turmaAtual", turmaAtual);
 };
 
+/**
+ * Abre o modal com as informações do conselheiro
+ * @param {DOM element} element Card de conselheiro clicado
+ */
 const abrirConselheiro = (element) => {
   console.log("> Abrindo conselheiro!");
   const modalConselheiro = document.getElementById("conselheiro");
@@ -42,6 +54,7 @@ const abrirConselheiro = (element) => {
   localStorage.setItem("turmaAtual", turmaAtual);
   console.log(turmaAtual);
 };
+
 /**
  * Listener para o fechamento do modal
  * @param {*} params
@@ -64,6 +77,9 @@ const closeModal = (params) => {
   });
 };
 
+/**
+ * Listener para listar as sugestões de coordenadores
+ */
 let autocompleteCoordenador = () => {
   var api = function (inputValue) {
     const dados = { acao: "Servidores/listarServidores" };
@@ -97,6 +113,10 @@ let autocompleteCoordenador = () => {
   bulmahead("coordenador", "coordenador-menu", api, onSelect, 200);
 };
 
+/**
+ * Dispara a requisição para salvar o coordenador
+ * @param {*} e 
+ */
 const salvarCoordenador = (e) => {
   console.log("> Salvando Coordenador");
 
@@ -146,6 +166,9 @@ const salvarCoordenador = (e) => {
   }
 };
 
+/**
+ * Função para obtenção dos dados do coordenador
+ */
 const pegarDados = () => {
   const coordenadorNovo = document
     .getElementById("coordenador")
@@ -193,6 +216,10 @@ const pegarDados = () => {
   return dados;
 };
 
+/**
+ * Adiciona um card de curso na tela    
+ * @param {JSON} curso  
+ */
 const addCursoCard = (curso) => {
   let card = document.createElement("div");
 
@@ -224,6 +251,9 @@ const addCursoCard = (curso) => {
   coordenadoresDiv.appendChild(card);
 };
 
+/**
+ * Requisição para obter os cursos
+ */
 const solicitarCursos = () => {
   const dados = { acao: "Cursos/listarCursos" };
   sendRequest(dados)
@@ -245,6 +275,10 @@ const solicitarCursos = () => {
     });
 };
 
+/**
+ * Adiciona um card de turma na tela
+ * @param {JSON} turma 
+ */
 const addTurmaCard = (turma) => {
   let card = document.createElement("div");
 
@@ -292,6 +326,9 @@ const addTurmaCard = (turma) => {
   divCards.appendChild(card);
 };
 
+/**
+ * Requisição para obter os representantes
+ */
 const solicitarRepresentantes = () => {
   const dados = { acao: "Turmas/listarTurmasLideres" };
 
@@ -314,6 +351,9 @@ const solicitarRepresentantes = () => {
     });
 };
 
+/**
+ * Requisição para obter os conselheiros
+ */
 const solicitarConselheiros = () => {
   const dados = { acao: "Turmas/listarTurmasConselheiros" };
 
