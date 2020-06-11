@@ -12,7 +12,7 @@ const btnSalvarCoordenador = document.querySelector(".salvar-coordenador");
 btnSalvarCoordenador.addEventListener("click", (e) => salvarCoordenador(e));
 
 /**
- * Abre o modal com as informações do coordenador 
+ * Abre o modal com as informações do coordenador
  * @param {DOM element} element Card de coordenador clicado
  */
 const abrirCoordenador = (element) => {
@@ -29,31 +29,33 @@ const abrirCoordenador = (element) => {
 
   const dados = {
     acao: "Coordenadores/selecionarCoordenador",
-    curso: curso
+    curso: curso,
   };
 
-  sendRequest(dados).then((response) => {
-    console.log(response);
-    preencherCoordenador(response.coordenador, response.curso);
-  }).catch((err) => {
-    console.error(err);
-  });
+  sendRequest(dados)
+    .then((response) => {
+      console.log(response);
+      preencherCoordenador(response.coordenador, response.curso);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 const preencherCoordenador = (coordenador, curso) => {
-  const coordenadorInput = document.getElementById("coordenador");
-  coordenadorInput.value =  coordenador.nome;
-  coordenadorInput.setAttribute("data-coordenador", coordenador.pessoa);
+  if (coordenador.length != 0) {
+    const coordenadorInput = document.getElementById("coordenador");
+    coordenadorInput.value = coordenador.nome;
+    coordenadorInput.setAttribute("data-coordenador", coordenador.pessoa);
 
-  document.getElementById("email-coordenador").value = coordenador.login;
-
+    document.getElementById("email-coordenador").value = coordenador.login;
+  }
   document.getElementById("coordenacao-curso").innerHTML = curso.nome;
-
-}
+};
 
 /**
  * Abre o modal com as informações do representante
- * @param {DOM element} element Card de representante clicado   
+ * @param {DOM element} element Card de representante clicado
  */
 const abrirRepresentante = (element) => {
   const modalRepresentante = document.getElementById("representante");
@@ -138,7 +140,7 @@ let autocompleteCoordenador = () => {
 
 /**
  * Dispara a requisição para salvar o coordenador
- * @param {*} e 
+ * @param {*} e
  */
 const salvarCoordenador = (e) => {
   console.log("> Salvando Coordenador");
@@ -240,8 +242,8 @@ const pegarDados = () => {
 };
 
 /**
- * Adiciona um card de curso na tela    
- * @param {JSON} curso  
+ * Adiciona um card de curso na tela
+ * @param {JSON} curso
  */
 const addCursoCard = (curso) => {
   let card = document.createElement("div");
@@ -300,7 +302,7 @@ const solicitarCursos = () => {
 
 /**
  * Adiciona um card de turma na tela
- * @param {JSON} turma 
+ * @param {JSON} turma
  */
 const addTurmaCard = (turma) => {
   let card = document.createElement("div");
