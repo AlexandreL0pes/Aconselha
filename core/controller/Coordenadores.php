@@ -22,33 +22,42 @@ class Coordenadores
     public function cadastrar($dados)
     {
 
-        // print_r($dados);
 
         $curso = $dados['curso'];
         $data_inicio = date('Y-m-d');
-        $permissao = Autenticacao::COORDENADOR;
         $senha = $dados['senha'];
         $pessoa = $dados['coordenador'];
         $matricula = $dados['email'];
 
-        // $matricula = (isset($servidor[Servidor::COL_EMAIL])) ? $servidor[Servidor::COL_EMAIL] : "";
 
-        $usuario = new Usuario();
+        $u = new Usuario();
 
+        // Verifica se já existe um usuário da pessoa
+        $usuario = $this->verificarUsuarioExistente($pessoa);
 
-        $retorno = $usuario->adicionar([
-            Usuario::COL_MATRICULA => $matricula,
-            Usuario::COL_CURSO => $curso,
-            Usuario::COL_DATA_INICIO => $data_inicio,
-            Usuario::COL_PERMISSAO => $permissao,
-            Usuario::COL_SENHA => $senha,
-            Usuario::COL_PESSOA => $pessoa
-        ]);
+        $permissao = true;
 
-        // Salvar aqui a permissao do coordenador
-        $permissao = $this->addPermissao($retorno);
+        // Caso o usuário exista
+        if ($usuario) {
+            if ($this->verificarPermissao($usuario)) {
+                $permissao = $this->addPermissao($usuario);
+            }
+        } else {
+            // Caso o usuário não exista
+            $usuario = $u->adicionar([
+                Usuario::COL_MATRICULA => $matricula,
+                Usuario::COL_CURSO => $curso,
+                Usuario::COL_DATA_INICIO => $data_inicio,
+                Usuario::COL_SENHA => $senha,
+                Usuario::COL_PESSOA => $pessoa
+            ]);
 
-        if ($retorno > 0 && $permissao) {
+            if ($usuario) {
+                $permissao = $this->addPermissao($usuario);
+            }
+        }
+
+        if ($usuario > 0 && $permissao) {
             http_response_code(200);
             return json_encode(array('message' => "O coordenador foi cadastrado!"));
         } else {
@@ -122,7 +131,7 @@ class Coordenadores
     {
         $coordenador = $this->selecionarCoordenadorAtual($curso);
         $coordenador_id = $coordenador[Usuario::COL_ID];
-        
+
         $retorno = $this->delPermissao($coordenador_id);
 
         return $retorno;
@@ -304,8 +313,13 @@ class Coordenadores
         if (!isset($usuario_id)) {
             throw new Exception("É necessário informar o id do usuário");
         }
+        $resultado = true;
         $permissao = new Permissao();
-        $resultado = $permissao->adicionar($usuario_id, Autenticacao::COORDENADOR);
+        
+        // Verifica se o usuário já tem a permissão
+        if ($permissao->verificarPermissao($usuario_id, Autenticacao::COORDENADOR)) {
+            $resultado = $permissao->adicionar($usuario_id, Autenticacao::COORDENADOR);
+        }
         return $resultado;
     }
 
@@ -321,9 +335,36 @@ class Coordenadores
         if (!isset($usuario_id)) {
             throw new Exception("É necessário informar o usuário");
         }
-
+        
         $p = new Permissao();
         $resultado = $p->remover($usuario_id, Autenticacao::COORDENADOR);
         return $resultado;
+    }
+
+    /**
+     * Verifica a existência de um usuário e caso exista, retorna o id do usuário
+     *
+     * @param  mixed $cod_pessoa
+     * @return void
+     */
+    public function verificarUsuarioExistente($cod_pessoa = null)
+    {
+        if ($cod_pessoa == null) {
+            throw new Exception("É necessário informar o COD_PESSOA");
+        }
+
+        $campos = Usuario::COL_ID;
+        $busca = [
+            Usuario::COL_PESSOA => $cod_pessoa
+        ];
+
+        $u = new Usuario();
+        $usuario = $u->listar($campos, $busca, null, 1)[0];
+
+        if (!empty($usuario)) {
+            return $usuario[Usuario::COL_ID];
+        }
+
+        return false;
     }
 }
