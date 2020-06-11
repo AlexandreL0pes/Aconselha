@@ -26,7 +26,30 @@ const abrirCoordenador = (element) => {
 
   const modalCoordenador = document.getElementById("modal-coordenador");
   modalCoordenador.classList.toggle("is-active");
+
+  const dados = {
+    acao: "Coordenadores/selecionarCoordenador",
+    curso: curso
+  };
+
+  sendRequest(dados).then((response) => {
+    console.log(response);
+    preencherCoordenador(response.coordenador, response.curso);
+  }).catch((err) => {
+    console.error(err);
+  });
 };
+
+const preencherCoordenador = (coordenador, curso) => {
+  const coordenadorInput = document.getElementById("coordenador");
+  coordenadorInput.value =  coordenador.nome;
+  coordenadorInput.setAttribute("data-coordenador", coordenador.pessoa);
+
+  document.getElementById("email-coordenador").value = coordenador.login;
+
+  document.getElementById("coordenacao-curso").innerHTML = curso.nome;
+
+}
 
 /**
  * Abre o modal com as informações do representante
