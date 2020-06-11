@@ -83,12 +83,6 @@ class Usuario extends CRUD
             $where_valor[] = $busca[self::COL_CURSO];
         }
 
-        if (isset($busca[self::COL_PERMISSAO]) && !empty($busca[self::COL_PERMISSAO])) {
-            $where_condicao .= " AND " . self::COL_PERMISSAO . " = ?";
-            $where_valor[] = $busca[self::COL_PERMISSAO];
-        }
-
-
         if (isset($busca['periodo']) && !empty($busca['periodo'])) {
             if ($busca['periodo'] == "atual") {
 
