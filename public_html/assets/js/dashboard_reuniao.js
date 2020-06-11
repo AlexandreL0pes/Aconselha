@@ -76,6 +76,8 @@ const fecharDiagnostica = () => {
 const fecharExperiencia = () => {
   const modalExperiencia = document.getElementById("visualizar-experiencia");
   modalExperiencia.classList.toggle("is-active");
+
+  const disciplinasChips = (modalExperiencia.querySelector(".disciplinas .chips").innerHTML = "");
 };
 
 /**

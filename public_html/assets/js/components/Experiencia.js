@@ -146,12 +146,37 @@ const gerarDisciplinasChip = (disciplinas) => {
     chips.appendChild(chip);
   } else if (disciplinas.length <= QTD_PREVIA) {
     disciplinas.map((disciplina) => {
-      const chip = gerarChips(disciplina.nome);
+      let nome = disciplina.nome;
+      if (disciplina.nome.length >= 20) {
+        let palavras = disciplina.nome.split(" ");
+        let filtradas = palavras
+          .map((p) => {
+            if (p.length >= 3) {
+              return p.substr(0, 1);
+            }
+          })
+          .filter((p) => p != null);
+        nome = filtradas.join(".");
+      }
+      const chip = gerarChips(nome);
       chips.appendChild(chip);
     });
   } else if (disciplinas.length > QTD_PREVIA) {
     for (let index = 0; index < QTD_PREVIA; index++) {
-      const chip = gerarChips(disciplinas[index].nome);
+      let nome = disciplinas[index].nome;
+      if (disciplinas[index].nome.length >= 20) {
+        let palavras = disciplinas[index].nome.split(" ");
+        let filtradas = palavras
+          .map((p) => {
+            if (p.length >= 3) {
+              return p.substr(0, 1);
+            }
+          })
+          .filter((p) => p != null);
+
+        nome = filtradas.join(".");
+      }
+      const chip = gerarChips(nome);
       chips.appendChild(chip);
     }
     const chip = gerarChips(`+${disciplinas.length - QTD_PREVIA}`);
@@ -281,7 +306,7 @@ const preencherExperiencia = (experiencia) => {
 
   categoria.classList.add(classeClassificacao);
   categoria.innerHTML = experiencia.classificacao.nome;
-  
+
   observacao.innerHTML = experiencia.descricao;
 
   experiencia.disciplinas.map((disciplina) => {
