@@ -241,12 +241,15 @@ class Coordenadores
     {
         $coordenador = $this->selecionarCoordenadorAtual($cod_curso);
 
-        $coordenador = [
-            'id' => $coordenador['id'],
-            'login' => $coordenador[Usuario::COL_MATRICULA],
-            'pessoa' => $coordenador[Usuario::COL_PESSOA]
-        ];
-
+        if (!empty($coordenador)) {
+            $coordenador = [
+                'id' => $coordenador['id'],
+                'login' => $coordenador[Usuario::COL_MATRICULA],
+                'pessoa' => $coordenador[Usuario::COL_PESSOA]
+            ];
+        } else {
+            $coordenador = [];
+        }
         return $coordenador;
     }
 
