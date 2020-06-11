@@ -41,7 +41,7 @@ class Conselheiros
             Usuario::COL_PESSOA;
         $busca = [
             Usuario::COL_TURMA => $turma,
-            'permissao' => Autenticacao::PROFESSOR,
+            'permissao' => Autenticacao::CONSELHEIRO,
             'periodo' => 'atual'
         ];
 
