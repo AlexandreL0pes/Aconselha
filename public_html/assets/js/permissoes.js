@@ -149,46 +149,35 @@ const salvarCoordenador = (e) => {
 
   console.log(dados);
 
-  if (
-    dados.acao !== "Coordenadores/alterarSenha" &&
-    dados.coordenador == null
-  ) {
+  if (dados.coordenador == null) {
     showMessage(
       "Confira seus dados!",
-      "É necessário informar o novo coordenador.",
+      "É necessário informar o novo coordenador",
       "warning",
       4000
     );
+    return false;
   }
 
-  if (dados.curso != "") {
-    sendRequest(dados)
-      .then((response) => {
-        console.log(response);
-        showMessage(
-          "Deu certo!",
-          "O coordenador foi alterado com sucesso!",
-          "success",
-          4000
-        );
-      })
-      .catch((err) => {
-        console.error(err);
-        showMessage(
-          "Houve um erro",
-          "Não foi possível salvar o coordenador, verifique os dados.",
-          "warning",
-          400
-        );
-      });
-  } else {
-    showMessage(
-      "Confira seus dados!",
-      "Existe algum erro no formulário!",
-      "warning",
-      4000
-    );
-  }
+  sendRequest(dados)
+    .then((response) => {
+      console.log(response);
+      showMessage(
+        "Deu certo!",
+        "As alterações foram realizadas com sucesso!",
+        "success",
+        4000
+      );
+    })
+    .catch((err) => {
+      console.error(err);
+      showMessage(
+        "Houve um erro",
+        "Não foi possível salvar as alterações, verifique os dados.",
+        "warning",
+        400
+      );
+    });
 };
 
 /**
@@ -261,7 +250,7 @@ const addCursoCard = (curso) => {
   card.setAttribute("data-curso", curso.codigo);
 
   let texto = curso.coordenador.nome || "";
-  let codigoCoordenador = curso.coordenador.codigo || "";
+  let codigoCoordenador = curso.coordenador.pessoa || "";
 
   card.setAttribute("data-coordenador", codigoCoordenador);
 
