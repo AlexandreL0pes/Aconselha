@@ -302,7 +302,8 @@ class Coordenadores
             $servidor = $s->selecionarServidor($coordenador[Usuario::COL_PESSOA]);
             $retorno = [
                 'codigo' => $coordenador[Usuario::COL_ID],
-                'nome' => $servidor['nome']
+                'nome' => $servidor['nome'],
+                'pessoa' => $servidor[Usuario::COL_PESSOA]
             ];
         }
 
