@@ -91,7 +91,7 @@ const abrirConselheiro = (element) => {
   console.log(turmaAtual);
 };
 
-const fecharRepresentante = () => {};
+const fecharConselheiro = () => {};
 
 /**
  * Listener para o fechamento do modal
@@ -107,14 +107,14 @@ const closeModal = (params) => {
   let bgModal = modalCoordenador.querySelector(".modal-background");
   bgModal.addEventListener("click", (event) => fecharCoordenador);
 
-  let closeBtn = modalConselheiro.querySelector(".modal-close-btn");
+  closeBtn = modalConselheiro.querySelector(".modal-close-btn");
   closeBtn.addEventListener("click", (event) => fecharConselheiro);
-  let bgModal = modalConselheiro.querySelector(".modal-background");
+  bgModal = modalConselheiro.querySelector(".modal-background");
   bgModal.addEventListener("click", (event) => fecharConselheiro);
 
-  let closeBtn = modalRepresentante.querySelector(".modal-close-btn");
+  closeBtn = modalRepresentante.querySelector(".modal-close-btn");
   closeBtn.addEventListener("click", (event) => fecharRepresentante);
-  let bgModal = modalRepresentante.querySelector(".modal-background");
+  bgModal = modalRepresentante.querySelector(".modal-background");
   bgModal.addEventListener("click", (event) => fecharRepresentante);
 };
 
