@@ -75,6 +75,8 @@ const abrirRepresentante = (element) => {
   localStorage.setItem("turmaAtual", turmaAtual);
 };
 
+const fecharRepresentante = () => {};
+
 /**
  * Abre o modal com as informações do conselheiro
  * @param {DOM element} element Card de conselheiro clicado
@@ -88,6 +90,8 @@ const abrirConselheiro = (element) => {
   localStorage.setItem("turmaAtual", turmaAtual);
   console.log(turmaAtual);
 };
+
+const fecharRepresentante = () => {};
 
 /**
  * Listener para o fechamento do modal
