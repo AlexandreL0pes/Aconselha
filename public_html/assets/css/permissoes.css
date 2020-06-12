@@ -53,6 +53,9 @@
   text-justify: center;
   text-align: center;
 }
+.card-coordenador p.nome {
+  text-transform: capitalize;
+}
 
 .cardbox:hover {
   box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.3);
