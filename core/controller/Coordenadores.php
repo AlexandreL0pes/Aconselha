@@ -169,6 +169,21 @@ class Coordenadores
         }
     }
 
+    public function excluirCoordenador($dados)
+    {
+        $curso_id = $dados['curso'];
+        // print_r($this->selecionarCoordenadorAtual($curso_id));
+        $resultado = $this->desabilitarCoordenador($curso_id);
+        $resultado = 1;
+        if ($resultado) {
+            http_response_code(200);
+            return json_encode(array("message" => "O coordenador foi removido com sucesso!"));
+        } else {
+            http_response_code(500);
+            return json_encode(array("message" => "Não foi possível remover o coordenador atual."));
+        }
+    }
+
     /**
      * Altera a senha de um usuário 
      *
