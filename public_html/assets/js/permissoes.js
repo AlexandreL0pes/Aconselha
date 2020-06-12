@@ -256,7 +256,7 @@ const addCursoCard = (curso) => {
 
   card.innerHTML += `
     <p class="gray-text">${curso.nome}</p>
-    <p class="">${texto}</p>
+    <p class="nome">${texto}</p>
   `;
 
   card.addEventListener("click", (e) => abrirCoordenador(e));
