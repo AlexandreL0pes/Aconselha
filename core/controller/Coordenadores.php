@@ -347,7 +347,7 @@ class Coordenadores
 
         $resultado = true;
         $p = new Permissao();
-        if (!$p->verificarPermissao($usuario_id, Autenticacao::COORDENADOR)) {
+        if ($p->verificarPermissao($usuario_id, Autenticacao::COORDENADOR)) {
             $resultado = $p->remover($usuario_id, Autenticacao::COORDENADOR);
         }
         return $resultado;
