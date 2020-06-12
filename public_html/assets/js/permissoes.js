@@ -133,6 +133,7 @@ let autocompleteCoordenador = () => {
 
     const input = document.querySelector("#coordenador");
     input.setAttribute("data-coordenador", state.value);
+    document.getElementById("email-coordenador").value = "";
   };
 
   bulmahead("coordenador", "coordenador-menu", api, onSelect, 200);
