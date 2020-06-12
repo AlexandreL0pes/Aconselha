@@ -42,6 +42,15 @@ const abrirCoordenador = (element) => {
     });
 };
 
+const fecharCoordenador = () => {
+  console.log("> Fechando Coordenador");
+  const modal = document.getElementById("modal-coordenador");
+  modal.classList.toggle("is-active");
+
+  localStorage.removeItem("cursoAtual");
+  localStorage.removeItem("coordenadorAtual");
+};
+
 const preencherCoordenador = (coordenador, curso) => {
   if (coordenador.length != 0) {
     const coordenadorInput = document.getElementById("coordenador");
@@ -85,21 +94,24 @@ const abrirConselheiro = (element) => {
  * @param {*} params
  */
 const closeModal = (params) => {
-  const modals = document.querySelectorAll(".modal");
-  modals.forEach((modal) => {
-    const closeBtn = modal.querySelector(".modal-close-btn");
-    closeBtn.addEventListener("click", (evnt) => {
-      modal.classList.toggle("is-active");
-      localStorage.removeItem("cursoAtual", "");
-      localStorage.removeItem("turmaAtual", "");
-    });
-    const bgModal = modal.querySelector(".modal-background");
-    bgModal.addEventListener("click", (evnt) => {
-      modal.classList.toggle("is-active");
-      localStorage.removeItem("cursoAtual", "");
-      localStorage.removeItem("turmaAtual", "");
-    });
-  });
+  const modalCoordenador = document.getElementById("modal-coordenador");
+  const modalConselheiro = document.getElementById("modal-conselheiro");
+  const modalRepresentante = document.getElementById("modal-representante");
+
+  let closeBtn = modalCoordenador.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", (event) => fecharCoordenador);
+  let bgModal = modalCoordenador.querySelector(".modal-background");
+  bgModal.addEventListener("click", (event) => fecharCoordenador);
+
+  let closeBtn = modalConselheiro.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", (event) => fecharConselheiro);
+  let bgModal = modalConselheiro.querySelector(".modal-background");
+  bgModal.addEventListener("click", (event) => fecharConselheiro);
+
+  let closeBtn = modalRepresentante.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", (event) => fecharRepresentante);
+  let bgModal = modalRepresentante.querySelector(".modal-background");
+  bgModal.addEventListener("click", (event) => fecharRepresentante);
 };
 
 /**
