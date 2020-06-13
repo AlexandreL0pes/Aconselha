@@ -52,7 +52,7 @@ const fecharCoordenador = () => {
 
   const coordenadorInput = document.getElementById("coordenador");
   coordenadorInput.value = "";
-  coordenadorInput.setAttribute("data-coordenador","");
+  coordenadorInput.setAttribute("data-coordenador", "");
 
   document.getElementById("email-coordenador").value = "";
   document.getElementById("coordenacao-curso").innerHTML = "";
@@ -185,18 +185,22 @@ const salvarCoordenador = (e) => {
 
   console.log(dados);
 
-  if (dados.coordenador == null && dados.acao !== "Coordenadores/alterarSenha") {
+  if (
+    dados.coordenador == null &&
+    dados.acao !== "Coordenadores/alterarSenha"
+  ) {
     showMessage(
       "Confira seus dados!",
       "É necessário informar o novo coordenador",
       "warning",
       4000
     );
-    return false;
+    // return false;
   }
 
   sendRequest(dados)
     .then((response) => {
+      console.log("Deu certo hein!");
       console.log(response);
       showMessage(
         "Deu certo!",
@@ -204,8 +208,8 @@ const salvarCoordenador = (e) => {
         "success",
         4000
       );
-        fecharCoordenador();
-        solicitarConselheiros();
+      solicitarCursos();
+      fecharCoordenador();
     })
     .catch((err) => {
       console.error(err);
