@@ -45,7 +45,8 @@ class Coordenadores
                 Usuario::COL_ID => $usuario,
                 Usuario::COL_MATRICULA => $matricula,
                 Usuario::COL_CURSO => $curso,
-                Usuario::COL_SENHA => $senha
+                Usuario::COL_SENHA => $senha,
+                Usuario::COL_PESSOA => $pessoa
             ]);
         } else {
             // Caso o usuário não exista
