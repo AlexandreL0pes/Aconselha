@@ -102,6 +102,20 @@ const abrirConselheiro = (element) => {
   let turmaAtual = element.currentTarget.getAttribute("data-turma");
   localStorage.setItem("turmaAtual", turmaAtual);
   console.log(turmaAtual);
+
+  const dados = {
+    acao: "Conselheiros/selecionarConselheiro",
+    turma: turmaAtual,
+  };
+
+  sendRequest(dados)
+    .then((response) => {
+      console.log(response);
+      preencherConselheiro(response.conselheiro, response.turma);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 const fecharConselheiro = () => {
@@ -110,6 +124,27 @@ const fecharConselheiro = () => {
   modal.classList.toggle("is-active");
 
   localStorage.removeItem("turmaAtual");
+
+  const conselheiroInput = document.getElementById("conselheiro");
+  conselheiroInput.value = "";
+  conselheiroInput.setAttribute("data-conselheiro", "");
+
+  document.getElementById("email-conselheiro").value = "";
+
+  document.getElementById("conselheiro-turma").innerHTML = "";
+  document.getElementById("conselheiro-curso").innerHTML = "";
+};
+
+const preencherConselheiro = (conselheiro, turma) => {
+  if (conselheiro.length != 0) {
+    const conselheiroInput = document.getElementById("conselheiro");
+    conselheiroInput.value = conselheiro.nome;
+    conselheiroInput.setAttribute("data-conselheiro", conselheiro.pessoa);
+
+    document.getElementById("email-conselheiro").value = conselheiro.login;
+  }
+  document.getElementById("conselheiro-turma").innerHTML = turma.nome;
+  document.getElementById("conselheiro-curso").innerHTML = turma.curso;
 };
 
 /**
