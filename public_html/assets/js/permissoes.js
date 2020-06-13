@@ -178,7 +178,7 @@ const salvarCoordenador = (e) => {
 
   console.log(dados);
 
-  if (dados.coordenador == null) {
+  if (dados.coordenador == null && dados.acao !== "Coordenadores/alterarSenha") {
     showMessage(
       "Confira seus dados!",
       "É necessário informar o novo coordenador",
@@ -223,7 +223,7 @@ const pegarDados = () => {
   const coordenadorAtual = localStorage.getItem("coordenadorAtual") || "";
 
   let dados = {
-    curso: curso,
+    codigo: coordenadorAtual,
     email: email,
     senha: senha,
   };
