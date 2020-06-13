@@ -104,6 +104,9 @@ const abrirConselheiro = (element) => {
 
   let turmaAtual = element.currentTarget.getAttribute("data-turma");
   localStorage.setItem("turmaAtual", turmaAtual);
+
+  let conselheiroAtual = element.currentTarget.getAttribute("data-conselheiro");
+  localStorage.setItem("conselheiroAtual", conselheiroAtual);
   console.log(turmaAtual);
 
   const dados = {
@@ -289,7 +292,7 @@ const salvarCoordenador = (e) => {
         "Houve um erro",
         "Não foi possível salvar as alterações, verifique os dados.",
         "warning",
-        400
+        4000
       );
     });
 };
@@ -350,6 +353,37 @@ const salvarConselheiro = () => {
   let dados = pegarDadosConselheiro();
 
   console.log(dados);
+
+  if (dados.pessoa == null && dados.acao !== "Conselheiros/alterarSenha") {
+    showMessage(
+      "Confira seus dados!",
+      "É necessário informar o novo coordenador",
+      "warning",
+      4000
+    );
+  }
+
+  sendRequest(dados)
+    .then((response) => {
+      console.log(response);
+      showMessage(
+        "Deu certo!",
+        "As alterações foram realizadas com sucesso!",
+        "success",
+        4000
+      );
+      solicitarConselheiros();
+      fecharConselheiro();
+    })
+    .catch((err) => {
+      console.error(err);
+      showMessage(
+        "Houve um erro",
+        "Não foi possível salvar as alterações, verifique os dados,",
+        "warning",
+        4000
+      );
+    });
 };
 
 const pegarDadosConselheiro = (params) => {
@@ -357,10 +391,10 @@ const pegarDadosConselheiro = (params) => {
     .getElementById("conselheiro")
     .getAttribute("data-conselheiro");
   const senha = document.getElementById("senha-conselheiro").value;
-  const turma = localStorage.getItem("turmaAtual").value;
+  const turma = localStorage.getItem("turmaAtual");
   const email = document.getElementById("email-conselheiro").value;
 
-  const conselheiroAtual = localStorage.getItem("coordenadorAtual") || "";
+  const conselheiroAtual = localStorage.getItem("conselheiroAtual") || "";
 
   let dados = {
     codigo: conselheiroAtual,
@@ -370,10 +404,22 @@ const pegarDadosConselheiro = (params) => {
 
   dados.acao = "Conselheiros/alterarSenha";
 
+  if (conselheiroAtual === "") {
+    dados = {
+      turma: turma,
+      pessoa: conselheiroNovo,
+      email: email,
+      senha: senha,
+    };
+    dados.acao = "Conselheiros/cadastrar";
+  }
+
+  console.log("CN", conselheiroNovo);
+  console.log("CA", conselheiroAtual);
   if (conselheiroNovo !== conselheiroAtual && conselheiroAtual !== "") {
     dados = {
       turma: turma,
-      conselheiro: conselheiro,
+      pessoa: conselheiroNovo,
       email: email,
       senha: senha,
     };
@@ -481,6 +527,9 @@ const addTurmaCard = (turma) => {
       <p class="subtitulo is-7">${conselheiro}</p>
       <p class="subtitulo is-8 gray-text">${turma.nome}</p>
     `;
+
+    conselheiro = turma.conselheiro.pessoa || "";
+    card.setAttribute("data-conselheiro", conselheiro);
   }
 
   card.classList.add("cardbox", classCard, classCurso);
