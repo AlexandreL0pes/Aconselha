@@ -49,6 +49,13 @@ const fecharCoordenador = () => {
 
   localStorage.removeItem("cursoAtual");
   localStorage.removeItem("coordenadorAtual");
+
+  const coordenadorInput = document.getElementById("coordenador");
+  coordenadorInput.value = "";
+  coordenadorInput.setAttribute("data-coordenador","");
+
+  document.getElementById("email-coordenador").value = "";
+  document.getElementById("coordenacao-curso").innerHTML = "";
 };
 
 const preencherCoordenador = (coordenador, curso) => {
@@ -197,6 +204,8 @@ const salvarCoordenador = (e) => {
         "success",
         4000
       );
+        fecharCoordenador();
+        solicitarConselheiros();
     })
     .catch((err) => {
       console.error(err);
