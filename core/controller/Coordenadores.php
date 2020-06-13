@@ -197,7 +197,7 @@ class Coordenadores
         // $coordenador = $this->selecionarCoordenadorAtual($curso);
 
         $data = array(
-            Usuario::COL_ID => $usuario,
+            Usuario::COL_PESSOA => $usuario,
             Usuario::COL_MATRICULA => $dados['email'],
             Usuario::COL_SENHA => $dados['senha']
         );
@@ -205,6 +205,7 @@ class Coordenadores
 
         $usuario = new Usuario();
         $retorno = $usuario->alterar($data);
+        // print_r($retorno);
         if ($retorno > 0) {
             http_response_code(200);
             return json_encode(array("message" => "A senha foi alterada!"));

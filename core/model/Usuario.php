@@ -35,12 +35,12 @@ class Usuario extends CRUD
 
     public function alterar($dados)
     {
-        if (!isset($dados[self::COL_ID])) {
+        if (!isset($dados[self::COL_PESSOA])) {
             throw new Exception("É necessário informar o id do usuário");
         }
 
-        $where_condicao = self::COL_ID . " = ?";
-        $where_valor[] = $dados[self::COL_ID];
+        $where_condicao = self::COL_PESSOA . " = ?";
+        $where_valor[] = $dados[self::COL_PESSOA];
 
         try {
             $this->update(self::TABELA, $dados, $where_condicao, $where_valor);
@@ -49,7 +49,7 @@ class Usuario extends CRUD
             return false;
         }
 
-        return $dados[self::COL_ID];
+        return $dados[self::COL_PESSOA];
     }
 
     public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
