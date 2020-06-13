@@ -101,12 +101,15 @@ class Conselheiros
 
 		$retorno = [];
 
+		// print_r($conselheiro);
 		if (count($conselheiro) > 0) {
 			$s = new Servidores();
 			$servidor = $s->selecionarServidor($conselheiro[Usuario::COL_PESSOA]);
 			$retorno = [
-				'codigo' => $conselheiro[Usuario::COL_ID],
-				'nome' => $servidor['nome']
+				'id' => $conselheiro[Usuario::COL_ID],
+				'login' => $conselheiro[Usuario::COL_MATRICULA],
+				'nome' => $servidor['nome'],
+				'pessoa' => $conselheiro[Usuario::COL_PESSOA]
 			];
 		}
 
@@ -125,16 +128,14 @@ class Conselheiros
 		// $turma = '20201.03AGP10I.1A';
 		$usuario = new Usuario();
 
-		$campos = Usuario::COL_ID . ", " .
-			Usuario::COL_TURMA . ", " .
-			Usuario::COL_PESSOA;
+
 		$busca = [
 			Usuario::COL_TURMA => $turma,
 			'permissao' => Autenticacao::CONSELHEIRO,
 			'periodo' => 'atual'
 		];
 
-		$conselheiro = $usuario->listar($campos, $busca, null, 1)[0];
+		$conselheiro = $usuario->listar(null, $busca, null, 1)[0];
 		return $conselheiro;
 	}
 
