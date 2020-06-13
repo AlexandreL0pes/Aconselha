@@ -27,7 +27,9 @@ class Usuario extends CRUD
 
             $retorno = $this->create(self::TABELA, $dados);
         } catch (\Throwable $th) {
+            // echo $this->pegarUltimoSQL();
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
+            return false;
         }
 
         return $retorno;
@@ -115,6 +117,7 @@ class Usuario extends CRUD
             $retorno = $this->read(null, $tabela, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
             // echo $this->pegarUltimoSQL();
         } catch (\Throwable $th) {
+            echo $this->pegarUltimoSQL();
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
             return false;
         }
