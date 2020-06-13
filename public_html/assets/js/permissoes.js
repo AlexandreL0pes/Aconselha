@@ -11,6 +11,9 @@ import { sendRequest, showMessage } from "./utils.js";
 const btnSalvarCoordenador = document.querySelector(".salvar-coordenador");
 btnSalvarCoordenador.addEventListener("click", (e) => salvarCoordenador(e));
 
+const btnSalvarConselheiro = document.querySelector(".salvar-conselheiro");
+btnSalvarConselheiro.addEventListener("click", (e) => salvarConselheiro(e));
+
 /**
  * Abre o modal com as informações do coordenador
  * @param {DOM element} element Card de coordenador clicado
@@ -304,6 +307,45 @@ const pegarDados = () => {
     };
     dados.acao = "Coordenadores/atualizarCoordenador";
   }
+  return dados;
+};
+
+const salvarConselheiro = () => {
+  console.log("> Salvando Conselheiro");
+
+  let dados = pegarDadosConselheiro();
+
+  console.log(dados);
+};
+
+const pegarDadosConselheiro = (params) => {
+  const conselheiroNovo = document
+    .getElementById("conselheiro")
+    .getAttribute("data-conselheiro");
+  const senha = document.getElementById("senha-conselheiro").value;
+  const turma = localStorage.getItem("turmaAtual").value;
+  const email = document.getElementById("email-conselheiro").value;
+
+  const conselheiroAtual = localStorage.getItem("coordenadorAtual") || "";
+
+  let dados = {
+    codigo: conselheiroAtual,
+    email: email,
+    senha: senha,
+  };
+
+  dados.acao = "Conselheiros/alterarSenha";
+
+  if (conselheiroNovo !== conselheiroAtual && conselheiroAtual !== "") {
+    dados = {
+      turma: turma,
+      conselheiro: conselheiro,
+      email: email,
+      senha: senha,
+    };
+    dados.acao = "Conselheiros/atualizarConselheiro";
+  }
+
   return dados;
 };
 
