@@ -117,6 +117,29 @@ class Conselheiros
 		return json_encode($retorno);
 	}
 
+
+	public function alterarSenha($dados)
+	{
+		$usuario = $dados['codigo'];
+
+		$data = array(
+			Usuario::COL_PESSOA => $usuario,
+			Usuario::COL_MATRICULA => $dados['email'],
+			Usuario::COL_SENHA => $dados['senha']
+		);
+
+
+		$usuario = new Usuario();
+		$retorno = $usuario->alterar($data);
+
+		if ($retorno > 0) {
+			http_response_code(200);
+			return json_encode(array('message' => "A senha foi alterada!"));
+		} else {
+			http_response_code(500);
+			return json_encode(array("message" => "Não foi possível alterar os dados!"));
+		}
+	}
 	/**
 	 * Obtem o conselheiro atual de uma turma
 	 *
@@ -188,7 +211,6 @@ class Conselheiros
 		$u = new Usuario();
 		$usuario = $u->listar($campos, $busca, null, 1)[0];
 
-		print_r($usuario);
 		if (!empty($usuario)) {
 			return $usuario[Usuario::COL_ID];
 		}
