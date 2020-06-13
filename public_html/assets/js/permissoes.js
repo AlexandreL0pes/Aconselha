@@ -212,6 +212,40 @@ let autocompleteCoordenador = () => {
   bulmahead("coordenador", "coordenador-menu", api, onSelect, 200);
 };
 
+const autocompleteConselheiro = () => {
+  var api = function (inputValue) {
+    const dados = { acao: "Servidores/listarServidores" };
+
+    return sendRequest(dados)
+      .then((servidores) => {
+        return servidores.filter((servidor) => {
+          return servidor.nome
+            .toLowerCase()
+            .startsWith(inputValue.toLowerCase());
+        });
+      })
+      .then((filtrado) => {
+        return filtrado.map((servidor) => {
+          return { label: servidor.nome, value: servidor.codigo };
+        });
+      })
+      .then((transformado) => {
+        return transformado.slice(0, 5);
+      });
+  };
+
+  var onSelect = function (state) {
+    console.log("> O brabo tem nome");
+    console.log(state);
+
+    const input = document.querySelector("#conselheiro");
+    input.setAttribute("data-conselheiro", state.value);
+    document.getElementById("email-conselheiro").value = "";
+  };
+
+  bulmahead("conselheiro", "conselheiro-menu", api, onSelect, 200);
+};
+
 /**
  * Dispara a requisição para salvar o coordenador
  * @param {*} e
@@ -513,4 +547,5 @@ solicitarCursos();
 solicitarConselheiros();
 solicitarRepresentantes();
 autocompleteCoordenador();
+autocompleteConselheiro();
 closeModal();
