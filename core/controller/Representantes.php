@@ -4,19 +4,16 @@
 namespace core\controller;
 
 use core\model\Aluno;
+use core\model\Permissao;
 use core\model\Usuario;
 use core\sistema\Autenticacao;
+use Exception;
 
 class Representantes
 {
 
     public function cadastrar($dados)
     {
-
-
-        // COD_MATRICULA 
-        // COD_TURMA 
-        // senha
 
 
         // Ver se a matrícula está em um representante atual, se tiver altera, senão cadastra
@@ -26,25 +23,39 @@ class Representantes
 
         $data_inicio = date('Y-m-d');
 
-        $permissao = Autenticacao::REPRESENTANTE;
 
-        $usuario = new Usuario();
+        $u = new Usuario();
 
 
-        $retorno = $usuario->adicionar([
-            Usuario::COL_MATRICULA => $matricula,
-            Usuario::COL_TURMA => $turma,
-            Usuario::COL_SENHA => $senha,
-            Usuario::COL_PERMISSAO => $permissao,
-            Usuario::COL_DATA_INICIO => $data_inicio
-        ]);
+        $usuario = $this->verificarUsuarioExistente($matricula);
 
-        if ($retorno > 0) {
+        $permissao = true;
+
+        if ($usuario) {
+            $permissao = $this->addPermissao($usuario);
+            $usuario = $u->alterar([
+                Usuario::COL_ID => $usuario,
+                Usuario::COL_MATRICULA => $matricula,
+                Usuario::COL_TURMA => $turma,
+                Usuario::COL_SENHA => $senha
+            ]);
+        }else{
+            $usuario = $u->adicionar([
+                Usuario::COL_MATRICULA => $matricula,
+                Usuario::COL_TURMA => $turma,
+                Usuario::COL_DATA_INICIO => $data_inicio,
+                Usuario::COL_SENHA => $senha
+            ]);
+
+            $permissao = $this->addPermissao($usuario);
+        }
+
+        if ($usuario > 0 && $permissao) {
             http_response_code(200);
-            return json_encode(array('message' => 'O representante foi cadastrado!'));
-        } else {
+            return json_encode(array('message' => "O coordenador foi cadastrado!"));
+        }else{
             http_response_code(500);
-            return json_encode(array('message' => 'Não foi possível cadastrar o representante!'));
+            return json_encode(array('message' => 'Não foi possível cadastrar o coordenador!'));
         }
     }
 
@@ -104,5 +115,55 @@ class Representantes
 
         http_response_code(200);
         return json_encode($retorno);
+    }
+
+    public function verificarUsuarioExistente($matricula = null)
+    {
+        if ($matricula == null) {
+            throw new Exception("É ncessário informar a matrícula");
+        }
+
+        $campos = Usuario::COL_ID;
+        $busca = [
+            Usuario::COL_MATRICULA => $matricula
+        ];
+
+        $u = new Usuario();
+        $usuario = $u->listar($campos, $busca, null,1)[0];
+
+        if (!empty($usuario)) {
+            return $usuario[Usuario::COL_ID];
+        }
+        return false;
+    }
+
+    public function addPermissao($usuario_id)
+    {
+        if (!isset($usuario_id)) {
+            throw new Exception("É necessário informar o id do usuário");
+        }
+
+        $resultado = true;
+        $p = new Permissao();
+
+        if (!$p->verificarPermissao($usuario_id, Autenticacao::REPRESENTANTE)) {
+            $resultado = $p->adicionar($usuario_id, Autenticacao::REPRESENTANTE);
+        }
+        return $resultado;
+    }
+
+    public function delPermissao($usuario_id)
+    {
+        if (!isset($usuario)) {
+            throw new Exception("É necessário informar o id do usuário");
+        }
+
+        $resultado = true;
+        $p = new Permissao();
+
+        if ($p->verificarPermissao($usuario_id, Autenticacao::REPRESENTANTE)) {
+            $resultado = $p->remover($usuario_id, Autenticacao::REPRESENTANTE);
+        }
+        return $resultado;
     }
 }
