@@ -17,6 +17,13 @@ btnSalvarConselheiro.addEventListener("click", (e) => salvarConselheiro(e));
 const btnSalvarRepresentante = document.querySelector(".salvar-representante");
 btnSalvarRepresentante.addEventListener("click", (e) => salvarRepresentante(e));
 
+const btnSalvarViceRepresentante = document.querySelector(
+  ".salvar-vice-representante"
+);
+btnSalvarViceRepresentante.addEventListener("click", (e) =>
+  salvarViceRepresentante(e)
+);
+
 /**
  * Abre o modal com as informações do coordenador
  * @param {DOM element} element Card de coordenador clicado
@@ -669,9 +676,11 @@ const fecharRepresentante = () => {
 
   representanteInput.value = "";
   representanteInput.setAttribute("data-representante", "");
+  document.getElementById("senha-representante").value = "";
 
   viceInput.value = "";
   viceInput.setAttribute("data-vice-representante", "");
+  document.getElementById("senha-vice-representante").value = "";
 };
 
 const preencherRepresentante = (representante) => {
@@ -688,12 +697,13 @@ const preencherRepresentante = (representante) => {
 };
 
 const preencherViceRepresentante = (vice) => {
+  localStorage.setItem("viceAtual", "");
   if (vice.length != 0) {
     const viceInput = document.getElementById("vice-representante");
     viceInput.value = vice.nome;
-    viceInput.setAttribute("data-vice-representante", vice.matricula);
+    viceInput.setAttribute("data-vice-representante", vice.codigo);
 
-    localStorage.setItem("viceAtual", vice.matricula);
+    localStorage.setItem("viceAtual", vice.codigo);
   }
 };
 
@@ -717,23 +727,30 @@ const salvarRepresentante = () => {
       "warning",
       4000
     );
+  }else{
+    sendRequest(dados)
+      .then((response) => {
+        console.log("Deu certo hein!");
+        console.log(response);
+        showMessage(
+          "Deu certo!",
+          "As alterações foram realizadas com sucesso!",
+          "success",
+          4000
+        );
+        solicitarRepresentantes();
+      })
+      .catch((err) => {
+        console.error(err);
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível efetuar as alterações.",
+          "error",
+          5000
+        );
+      });
   }
 
-  sendRequest(dados)
-    .then((response) => {
-      console.log("Deu certo hein!");
-      console.log(response);
-      showMessage(
-        "Deu certo!",
-        "As alterações foram realizadas com sucesso!",
-        "success",
-        4000
-      );
-      solicitarRepresentantes();
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 };
 
 const pegarDadosRepresentante = () => {
@@ -779,6 +796,88 @@ const pegarDadosRepresentante = () => {
 };
 // Representantes
 
+// Vice
+
+const salvarViceRepresentante = () => {
+  console.log("> Salvando ViceRepresentante");
+  let dados = pegarDadosViceRepresentante();
+
+  console.log(dados);
+
+  if (dados.senha === "") {
+    showMessage(
+      "Confira seus dados!",
+      "É necessário informar um nova senha.",
+      "warning",
+      4000
+    );
+  } else {
+    sendRequest(dados)
+      .then((response) => {
+        console.log("Deu certo hein!");
+        console.log(response);
+        showMessage(
+          "Deu certo!",
+          "As alterações foram realizadas com sucesso!",
+          "success",
+          4000
+        );
+        solicitarRepresentantes();
+      })
+      .catch((err) => {
+        console.error(err);
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível efetuar as alterações.",
+          "error",
+          5000
+        );
+      });
+  }
+};
+
+const pegarDadosViceRepresentante = () => {
+  const viceNovo = document
+    .getElementById("vice-representante")
+    .getAttribute("data-vice-representante");
+
+  const senha = document.getElementById("senha-vice-representante").value;
+
+  const turma = localStorage.getItem("turmaAtual");
+
+  const viceAtual = localStorage.getItem("viceAtual") || "";
+
+  let dados = {
+    matricula: viceAtual,
+    turma: turma,
+    senha: senha,
+  };
+  dados.acao = "ViceRepresentantes/alterarSenha";
+
+  if (viceAtual === "") {
+    dados = {
+      matricula: viceNovo,
+      turma: turma,
+      senha: senha,
+    };
+
+    dados.acao = "ViceRepresentantes/cadastrar";
+  }
+
+  console.log("VN", viceNovo);
+  console.log("VA", viceAtual);
+  if (viceNovo !== viceAtual && viceAtual !== "") {
+    dados = {
+      matricula: viceNovo,
+      turma: turma,
+      senha: senha,
+    };
+    dados.acao = "ViceRepresentantes/atualizarViceRepresentante";
+  }
+
+  return dados;
+};
+// Vice
 solicitarCursos();
 solicitarConselheiros();
 solicitarRepresentantes();
