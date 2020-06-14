@@ -177,6 +177,7 @@ class Turmas
 
         $t = new Turma();
         $r = new Representantes();
+        $v = new ViceRepresentantes();
         $retornoTurmas = $t->listar($campos, $busca, null, null);
 
         $c = new Conselheiros();
@@ -190,9 +191,23 @@ class Turmas
 
                 $curso = $this->processarCurso($retornoTurma[Turma::COL_DESC_TURMA]);
 
-                $representantes = $r->obterRepresentantes($retornoTurma[Turma::COL_ID]);
-                $representantes = json_decode($representantes, true);
+                // Obtem o representante de turma
+                $representante = $r->selecionarRepresentante(['turma' => $retornoTurma[Turma::COL_ID]]);
+                $representante = json_decode($representante, true);
 
+                // Obtem o vice-representante
+                $vice = $v->selecionarViceRepresentante(['turma' => $retornoTurma[Turma::COL_ID]]);
+                $vice = json_decode($vice, true);
+
+                $representantes = [];
+                if (!empty($representante[0])) {
+                    $representantes[] = $representante[0];
+                }
+
+                if (!empty($vice[0])) {
+                    $representantes[] = $vice[0];
+                }
+                // print_r($representantes);
                 $turma = [
                     'codigo' => $retornoTurma[Turma::COL_ID],
                     'nome' => $nome,

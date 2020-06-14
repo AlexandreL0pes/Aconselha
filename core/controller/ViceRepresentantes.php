@@ -89,7 +89,7 @@ class ViceRepresentantes
         return json_encode($retorno);
     }
 
-    public function obterRepresentante($turma)
+    public function obterViceRepresentante($turma)
     {
         $vice = $this->selecionarViceRepresentanteAtual($turma);
 
