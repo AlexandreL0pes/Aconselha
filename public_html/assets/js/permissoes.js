@@ -74,14 +74,6 @@ const preencherCoordenador = (coordenador, curso) => {
 
 
 
-const fecharRepresentante = () => {
-  console.log("> Fechando Coordenador");
-  const modal = document.getElementById("modal-representante");
-  modal.classList.toggle("is-active");
-
-  localStorage.removeItem("turmaAtual");
-};
-
 /**
  * Abre o modal com as informações do conselheiro
  * @param {DOM element} element Card de conselheiro clicado
@@ -631,10 +623,7 @@ const solicitarConselheiros = () => {
     });
 };
 
-
-
 // Representantes
-
 
 /**
  * Abre o modal com as informações do representante
@@ -649,27 +638,70 @@ const abrirRepresentante = (element) => {
   localStorage.setItem("turmaAtual", turmaAtual);
 
   if (turmaAtual) {
-    const dados = {acao:"Turmas/selecionarRepresentantes", turma: turmaAtual};
+    const dados = {
+      acao: "Turmas/selecionarRepresentantes",
+      turma: turmaAtual,
+    };
 
-    sendRequest(dados).then((response) => {
-      console.log(response);
-    }).catch((err) => {
-      console.error(err);
-    });
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        preencherRepresentante(response.representante);
+        preencherViceRepresentante(response.vice_representante);
+        preencherTurma(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
+};
+
+const fecharRepresentante = () => {
+  console.log("> Fechando Coordenador");
+  const modal = document.getElementById("modal-representante");
+  modal.classList.toggle("is-active");
+
+  localStorage.removeItem("turmaAtual");
+
+  const representanteInput = document.getElementById("representante");
+  const viceInput = document.getElementById("vice-representante");
+
+  representanteInput.value = "";
+  representanteInput.setAttribute("data-representante", "");
+
+  viceInput.value = "";
+  viceInput.setAttribute("data-vice-representante", "");
 };
 
 const preencherRepresentante = (representante) => {
   console.log("> Preenchendo Representante");
-
   if (representante.length != 0) {
-    
+    const representanteInput = document.getElementById("representante");
+    representanteInput.value = representante.nome;
+    representanteInput.setAttribute("data-representante", representante.codigo);
   }
+};
+
+const preencherViceRepresentante = (vice) => {
+  if (vice.length != 0) {
+    const viceInput = document.getElementById("vice-representante");
+    viceInput.value = vice.nome;
+    viceInput.setAttribute(
+      "data-vice-representante",
+      vice.matricula
+    );
+  }
+};
+
+const preencherTurma = (turma) => {
+  const titulo = document.querySelector(
+    "#modal-representante .modal-card-title"
+  );
+  titulo.innerHTML = turma.nome + " - " + turma.curso;
 };
 
 
 // Representantes
-
 
 solicitarCursos();
 solicitarConselheiros();
