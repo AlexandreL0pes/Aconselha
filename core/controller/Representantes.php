@@ -74,7 +74,25 @@ class Representantes
         return  $representantes;
     }
 
+    public function selecionarRepresentante($dados)
+    {
+        $representante = $this->selecionarRepresentanteAtual($dados['turma']);
+        $retorno = [];
+        if (!empty($representante)) {
+            $aluno = new Alunos();
+            $representante = $aluno->selecionar($representante[Usuario::COL_MATRICULA]);
 
+            $representante = [
+                'codigo' => $representante['matricula'],
+                'nome' => $representante['nome']
+            ];
+
+            array_push($retorno, $representante);
+        }
+        http_response_code(200);
+        return json_encode($retorno);
+    }
+    
     public function obterRepresentante($turma)
     {
         $representante = $this->selecionarRepresentanteAtual($turma);
