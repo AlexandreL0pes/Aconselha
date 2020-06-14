@@ -303,7 +303,7 @@ class Turmas
         $retornoTurma = $t->listar($campos, $busca, null, null)[0];
 
 
-        $turmas = [];
+        $turma = [];
         if (!empty($retornoTurma)) {
 
             $nome = $this->processarNome($retornoTurma[Turma::COL_ID]);
@@ -318,13 +318,13 @@ class Turmas
             $vice = $v->selecionarViceRepresentante(['turma' => $retornoTurma[Turma::COL_ID]]);
             $vice = json_decode($vice, true);
 
-            $representantes = [];
+            $representante_completo = [];
             if (!empty($representante[0])) {
-                $representantes[] = $representante[0];
+                $representante_completo = $representante[0];
             }
-
+            $vice_representante_completo = [];
             if (!empty($vice[0])) {
-                $representantes[] = $vice[0];
+                $vice_representante_completo = $vice[0];
             }
 
             $turma = [
@@ -332,13 +332,13 @@ class Turmas
                 'nome' => $nome,
                 'curso' => $curso,
                 'codigo_curso' => $retornoTurma[Turma::COL_CURSO],
-                'representantes' => $representantes
+                'representante' => $representante_completo,
+                'vice_representante' => $vice_representante_completo
             ];
 
-            array_push($turmas, $turma);
         }
 
         http_response_code(200);
-        return json_encode($turmas);
+        return json_encode($turma);
     }
 }
