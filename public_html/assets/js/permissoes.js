@@ -249,6 +249,56 @@ const autocompleteConselheiro = () => {
   bulmahead("conselheiro", "conselheiro-menu", api, onSelect, 200);
 };
 
+const autocompleteRepresentante = () => {
+  var api = function (inputValue) {
+    const turma = localStorage.getItem("turmaAtual");
+
+    if (turma) {
+      const dados = { acao: "Turmas/listarEstudantes", turma: turma };
+      return sendRequest(dados)
+        .then((servidores) => {
+          return servidores.filter((servidor) => {
+            return servidor.nome
+              .toLowerCase()
+              .startsWith(inputValue.toLowerCase());
+          });
+        })
+        .then((filtrado) => {
+          return filtrado.map((servidor) => {
+            return { label: servidor.nome, value: servidor.codigo };
+          });
+        })
+        .then((transformado) => {
+          return transformado.slice(0, 5);
+        });
+    }
+  };
+
+  var onSelect = function (state) {
+    console.log("> O brabo tem nome");
+    console.log(state);
+
+    const input = document.querySelector("#representante");
+    input.setAttribute("data-representante", state.value);
+  };
+
+  const onSelectVice = (state) => {
+    console.log("> O brabo tem nome vice");
+    console.log(state);
+
+    const input = document.querySelector("#vice-representante");
+    input.setAttribute("data-vice-representante", state.value);
+  };
+  bulmahead("representante", "representante-menu", api, onSelect, 200);
+  bulmahead(
+    "vice-representante",
+    "vice-representante-menu",
+    api,
+    onSelectVice,
+    200
+  );
+};
+
 /**
  * Dispara a requisição para salvar o coordenador
  * @param {*} e
@@ -597,4 +647,5 @@ solicitarConselheiros();
 solicitarRepresentantes();
 autocompleteCoordenador();
 autocompleteConselheiro();
+autocompleteRepresentante();
 closeModal();
