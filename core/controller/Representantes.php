@@ -39,7 +39,7 @@ class Representantes
                 Usuario::COL_TURMA => $turma,
                 Usuario::COL_SENHA => $senha
             ]);
-        }else{
+        } else {
             $usuario = $u->adicionar([
                 Usuario::COL_MATRICULA => $matricula,
                 Usuario::COL_TURMA => $turma,
@@ -53,7 +53,7 @@ class Representantes
         if ($usuario > 0 && $permissao) {
             http_response_code(200);
             return json_encode(array('message' => "O coordenador foi cadastrado!"));
-        }else{
+        } else {
             http_response_code(500);
             return json_encode(array('message' => 'Não foi possível cadastrar o coordenador!'));
         }
@@ -75,19 +75,17 @@ class Representantes
         return !empty($representante);
     }
 
-    public function selecionarRepresentantesAtuais($turma)
+    public function selecionarRepresentanteAtual($turma)
     {
         $usuario = new Usuario();
-        $campos = Usuario::COL_MATRICULA;
         $busca = [
             Usuario::COL_TURMA => $turma,
             'periodo' => 'atual',
-            Usuario::COL_PERMISSAO => Autenticacao::REPRESENTANTE
+            'permissao' => Autenticacao::REPRESENTANTE
         ];
 
-        $representantes = $usuario->listar($campos, $busca, null, 5);
+        $representantes = $usuario->listar(null, $busca, null, 1)[0];
 
-        // print_r($representantes);
         return  $representantes;
     }
 
@@ -117,6 +115,37 @@ class Representantes
         return json_encode($retorno);
     }
 
+    public function atualizarRepresentante($dados)
+    {
+        $turma_id = $dados['turma'];
+        $resultado = $this->desabilitarRepresentante($turma_id);
+
+        if ($resultado) {
+            $retorno = $this->cadastrar($dados);
+
+            if ($retorno) {
+                http_response_code(200);
+                return json_encode(array('message' => 'O representante foi atualizado com sucesso!'));
+            }
+
+            http_response_code(500);
+            return json_encode(array('message' => 'Não foi possíve desabilitar o atual coordenador!'));
+        }
+    }
+
+    private function desabilitarRepresentante($turma)
+    {
+        $representante = $this->selecionarRepresentanteAtual($turma);
+        $representante_id = $representante[Usuario::COL_ID];
+        $retorno = $this->delPermissao($representante_id);
+        
+        // Retira a turma do usuário
+        $u = new Usuario();
+        $u->alterar([Usuario::COL_TURMA => null, Usuario::COL_ID => $representante_id]);
+        
+        return $retorno;
+    }
+
     public function verificarUsuarioExistente($matricula = null)
     {
         if ($matricula == null) {
@@ -129,7 +158,7 @@ class Representantes
         ];
 
         $u = new Usuario();
-        $usuario = $u->listar($campos, $busca, null,1)[0];
+        $usuario = $u->listar($campos, $busca, null, 1)[0];
 
         if (!empty($usuario)) {
             return $usuario[Usuario::COL_ID];
@@ -154,7 +183,7 @@ class Representantes
 
     public function delPermissao($usuario_id)
     {
-        if (!isset($usuario)) {
+        if (!isset($usuario_id)) {
             throw new Exception("É necessário informar o id do usuário");
         }
 
