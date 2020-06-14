@@ -187,17 +187,9 @@ const obterCurso = () => {
 
 const solicitarTurmas = async () => {
   let curso = await requisitarCurso();
-  
-  if (curso == null) {
-    curso = localStorage.getItem("curso");
-  }
 
   console.log(curso);
-  const dados = { acao: "Reunioes/reunioesNaoIniciadas" };
-
-  if (curso != null) {
-    dados.curso = curso;
-  }
+  const dados = { acao: "Reunioes/reunioesNaoIniciadas", curso: curso };
 
   sendRequest(dados)
     .then((response) => {
