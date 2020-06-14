@@ -14,6 +14,9 @@ btnSalvarCoordenador.addEventListener("click", (e) => salvarCoordenador(e));
 const btnSalvarConselheiro = document.querySelector(".salvar-conselheiro");
 btnSalvarConselheiro.addEventListener("click", (e) => salvarConselheiro(e));
 
+const btnSalvarRepresentante = document.querySelector(".salvar-representante");
+btnSalvarRepresentante.addEventListener("click", (e) => salvarRepresentante(e));
+
 /**
  * Abre o modal com as informações do coordenador
  * @param {DOM element} element Card de coordenador clicado
@@ -71,8 +74,6 @@ const preencherCoordenador = (coordenador, curso) => {
   }
   document.getElementById("coordenacao-curso").innerHTML = curso.nome;
 };
-
-
 
 /**
  * Abre o modal com as informações do conselheiro
@@ -675,10 +676,14 @@ const fecharRepresentante = () => {
 
 const preencherRepresentante = (representante) => {
   console.log("> Preenchendo Representante");
+  localStorage.setItem("representanteAtual", "");
+
   if (representante.length != 0) {
     const representanteInput = document.getElementById("representante");
     representanteInput.value = representante.nome;
     representanteInput.setAttribute("data-representante", representante.codigo);
+    console.log(representante);
+    localStorage.setItem("representanteAtual", representante.codigo);
   }
 };
 
@@ -686,10 +691,9 @@ const preencherViceRepresentante = (vice) => {
   if (vice.length != 0) {
     const viceInput = document.getElementById("vice-representante");
     viceInput.value = vice.nome;
-    viceInput.setAttribute(
-      "data-vice-representante",
-      vice.matricula
-    );
+    viceInput.setAttribute("data-vice-representante", vice.matricula);
+
+    localStorage.setItem("viceAtual", vice.matricula);
   }
 };
 
@@ -700,7 +704,79 @@ const preencherTurma = (turma) => {
   titulo.innerHTML = turma.nome + " - " + turma.curso;
 };
 
+const salvarRepresentante = () => {
+  console.log("> Salvando Representante");
+  let dados = pegarDadosRepresentante();
 
+  console.log(dados);
+
+  if (dados.senha === "") {
+    showMessage(
+      "Confira seus dados",
+      "É necessário informar uma nova senha",
+      "warning",
+      4000
+    );
+  }
+
+  sendRequest(dados)
+    .then((response) => {
+      console.log("Deu certo hein!");
+      console.log(response);
+      showMessage(
+        "Deu certo!",
+        "As alterações foram realizadas com sucesso!",
+        "success",
+        4000
+      );
+      solicitarRepresentantes();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const pegarDadosRepresentante = () => {
+  const representanteNovo = document
+    .getElementById("representante")
+    .getAttribute("data-representante");
+  const senha = document.getElementById("senha-representante").value;
+  const turma = localStorage.getItem("turmaAtual");
+
+  const representanteAtual = localStorage.getItem("representanteAtual") || "";
+
+  let dados = {
+    matricula: representanteAtual,
+    turma: turma,
+    senha: senha,
+  };
+
+  dados.acao = "Representantes/alterarSenha";
+
+  if (representanteAtual === "") {
+    dados = {
+      turma: turma,
+      matricula: representanteNovo,
+      senha: senha,
+    };
+
+    dados.acao = "Representantes/cadastrar";
+  }
+
+  console.log("RN", representanteNovo);
+  console.log("RA", representanteAtual);
+
+  if (representanteNovo !== representanteAtual && representanteAtual !== "") {
+    dados = {
+      matricula: representanteNovo,
+      turma: turma,
+      senha: senha,
+    };
+    dados.acao = "Representantes/atualizarRepresentante";
+  }
+
+  return dados;
+};
 // Representantes
 
 solicitarCursos();
