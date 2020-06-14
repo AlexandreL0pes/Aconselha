@@ -6,6 +6,7 @@ namespace core\controller;
 use core\model\Aluno;
 use core\model\Professor;
 use core\model\Turma;
+use core\model\Usuario;
 
 class Turmas
 {
@@ -280,6 +281,61 @@ class Turmas
 
                 array_push($turmas, $turma);
             }
+        }
+
+        http_response_code(200);
+        return json_encode($turmas);
+    }
+
+    public function selecionarRepresentantes($dados)
+    {
+        $turma_id = $dados['turma'];
+
+        $campos = Turma::COL_ID . ", " .
+            Turma::COL_DESC_TURMA . ", " .
+            Turma::COL_CURSO;
+
+        $busca = [Turma::COL_ID => $turma_id, 'ano' => 'atual'];
+
+        $t = new Turma();
+        $r = new Representantes();
+        $v = new ViceRepresentantes();
+        $retornoTurma = $t->listar($campos, $busca, null, null)[0];
+
+
+        $turmas = [];
+        if (!empty($retornoTurma)) {
+
+            $nome = $this->processarNome($retornoTurma[Turma::COL_ID]);
+
+            $curso = $this->processarCurso($retornoTurma[Turma::COL_DESC_TURMA]);
+
+            // Obtem o representante de turma
+            $representante = $r->selecionarRepresentante(['turma' => $retornoTurma[Turma::COL_ID]]);
+            $representante = json_decode($representante, true);
+
+            // Obtem o vice-representante
+            $vice = $v->selecionarViceRepresentante(['turma' => $retornoTurma[Turma::COL_ID]]);
+            $vice = json_decode($vice, true);
+
+            $representantes = [];
+            if (!empty($representante[0])) {
+                $representantes[] = $representante[0];
+            }
+
+            if (!empty($vice[0])) {
+                $representantes[] = $vice[0];
+            }
+
+            $turma = [
+                'codigo' => $retornoTurma[Turma::COL_ID],
+                'nome' => $nome,
+                'curso' => $curso,
+                'codigo_curso' => $retornoTurma[Turma::COL_CURSO],
+                'representantes' => $representantes
+            ];
+
+            array_push($turmas, $turma);
         }
 
         http_response_code(200);
