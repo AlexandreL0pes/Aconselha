@@ -52,10 +52,10 @@ class Representantes
 
         if ($usuario > 0 && $permissao) {
             http_response_code(200);
-            return json_encode(array('message' => "O coordenador foi cadastrado!"));
+            return json_encode(array('message' => "O representante foi cadastrado!"));
         } else {
             http_response_code(500);
-            return json_encode(array('message' => 'Não foi possível cadastrar o coordenador!'));
+            return json_encode(array('message' => 'Não foi possível cadastrar o representante!'));
         }
     }
 
@@ -92,7 +92,7 @@ class Representantes
         http_response_code(200);
         return json_encode($retorno);
     }
-    
+
     public function obterRepresentante($turma)
     {
         $representante = $this->selecionarRepresentanteAtual($turma);
