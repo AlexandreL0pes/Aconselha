@@ -5,6 +5,7 @@ let events = () => {
   resposiveNavbar();
   activeDropdown();
   navegacaoTabs();
+  atualizarTitulo();
 };
 
 let resposiveNavbar = () => {
@@ -70,5 +71,11 @@ let navegacaoTabs = () => {
   }
 };
 
+const atualizarTitulo = () => {
+  const url = window.location.pathname.split("/");
+  let usuario = url[(url.length) - 2];
+  usuario = usuario[0].toUpperCase() + usuario.slice(1);
+  document.title += " | " + usuario + " | SADC ";  
+}
 Sidebar();
 events();
