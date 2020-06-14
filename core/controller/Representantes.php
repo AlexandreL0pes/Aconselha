@@ -59,21 +59,6 @@ class Representantes
         }
     }
 
-    public function representanteCadastrado($matricula)
-    {
-        $usuario = new Usuario();
-
-        $campos = Usuario::COL_ID . ", " . Usuario::COL_MATRICULA;
-        $busca = [
-            Usuario::COL_MATRICULA => $matricula,
-            'periodo' => 'atual',
-            Usuario::COL_PERMISSAO => Autenticacao::REPRESENTANTE
-        ];
-
-        $representante = ($usuario->listar($campos, $busca, null, 1))[0];
-
-        return !empty($representante);
-    }
 
     public function selecionarRepresentanteAtual($turma)
     {
@@ -90,25 +75,23 @@ class Representantes
     }
 
 
-    public function obterRepresentantes($turma)
+    public function obterRepresentante($turma)
     {
-        $representantes = $this->selecionarRepresentantesAtuais($turma);
+        $representante = $this->selecionarRepresentanteAtual($turma);
 
         $retorno = [];
 
-        if (count($representantes) > 0 && !empty($representantes[0])) {
-            foreach ($representantes as $representante) {
+        if (!empty($representante)) {
 
-                $aluno = new Alunos();
-                $representante = $aluno->selecionar($representante[Usuario::COL_MATRICULA]);
+            $aluno = new Alunos();
+            $representante = $aluno->selecionar($representante[Usuario::COL_MATRICULA]);
 
-                $representante = [
-                    'codigo' => $representante['matricula'],
-                    'nome' => $representante['nome']
-                ];
+            $representante = [
+                'codigo' => $representante['matricula'],
+                'nome' => $representante['nome']
+            ];
 
-                array_push($retorno, $representante);
-            }
+            array_push($retorno, $representante);
         }
 
         http_response_code(200);
@@ -138,12 +121,38 @@ class Representantes
         $representante = $this->selecionarRepresentanteAtual($turma);
         $representante_id = $representante[Usuario::COL_ID];
         $retorno = $this->delPermissao($representante_id);
-        
+
         // Retira a turma do usuário
         $u = new Usuario();
         $u->alterar([Usuario::COL_TURMA => null, Usuario::COL_ID => $representante_id]);
-        
+
         return $retorno;
+    }
+
+    public function alterarSenha($dados)
+    {
+        $turma = $dados['turma'];
+
+        $usuario = $this->selecionarRepresentanteAtual($turma);
+
+        $usuario = $usuario[Usuario::COL_ID];
+
+        $data = array(
+            Usuario::COL_ID => $usuario,
+            Usuario::COL_MATRICULA => $dados['matricula'],
+            Usuario::COL_SENHA => $dados['senha']
+        );
+
+        $usuario = new Usuario();
+        $retorno = $usuario->alterar($data);
+
+        if ($retorno > 0) {
+            http_response_code(200);
+            return json_encode(array('message' => "A senha foi alterada!"));
+        } else {
+            http_response_code(500);
+            return json_encode(array("message" => "Não foi possível alterar os dados!"));
+        }
     }
 
     public function verificarUsuarioExistente($matricula = null)
