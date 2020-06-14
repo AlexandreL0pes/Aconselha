@@ -72,18 +72,7 @@ const preencherCoordenador = (coordenador, curso) => {
   document.getElementById("coordenacao-curso").innerHTML = curso.nome;
 };
 
-/**
- * Abre o modal com as informações do representante
- * @param {DOM element} element Card de representante clicado
- */
-const abrirRepresentante = (element) => {
-  const modalRepresentante = document.getElementById("modal-representante");
-  modalRepresentante.classList.toggle("is-active");
 
-  let turmaAtual = element.currentTarget.getAttribute("data-turma");
-
-  localStorage.setItem("turmaAtual", turmaAtual);
-};
 
 const fecharRepresentante = () => {
   console.log("> Fechando Coordenador");
@@ -256,16 +245,16 @@ const autocompleteRepresentante = () => {
     if (turma) {
       const dados = { acao: "Turmas/listarEstudantes", turma: turma };
       return sendRequest(dados)
-        .then((servidores) => {
-          return servidores.filter((servidor) => {
-            return servidor.nome
+        .then((alunos) => {
+          return alunos.filter((aluno) => {
+            return aluno.nome
               .toLowerCase()
               .startsWith(inputValue.toLowerCase());
           });
         })
         .then((filtrado) => {
-          return filtrado.map((servidor) => {
-            return { label: servidor.nome, value: servidor.codigo };
+          return filtrado.map((aluno) => {
+            return { label: aluno.nome, value: aluno.matricula };
           });
         })
         .then((transformado) => {
@@ -641,6 +630,46 @@ const solicitarConselheiros = () => {
       console.error(err);
     });
 };
+
+
+
+// Representantes
+
+
+/**
+ * Abre o modal com as informações do representante
+ * @param {DOM element} element Card de representante clicado
+ */
+const abrirRepresentante = (element) => {
+  const modalRepresentante = document.getElementById("modal-representante");
+  modalRepresentante.classList.toggle("is-active");
+
+  let turmaAtual = element.currentTarget.getAttribute("data-turma");
+
+  localStorage.setItem("turmaAtual", turmaAtual);
+
+  if (turmaAtual) {
+    const dados = {acao:"Turmas/selecionarRepresentantes", turma: turmaAtual};
+
+    sendRequest(dados).then((response) => {
+      console.log(response);
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+};
+
+const preencherRepresentante = (representante) => {
+  console.log("> Preenchendo Representante");
+
+  if (representante.length != 0) {
+    
+  }
+};
+
+
+// Representantes
+
 
 solicitarCursos();
 solicitarConselheiros();
