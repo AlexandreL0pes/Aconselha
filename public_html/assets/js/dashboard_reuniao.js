@@ -19,13 +19,15 @@ import { autenticarCoordenador } from "./components/Autenicacao.js";
 // autenticarCoordenador();
 
 const listener = () => {
-
-
   Aprendizado();
   Experiencia();
   Diagnostica();
 
   closeModal();
+
+  const btnFinalizarReuniao = document.getElementById("finalizarReuniao");
+  btnFinalizarReuniao.addEventListener("click", finalizarReuniao);
+
 };
 
 /**
@@ -77,7 +79,9 @@ const fecharExperiencia = () => {
   const modalExperiencia = document.getElementById("visualizar-experiencia");
   modalExperiencia.classList.toggle("is-active");
 
-  const disciplinasChips = (modalExperiencia.querySelector(".disciplinas .chips").innerHTML = "");
+  const disciplinasChips = (modalExperiencia.querySelector(
+    ".disciplinas .chips"
+  ).innerHTML = "");
 };
 
 /**
@@ -101,7 +105,12 @@ const obterInformacoesTurma = () => {
       })
       .catch((err) => {
         console.error(err);
-        showMessage("Houve um erro!", "Não foi possível acessar as informações da turma.", "error", 4000);
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível acessar as informações da turma.",
+          "error",
+          4000
+        );
       });
   }
 };
@@ -112,6 +121,31 @@ const apresentarInformacoesTurma = (dados) => {
   cardInfoTurma.querySelector("#nome").innerHTML = dados.nome;
   cardInfoTurma.querySelector("#curso").innerHTML = dados.curso;
   cardInfoTurma.querySelector("#codigo").innerHTML = dados.codigo;
+};
+
+const finalizarReuniao = () => {
+  const reuniao = localStorage.getItem("conselhoAtual");
+
+  if (reuniao) {
+    const dados = {
+      acao: "Reunioes/finalizarReuniao",
+      reuniao: reuniao,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        showMessage("Deu certo!", "A reunião foi encerrada.", "success");
+      })
+      .catch((err) => {
+        console.error(err);
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível encerrar a reunião.",
+          "warning"
+        );
+      });
+  }
 };
 
 obterInformacoesTurma();
