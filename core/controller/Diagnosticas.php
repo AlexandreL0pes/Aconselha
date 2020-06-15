@@ -253,9 +253,9 @@ class Diagnosticas
             ]
         ];
 
-        $diagnostica = new Diagnostica();
+        $d = new Diagnostica();
 
-        $diagnosticasRelevantes = $diagnostica->listar($campos, $busca, null, null);
+        $diagnosticasRelevantes = $d->listar($campos, $busca, null, null);
 
         $diagnosticasCompletas = [];
 
@@ -263,9 +263,12 @@ class Diagnosticas
         if (!empty($diagnosticasRelevantes) && !empty($diagnosticasRelevantes[0])) {
             foreach ($diagnosticasRelevantes as $diagnostica) {
                 $professoresIds = explode(",", $diagnostica['professores']);
+
                 $perfisIds = explode(",", $diagnostica['perfis']);
 
                 $pf = new Perfil();
+
+                $professoresIds = array_unique($professoresIds);
 
                 $perfis = [];
                 foreach ($perfisIds as $perfilId) {
