@@ -16,11 +16,11 @@ class Diagnosticas
     {
         $reuniao = $dados['reuniao'];
         $estudante = $dados['estudante'];
-        $professor = $dados['professor'];
         $perfis = $dados['perfis'];
         $dataAtual = date('Y-m-d h:i:s');
 
         $diagnostica = new Diagnostica();
+        $professor = Autenticacao::obterProfessor($dados['token']);
 
         $resultadoDiagnostica = $diagnostica->adicionar([
             Diagnostica::COL_ID_REUNIAO => $reuniao,
