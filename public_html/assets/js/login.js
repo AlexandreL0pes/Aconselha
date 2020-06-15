@@ -58,7 +58,9 @@ const redirecionamento = (type) => {
     1: "./gerencia/reunioes.html",
     2: "./coordenador/reunioes.html",
     3: "./professor/turmas.html",
-    4: "./representante/ensino.html",
+    4: "./professor/turmas.html",
+    5: "./representante/ensino.html",
+    6: "./representante/ensino.html",
   };
   window.location.href = pages[type];
 };
