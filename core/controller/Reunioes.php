@@ -54,7 +54,39 @@ class Reunioes
 		}
 	}
 
+	/**
+	 * Finaliza a reunião especificada
+	 *
+	 * @param  mixed $dados['reuniao']
+	 * @return void
+	 */
 	public function finalizarReuniao($dados)
+	{
+		$reuniao = $dados['reuniao'];
+
+		$r = new Reuniao();
+
+		$resultado = $r->alterar([
+			Reuniao::COL_ID => $reuniao,
+			Reuniao::COL_FINALIZADO => 1
+		]);
+
+		if ($resultado > 0) {
+			http_response_code(200);
+			return json_encode(array('message' => 'A reunião foi finalizada!'));
+		} else {
+			http_response_code(500);
+			return json_encode(array('message' => 'Não foi possível finalizar as reuniões'));
+		}
+	}
+
+	/**
+	 * Finaliza todas as reuniões passadas
+	 *
+	 * @param  array $dados['reunioes']
+	 * @return void
+	 */
+	public function finalizarReunioes($dados)
 	{
 		$reunioes = $dados['reunioes'];
 
