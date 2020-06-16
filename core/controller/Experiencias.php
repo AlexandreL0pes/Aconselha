@@ -14,7 +14,11 @@ class Experiencias
     {
 
 
-        $reuniao = $dados['reuniao'];
+        // Obtem o dado da reunião atual, com base na token do usuário logado
+        $token = $dados['token'];
+        $r = new Reunioes();
+        $reuniao = $r->obterReuniaoTurma($token);
+
         $titulo = $dados['titulo'];
         $observacao = $dados['descricao'];
         $dataAtual = date('Y-m-d h:i:s');
@@ -64,7 +68,6 @@ class Experiencias
     public function alterar($dados)
     {
         $experiencia_id = $dados['experiencia'];
-        $reuniao = $dados['reuniao'];
         $titulo = $dados['titulo'];
         $descricao = $dados['descricao'];
 
@@ -75,7 +78,6 @@ class Experiencias
 
         $resultadoExperiencia = $experiencia->alterar([
             Experiencia::COL_ID => $experiencia_id,
-            Experiencia::COL_ID_REUNIAO => $reuniao,
             Experiencia::COL_TITULO => $titulo,
             Experiencia::COL_OBSERVACAO => $descricao,
             Experiencia::COL_CLASSIFICACAO => $classificacao
@@ -206,7 +208,16 @@ class Experiencias
 
     public function listarExperienciasReuniao($dados)
     {
-        $reuniao_id = $dados['reuniao'];
+
+        // Caso a token seja passada, usar ela, caso não use o id
+        if (isset($dados['token']) && !isset($dados['reuniao'])) {
+            $token = $dados['token'];
+            $r = new Reunioes();
+            $reuniao_id = $r->obterReuniaoTurma($token);
+        } else {
+            $reuniao_id = $dados['reuniao'];
+        }
+
         $campos = "e." . Experiencia::COL_ID . ", " . Experiencia::COL_ID_REUNIAO . ", " . Experiencia::COL_TITULO . " c." . Classificacao::COL_NOME;
         $campos = "e.*, c." . Classificacao::COL_NOME;
         $busca = [Experiencia::COL_ID_REUNIAO => $reuniao_id];
