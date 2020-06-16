@@ -199,7 +199,11 @@ class Aprendizados
     {
 
 
-        $reuniao_id = $dados['reuniao'];
+        
+        $token = $dados['token'];
+        $r = new Reunioes();
+        $reuniao_id = $r->obterReuniaoTurma($token);
+
         $campos = Aprendizado::COL_ID . ", " . Aprendizado::COL_ID_REUNIAO . ", " . Aprendizado::COL_DISCIPLINA . ", " . Aprendizado::COL_OBSERVACAO;
         $busca = [Aprendizado::COL_ID_REUNIAO => $reuniao_id];
         $ordem = Aprendizado::COL_DATA . " DESC ";
