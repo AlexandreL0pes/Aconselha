@@ -9,8 +9,8 @@ use core\model\EstudanteAprendizado;
 use core\model\Reuniao;
 
 class Aprendizados
-{    
-    
+{
+
     /**
      * Efetua o cadastro de uma Avaliação de Ensino-Aprendizado
      *
@@ -31,7 +31,7 @@ class Aprendizados
         $r = new Reunioes();
         $reuniao = $r->obterReuniaoTurma($token);
 
-        
+
         $avaliacao = new Aprendizado();
 
         $resultadoAprendizado = $avaliacao->adicionar([
@@ -70,7 +70,7 @@ class Aprendizados
         }
     }
 
-        
+
     /**
      * Efetua a alteração dos dados de uma Avaliação de Ensino-Aprenzizado
      *
@@ -123,7 +123,7 @@ class Aprendizados
             return json_encode(array('message' => 'Houve um erro na alteração do aprendizado!'));
         }
     }
-    
+
     /**
      * Obtem os dados referentes à uma Avaliação de Ensino-Aprendizado
      *
@@ -168,7 +168,7 @@ class Aprendizados
             return json_encode(array('message' => 'O aprendizado solicitado não foi encontrado!'));
         }
     }
-    
+
     /**
      * Obtem todos os estudantes relacionados à uma Avaliação de Ensino-Aprendizado
      *
@@ -193,7 +193,7 @@ class Aprendizados
 
         return $estudantes;
     }
-    
+
     /**
      * Exclui uma avaliação de Ensino-Aprendizado
      *
@@ -226,7 +226,7 @@ class Aprendizados
             return json_encode(array('message' => 'Houve um erro na exclusão do aprendizado!'));
         }
     }
-    
+
     /**
      * Obtem todas as Avaliações de Ensino-Aprendizado de um conselho
      *
@@ -236,11 +236,14 @@ class Aprendizados
     public function listarAprendizadosReuniao($dados)
     {
 
-
-        
-        $token = $dados['token'];
-        $r = new Reunioes();
-        $reuniao_id = $r->obterReuniaoTurma($token);
+        // Caso a token seja passada, usar ela, caso não use o id
+        if (isset($dados['token']) && !isset($dados['reuniao'])) {
+            $token = $dados['token'];
+            $r = new Reunioes();
+            $reuniao_id = $r->obterReuniaoTurma($token);
+        } else {
+            $reuniao_id = $dados['reuniao'];
+        }
 
         $campos = Aprendizado::COL_ID . ", " . Aprendizado::COL_ID_REUNIAO . ", " . Aprendizado::COL_DISCIPLINA . ", " . Aprendizado::COL_OBSERVACAO;
         $busca = [Aprendizado::COL_ID_REUNIAO => $reuniao_id];
