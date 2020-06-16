@@ -364,4 +364,36 @@ class Reunioes
 			return json_encode(array('message' => 'A turma especificada não foi encontrada!'));
 		}
 	}
+	
+	/**
+	 * Verifica se a turma está em reunião com base no token
+	 *
+	 * @param  mixed $token
+	 * @return void
+	 */
+	public function turma_em_reuniao($token)
+	{
+		$cod_turma = Autenticacao::obterTurma($token);
+
+
+		if ($cod_turma) {
+
+			$turmas_em_reuniao = $this->listarReunioesAndamento();
+			$turmas_em_reuniao = json_decode($turmas_em_reuniao, true);
+
+
+			$reuniao = null;
+			foreach ($turmas_em_reuniao as $turma_em_reuniao) {
+				if ($turma_em_reuniao['codigo'] === $cod_turma) {
+					$reuniao = $turma_em_reuniao['reuniao'];
+				}
+			}
+
+			if ($reuniao !== null) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
