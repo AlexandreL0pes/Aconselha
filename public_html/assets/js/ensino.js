@@ -106,7 +106,7 @@ const salvarAprendizado = (e) => {
     dados.disciplina != "" &&
     dados.estudantes.length > 0 &&
     dados.descricao != "" &&
-    dados.reuniao != ""
+    dados.token != ""
   ) {
     console.log(dados);
     sendRequest(dados)
@@ -153,9 +153,10 @@ const pegarDadosAprendizado = (params) => {
 
   const aprendizado = localStorage.getItem("aprendizado") || "";
 
+  const token = getCookie("token");
   let dados = {
     acao: "Aprendizados/cadastrar",
-    reuniao: reuniao,
+    token: token,
     disciplina: disciplina,
     estudantes: estudantes,
     descricao: descricao,
@@ -171,7 +172,7 @@ const salvarExperiencia = () => {
   console.log(">> Apertou Experiencia");
   const dados = pegarDadosExperiencia();
 
-  if (dados.reuniao != "" && dados.titulo != "" && dados.classificacao != "") {
+  if (dados.token != "" && dados.titulo != "" && dados.classificacao != "") {
     console.log(dados);
     sendRequest(dados)
       .then((response) => {
@@ -221,9 +222,10 @@ const pegarDadosExperiencia = (params) => {
 
   const experiencia = localStorage.getItem("experiencia") || "";
 
+  const token = getCookie("token");
   let dados = {
     acao: "Experiencias/cadastrar",
-    reuniao: reuniao,
+    token: token,
     titulo: titulo,
     descricao: descricao,
     classificacao: classificacao,
