@@ -91,7 +91,6 @@ const iniciarConselhos = () => {
     };
     sendRequest(dados)
       .then((response) => {
-        console.log(response);
         showMessage("Deu certo!", "Os conselhos foram iniciados!", "success");
         solicitarReunioes();
         solicitarTurmas();
@@ -188,7 +187,6 @@ const obterCurso = () => {
 const solicitarTurmas = async () => {
   let curso = await requisitarCurso();
 
-  console.log(curso);
   const dados = { acao: "Reunioes/reunioesNaoIniciadas", curso: curso };
 
   sendRequest(dados)
@@ -197,6 +195,7 @@ const solicitarTurmas = async () => {
         document.getElementById("turmas").innerHTML = "";
         response.map((turma) => addTurmaCard(turma));
       } else {
+        document.getElementById("turmas").innerHTML = "";
         const reunioesDiv = document.getElementById("turmas");
         const msg = document.createElement("div");
         msg.classList.add("nenhum-resultado");
