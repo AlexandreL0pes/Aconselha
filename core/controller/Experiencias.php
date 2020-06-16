@@ -10,6 +10,13 @@ use core\model\Perfil;
 class Experiencias
 {
 
+
+    /**
+     * Efetua o cadastro de uma Avaliação de Experiência
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function cadastrar($dados)
     {
 
@@ -65,6 +72,13 @@ class Experiencias
         }
     }
 
+
+    /**
+     * Efetua a alteração de uma Avaliação de Experiência
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function alterar($dados)
     {
         $experiencia_id = $dados['experiencia'];
@@ -113,6 +127,12 @@ class Experiencias
         }
     }
 
+    /**
+     * Obtem os dados de uma Avaliação de Experiência
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function selecionar($dados)
     {
         $experiencia_id = $dados['experiencia'];
@@ -155,6 +175,12 @@ class Experiencias
         }
     }
 
+    /**
+     * Obtem todas as disciplinas envolvidas em uma Avaliação de Experiência
+     *
+     * @param  mixed $experiencia_id
+     * @return void
+     */
     private function disciplinasExperiencia($experiencia_id)
     {
         $disciplinasExperiencia = new DisciplinaExperiencia();
@@ -178,7 +204,12 @@ class Experiencias
         return $disciplinas;
     }
 
-
+    /**
+     * Efetua a exclusão de uma Avaliação de Experiência
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function excluir($dados)
     {
         $experiencia_id = $dados['experiencia'];
@@ -206,6 +237,12 @@ class Experiencias
         }
     }
 
+    /**
+     * Obtem todas as Avaliações de Experiência de uma reunião
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarExperienciasReuniao($dados)
     {
 
