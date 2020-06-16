@@ -4,6 +4,7 @@ const listeners = () => {
   const btnLogar = document.getElementById("btnLogar");
   btnLogar.addEventListener("click", login);
   verificarLogin();
+  verificaErro();
 };
 
 const login = (params) => {
@@ -85,4 +86,44 @@ const verificarLogin = () => {
       });
   }
 };
+
+const getSearchParams = () => {
+  const url = window.location.search.replace("?", "");
+  let items = url.split("&");
+  let splited = [];
+  splited = items.map((item) => {
+    const s = item.split("=");
+    return { key: s[0], value: s[1] };
+  });
+
+  return splited;
+};
+
+const verificaErro = () => {
+  const params = getSearchParams();
+
+  // Caso algum novo erro tenha que ser tratado, só adicionar nesse objeto aqui 
+  const msg = {
+    1: {
+      title: "Cedo demais!",
+      content: "Por enquanto sua turma não possui um conselho em andamento!",
+      type: "warning",
+      time: 10000,
+    },
+  };
+  console.log(params);
+
+  params.map((item) => {
+    if ("key" in item && item.key === "erro") {
+      console.log(item);
+      showMessage(
+        msg[item.value].title,
+        msg[item.value].content,
+        msg[item.value].type,
+        msg[item.value].time
+      );
+    }
+  });
+};
+
 listeners();
