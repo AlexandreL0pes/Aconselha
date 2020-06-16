@@ -9,7 +9,14 @@ use core\model\EstudanteAprendizado;
 use core\model\Reuniao;
 
 class Aprendizados
-{
+{    
+    
+    /**
+     * Efetua o cadastro de uma Avaliação de Ensino-Aprendizado
+     *
+     * @param  mixed $dados
+     * @return bool
+     */
     public function cadastrar($dados)
     {
 
@@ -63,6 +70,13 @@ class Aprendizados
         }
     }
 
+        
+    /**
+     * Efetua a alteração dos dados de uma Avaliação de Ensino-Aprenzizado
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function alterar($dados)
     {
 
@@ -109,7 +123,13 @@ class Aprendizados
             return json_encode(array('message' => 'Houve um erro na alteração do aprendizado!'));
         }
     }
-
+    
+    /**
+     * Obtem os dados referentes à uma Avaliação de Ensino-Aprendizado
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function selecionar($dados)
     {
         $aprendizado_id = $dados['aprendizado'];
@@ -148,7 +168,13 @@ class Aprendizados
             return json_encode(array('message' => 'O aprendizado solicitado não foi encontrado!'));
         }
     }
-
+    
+    /**
+     * Obtem todos os estudantes relacionados à uma Avaliação de Ensino-Aprendizado
+     *
+     * @param  mixed $aprendizado_id
+     * @return void
+     */
     private function estudantesAprendizado($aprendizado_id)
     {
 
@@ -167,7 +193,13 @@ class Aprendizados
 
         return $estudantes;
     }
-
+    
+    /**
+     * Exclui uma avaliação de Ensino-Aprendizado
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function excluir($dados)
     {
         $aprendizado_id = $dados['aprendizado'];
@@ -194,7 +226,13 @@ class Aprendizados
             return json_encode(array('message' => 'Houve um erro na exclusão do aprendizado!'));
         }
     }
-
+    
+    /**
+     * Obtem todas as Avaliações de Ensino-Aprendizado de um conselho
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarAprendizadosReuniao($dados)
     {
 
