@@ -69,6 +69,7 @@ const fecharCoordenador = () => {
 
   document.getElementById("email-coordenador").value = "";
   document.getElementById("coordenacao-curso").innerHTML = "";
+  document.getElementById("senha-coordenador").value = "";
 };
 
 const preencherCoordenador = (coordenador, curso) => {
