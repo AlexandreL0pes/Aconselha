@@ -6,18 +6,25 @@ namespace core\controller;
 use core\model\Aluno;
 use core\model\Aprendizado;
 use core\model\EstudanteAprendizado;
+use core\model\Reuniao;
 
 class Aprendizados
 {
     public function cadastrar($dados)
     {
 
-        $reuniao = $dados['reuniao'];
         $disciplina = $dados['disciplina'];
         $observacao = $dados['descricao'];
         $dataAtual = date('Y-m-d h:i:s');
         $estudantes = $dados['estudantes'];
 
+
+        // Obtem o dado da reunião atual, com base na token do usuário logado
+        $token = $dados['token'];
+        $r = new Reunioes();
+        $reuniao = $r->obterReuniaoTurma($token);
+
+        
         $avaliacao = new Aprendizado();
 
         $resultadoAprendizado = $avaliacao->adicionar([
