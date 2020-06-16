@@ -222,4 +222,19 @@ class Representantes
         }
         return $resultado;
     }
+    
+    public function obterTurma($dados)
+    {
+        $token = $dados['token'];
+
+        $cod_turma = Autenticacao::obterTurma($token);
+
+        if ($cod_turma) {
+            http_response_code(200);
+            return json_encode(array('message' => 'A turma foi obtida com sucesso','turma' => $cod_turma));
+        }else{
+            http_response_code(500);
+            return json_encode(array('message' => 'Não foi possível obter a turma'));
+        }
+    }
 }
