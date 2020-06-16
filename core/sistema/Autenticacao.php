@@ -139,4 +139,14 @@ class Autenticacao
 
         return $cod_professor;
     }
+
+    public static function obterTurma($token = null)
+    {
+        $dados = Autenticacao::decodificarToken($token);
+        $dados = (array) $dados->data;
+
+        $cod_turma = (isset($dados[Usuario::COL_TURMA])) ? $dados[Usuario::COL_TURMA] : false;
+
+        return $cod_turma;
+    }
 }
