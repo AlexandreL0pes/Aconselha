@@ -637,11 +637,11 @@ const abrirAprendizado = (element) => {
 
 const preencherAprendizado = (aprendizado) => {
   aprendizado.estudantes.map((estudante) => {
-    addChip(estudante.nome, estudante.id, "ensino-estudantes-selecionados");
+    addChip(estudante.nome, estudante.matricula, "ensino-estudantes-selecionados");
   });
   const disciplina = document.querySelector("#ensino-disciplina");
   disciplina.value = aprendizado.disciplina.nome;
-  disciplina.setAttribute("data-disciplina", aprendizado.disciplina.id);
+  disciplina.setAttribute("data-disciplina", aprendizado.disciplina.codigo);
 
   console.log("Preenchendo Aprendizado!");
   console.log(aprendizado);
