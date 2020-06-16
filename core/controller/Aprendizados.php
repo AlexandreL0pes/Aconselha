@@ -67,7 +67,6 @@ class Aprendizados
     {
 
         $aprendizado_id = $dados['aprendizado'];
-        $reuniao = $dados['reuniao'];
         $disciplina = $dados['disciplina'];
         $observacao = $dados['descricao'];
 
@@ -77,7 +76,6 @@ class Aprendizados
 
         $resultadoAvaliacao = $avaliacao->alterar([
             Aprendizado::COL_ID => $aprendizado_id,
-            Aprendizado::COL_ID_REUNIAO => $reuniao,
             Aprendizado::COL_DISCIPLINA => $disciplina,
             Aprendizado::COL_OBSERVACAO => $observacao
         ]);
