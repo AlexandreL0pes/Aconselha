@@ -35,7 +35,7 @@ const abrirConfiguracoes = () => {
 
   items.forEach((item) =>
     item.addEventListener("click", (element) => {
-      window.location.href = "./config.html";
+      window.location.href = "./permissoes.html";
     })
   );
 };
