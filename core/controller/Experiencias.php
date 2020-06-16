@@ -145,7 +145,7 @@ class Experiencias
             Experiencia::COL_TITULO . ", " .
             Experiencia::COL_OBSERVACAO . ", " .
             Experiencia::COL_DATA . ", " .
-            "c." . Classificacao::COL_ID . ", " .
+            "c." . Classificacao::COL_ID . " as id_classificacao, " .
             "c." . Classificacao::COL_NOME
 
             // Classificacao::COL_NOME;
@@ -157,7 +157,7 @@ class Experiencias
         if (!empty($resultadoExperiencia)) {
             $disciplinas = $this->disciplinasExperiencia($experiencia_id);
             // print_r($resultadoExperiencia);
-            $classificacao = ['id' => $resultadoExperiencia[Perfil::COL_ID], 'nome' => $resultadoExperiencia[Perfil::COL_NOME]];
+            $classificacao = ['id' => $resultadoExperiencia['id_classificacao'], 'nome' => $resultadoExperiencia[Perfil::COL_NOME]];
             $experienciaCompleta = [
                 'experiencia' => $resultadoExperiencia[Experiencia::COL_ID],
                 'titulo' => $resultadoExperiencia[Experiencia::COL_TITULO],
