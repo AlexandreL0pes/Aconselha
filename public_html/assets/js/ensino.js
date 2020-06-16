@@ -1,4 +1,4 @@
-import { sendRequest, showMessage } from "./utils.js";
+import { sendRequest, showMessage, getCookie } from "./utils.js";
 import { autenticarRepresentante } from "./components/Autenicacao.js";
 
 // autenticarRepresentante();
@@ -151,7 +151,6 @@ const pegarDadosAprendizado = (params) => {
 
   const descricao = document.getElementById("ensino-descricao").value;
 
-  const reuniao = localStorage.getItem("conselhoAtual") || "";
   const aprendizado = localStorage.getItem("aprendizado") || "";
 
   let dados = {
@@ -220,7 +219,6 @@ const pegarDadosExperiencia = (params) => {
   console.log(disciplinas);
   const descricao = document.getElementById("experiencia-descricao").value;
 
-  const reuniao = localStorage.getItem("conselhoAtual") || "";
   const experiencia = localStorage.getItem("experiencia") || "";
 
   let dados = {
@@ -434,9 +432,9 @@ let autocompleteEnsinoDisciplina = () => {
  * Dispara requisição assíncrona para obtenção dos aprendizados
  */
 const solicitarAprendizados = async () => {
-  const reuniao = localStorage.getItem("conselhoAtual") || "";
-
-  if (reuniao === "") {
+  // const reuniao = localStorage.getItem("conselhoAtual") || "";
+  const token = getCookie("token");
+  if (token === "") {
     showMessage(
       "Ops, deu errado!",
       "Não foi possível identificar a reunião atual!",
@@ -447,7 +445,7 @@ const solicitarAprendizados = async () => {
   }
   let dados = {
     acao: "Aprendizados/listarAprendizadosReuniao",
-    reuniao: reuniao,
+    token: token,
   };
 
   return await sendRequest(dados)
@@ -511,9 +509,9 @@ const listarAprendizados = () => {
  * Dispara requisição assíncrona para obtenção das experiencias
  */
 const solicitarExperiencias = async () => {
-  const reuniao = localStorage.getItem("conselhoAtual") || "";
-
-  if (reuniao === "") {
+  // const reuniao = localStorage.getItem("conselhoAtual") || "";
+  const token = getCookie("token");
+  if (token === "") {
     showMessage(
       "Ops, deu errado!",
       "Não foi possível identificar a reunião atual!",
@@ -525,7 +523,7 @@ const solicitarExperiencias = async () => {
 
   let dados = {
     acao: "Experiencias/listarExperienciasReuniao",
-    reuniao: reuniao,
+    token: token,
   };
 
   return await sendRequest(dados)
@@ -575,6 +573,7 @@ const listarExperiencias = () => {
   atualizarAvaliacoes();
   solicitarExperiencias()
     .then((experiencias) => {
+      console.log(experiencias);
       experiencias.map((experiencia) => addExperienciaCard(experiencia));
       atualizarAvaliacoes();
     })
@@ -688,8 +687,8 @@ const preencherExperiencia = (experiencia) => {
       "experiencia-disciplinas-selecionadas"
     )
   );
-    console.log("Preenchendo Experiência");
-    console.log(experiencia);
+  console.log("Preenchendo Experiência");
+  console.log(experiencia);
   document.getElementById("experiencia-titulo").value = experiencia.titulo;
   document.getElementById("experiencia-categoria").value =
     experiencia.classificacao.id;
@@ -737,10 +736,9 @@ const removerFiltro = () => {
 };
 
 const obterInformacoesTurma = () => {
-  const turma = localStorage.getItem("turmaAtual") || null;
-
-  if (turma !== null) {
-    const dados = { acao: "Turmas/informacoesTurma", turma: turma };
+  const token = getCookie("token");
+  if (token !== null) {
+    const dados = { acao: "Turmas/informacoesTurma", token: token };
 
     sendRequest(dados)
       .then((response) => {
@@ -765,6 +763,8 @@ const apresentarInformacoesTurma = (dados) => {
   cardInfoTurma.querySelector("#nome").innerHTML = dados.nome;
   cardInfoTurma.querySelector("#curso").innerHTML = dados.curso;
   cardInfoTurma.querySelector("#codigo").innerHTML = dados.codigo;
+
+  localStorage.setItem("turmaAtual", dados.codigo);
 };
 
 obterInformacoesTurma();
