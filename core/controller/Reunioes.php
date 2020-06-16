@@ -4,6 +4,7 @@ namespace core\controller;
 
 use core\model\Reuniao;
 use core\model\Turma;
+use core\sistema\Autenticacao;
 
 class Reunioes
 {
@@ -323,5 +324,44 @@ class Reunioes
 
 
 		return $turmasIds;
+	}
+
+	/**
+	 * Verifica se a turma contida na token possui está em algum conselho
+	 *
+	 * @param  mixed $dados
+	 * @return void
+	 */
+	public function verificarTurmaReuniao($dados)
+	{
+		$token = $dados['token'];
+
+		$cod_turma = Autenticacao::obterTurma($token);
+
+
+		if ($cod_turma) {
+
+			$turmas_em_reuniao = $this->listarReunioesAndamento();
+			$turmas_em_reuniao = json_decode($turmas_em_reuniao, true);
+
+
+			$reuniao = null;
+			foreach ($turmas_em_reuniao as $turma_em_reuniao) {
+				if ($turma_em_reuniao['codigo'] === $cod_turma) {
+					$reuniao = $turma_em_reuniao['reuniao'];
+				}
+			}
+
+			if ($reuniao !== null) {
+				http_response_code(200);
+				return json_encode(array('message' => 'A turma possui uma reunião em andamento!', 'reuniao' => $reuniao));
+			} else {
+				http_response_code(500);
+				return json_encode(array('message' => 'A turma não possui algum conselho em andamento!'));
+			}
+		} else {
+			http_response_code(400);
+			return json_encode(array('message' => 'A turma especificada não foi encontrada!'));
+		}
 	}
 }
