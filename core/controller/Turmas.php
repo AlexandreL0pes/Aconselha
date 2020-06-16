@@ -7,12 +7,22 @@ use core\model\Aluno;
 use core\model\Professor;
 use core\model\Turma;
 use core\model\Usuario;
+use core\sistema\Autenticacao;
 
 class Turmas
 {
     public function informacoesTurma($dados)
     {
-        $codigoTurma = $dados['turma'];
+
+        // Caso a token seja passada, usar ela, caso não use o id
+        if (isset($dados['token']) && !isset($dados['turma'])) {
+            $token = $dados['token'];
+            $token = $dados['token'];
+            $codigoTurma = Autenticacao::obterTurma($token);
+        } else {
+            $codigoTurma = $dados['turma'];
+        }
+
 
         $campos = Turma::COL_ID . ", " .
             Turma::COL_DESC_TURMA . ", " .
@@ -335,7 +345,6 @@ class Turmas
                 'representante' => $representante_completo,
                 'vice_representante' => $vice_representante_completo
             ];
-
         }
 
         http_response_code(200);
