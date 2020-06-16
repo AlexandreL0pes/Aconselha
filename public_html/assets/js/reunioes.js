@@ -115,8 +115,8 @@ const iniciarConselhos = () => {
   );
 };
 
-const solicitarReunioes = () => {
-  const curso = localStorage.getItem("curso");
+const solicitarReunioes = async () => {
+  const curso =  await requisitarCurso();
 
   const dados = { acao: "Reunioes/listarReunioesAndamento" };
 
