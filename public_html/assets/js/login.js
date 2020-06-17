@@ -110,6 +110,12 @@ const verificaErro = () => {
       type: "warning",
       time: 10000,
     },
+    2: {
+      title: "Acesso negado!",
+      content: "Pelo visto você não tem permissão para abir essa página!",
+      type: "error",
+      time: 10000,
+    },
   };
   console.log(params);
 
