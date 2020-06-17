@@ -125,9 +125,9 @@ class Autenticacao
         return $jwt;
     }
 
-    public function isCoordenador($token = null)
+    public static function isCoordenador($token = null)
     {
-        return $this->verificarPermissao($token, Autenticacao::CONSELHEIRO);
+        return Autenticacao::verificarPermissao($token, Autenticacao::CONSELHEIRO);
     }
 
     public static function isRepresentante($token = null)
