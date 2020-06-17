@@ -1,17 +1,36 @@
+<?php
+
+use core\sistema\Autenticacao;
+
+require_once '../../vendor/autoload.php';
+require_once '../../config.php';
+
+if (!isset($_COOKIE['token'])) {
+  header("Location: ../login.html");
+}
+
+if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
+  header("Location: ../login.html?erro=2");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Memória de Reunião</title>
+    <title>Reuniões</title>
     <link rel="stylesheet" href="../assets/css/index.css" />
     <link rel="stylesheet" href="../assets/css/dropdown.css" />
-    <link rel="stylesheet" href="../assets/css/memoria.css" />
+    <link rel="stylesheet" href="../assets/css/reunioes.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="../assets/css/bulma.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css"
+    />
   </head>
   <body>
     <div class="grid-container">
@@ -119,43 +138,26 @@
       <!-- Sidebar Mobile -->
 
       <main class="main">
-        <div class="page-head">
-          <h4 class="titulo is-5">Conselho de Classe</h4>
+        <div>
+          <h4 class="subtitulo is-6 descricao">Conselhos em Andamento</h4>
+          <div class="reunioes" id="reunioes"></div>
+        </div>
 
-          <div class="turma-info">
-            <span
-              ><span name="turma" id="nome"></span> -
-              <span name="curso" id="curso"></span
-            ></span>
-            <!-- <span class="subtitulo is-8 gray-text" id=
-              >Prof. Adriano Honorato Braga</span
-            > -->
-            <span class="gray-text" id="codigo"></span>
-            <a class="button is-small" href="./dashboard.html">
-              <span>Informações</span>
-            </a>
-          </div>
-          <div class="actions">
-            <button class="button is-success" id="salvar-memoria">
-              <span class="icon is-small">
-                <i class="fas fa-check"></i>
-              </span>
-              <p class="">Salvar</p>
+        <div>
+          <div class="descricao">
+            <div>
+              <h4 class="subtitulo is-6">Conselhos não iniciados</h4>
+              <p class="resultadoSelecionado">
+                <span class="" id="qtdTurmas">Nenhuma</span>
+                turma(s) selecionada(s)
+              </p>
+            </div>
+            <button href="#" class="button" id="iniciarConselho" disabled>
+              Iniciar Conselho
             </button>
           </div>
-        </div>
 
-        <div class="titulo">
-          <h4 class="subtitulo is-6">Memória da Reunião</h4>
-        </div>
-        <div class="field">
-          <div class="control">
-            <textarea
-              class="textarea"
-              placeholder="Digite aqui os assuntos discutidos na reunião"
-              id="memoriaReuniao"
-              autofocus
-            ></textarea>
+          <div class="turmas" id="turmas">
           </div>
         </div>
       </main>
@@ -177,5 +179,5 @@
     <div class="toasts" id="toasts"></div>
   </body>
   <script src="../assets/js/index.js" type="module"></script>
-  <script src="../assets/js/memoria.js" type="module"></script>
+  <script src="../assets/js/reunioes.js" type="module"></script>
 </html>
