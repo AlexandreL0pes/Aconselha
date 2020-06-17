@@ -1,3 +1,19 @@
+<?php
+
+use core\sistema\Autenticacao;
+
+require_once '../../vendor/autoload.php';
+require_once '../../config.php';
+
+if (!isset($_COOKIE['token'])) {
+  header("Location: ../login.html");
+}
+
+if (!Autenticacao::isProfessor($_COOKIE['token']) || !Autenticacao::isConselheiro($_COOKIE['token'])) {
+  header("Location: ../login.html?erro=2");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
