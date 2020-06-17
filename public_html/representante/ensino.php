@@ -1,3 +1,18 @@
+<?php
+
+require_once '../../vendor/autoload.php';
+require_once '../../config.php';
+
+use core\controller\Reunioes;
+$r = new Reunioes();
+// Verificação de usuário logado e reunião em andamento
+if (!isset($_COOKIE['token'])) {
+  header("Location: ../login.html");
+}
+if (isset($_COOKIE['token']) && !$r->turma_em_reuniao($_COOKIE['token'])) {
+  header("Location: ../login.html?erro=1");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

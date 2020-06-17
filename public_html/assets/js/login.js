@@ -60,8 +60,8 @@ const redirecionamento = (type) => {
     2: "./coordenador/reunioes.html",
     3: "./professor/turmas.html",
     4: "./professor/turmas.html",
-    5: "./representante/ensino.html",
-    6: "./representante/ensino.html",
+    5: "./representante/ensino.php",
+    6: "./representante/ensino.php",
   };
   window.location.href = pages[type];
 };
