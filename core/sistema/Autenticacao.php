@@ -125,6 +125,11 @@ class Autenticacao
         return $jwt;
     }
 
+    public static function isGerente($token = null)
+    {
+        return Autenticacao::verificarPermissao($token, Autenticacao::GERENTE);
+    }
+    
     public static function isCoordenador($token = null)
     {
         return Autenticacao::verificarPermissao($token, Autenticacao::CONSELHEIRO);
