@@ -130,6 +130,16 @@ class Autenticacao
         return $this->verificarPermissao($token, Autenticacao::CONSELHEIRO);
     }
 
+    public static function isRepresentante($token = null)
+    {
+        return Autenticacao::verificarPermissao($token, Autenticacao::REPRESENTANTE);
+    }
+
+    public static function isViceRepresentante($token = null)
+    {
+        return Autenticacao::verificarPermissao($token, Autenticacao::VICE_REPRESENTANTE);
+    }
+
     public static function obterProfessor($token = null)
     {
         $dados = Autenticacao::decodificarToken($token);
