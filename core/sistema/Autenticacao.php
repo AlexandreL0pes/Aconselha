@@ -129,6 +129,16 @@ class Autenticacao
     {
         return Autenticacao::verificarPermissao($token, Autenticacao::GERENTE);
     }
+
+    public static function isProfessor($token = null)
+    {
+        return Autenticacao::verificarPermissao($token, Autenticacao::PROFESSOR);
+    }
+
+    public static function isConselheiro($token = null)
+    {
+        return Autenticacao::verificarPermissao($token, Autenticacao::CONSELHEIRO);
+    }
     
     public static function isCoordenador($token = null)
     {
