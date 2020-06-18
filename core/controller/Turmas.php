@@ -10,7 +10,7 @@ use core\model\Usuario;
 use core\sistema\Autenticacao;
 
 class Turmas
-{    
+{
     /**
      * Retorna as informações de uma turma
      *
@@ -58,7 +58,7 @@ class Turmas
             return json_encode(array('message' => 'Nenhuma turma foi encontrada!'));
         }
     }
-    
+
     /**
      * Processa o nome de uma turma, com base no código
      *
@@ -79,7 +79,7 @@ class Turmas
         $nome = $numeroTurma . "° " . $letraTurma;
         return $nome;
     }
-    
+
     /**
      * Processa o nome de um curso
      *
@@ -97,7 +97,7 @@ class Turmas
 
         return $curso;
     }
-    
+
     /**
      * Obtem o nome e matrícula de estudantes de uma turma
      *
@@ -125,7 +125,7 @@ class Turmas
         http_response_code(200);
         return json_encode($retorno);
     }
-    
+
     /**
      * Verifica a turma de um curso
      *
@@ -171,7 +171,7 @@ class Turmas
 
         return $retorno;
     }
-    
+
     /**
      * Retorna a informação das turmas solicitadas
      *
@@ -213,7 +213,7 @@ class Turmas
         return json_encode($informacoesCompletas);
     }
 
-    
+
     /**
      * Retorna as informações de uma turma e seus líderes
      *
@@ -275,7 +275,7 @@ class Turmas
         http_response_code(200);
         return json_encode($turmas);
     }
-    
+
     /**
      * Retorna os professores atuais de uma turma
      *
@@ -302,7 +302,7 @@ class Turmas
 
         return json_encode($professores);
     }
-    
+
     /**
      * Lista o professor conselheiro de uma turma
      *
@@ -349,7 +349,7 @@ class Turmas
         http_response_code(200);
         return json_encode($turmas);
     }
-    
+
     /**
      * Retorna os representantes de uma turma
      *
@@ -408,5 +408,26 @@ class Turmas
 
         http_response_code(200);
         return json_encode($turma);
+    }
+
+    /**
+     * Retorna o coeficiente de rendimento geral da turma
+     *
+     * @param  mixed $dados
+     * @return array
+     */
+    public function obterCoeficienteGeral($dados = [])
+    {
+        $turma_id = $dados['turma'];
+
+        $campos = " AVG(" . Turma::COL_COEFICIENTE_RENDIMENTO . ") COEFICIENTE_RENDIMENTO ";
+
+        $busca = ['ano' => 'atual', Turma::COL_COEFICIENTE_RENDIMENTO => $turma_id];
+
+        $t = new Turma();
+
+        $coef = $t->listar($campos, $busca, null, 1)[0];
+
+        return $coef;
     }
 }
