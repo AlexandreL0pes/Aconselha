@@ -12,9 +12,14 @@ use Exception;
 class Representantes
 {
 
+    /**
+     * Cadastra um usuário com permissão de representante de turma
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function cadastrar($dados)
     {
-
 
         // Ver se a matrícula está em um representante atual, se tiver altera, senão cadastra
         $matricula = $dados['matricula'];
@@ -59,7 +64,13 @@ class Representantes
         }
     }
 
-
+    
+    /**
+     * Retorna o representante atual de uma turma
+     *
+     * @param  mixed $turma
+     * @return void
+     */
     public function selecionarRepresentanteAtual($turma)
     {
         $usuario = new Usuario();
@@ -73,7 +84,13 @@ class Representantes
 
         return  $representantes;
     }
-
+    
+    /**
+     * Retorna o código e nome do representante
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function selecionarRepresentante($dados)
     {
         $representante = $this->selecionarRepresentanteAtual($dados['turma']);
@@ -92,7 +109,13 @@ class Representantes
         http_response_code(200);
         return json_encode($retorno);
     }
-
+    
+    /**
+     * Retorna as informações de um representante atual de uma turma
+     *
+     * @param  mixed $turma
+     * @return void
+     */
     public function obterRepresentante($turma)
     {
         $representante = $this->selecionarRepresentanteAtual($turma);
@@ -116,6 +139,13 @@ class Representantes
         return json_encode($retorno);
     }
 
+        
+    /**
+     * Atualiza o representante atual de uma turma
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function atualizarRepresentante($dados)
     {
         $turma_id = $dados['turma'];
@@ -133,7 +163,13 @@ class Representantes
             return json_encode(array('message' => 'Não foi possíve desabilitar o atual coordenador!'));
         }
     }
-
+    
+    /**
+     * Retira a permissão de representante de um usuário
+     *
+     * @param  mixed $turma
+     * @return void
+     */
     private function desabilitarRepresentante($turma)
     {
         $representante = $this->selecionarRepresentanteAtual($turma);
@@ -146,7 +182,13 @@ class Representantes
 
         return $retorno;
     }
-
+    
+    /**
+     * Altera a senha de um usuário representante
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function alterarSenha($dados)
     {
         $turma = $dados['turma'];
@@ -172,7 +214,13 @@ class Representantes
             return json_encode(array("message" => "Não foi possível alterar os dados!"));
         }
     }
-
+    
+    /**
+     * Verifica se um usuário existe, com base na matrícula
+     *
+     * @param  mixed $matricula
+     * @return void
+     */
     public function verificarUsuarioExistente($matricula = null)
     {
         if ($matricula == null) {
@@ -192,7 +240,13 @@ class Representantes
         }
         return false;
     }
-
+    
+    /**
+     * Adiciona a permissão de Representante para um usuário
+     *
+     * @param  mixed $usuario_id
+     * @return void
+     */
     public function addPermissao($usuario_id)
     {
         if (!isset($usuario_id)) {
@@ -207,7 +261,13 @@ class Representantes
         }
         return $resultado;
     }
-
+    
+    /**
+     * Remove a permissão de representante de um usuário
+     *
+     * @param  mixed $usuario_id
+     * @return void
+     */
     public function delPermissao($usuario_id)
     {
         if (!isset($usuario_id)) {
@@ -223,6 +283,12 @@ class Representantes
         return $resultado;
     }
     
+    /**
+     * Retorna a turma, com base na token 
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function obterTurma($dados)
     {
         $token = $dados['token'];
@@ -231,8 +297,8 @@ class Representantes
 
         if ($cod_turma) {
             http_response_code(200);
-            return json_encode(array('message' => 'A turma foi obtida com sucesso','turma' => $cod_turma));
-        }else{
+            return json_encode(array('message' => 'A turma foi obtida com sucesso', 'turma' => $cod_turma));
+        } else {
             http_response_code(500);
             return json_encode(array('message' => 'Não foi possível obter a turma'));
         }

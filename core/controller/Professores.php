@@ -9,8 +9,13 @@ use core\sistema\Autenticacao;
 
 class Professores
 {
-
-    // Lista todas as turmas que um professor já deu aula
+    
+    /**
+     * Retorna todas as turmas que um professor deu/dá aulas
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarTurmas($dados = [])
     {
         $pessoa = $dados['professor'];
@@ -33,7 +38,13 @@ class Professores
         return $turmas_id;
     }
 
-    // Lista todas as turmas que um professor está dando aula
+        
+    /**
+     * Retorna todas as turmas que um professor dá aulas
+     *
+     * @param  mixed $dados
+     * @return array
+     */
     public function listarTurmasAtuais($dados = [])
     {
         $pessoa = $dados['professor'];
@@ -56,7 +67,13 @@ class Professores
         return $turmas_id;
     }
 
-    // Lista todas as turma de um professor que estão em reunião
+        
+    /**
+     * Retorna as turma que um professor dá aula que tem um reunião em andamento
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarTurmasReuniao($dados = [])
     {
 
@@ -88,7 +105,13 @@ class Professores
         // print_r($reunioes_professor);
         return json_encode($reunioes_professor);
     }
-
+    
+    /**
+     * Retorna todas as turma sde um prof com informações completas 
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function obterTurmasProfessor($dados = [])
     {
         $pessoa = Autenticacao::obterProfessor($dados['token']);
@@ -103,7 +126,13 @@ class Professores
         }
         return json_encode($turmas);
     }
-
+    
+    /**
+     * Retorna o códgo de pessoa e nome de um professor
+     *
+     * @param  mixed $cod_pessoa
+     * @return void
+     */
     public function selecionar($cod_pessoa = null)
     {
         $campos = "PROFESSORES" . "." . Professor::COL_COD_PESSOA . ", " .
@@ -123,7 +152,13 @@ class Professores
 
         return $professor;
     }
-
+    
+    /**
+     * Seleciona todos os professores atuais de uma turma
+     *
+     * @param  mixed $cod_turma
+     * @return array
+     */
     public function professoresAtuaisTurma($cod_turma = null)
     {
         $campos = Professor::TABELA . "." . Professor::COL_COD_PESSOA;

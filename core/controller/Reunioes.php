@@ -9,24 +9,13 @@ use core\sistema\Autenticacao;
 class Reunioes
 {
 
-	private $reuniao_id = null;
-	private $turma_cod = null;
-	private $data = null;
-	private $etapaConselho = null;
-	private $finalizado = null;
-	private $memoria = null;
 
-
-	public function __set($atributo, $valor)
-	{
-		$this->$atributo = $valor;
-	}
-
-	public function __get($atributo)
-	{
-		return $this->$atributo;
-	}
-
+	/**
+	 * Cadastra uma reunião
+	 *
+	 * @param  mixed $dados
+	 * @return void
+	 */
 	public function cadastrar($dados)
 	{
 		$turmas = $dados['turmas'];
@@ -114,6 +103,12 @@ class Reunioes
 		}
 	}
 
+	/**
+	 * Cadastra a memória da reunião
+	 *
+	 * @param  mixed $dados
+	 * @return void
+	 */
 	public function salvarMemoria($dados)
 	{
 		$reuniao_id = $dados['reuniao'];
@@ -132,6 +127,12 @@ class Reunioes
 		}
 	}
 
+	/**
+	 * Obtem a memória de reunião salva
+	 *
+	 * @param  mixed $dados
+	 * @return void
+	 */
 	public function selecionarMemoria($dados)
 	{
 		$reuniao_id = $dados['reuniao'];
@@ -153,7 +154,11 @@ class Reunioes
 
 
 	/**
-	 * Lista as reuniões não finalizadas
+	 * Retorna todas informações das reuniões em andamento
+	 * Andamento => COL_FINALIZADO == 1 
+	 *
+	 * @param  mixed $dados
+	 * @return void
 	 */
 	public function listarReunioesAndamento($dados = [])
 	{
@@ -209,6 +214,12 @@ class Reunioes
 		return json_encode($reunioesFiltradas);
 	}
 
+	/**
+	 * Retorna todos os códigos das turmas que estão presentes em reunião
+	 *
+	 * @param  mixed $dados
+	 * @return void
+	 */
 	public function listarTurmasEmReuniao($dados = [])
 	{
 		$reunioes = $this->listarReunioesAndamento($dados);
@@ -224,6 +235,13 @@ class Reunioes
 
 		return $turmas;
 	}
+
+	/**
+	 * Retorna todas informações das turmas fora de reunião
+	 *
+	 * @param  mixed $dados
+	 * @return array
+	 */
 	public function reunioesNaoIniciadas($dados)
 	{
 
@@ -279,8 +297,11 @@ class Reunioes
 		return json_encode($turmasCompletas);
 	}
 
+
 	/**
-	 * Retorna uma lista contendo os COD_TURMA de turmas que não participam do conselho a mais de 30 dias
+	 * Retorna os COD_TURMA de turmas que não participam do conselho a mais de 30 dias
+	 *
+	 * @return array
 	 */
 	public function turmasReunioesFinalizadas()
 	{
@@ -302,8 +323,11 @@ class Reunioes
 		return $turmasIds;
 	}
 
+
 	/**
 	 * Retorna uma lista de turmas que já participaram de uma reunião
+	 *
+	 * @return array
 	 */
 	public function turmasAvaliadasReuniao()
 	{

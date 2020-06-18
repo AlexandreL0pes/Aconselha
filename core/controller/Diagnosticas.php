@@ -12,6 +12,12 @@ class Diagnosticas
 {
 
 
+    /**
+     * Cadastra uma Avaliação Diagnóstica
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function cadastrar($dados)
     {
         $reuniao = $dados['reuniao'];
@@ -56,7 +62,13 @@ class Diagnosticas
             return json_encode(array('message' => 'Não foi possível cadastrar a avaliação diagnóstica!'));
         }
     }
-
+    
+    /**
+     * Altera os dados de uma Avaliação Diagnóstica 
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function alterar($dados)
     {
         $diagnostica_id = $dados['diagnostica'];
@@ -100,7 +112,13 @@ class Diagnosticas
             return json_encode(array('message' => 'Não foi possível encontrar a avaliação selecionada!'));
         }
     }
-
+    
+    /**
+     * Obtem os dados de uma Avaliação Diagnóstica
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function selecionarDiagnostica($dados)
     {
         $diagnostica_id = $dados['diagnostica'];
@@ -133,7 +151,13 @@ class Diagnosticas
             return json_encode(array('message' => 'Não foi encontrada uma avaliação diagnóstica com o id especificado!'));
         }
     }
-
+    
+    /**
+     * Retorna todos os perfis envolvidos em uma Avaliação Diagnóstica
+     *
+     * @param  mixed $diagnostica_id
+     * @return void
+     */
     private function perfisAnalise($diagnostica_id)
     {
         $analise = new Analise();
@@ -145,7 +169,13 @@ class Diagnosticas
 
         return $perfis;
     }
-
+    
+    /**
+     * Exclui uma Avaliação Diagnóstica
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function excluirDiagnostica($dados)
     {
         $diagnostica_id = $dados['diagnostica'];
@@ -173,7 +203,13 @@ class Diagnosticas
             return json_encode(array('message' => 'Houve um erro na exclusão da avaliação diagnóstica'));
         }
     }
-
+    
+    /**
+     * Retorna todas as Avaliações Diagnósticas de uma reunião
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarDiagnosticasReuniao($dados)
     {
         $reuniao_id = $dados['reuniao'];
@@ -239,7 +275,14 @@ class Diagnosticas
         http_response_code(200);
         return json_encode($retorno);
     }
-
+    
+    /**
+     * Retorna todas as Avaliações Diagnósticas relevantes de um reunião
+     * Relevantes == Avaliações que tem ao menos 2 perfis iguais sobre o mesmo alun
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarDiagnosticasRelevantes($dados)
     {
         $reuniao_id = $dados['reuniao'];
