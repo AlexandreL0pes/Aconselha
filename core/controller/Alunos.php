@@ -10,14 +10,18 @@ use core\model\Aluno;
 
 class Alunos {
 
-
+    
+    /**
+     * Retorna o nome e matrícula de um estudante, com base na sua matricula
+     *
+     * @param  mixed $matricula
+     * @return void
+     */
     public function selecionar($matricula)
     {
-        # $matriculaAluno = $dados['matricula'];
 
 
         $campos = Aluno::COL_MATRICULA . ", " . 
-        // "CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1),' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1))) as nome";
         "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome";
 
         $busca = [Aluno::COL_MATRICULA => $matricula];

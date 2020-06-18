@@ -6,8 +6,14 @@ namespace core\controller;
 use core\model\Classificacao;
 
 
-class Classificacoes {
+class Classificacoes
+{
 
+    /**
+     * Retorna todas as classificações disponíveis para uma Experiência
+     *
+     * @return void
+     */
     public function listar()
     {
         $classificacao = new Classificacao();
