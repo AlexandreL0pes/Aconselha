@@ -19,7 +19,7 @@ if (isset($_COOKIE['token']) && !$r->turma_em_reuniao($_COOKIE['token'])) {
 }
 
 // Verifica se o usuário tem permissão para acessar a página
-if (!Autenticacao::isRepresentante($_COOKIE['token'] || !Autenticacao::isViceRepresentante($_COOKIE['token']))) {
+if (!Autenticacao::isRepresentante($_COOKIE['token']) && !Autenticacao::isViceRepresentante($_COOKIE['token'])) {
   header("Location: ../login.html?erro=2");
 }
 ?>
