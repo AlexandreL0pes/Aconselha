@@ -62,6 +62,12 @@ class Conselheiros
 		}
 	}
 
+	/**
+	 * Atualiza o coordenador de curso
+	 *
+	 * @param  mixed $dados
+	 * @return void
+	 */
 	public function atualizarConselheiro($dados)
 	{
 		$turma_id = $dados['turma'];
@@ -79,6 +85,12 @@ class Conselheiros
 		}
 	}
 
+	/**
+	 * Retira a permissão de coordenador de um usuário
+	 *
+	 * @param  mixed $turma
+	 * @return void
+	 */
 	private function desabilitarConselheiro($turma)
 	{
 		$conselheiro = $this->selecionarConselheiroAtual($turma);
@@ -88,6 +100,7 @@ class Conselheiros
 
 		return $retorno;
 	}
+
 	/**
 	 * Obtem as informações de um conselheiro
 	 *
@@ -118,6 +131,12 @@ class Conselheiros
 	}
 
 
+	/**
+	 * Altera a senha de acesso de um usuário coordeandor
+	 *
+	 * @param  mixed $dados
+	 * @return void
+	 */
 	public function alterarSenha($dados)
 	{
 		$usuario = $dados['codigo'];
@@ -140,6 +159,7 @@ class Conselheiros
 			return json_encode(array("message" => "Não foi possível alterar os dados!"));
 		}
 	}
+	
 	/**
 	 * Obtem o conselheiro atual de uma turma
 	 *
@@ -148,7 +168,6 @@ class Conselheiros
 	 */
 	public function selecionarConselheiroAtual($turma)
 	{
-		// $turma = '20201.03AGP10I.1A';
 		$usuario = new Usuario();
 
 

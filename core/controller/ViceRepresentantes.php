@@ -11,6 +11,12 @@ use Exception;
 class ViceRepresentantes
 {
 
+    /**
+     * Cadastra um usuário com permissão de vice representante
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function cadastrar($dados)
     {
         // Ver se a matrícula está em um representante atual, se tiver altera, senão cadastra
@@ -56,6 +62,12 @@ class ViceRepresentantes
         }
     }
 
+    /**
+     * Retorna o vice representante atual de um turma
+     *
+     * @param  mixed $turma
+     * @return void
+     */
     public function selecionarViceRepresentanteAtual($turma)
     {
         $usuario = new Usuario();
@@ -70,6 +82,12 @@ class ViceRepresentantes
         return  $representantes;
     }
 
+    /**
+     * Retorna o código e nome do vice representante
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function selecionarViceRepresentante($dados)
     {
         $vice = $this->selecionarViceRepresentanteAtual($dados['turma']);
@@ -89,6 +107,12 @@ class ViceRepresentantes
         return json_encode($retorno);
     }
 
+    /**
+     * Retorna as informações de um vice representante atual de uma turma
+     *
+     * @param  mixed $turma
+     * @return void
+     */
     public function obterViceRepresentante($turma)
     {
         $vice = $this->selecionarViceRepresentanteAtual($turma);
@@ -112,6 +136,12 @@ class ViceRepresentantes
         return json_encode($retorno);
     }
 
+    /**
+     * Atualiza o vice representante atual de uma turma
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function atualizarViceRepresentante($dados)
     {
         $turma_id = $dados['turma'];
@@ -130,6 +160,12 @@ class ViceRepresentantes
         }
     }
 
+    /**
+     * Retira a permissão de vice representante de um usuário
+     *
+     * @param  mixed $turma
+     * @return void
+     */
     public function desabilitarViceRepresentante($turma)
     {
         $vice = $this->selecionarViceRepresentanteAtual($turma);
@@ -143,6 +179,12 @@ class ViceRepresentantes
         return $retorno;
     }
 
+    /**
+     * Altera a senha de um usuário vice representante
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function alterarSenha($dados)
     {
         $turma = $dados['turma'];
@@ -168,6 +210,13 @@ class ViceRepresentantes
             return json_encode(array('message' => "Não foi possível aterar os dados!"));
         }
     }
+
+    /**
+     * Verifica se um usuário existe, com base na matrícula
+     *
+     * @param  mixed $matricula
+     * @return void
+     */
     public function verificarUsuarioExistente($matricula = null)
     {
         if ($matricula == null) {
@@ -188,6 +237,12 @@ class ViceRepresentantes
         return false;
     }
 
+    /**
+     * Adiciona a permissão de Vice Representante para um usuário
+     *
+     * @param  mixed $usuario_id
+     * @return void
+     */
     public function addPermissao($usuario_id)
     {
         if (!isset($usuario_id)) {
@@ -203,6 +258,12 @@ class ViceRepresentantes
         return $resultado;
     }
 
+    /**
+     * Remove a permissão de Vice Representante de  um usuário
+     *
+     * @param  mixed $usuario_id
+     * @return void
+     */
     public function delPermissao($usuario_id)
     {
         if (!isset($usuario_id)) {
