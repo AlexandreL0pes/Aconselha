@@ -89,7 +89,7 @@ class Diagnostica extends CRUD
                         INNER JOIN Analise A on Diagnostica.id = A.idDiagnostica
                         ". $condicao ."
                         group by idPerfil,COD_MATRICULA
-                        having  qtdperfil >= 1
+                        having  qtdperfil >= 2
                         order by qtdperfil desc ) as tabela";
                 $group_by = " matricula ";
                 $ordem = null;
