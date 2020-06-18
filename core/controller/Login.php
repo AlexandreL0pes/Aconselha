@@ -28,9 +28,10 @@ class Login
         if (isset($dados['token']) && $dados['token'] != null) {
             $retorno = Autenticacao::verificarLogin($dados['token']);
 
+            // print_r($retorno);
             if ($retorno) {
                 http_response_code(200);
-                return json_encode(array('message'=> "Usuário Logado!", 'type' => $retorno['permissao']));
+                return json_encode(array('message'=> "Usuário Logado!", 'type' => end($retorno['permissoes'])));
             }else{
                 http_response_code(400);
                 return json_encode(array('message' => "Usuário não logado!"));
