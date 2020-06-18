@@ -9,6 +9,12 @@ use core\model\Curso;
 class Cursos
 {
 
+    /**
+     * Retorna o código  e nome
+     *
+     * @param  mixed $cod_curso
+     * @return void
+     */
     public function selecionarCurso($cod_curso)
     {
 
@@ -29,12 +35,17 @@ class Cursos
                 'codigo' => $cod_curso,
                 'nome' => $nome
             ];
-
         }
 
         return $curso;
     }
 
+    /**
+     * Retira as palavras indesejadas, restando apenas o nome do curso
+     *
+     * @param  mixed $descricaoCurso
+     * @return void
+     */
     private function processarCurso($descricaoCurso = null)
     {
         if ($descricaoCurso == null) {
@@ -47,6 +58,11 @@ class Cursos
         return $curso;
     }
 
+    /**
+     * Retorna a descrição e o código de todos os cursos técnicos
+     *
+     * @return void
+     */
     public function listarCursos()
     {
         $campos = Curso::COL_ID . ", " .
