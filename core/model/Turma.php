@@ -15,6 +15,7 @@ class Turma extends CRUD
     const COL_SIGLA_TURMA = "SIGLA_TURMA";
     const COL_DESC_TURMA = "DESC_TURMA";
     const COL_ANO_LET = "ANO_LET";
+    const COL_COEFICIENTE_RENDIMENTO = "COEFICIENTE_RENDIMENTO";
 
 
     public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
@@ -30,6 +31,8 @@ class Turma extends CRUD
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
 
+        $tabela = self::TABELA;
+        $group_by = null;
         if ($busca && count($busca) > 0) {
             if (isset($busca[self::COL_ID]) && !empty($busca[self::COL_ID])) {
                 $where_condicao .= " AND " . self::COL_ID . " = ? ";
@@ -45,6 +48,24 @@ class Turma extends CRUD
                     $where_condicao .= " AND " . self::COL_ANO_LET . " = YEAR(GETDATE())";
                 }
             }
+
+            if (isset($busca[self::COL_COEFICIENTE_RENDIMENTO])) {
+                $tabela = $tabela .
+                    " INNER JOIN MATRICULAS on TURMAS.COD_CURSO = MATRICULAS.COD_CURSO
+                     INNER JOIN ALUNOS ON MATRICULAS.COD_ALUNO = ALUNOS.COD_ALUNO
+                     INNER JOIN PESSOAS on ALUNOS.COD_PESSOA = PESSOAS.COD_PESSOA ";
+
+                $where_condicao .= " AND (" .
+                    self::TABELA . "." . self::COL_CURSO . " = 80 OR " .
+                    self::TABELA . "." . self::COL_CURSO . " = 862 OR " .
+                    self::TABELA . "." . self::COL_CURSO . " = 851" .
+                    " ) ";
+
+                $where_condicao .= " AND COD_TURMA_ATUAL = ? ";
+                $where_valor[] = $busca[self::COL_COEFICIENTE_RENDIMENTO];
+                $group_by = " COD_TURMA_ATUAL ";
+                $ordem = " COD_TURMA_ATUAL ";
+            }
         }
 
         $where_condicao .= " AND " . self::COL_ID . " NOT LIKE ? ";
@@ -55,7 +76,7 @@ class Turma extends CRUD
         $retorno = [];
 
         try {
-            $retorno = $this->read($database, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, null);
+            $retorno = $this->read($database, $tabela, $campos, $where_condicao, $where_valor, $group_by, $ordem, null);
             // echo $this->pegarUltimoSQL();
             // echo "\n";
         } catch (\Throwable $th) {
