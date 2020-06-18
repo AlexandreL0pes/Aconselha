@@ -9,6 +9,12 @@ use core\sistema\Autenticacao;
 class Login
 {
 
+    /**
+     * Efetua o login de um usuário no sistema
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function login($dados)
     {
         $retorno = Autenticacao::login($dados['login'], $dados['senha'], $dados['lembrar'], false);
@@ -23,6 +29,12 @@ class Login
     }
 
 
+    /**
+     * Verifica o login de usuário com base na token
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function verificarLogin($dados)
     {
         if (isset($dados['token']) && $dados['token'] != null) {
@@ -31,72 +43,13 @@ class Login
             // print_r($retorno);
             if ($retorno) {
                 http_response_code(200);
-                return json_encode(array('message'=> "Usuário Logado!", 'type' => end($retorno['permissoes'])));
-            }else{
+                return json_encode(array('message' => "Usuário Logado!", 'type' => end($retorno['permissoes'])));
+            } else {
                 http_response_code(400);
                 return json_encode(array('message' => "Usuário não logado!"));
             }
         }
 
         return false;
-    }
-
-    public function verificarCoordenador($dados)
-    {
-        $token = $dados['token'];
-
-        $acesso = Autenticacao::verificarPermissao($token, Autenticacao::COORDENADOR);
-
-        if ($acesso) {
-            http_response_code(200);
-            return json_encode(array('message' => 'Usuário logado'));
-        }else{
-            http_response_code(400);
-            return json_encode(array('message' => 'O usuário não possui tal nível de acesso.'));
-        }
-    }
-    public function verificarRepresentante($dados)
-    {
-        $token = $dados['token'];
-
-        $acesso = Autenticacao::verificarPermissao($token, Autenticacao::REPRESENTANTE);
-
-        if ($acesso) {
-            http_response_code(200);
-            return json_encode(array('message' => 'Usuário logado'));
-        }else{
-            http_response_code(400);
-            return json_encode(array('message' => 'O representante não possui tal nível de acesso.'));
-        }
-    }
-
-    public function verificarProfessor($dados)
-    {
-        $token = $dados['token'];
-
-        $acessoProfessor = Autenticacao::verificarPermissao($token, Autenticacao::PROFESSOR);
-        $acessoCoordenador = Autenticacao::verificarPermissao($token,Autenticacao::COORDENADOR);
-        if ($acessoProfessor || $acessoCoordenador) {
-            http_response_code(200);
-            return json_encode(array('message' => 'Usuário logado'));
-        }else{
-            http_response_code(400);
-            return json_encode(array('message' => 'O usuário não possui tal nível de acesso.'));
-        }
-    }
-
-    public function verificarGerente($dados)
-    {
-        $token = $dados['token'];
-
-        $acesso = Autenticacao::verificarPermissao($token, Autenticacao::GERENTE);
-
-        if ($acesso) {
-            http_response_code(200);
-            return json_encode(array('message' => 'Usuário logado'));
-        }else{
-            http_response_code(400);
-            return json_encode(array('message' => 'O usuário não possui tal nível de acesso.'));
-        }
     }
 }
