@@ -7,6 +7,11 @@ use core\model\Acao;
 
 class Acoes
 {
+    /**
+     * Retorna todas as ações disponíveis para um Atendimento Psicopedagógico
+     *
+     * @return void
+     */
     public function listarAcoes()
     {
         $acao = new Acao();
