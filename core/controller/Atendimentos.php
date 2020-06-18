@@ -8,24 +8,13 @@ use core\model\Atendimento;
 
 class Atendimentos
 {
-    private $atendimento_id = null;
-    private $reuniao_id = null;
-    private $estudante_id = null;
-    private $data = null;
-    private $observacao = null;
-    private $acao_id = null;
 
-
-    public function __set($atributo, $valor)
-    {
-        $this->$atributo = $valor;
-    }
-
-    public function __get($atributo)
-    {
-        return $this->$atributo;
-    }
-
+    /**
+     * Cadastra um Atendimento Pedagógico
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function cadastrar($dados)
     {
         $reuniao = $dados['reuniao'];
@@ -77,6 +66,12 @@ class Atendimentos
         }
     }
 
+    /**
+     * Altera os dados de um Atendimento Pedagógico
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function alterar($dados)
     {
         $atendimento_id = $dados['atendimento'];
@@ -132,6 +127,12 @@ class Atendimentos
         }
     }
 
+    /**
+     * Retorna os dados de um Atendimento Pedagógico
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function selecionarAtendimento($dados)
     {
         $atendimento_id = $dados['atendimento'];
@@ -164,6 +165,12 @@ class Atendimentos
         }
     }
 
+    /**
+     * Retorna todos os professores envolvi
+     *
+     * @param  mixed $atendimento_id
+     * @return void
+     */
     private function professoresAtendimento($atendimento_id)
     {
         $encaminhamento = new Encaminhamento();
@@ -182,6 +189,12 @@ class Atendimentos
         return $professores;
     }
 
+    /**
+     * Exclui o Atendimento Pedagógico espeficicado
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function excluirAtendimento($dados)
     {
         $atendimento_id = $dados['atendimento'];
@@ -209,6 +222,12 @@ class Atendimentos
         }
     }
 
+    /**
+     * Retorna todos os Atendimentos Pedagógicos de um conselho
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarAtendimentosReuniao($dados)
     {
         $reuniao_id = $dados['reuniao'];
