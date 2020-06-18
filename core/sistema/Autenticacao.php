@@ -35,8 +35,18 @@ class Autenticacao
 
         if ($resultado) {
             $p = new Permissao();
-            $permissao = $p->obterPermissoes($resultado[Usuario::COL_ID])[0];
-            $permissao = $permissao[Permissao::COL_ACESSO];
+            $permissoes = $p->obterPermissoes($resultado[Usuario::COL_ID]);
+            $p = [];
+            if (count($permissoes) > 0) {
+                foreach ($permissoes as $per) {
+                    if (isset($per['acesso'])) {
+                        array_push($p, $per['acesso']);
+                    }
+                }
+            }
+            // Atribui o array ordenado, para mandar de volta a permissao mais baixa
+            sort($p);
+            $permissoes = $p ;
         }
 
 
@@ -47,11 +57,14 @@ class Autenticacao
             //Remove os valores indesejados na token
             unset($resultado[Usuario::COL_SENHA], $resultado[Usuario::COL_DATA_INICIO], $resultado[Usuario::COL_DATA_FIM]);
 
+            // Adiciona a permissão de usuário na token
+            $resultado['permissoes'] = $permissoes;
+
             // Cria a token com os dados e a duração definida
             $retorno = Autenticacao::codificarToken($resultado, $validade_token);
 
             // print_r($resultado);
-            return array('jwt' => $retorno, 'expireAt' => $validade_token, 'type' => $permissao);
+            return array('jwt' => $retorno, 'expireAt' => $validade_token, 'type' => end($permissoes));
         } else {
             return false;
         }
@@ -73,7 +86,7 @@ class Autenticacao
         $decoded = Autenticacao::decodificarToken($token);
 
 
-        if (isset($decoded->data->permissao) && $decoded->data->permissao == $permissao) {
+        if (isset($decoded->data->permissoes) && in_array($permissao, $decoded->data->permissoes)) {
             return true;
         }
 
@@ -139,7 +152,7 @@ class Autenticacao
     {
         return Autenticacao::verificarPermissao($token, Autenticacao::CONSELHEIRO);
     }
-    
+
     public static function isCoordenador($token = null)
     {
         return Autenticacao::verificarPermissao($token, Autenticacao::CONSELHEIRO);
