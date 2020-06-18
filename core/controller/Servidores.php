@@ -8,7 +8,13 @@ use core\model\Servidor;
 
 class Servidores
 {
-
+    
+    /**
+     * Retorna todos os servidores do IF CEREs
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarServidores($dados = [])
     {
 
@@ -35,7 +41,13 @@ class Servidores
         http_response_code(200);
         return json_encode($retorno);
     }
-
+    
+    /**
+     * Retorna o nome e email de um servidor
+     *
+     * @param  mixed $servidorId
+     * @return void
+     */
     public function selecionarServidor($servidorId)
     {
 
@@ -52,7 +64,13 @@ class Servidores
 
         return $servidor;
     }
-
+    
+    /**
+     * Pra teste msm
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function selecionarServidorTeste($dados = [])
     {
 

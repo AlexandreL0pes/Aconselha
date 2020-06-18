@@ -10,7 +10,13 @@ use core\model\Usuario;
 use core\sistema\Autenticacao;
 
 class Turmas
-{
+{    
+    /**
+     * Retorna as informações de uma turma
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function informacoesTurma($dados)
     {
 
@@ -52,7 +58,13 @@ class Turmas
             return json_encode(array('message' => 'Nenhuma turma foi encontrada!'));
         }
     }
-
+    
+    /**
+     * Processa o nome de uma turma, com base no código
+     *
+     * @param  mixed $codigoTurma
+     * @return string
+     */
     public function processarNome($codigoTurma = null)
     {
         if ($codigoTurma == null) {
@@ -67,7 +79,13 @@ class Turmas
         $nome = $numeroTurma . "° " . $letraTurma;
         return $nome;
     }
-
+    
+    /**
+     * Processa o nome de um curso
+     *
+     * @param  mixed $descricaoTurma
+     * @return string
+     */
     public function processarCurso($descricaoTurma = null)
     {
         if ($descricaoTurma == null) {
@@ -79,7 +97,13 @@ class Turmas
 
         return $curso;
     }
-
+    
+    /**
+     * Obtem o nome e matrícula de estudantes de uma turma
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarEstudantes($dados)
     {
         $turma = $dados['turma'];
@@ -101,7 +125,14 @@ class Turmas
         http_response_code(200);
         return json_encode($retorno);
     }
-
+    
+    /**
+     * Verifica a turma de um curso
+     *
+     * @param  mixed $codTurma
+     * @param  mixed $codCurso
+     * @return bool
+     */
     public function verificarTurmaCurso($codTurma, $codCurso)
     {
         $campos = Turma::COL_ID . ", " .
@@ -140,7 +171,13 @@ class Turmas
 
         return $retorno;
     }
-
+    
+    /**
+     * Retorna a informação das turmas solicitadas
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function informacoesTurmas($dados)
     {
         $turmas = $dados['turmas'];
@@ -176,8 +213,12 @@ class Turmas
         return json_encode($informacoesCompletas);
     }
 
-
-    //Lista todas as turmas atuais com seus líderes
+    
+    /**
+     * Retorna as informações de uma turma e seus líderes
+     *
+     * @return void
+     */
     public function listarTurmasLideres()
     {
         $campos = Turma::COL_ID . ", " .
@@ -234,7 +275,13 @@ class Turmas
         http_response_code(200);
         return json_encode($turmas);
     }
-
+    
+    /**
+     * Retorna os professores atuais de uma turma
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarProfessoresAtuais($dados = [])
     {
 
@@ -255,7 +302,13 @@ class Turmas
 
         return json_encode($professores);
     }
-
+    
+    /**
+     * Lista o professor conselheiro de uma turma
+     *
+     * @param  mixed $dados
+     * @return array
+     */
     public function listarTurmasConselheiros($dados = [])
     {
         // Várias paradas
@@ -296,7 +349,13 @@ class Turmas
         http_response_code(200);
         return json_encode($turmas);
     }
-
+    
+    /**
+     * Retorna os representantes de uma turma
+     *
+     * @param  mixed $dados
+     * @return array
+     */
     public function selecionarRepresentantes($dados)
     {
         $turma_id = $dados['turma'];

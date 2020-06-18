@@ -7,7 +7,13 @@ use core\model\Disciplina;
 
 class Disciplinas
 {
-
+    
+    /**
+     * Retorna o código e nome de um disciplina
+     *
+     * @param  mixed $disciplina
+     * @return void
+     */
     public function selecionar($disciplina)
     {
         // Selecionar disciplina pelo código pauta
@@ -22,6 +28,13 @@ class Disciplinas
 
         return $disciplina;
     }
+        
+    /**
+     * Retorna todas as disciplinas atuais de uma turma
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarDisciplinasTurma($dados = [])
     {
 
@@ -41,7 +54,12 @@ class Disciplinas
         return json_encode($disciplinas);
     }
 
-    // Obtem a disciplina com base na pauta
+    /**
+     * Retorna a disciplina com base em sua pauta
+     *
+     * @param  mixed $pauta
+     * @return void
+     */
     public function selecionarDiscplinaPauta($pauta = null)
     {
         $campos = Disciplina::TABELA . "." . Disciplina::COL_COD_DISCIPLINA . " as codigo, " .
