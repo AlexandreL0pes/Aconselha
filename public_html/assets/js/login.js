@@ -3,6 +3,7 @@ import { sendRequest, showMessage, setCookie, getCookie } from "./utils.js";
 const listeners = () => {
   const btnLogar = document.getElementById("btnLogar");
   btnLogar.addEventListener("click", login);
+  console.log(getSearchParams());
   verificarLogin();
   verificaErro();
 };
@@ -56,10 +57,10 @@ const pegarDados = () => {
  */
 const redirecionamento = (type) => {
   const pages = {
-    1: "./gerencia/reunioes.html",
-    2: "./coordenador/reunioes.html",
-    3: "./professor/turmas.html",
-    4: "./professor/turmas.html",
+    1: "./gerencia/reunioes.php",
+    2: "./coordenador/reunioes.php",
+    3: "./professor/turmas.php",
+    4: "./professor/turmas.php",
     5: "./representante/ensino.php",
     6: "./representante/ensino.php",
   };
@@ -68,7 +69,9 @@ const redirecionamento = (type) => {
 
 const verificarLogin = () => {
   const token = getCookie("token");
-  if (token !== "") {
+  const params = getSearchParams();
+
+  if (token !== "" && params.length > 0) {
     console.log(">> Token");
     console.log(token);
 
@@ -94,6 +97,8 @@ const getSearchParams = () => {
   splited = items.map((item) => {
     const s = item.split("=");
     return { key: s[0], value: s[1] };
+  }).filter(item => {
+    return (item.key !== "" && item.value !== undefined);
   });
 
   return splited;
@@ -102,7 +107,7 @@ const getSearchParams = () => {
 const verificaErro = () => {
   const params = getSearchParams();
 
-  // Caso algum novo erro tenha que ser tratado, só adicionar nesse objeto aqui 
+  // Caso algum novo erro tenha que ser tratado, só adicionar nesse objeto aqui
   const msg = {
     1: {
       title: "Cedo demais!",
