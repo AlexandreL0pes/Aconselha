@@ -71,7 +71,7 @@ const verificarLogin = () => {
   const token = getCookie("token");
   const params = getSearchParams();
 
-  if (token !== "" && params.length > 0) {
+  if (token !== "" && params.length === 0) {
     console.log(">> Token");
     console.log(token);
 
