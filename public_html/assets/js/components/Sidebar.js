@@ -5,7 +5,7 @@ const abrirTurmasEvent = () => {
 
   items.forEach((item) =>
     item.addEventListener("click", (element) => {
-      window.location.href = "./turmas.html";
+      window.location.href = "./turmas.php";
     })
   );
 };
@@ -15,7 +15,7 @@ const abrirAlunosEvent = () => {
 
   items.forEach((item) =>
     item.addEventListener("click", (element) => {
-      window.location.href = "./estudantes.html";
+      window.location.href = "./estudantes.php";
     })
   );
 };
@@ -25,7 +25,7 @@ const abrirReunioesEvent = () => {
 
   items.forEach((item) =>
     item.addEventListener("click", (element) => {
-      window.location.href = "./reunioes.html";
+      window.location.href = "./reunioes.php";
     })
   );
 };
@@ -35,7 +35,7 @@ const abrirConfiguracoes = () => {
 
   items.forEach((item) =>
     item.addEventListener("click", (element) => {
-      window.location.href = "./permissoes.html";
+      window.location.href = "./permissoes.php";
     })
   );
 };

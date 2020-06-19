@@ -136,7 +136,7 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
               >Prof. Adriano Honorato Braga</span
             > -->
           <span class="gray-text" id="codigo"></span>
-          <a class="button is-small" href="./dashboard.html">
+          <a class="button is-small" href="./dashboard.php">
             <span>Informações</span>
           </a>
         </div>

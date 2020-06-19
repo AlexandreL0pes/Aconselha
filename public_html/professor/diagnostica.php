@@ -135,7 +135,7 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) || !Autenticacao::isConselheir
               >Prof. Adriano Honorato Braga</span
             > -->
           <span class="subtitulo is-8 gray-text" id="codigo">20141.03INF10I.3B</span>
-          <a class="button is-small" href="./diagnostica.html">
+          <a class="button is-small" href="./diagnostica.php">
             <span>Informações</span>
           </a>
         </div>
@@ -150,7 +150,7 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) || !Autenticacao::isConselheir
           </p>
         </div>
 
-        <a class="button is-success" href="./dashboard.html">
+        <a class="button is-success" href="./dashboard.php">
           <span class="icon is-small">
             <i class="fas fa-check"></i>
           </span>

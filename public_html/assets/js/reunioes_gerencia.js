@@ -26,7 +26,7 @@ let abrirReuniao = () => {
   localStorage.setItem("conselhoAtual", idReuniao);
   localStorage.setItem("turmaAtual", idTurma);
 
-  window.location.href = "./dashboard.html";
+  window.location.href = "./dashboard.php";
 };
 
 /**

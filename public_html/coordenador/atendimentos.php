@@ -129,7 +129,7 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
               Prof. Adriano Honorato Braga
             </span> -->
           <span class="gray-text" id="codigo"></span>
-          <a class="button" href="./dashboard.html">
+          <a class="button" href="./dashboard.php">
             Informações
           </a>
         </div>

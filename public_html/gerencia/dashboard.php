@@ -224,10 +224,10 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
           <a class="button is-small is-success" id="finalizarReuniao">
             <span>Encerrar Reunião</span>
           </a>
-          <a class="button is-small" id="abrirMemoria" href="./memoria.html">
+          <a class="button is-small" id="abrirMemoria" href="./memoria.php">
             <span>Memória de Reunião</span>
           </a>
-          <a class="button is-small" id="abrirAtendimento" href="./atendimentos.html">
+          <a class="button is-small" id="abrirAtendimento" href="./atendimentos.php">
             <span>Atendimentos Pedagógicos</span>
           </a>
         </div>

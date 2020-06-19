@@ -135,7 +135,7 @@ const finalizarReuniao = () => {
       .then((response) => {
         console.log(response);
         showMessage("Deu certo!", "A reunião foi encerrada.", "success");
-        window.location.href = "./reunioes.html";
+        window.location.href = "./reunioes.php";
       })
       .catch((err) => {
         console.error(err);

@@ -221,7 +221,7 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) || !Autenticacao::isConselheir
         </div>
 
         <div class="actions">
-          <a class="button is-small" href="./diagnostica.html">
+          <a class="button is-small" href="./diagnostica.php">
             <span>Avaliação Diagnóstica</span>
           </a>
         </div>

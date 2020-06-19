@@ -68,7 +68,7 @@ const abrirReuniao = () => {
   localStorage.setItem("conselhoAtual", reuniao);
   localStorage.setItem("turmaAtual", turma);
 
-  window.location.href = "./dashboard.html";
+  window.location.href = "./dashboard.php";
 };
 
 const solicitarTurmas = () => {
@@ -132,7 +132,7 @@ const abrirTurma = (params) => {
 	localStorage.setItem("turmaAtual", turma);
 	localStorage.removeItem("conselhoAtual");
 
-	window.location.href = "./turma.html";
+	window.location.href = "./turma.php";
 };
 
 solicitarTurmas();
