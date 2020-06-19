@@ -6,11 +6,11 @@ require_once '../../vendor/autoload.php';
 require_once '../../config.php';
 
 if (!isset($_COOKIE['token'])) {
-  header("Location: ../login.html");
+  header("Location: ../login.php");
 }
 
 if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
-  header("Location: ../login.html?erro=2");
+  header("Location: ../login.php?erro=2");
 }
 
 ?>

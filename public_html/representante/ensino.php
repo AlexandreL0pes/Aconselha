@@ -10,17 +10,17 @@ $r = new Reunioes();
 
 // Verifica a existência da Token
 if (!isset($_COOKIE['token'])) {
-  header("Location: ../login.html");
+  header("Location: ../login.php");
 }
 
 // Verifica se a reunião está em andamento
 if (isset($_COOKIE['token']) && !$r->turma_em_reuniao($_COOKIE['token'])) {
-  header("Location: ../login.html?erro=1");
+  header("Location: ../login.php?erro=1");
 }
 
 // Verifica se o usuário tem permissão para acessar a página
 if (!Autenticacao::isRepresentante($_COOKIE['token']) && !Autenticacao::isViceRepresentante($_COOKIE['token'])) {
-  header("Location: ../login.html?erro=2");
+  header("Location: ../login.php?erro=2");
 }
 ?>
 <!DOCTYPE html>
