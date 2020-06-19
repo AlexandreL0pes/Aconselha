@@ -7138,23 +7138,25 @@ label.panel-block:hover {
  border-bottom-color:#dbdbdb;
  border-bottom-style:solid;
  border-bottom-width:1px;
- color:#4a4a4a;
+ color:#949494;
  display:flex;
  justify-content:center;
  margin-bottom:-1px;
- padding:.5em 1em;
+ padding:.11em 1em;
  vertical-align:top
 }
 .tabs a:hover {
- border-bottom-color:#363636;
- color:#363636
+ /* border-bottom-color:#5d5858;
+ color:#5d5858 */
 }
 .tabs li {
  display:block
 }
 .tabs li.is-active a {
- border-bottom-color:#3273dc;
- color:#3273dc
+ border-bottom-color:#f0b318;
+ border-bottom-width: 2px;
+ /* color:#3273dc */
+ color: #202122
 }
 .tabs ul {
  align-items:center;
