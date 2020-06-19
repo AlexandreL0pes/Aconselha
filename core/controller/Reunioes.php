@@ -163,6 +163,8 @@ class Reunioes
 	public function listarReunioesAndamento($dados = [])
 	{
 
+		$curso_id = (isset($dados['curso'])) ? $dados['curso']  : null;
+
 		$reuniao = new Reuniao();
 
 
@@ -184,27 +186,20 @@ class Reunioes
 		if (count($reunioes) > 0 && !empty($reunioes[0])) {
 
 			// Verifica se existe curso especificado
-			if (isset($dados['curso']) && !empty($dados['curso'])) {
 
-				foreach ($reunioes as $reuniao) {
-					if ($turmas->verificarTurmaCurso($reuniao[Turma::COL_ID], $dados['curso'])) {
-						$turma = $turmas->informacoesTurma(['turma' => $reuniao[Turma::COL_ID]]);
+			foreach ($reunioes as $reuniao) {
+				$turma = $turmas->informacoesTurma(['turma' => $reuniao[Turma::COL_ID]]);
 
-						$turma = json_decode($turma, true);
-						$turma['reuniao'] = $reuniao[Reuniao::COL_ID];
+				$turma = json_decode($turma, true);
+				$turma['reuniao'] = $reuniao[Reuniao::COL_ID];
 
-						array_push($reunioesFiltradas, $turma);
-					}
+
+				if ($curso_id != null && $turmas->verificarTurmaCurso($reuniao[Turma::COL_ID], $curso_id)) {
+					$reunioesFiltradas[] = $turma;
 				}
-			} else {
 
-				foreach ($reunioes as $reuniao) {
-					$turma = $turmas->informacoesTurma(['turma' => $reuniao[Turma::COL_ID]]);
-
-					$turma = json_decode($turma, true);
-					$turma['reuniao'] = $reuniao[Reuniao::COL_ID];
-
-					array_push($reunioesFiltradas, $turma);
+				if ($curso_id == null) {
+					$reunioesFiltradas[] = $turma;
 				}
 			}
 		}
@@ -451,5 +446,68 @@ class Reunioes
 		}
 
 		return $reuniao;
+	}
+
+	/**
+	 * Retorna todas as reuniões que foram encerradas
+	 *
+	 * @param  mixed $dados
+	 * @return void
+	 */
+	public function reunioesEncerradas($dados)
+	{
+		$curso_id = (isset($dados['curso'])) ? $dados['curso']  : null;
+
+		$r = new Reuniao();
+
+
+		$campos = Reuniao::COL_ID . ", " .
+			Reuniao::COL_COD_TURMA . ", " .
+			Reuniao::COL_DATA;
+
+		$busca = [Reuniao::COL_FINALIZADO => '1'];
+		$reunioes = $r->listar($campos, $busca, null, 1000);
+
+
+		$turmas = new Turmas();
+
+		$reunioesFiltradas = [];
+
+		// Caso o curso seja passado, lista apenas as reuniões do curso
+		// Caso não exista curso, todas as reuniões serão retornadas
+
+		// Verifica se existem reuniões retornadas 
+		if (count($reunioes) > 0 && !empty($reunioes[0])) {
+
+			// Verifica se existe curso especificado
+
+			foreach ($reunioes as $reuniao) {
+				$turma = $turmas->informacoesTurma(['turma' => $reuniao[Turma::COL_ID]]);
+
+				$turma = json_decode($turma, true);
+				$turma['reuniao'] = $reuniao[Reuniao::COL_ID];
+
+				// $turma['data'] = ;
+				$data = strtotime($reuniao[Reuniao::COL_DATA]);
+				$data = date('Y', $data);
+
+				$turma['data'] = date('j-m-Y');
+
+
+
+
+				if ($curso_id != null && $turmas->verificarTurmaCurso($reuniao[Turma::COL_ID], $curso_id)) {
+					$reunioesFiltradas[$data][] = $turma;
+				}
+
+				if ($curso_id == null) {
+					$reunioesFiltradas[$data][] = $turma;
+				}
+			}
+		}
+
+
+		http_response_code(200);
+		return json_encode($reunioesFiltradas);
 	}
 }
