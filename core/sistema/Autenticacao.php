@@ -155,7 +155,7 @@ class Autenticacao
 
     public static function isCoordenador($token = null)
     {
-        return Autenticacao::verificarPermissao($token, Autenticacao::CONSELHEIRO);
+        return Autenticacao::verificarPermissao($token, Autenticacao::COORDENADOR);
     }
 
     public static function isRepresentante($token = null)
