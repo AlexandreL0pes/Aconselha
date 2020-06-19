@@ -251,26 +251,14 @@ class Reunioes
 		// Retorna uma lista das turmas que nunca participaram do conselho
 		$turmasForaReuniao = $turmas->turmasForaReuniao($turmasParticipantesReunioesPassadas);
 
+
+		$turmas_fora = array_merge($turmasForaReuniaoAtual, $turmasForaReuniao);
+		$turmas_fora = array_unique($turmas_fora);
+
 		$curso = (isset($dados['curso']) && !empty($dados['curso'])) ? $dados['curso'] : null;
 		$turmasCompletas = [];
 
-		foreach ($turmasForaReuniaoAtual as $t) {
-			$retorno = $turmas->informacoesTurma(['turma' => $t]);
-
-			$retorno = json_decode($retorno, true);
-
-			if ($curso != null) {
-				if ($retorno['codigo_curso'] == $curso) {
-					unset($retorno['codigo_curso']);
-					array_push($turmasCompletas, $retorno);
-				}
-			} else {
-				unset($retorno['codigo_curso']);
-				array_push($turmasCompletas, $retorno);
-			}
-		}
-
-		foreach ($turmasForaReuniao as $t) {
+		foreach ($turmas_fora as $t) {
 			$retorno = $turmas->informacoesTurma(['turma' => $t]);
 
 			$retorno = json_decode($retorno, true);
