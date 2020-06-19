@@ -493,6 +493,8 @@ class Reunioes
 
 				$turma['data'] = date('j-m-Y');
 
+				$turma['etapa_avaliativa'] = 1;
+
 
 
 
