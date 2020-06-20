@@ -433,7 +433,8 @@ class Turmas
         $coef = $t->listar($campos, $busca, null, 1)[0];
 
         if (!empty($coef)) {
-            return $coef[Turma::COL_COEFICIENTE_RENDIMENTO];
+            $coef = round($coef[Turma::COL_COEFICIENTE_RENDIMENTO], 2);
+            return $coef;
         }
         return $coef;
     }
