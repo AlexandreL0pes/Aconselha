@@ -29,6 +29,7 @@ class Turmas
         }
 
 
+        $coef_geral = $this->obterCoeficienteGeral($dados['turma']);
         $campos = Turma::COL_ID . ", " .
             Turma::COL_DESC_TURMA . ", " .
             Turma::COL_CURSO;
@@ -47,7 +48,8 @@ class Turmas
                 'codigo' => $codigoTurma,
                 'nome' => $nomeTurma,
                 'curso' => $cursoTurma,
-                'codigo_curso' => $retornoTurma[Turma::COL_CURSO]
+                'codigo_curso' => $retornoTurma[Turma::COL_CURSO],
+                'coeficiente_geral' => $coef_geral
             ];
 
             http_response_code(200);
@@ -415,9 +417,12 @@ class Turmas
      * @param  mixed $dados
      * @return array
      */
-    public function obterCoeficienteGeral($dados = [])
+    public function obterCoeficienteGeral($turma_id = null)
     {
-        $turma_id = $dados['turma'];
+
+        if (!isset($turma_id)) {
+            throw new \Exception("É necessário informar o id da turma");
+        }
 
         $campos = " AVG(" . Turma::COL_COEFICIENTE_RENDIMENTO . ") COEFICIENTE_RENDIMENTO ";
 
@@ -427,6 +432,9 @@ class Turmas
 
         $coef = $t->listar($campos, $busca, null, 1)[0];
 
+        if (!empty($coef)) {
+            return $coef[Turma::COL_COEFICIENTE_RENDIMENTO];
+        }
         return $coef;
     }
 }
