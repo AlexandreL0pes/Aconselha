@@ -23,7 +23,6 @@ class Turmas
         // Caso a token seja passada, usar ela, caso não use o id
         if (isset($dados['token']) && !isset($dados['turma'])) {
             $token = $dados['token'];
-            $token = $dados['token'];
             $codigoTurma = Autenticacao::obterTurma($token);
         } else {
             $codigoTurma = $dados['turma'];
