@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Turma</title>
     <link rel="stylesheet" href="../assets/css/index.css" />
-    <link rel="stylesheet" href="../assets/css/dashboard.css" />
+    <link rel="stylesheet" href="../assets/css/turma.css" />
     <link rel="stylesheet" href="../assets/css/modals.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="../assets/css/bulma.min.css" />
+
+    <style>
+      </style> 
   </head>
   <body>
     <div class="grid-container">
@@ -120,25 +123,37 @@
       <!-- Sidebar Mobile -->
 
       <main class="main">
-        <div class="content" id="tabs-with-content">
-          <div class="tabs">
-            <ul>
-              <li class="is-active"><a>Turma</a></li>
-            </ul>
+        <section class="head">
+          <div class="detalhes">
+            <p class="principal">
+              Visão Geral - Turma
+            </p>
+            <p class="descricao">
+              Bem-vindo de volta, Usuário.
+            </p>
           </div>
-          <div>
-            <section class="tab-content">Em desenvolvimento</section>
+        </section>
+        <section class="overview">
+          <div class="card-info">
+            <p class="descricao">Alunos</p>
+            <p class="resultado">35</p>
           </div>
-        </div>
-        <aside class="side">
-          <div class="turma-info">
-            <span>
-              <span name="turma" id="nome">3° B</span> -
-              <span name="curso" id="curso">Informática para Internet</span>
-            </span>
-            <span class="gray-text" id="codigo">20201.03INI10I.3B</span>
+          <div class="card-info">
+            <p class="descricao">Experiências</p>
+            <p class="resultado">199</p>
           </div>
-        </aside>
+          <div class="card-info">
+            <p class="descricao">Experiências</p>
+            <p class="resultado">199</p>
+          </div>
+          <div class="card-info">
+            <p class="descricao">Ensino-Aprendizado</p>
+            <p class="resultado">54</p>
+          </div>
+        </section>
+        <section class="alunos">
+          <h1 class="principal">Estudante</h1>
+        </section>
       </main>
 
       <footer class="footer">
@@ -154,7 +169,6 @@
           </p>
         </div>
       </footer>
-
     </div>
     <div class="toasts" id="toasts"></div>
   </body>
