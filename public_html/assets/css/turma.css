@@ -1,21 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap");
 
 .main {
-  grid-template-rows: 1fr 2fr 5fr;
+  grid-template-rows: 0.3fr 2fr 5fr;
 }
 
 .detalhes {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-.detalhes .principal{
+.detalhes .principal {
   font-size: 1.2rem !important;
   font-weight: 500;
 }
 .detalhes .descricao {
-  font-size: .95rem;
+  font-size: 0.95rem;
   color: #909090;
-  font-weight: 300; 
+  font-weight: 300;
   padding-left: 5px;
 }
 .overview {
@@ -47,9 +47,7 @@
   font-weight: 500;
   color: #242222;
   padding-left: 10px;
-
 }
-
 
 .alunos {
   padding-left: 5px;
@@ -57,5 +55,58 @@
 .alunos h1 {
   font-size: 1.3rem !important;
   font-weight: 400;
-  
+  font-family: "Poppins", sans-serif;
+}
+
+.overview-alunos {
+  /* display: flex;
+  column-gap: 5px;
+
+  align-items: baseline;
+
+  flex-flow: row wrap ;
+  justify-content: space-between; */
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  align-items: center;
+  justify-items: center;
+}
+
+.baixo {
+  border-top: 2px solid #f03f3f !important;
+}
+
+.medio {
+  border-top:2px solid #afa734 !important;
+}
+
+.alto {
+  border-top: 2px solid #54f03f !important;
+}
+
+.cardbox {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  background-color: #fff;
+  border-radius: 2px;
+  color: #222424;
+  margin: 0px;
+  padding: 5px;
+  row-gap: 5px;
+  box-shadow: 5px 11px 11px 5px rgba(0, 0, 0, 0.13);
+  transition: box-shadow ease-in-out 0.4s;
+  cursor: pointer;
+  text-justify: center;
+  text-align: center;
+}
+
+.lista-estudantes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: minmax(100px, 1fr);
+  grid-gap: 10px;
+  margin: 20px 10px;
 }
