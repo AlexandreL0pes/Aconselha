@@ -111,11 +111,11 @@ class Turmas
 
         $aluno = new Aluno();
         $campos = "MATRICULAS.MATRICULA as matricula, " .
-            "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome";
+            "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome, " . 
+            " ROUND(COEFICIENTE_RENDIMENTO ,1) as coeficiente_rendimento ";
 
         $busca = [Aluno::COL_COD_TURMA_ATUAL => $turma];
         $alunos = $aluno->listar($campos, $busca, null, null);
-
         $retorno = [];
 
 
