@@ -149,7 +149,7 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
                 <div class="titulo-avaliacoes">
                   Experiências
                   <a class="mostrar-tudo">Mostrar mais
-                    <i class="fas fa-angle-up" aria-hidden="true"></i></a>
+                    <i class="fas fa-angle-down" aria-hidden="true"></i></a>
                 </div>
 
                 <div id="experiencias" class="avaliacoes"></div>
