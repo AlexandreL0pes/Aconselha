@@ -135,6 +135,7 @@
 .card-info {
   /* font-size: 0.8em;
     border: solid 2px red; */
+    box-shadow: 0 5px 5px 4px rgba(0, 0, 0, 0.1);
   font-size: 0.9em;
   font-weight: 300;
 }
