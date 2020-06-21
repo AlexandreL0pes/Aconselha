@@ -109,8 +109,7 @@ if (!Autenticacao::isRepresentante($_COOKIE['token']) && !Autenticacao::isViceRe
             <span class="" id="qtdAvaliacoes">3</span>
           </p>
         </div>
-      </div>
-      <div class="pesquisa">
+        <div class="pesquisa">
           <div class="field has-addons tipos">
             <p class="control">
               <button class="button is-small" id="filtrarEnsino">
@@ -129,6 +128,8 @@ if (!Autenticacao::isRepresentante($_COOKIE['token']) && !Autenticacao::isViceRe
             </p>
           </div>
         </div>
+      </div>
+
 
       <div class="avaliacoes"></div>
     </main>

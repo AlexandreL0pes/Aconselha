@@ -110,17 +110,8 @@
 }
 
 .descricao {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  margin-top: 20px;
-  margin-bottom: 10px;
-  column-gap: 50px;
-  row-gap: 10px;
-}
-.descricao > * {
-  flex: 1;
+  flex-flow: column;
+  margin-top: 30px;
 }
 
 .resultadoSelecionado {
@@ -151,7 +142,7 @@
   margin: 0px;
   padding: 20px 20px;
   grid-gap: 3px;
-  box-shadow: 0 11px 11px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 5px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow ease-in-out 0.4s;
 }
 
