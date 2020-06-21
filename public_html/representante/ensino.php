@@ -66,22 +66,6 @@ if (!Autenticacao::isRepresentante($_COOKIE['token']) && !Autenticacao::isViceRe
         <i class="fas fa-times sidenav__brand-close"></i>
       </div>
       <ul class="sidenav__list-mobile">
-        <li class="sidenav__list-item-mobile estudantes">
-          <img src="../assets/images/student.svg" alt="" class="icone" />
-          <p class="sidenav-item-text">Alunos</p>
-        </li>
-        <li class="sidenav__list-item-mobile turmas">
-          <img src="../assets/images/grupo.svg" alt="" class="icone" />
-          <p class="sidenav-item-text">Turmas</p>
-        </li>
-        <li class="sidenav__list-item-mobile reunioes">
-          <img src="../assets/images/reunion.svg" alt="" class="icone" />
-          <p class="sidenav-item-text">Conselhos Anteriores</p>
-        </li>
-        <li class="sidenav__list-item-mobile config">
-          <img src="../assets/images/config.svg" alt="" class="icone" />
-          <p class="sidenav-item-text">Configurações</p>
-        </li>
       </ul>
       <div class="item-sair">
         <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
@@ -125,7 +109,8 @@ if (!Autenticacao::isRepresentante($_COOKIE['token']) && !Autenticacao::isViceRe
             <span class="" id="qtdAvaliacoes">3</span>
           </p>
         </div>
-        <div class="pesquisa">
+      </div>
+      <div class="pesquisa">
           <div class="field has-addons tipos">
             <p class="control">
               <button class="button is-small" id="filtrarEnsino">
@@ -144,9 +129,7 @@ if (!Autenticacao::isRepresentante($_COOKIE['token']) && !Autenticacao::isViceRe
             </p>
           </div>
         </div>
-        <div class="flex align-end">
-        </div>
-      </div>
+
       <div class="avaliacoes"></div>
     </main>
 
