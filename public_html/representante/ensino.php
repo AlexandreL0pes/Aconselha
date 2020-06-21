@@ -53,18 +53,6 @@ if (!Autenticacao::isRepresentante($_COOKIE['token']) && !Autenticacao::isViceRe
         <li class="sidenav__list-item first-item">
           <img src="../assets/images/logo_sadc.svg" alt="" class="logo-icon" />
         </li>
-        <li class="sidenav__list-item estudantes">
-          <img src="../assets/images/student.svg" alt="" class="icone" />
-        </li>
-        <li class="sidenav__list-item turmas">
-          <img src="../assets/images/grupo.svg" alt="" class="icone" />
-        </li>
-        <li class="sidenav__list-item reunioes">
-          <img class="icone" src="../assets/images/reunion.svg" alt="" />
-        </li>
-        <li class="sidenav__list-item config">
-          <img class="icone" src="../assets/images/config.svg" alt="" />
-        </li>
       </ul>
       <div class="item-sair">
         <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
