@@ -276,24 +276,42 @@ export const listarDiagnosticas = () => {
 export const listarPreviaDiagnosticas = () => {
   solicitarDiagnosticas()
     .then((diagnosticas) => {
-      console.log("> Listando Prévia Diagnóstica!");
-      gerarPreviaDiagnostica(diagnosticas);
-      mostrarMenos();
+      console.log(diagnosticas.length);
+      if (diagnosticas.length > 0) {
+        console.log(asd);
+        console.log("> Listando Prévia Diagnóstica!");
+        gerarPreviaDiagnostica(diagnosticas);
+        mostrarMenos();
 
-      // Contabiliza as ocorrências negativas e positivas
-      const negativas = diagnosticas.filter((value) => value.tipo === "false");
-      const positivas = diagnosticas.filter((value) => value.tipo === "true");
-      atualizarResultados("positivos", positivas.length);
-      atualizarResultados("negativos", negativas.length);
+        // Contabiliza as ocorrências negativas e positivas
+        const negativas = diagnosticas.filter(
+          (value) => value.tipo === "false"
+        );
+        const positivas = diagnosticas.filter((value) => value.tipo === "true");
+        atualizarResultados("positivos", positivas.length);
+        atualizarResultados("negativos", negativas.length);
 
-      localStorage.setItem(
-        "diagnosticasRelevantes",
-        JSON.stringify(diagnosticas)
-      );
+        localStorage.setItem(
+          "diagnosticasRelevantes",
+          JSON.stringify(diagnosticas)
+        );
+      } else {
+        nenhumaAvaliacao();
+      }
     })
     .catch((err) => {
       console.error(err);
     });
+};
+
+const nenhumaAvaliacao = () => {
+  const diagnosticas = document.getElementById("diagnosticas");
+  const div = document.createElement("div");
+  div.classList.add("nenhum-resultado");
+  div.innerText = "Nenhuma avaliação foi encontrada!";
+  atualizarResultados("negativos",0);
+  atualizarResultados("positivos",0);
+  diagnosticas.append(div);
 };
 
 export default () => {

@@ -275,3 +275,8 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
+
+.nenhum-resultado {
+  grid-column: span 2;
+  font-size: 0.85em;
+}

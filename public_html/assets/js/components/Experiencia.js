@@ -58,14 +58,28 @@ export const listarExperiencias = () => {
 export const listarPreviaExperiencias = () => {
   solicitarExperiencias()
     .then((experiencias) => {
-      console.log("> Listando Prévia!");
-      gerarPreviaExperiencia(experiencias);
-      mostrarMenos();
-      atualizarResultados(experiencias.length);
+      if (experiencias.length > 0) {
+        console.log("> Listando Prévia!");
+        gerarPreviaExperiencia(experiencias);
+        mostrarMenos();
+        atualizarResultados(experiencias.length);
+  
+      }else{
+        nenhumaAvaliacao(0);
+      }
     })
     .catch((err) => {
       console.error(err);
     });
+};
+
+const nenhumaAvaliacao = () => {
+  const diagnosticas = document.getElementById("experiencias");
+  const div = document.createElement("div");
+  div.classList.add("nenhum-resultado");
+  div.innerText = "Nenhuma experiência foi encontrada!";
+  atualizarResultados(0);
+  diagnosticas.append(div);
 };
 
 /**

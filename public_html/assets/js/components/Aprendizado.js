@@ -84,14 +84,27 @@ export const listarAprendizados = () => {
 export const listarPreviaAprendizados = () => {
   solicitarAprendizados()
     .then((aprendizados) => {
-      console.log("> Listando Prévia Aprendizado!");
-      gerarPreviaAprendizados(aprendizados);
-      mostrarMenos();
-      atualizarResultados(aprendizados.length);
+      if (aprendizados.length > 0) {
+        console.log("> Listando Prévia Aprendizado!");
+        gerarPreviaAprendizados(aprendizados);
+        mostrarMenos();
+        atualizarResultados(aprendizados.length);  
+      }else{
+        nenhumaAvaliacao();
+      }
     })
     .catch((err) => {
       console.error(err);
     });
+};
+
+const nenhumaAvaliacao = () => {
+  const aprendizados = document.getElementById("aprendizados");
+  const div = document.createElement("div");
+  div.classList.add("nenhum-resultado");
+  div.innerText = "Nenhuma dificuldade de aprendizado foi encontrada!";
+  atualizarResultados(0);
+  aprendizados.append(div);
 };
 
 /**
