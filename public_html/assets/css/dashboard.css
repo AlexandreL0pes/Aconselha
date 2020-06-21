@@ -58,7 +58,7 @@
   font-weight: 300;
   grid-template-columns: 1fr;
   /* grid-template-rows: repeat(auto-fill, minmax(20px, 1fr)); */
-  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
   grid-gap: 0px;
 }
 
@@ -75,6 +75,7 @@
   font-weight: 300;
   font-size: 0.75em;
   padding: 5px 10px;
+  
 }
 
 .reuniao-info > div {
