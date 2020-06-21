@@ -29,7 +29,7 @@ class Turmas
         }
 
 
-        $coef_geral = $this->obterCoeficienteGeral($dados['turma']);
+        $coef_geral = $this->obterCoeficienteGeral($codigoTurma);
         $campos = Turma::COL_ID . ", " .
             Turma::COL_DESC_TURMA . ", " .
             Turma::COL_CURSO;
