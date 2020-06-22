@@ -32,7 +32,7 @@
   padding-left: 10px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .turma-info > div:first-child {
