@@ -537,3 +537,7 @@ img.icone {
     opacity: 1;
   }
 }
+
+.debug { 
+  border: 1px solid #9e46f1;
+}
