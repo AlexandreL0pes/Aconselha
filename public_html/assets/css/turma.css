@@ -18,35 +18,133 @@
   font-weight: 300;
   padding-left: 5px;
 }
+
 .overview {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 20px;
-
-  padding: 20px 20px;
+  column-gap: 5px;
+  row-gap: 15px;
 }
 
-.overview .card-info {
-  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  padding: 10px 20px;
+.info {
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-left: 10px;
   display: flex;
-  flex-flow: column;
-  align-items: left;
-  align-self: center;
-  font-family: "Popins", sans-serif;
+  justify-content: center;
+  align-items: center;
 }
 
-.overview .card-info .descricao {
-  font-size: 0.9rem;
+.turma-info > div:first-child {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.turma-info .conselheiro {
+  font-size: 0.95rem;
+  color: #909090;
+}
+.turma-info .cod-turma {
+  font-size: 0.85rem;
+  color: #909090;
+}
+
+.turma-info {
+  flex-grow: 1;
+  display: grid;
+  align-items: center;
+  justify-items: left;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  background-color: #fff;
+  border-radius: 2px;
+  color: #080808;
+  margin: 0px;
+  padding: 15px 15px;
+  grid-gap: 2px;
+  box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+
+  font-size: 0.8rem;
+}
+
+/* Estatísticas Turma  */
+.estatistica-turma {
+  display: grid;
+  row-gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(50px, 70px);
+  column-gap: 5px;
+}
+
+.estatistica-turma .card-info {
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-family: "Popins", sans-serif;
+
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  grid-gap: 0px;
+
+  align-items: center;
+
+  padding: 5px 10px;
+}
+
+.estatistica-turma .card-info .descricao {
+  font-size: 0.8rem;
   color: #909090;
   font-weight: 300;
 }
-.overview .card-info .resultado {
-  font-size: 1.6rem;
+.estatistica-turma .card-info .resultado {
+  font-size: 1.2rem;
   font-weight: 500;
-  color: #242222;
+  padding: 0px;
   padding-left: 10px;
+}
+
+.estatistica-turma .card-info.experiencia {
+  border-left: 2px solid;
+  border-left-color: #7b61b2;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.estatistica-turma .card-info.experiencia .resultado {
+  color: #7b61b2;
+}
+
+.estatistica-turma .card-info.coef-geral {
+  border-left: 2px solid;
+  border-left-color: #3aafae;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.estatistica-turma .card-info.coef-geral .resultado {
+  color: #3aafae;
+}
+.estatistica-turma .card-info.aprendizado {
+  border-left: 2px solid;
+  border-left-color: #ffa751;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.estatistica-turma .card-info.aprendizado .resultado {
+  color: #ffa751;
+}
+
+.card-info.medidas {
+  border-left: 2px solid;
+  border-left-color: #b4ff51;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.card-info.medidas .resultado {
+  color: #92ce45;
+}
+/* Estatísticas Turma  */
+
+.overview .chart {
+  border: solid 2px purple;
 }
 
 .alunos {
@@ -59,14 +157,6 @@
 }
 
 .overview-alunos {
-  /* display: flex;
-  column-gap: 5px;
-
-  align-items: baseline;
-
-  flex-flow: row wrap ;
-  justify-content: space-between; */
-
   display: grid;
 
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -79,7 +169,7 @@
 }
 
 .medio {
-  border-top:2px solid #afa734 !important;
+  border-top: 2px solid #afa734 !important;
 }
 
 .alto {
@@ -95,7 +185,7 @@
   color: #222424;
   margin: 0px;
   padding: 5px;
-  box-shadow: 5px 11px 11px 5px rgba(0, 0, 0, 0.13);
+  box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.1);
   transition: box-shadow ease-in-out 0.4s;
   cursor: pointer;
   text-justify: center;
