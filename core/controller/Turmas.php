@@ -8,6 +8,7 @@ use core\model\Professor;
 use core\model\Turma;
 use core\model\Usuario;
 use core\sistema\Autenticacao;
+use core\sistema\Util;
 
 class Turmas
 {
@@ -463,24 +464,15 @@ class Turmas
         ];
 
 
-        // > 8.0 -> Coeficiente Alto
-        // >= 6.5 && < 8.0 -> Coeficiente médio
-        // < 6.5 -> Coeficiente Baixo
-        if (count($coef_rendimento) > 0 && !empty($coef_rendimento[0])) {
 
+        if (count($coef_rendimento) > 0 && !empty($coef_rendimento[0])) {
             foreach ($coef_rendimento as $c) {
-                if ($c[Aluno::COL_COEFICIENTE_RENDIMENTO] < 6.5) {
-                    $coef['baixo']++;
-                } else if ($c[Aluno::COL_COEFICIENTE_RENDIMENTO] >=  8.0) {
-                    $coef['alto']++;
-                } else {
-                    $coef['medio']++;
-                }
+                $classificacao = Util::classificarCoeficiente($c[Aluno::COL_COEFICIENTE_RENDIMENTO]);
+                $coef[$classificacao]++;
             }
         }
 
         http_response_code(200);
-
         return json_encode($coef);
     }
 }

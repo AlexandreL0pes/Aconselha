@@ -85,4 +85,29 @@ class Util
         $dt = explode(":", $dt[1]);
         return $dt[2];
     }
+
+    /**
+     * Retorna a classificação do coeficiente do estudante
+     *
+     * @param  mixed $coeficiente
+     * @return void
+     */
+    public static function classificarCoeficiente($coeficiente)
+    {
+
+        $classificacao = null;
+
+        // > 8.0 -> Coeficiente Alto
+        // >= 6.5 && < 8.0 -> Coeficiente médio
+        // < 6.5 -> Coeficiente Baixo
+        if ($coeficiente < 6.5) {
+            $classificacao =  'baixo';
+        } else if ($coeficiente >=  8.0) {
+            $classificacao =  'alto';
+        } else {
+            $classificacao =  'medio';
+        }
+
+        return $classificacao;
+    }
 }
