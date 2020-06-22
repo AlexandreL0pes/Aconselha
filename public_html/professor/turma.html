@@ -165,7 +165,27 @@
               <p class="resultado">54</p>
             </div>
           </div>
-          <div class="chart"></div>
+          <div class="chart">
+            <p class="descricao">Coeficiente Geral</p>
+            <div class="canvas-chart">
+
+              <canvas id="myChart"></canvas>
+            </div>
+            <div class="legenda">
+              <div class="alto">
+                <span class="cor"></span>
+                <span class="text">Alto</span>
+              </div> 
+              <div class="medio">
+                <span class="cor"></span>
+                <span class="text">Médio</span>
+              </div>
+              <div class="baixo">
+                <span class="cor"></span>
+                <span class="text">Baixo</span>
+              </div>
+            </div>
+          </div>
         </section>
         <section class="alunos">
           <h1 class="principal">Estudantes</h1>
@@ -196,5 +216,8 @@
     <div class="toasts" id="toasts"></div>
   </body>
   <script src="../assets/js/index.js" type="module"></script>
+  <script src="../assets/js/turma.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  
   <!-- <script src="../assets/js/atendimentos.js" type="module"></script> -->
 </html>
