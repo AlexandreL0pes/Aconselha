@@ -40,13 +40,28 @@
   font-weight: 400;
 }
 
-.turma-info .conselheiro {
-  font-size: 0.95rem;
-  color: #909090;
-}
 .turma-info .cod-turma {
+  padding: 2px;
   font-size: 0.85rem;
   color: #909090;
+}
+
+.turma-info .conselheiro {
+
+  font-size: 0.95rem;
+  color: #313131;
+}
+.turma-info .representante {
+  padding-left: 2px;
+
+  font-size: 0.9rem;
+  color: #726f6f;
+}
+.turma-info .vice-representante {
+  padding-left: 2px;
+
+  font-size: 0.9rem;
+  color: #726f6f;
 }
 
 .turma-info {
@@ -99,7 +114,7 @@
   font-weight: 300;
 }
 .estatistica-turma .card-info .resultado {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 500;
   padding: 0px;
   padding-left: 10px;
@@ -155,7 +170,6 @@
   border-radius: 15px;
   box-shadow: 0 3px 3px 4px rgba(0, 0, 0, 0.06);
   transition: box-shadow ease-in-out 0.4s;
-
 }
 
 .chart .descricao {
@@ -268,4 +282,9 @@
   grid-auto-rows: minmax(100px, 1fr);
   grid-gap: 10px;
   margin: 20px 10px;
+}
+
+.separator {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
