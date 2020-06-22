@@ -102,7 +102,7 @@ class Util
         // < 6.5 -> Coeficiente Baixo
         if ($coeficiente < 6.5) {
             $classificacao =  'baixo';
-        } else if ($coeficiente >=  8.0) {
+        } else if ($coeficiente >=  8.5) {
             $classificacao =  'alto';
         } else {
             $classificacao =  'medio';
