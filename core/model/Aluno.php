@@ -12,6 +12,7 @@ class Aluno extends CRUD
     const COL_MATRICULA = "MATRICULA";
     const COL_NOME_PESSOA = "NOME_PESSOA";
     const COL_COD_TURMA_ATUAL = "COD_TURMA_ATUAL";
+    const COL_COEFICIENTE_RENDIMENTO = "COEFICIENTE_RENDIMENTO";
 
     public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
     {
@@ -47,10 +48,7 @@ class Aluno extends CRUD
                 $tabela = self::TABELA .
                     " INNER JOIN MATRICULAS ON ALUNOS.COD_ALUNO = MATRICULAS.COD_ALUNO " .
                     " INNER JOIN PESSOAS ON ALUNOS.COD_PESSOA = PESSOAS.COD_PESSOA ";
-
             }
-
-
         }
 
         $retorno = [];

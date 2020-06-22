@@ -111,7 +111,7 @@ class Turmas
 
         $aluno = new Aluno();
         $campos = "MATRICULAS.MATRICULA as matricula, " .
-            "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome, " . 
+            "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome, " .
             " ROUND(COEFICIENTE_RENDIMENTO ,1) as coeficiente_rendimento ";
 
         $busca = [Aluno::COL_COD_TURMA_ATUAL => $turma];
@@ -437,5 +437,50 @@ class Turmas
             return $coef;
         }
         return $coef;
+    }
+
+    public function obterQuantidadeConficienteGeral($dados = [])
+    {
+        if (!isset($dados['turma'])) {
+            throw new \Exception("É necessário informar o id da turma");
+        }
+
+
+
+        $campos = Aluno::COL_COEFICIENTE_RENDIMENTO;
+        $busca = [
+            Aluno::COL_COD_TURMA_ATUAL => $dados['turma']
+        ];
+
+        $a = new Aluno();
+        $coef_rendimento = $a->listar($campos, $busca, null, null);
+
+
+        $coef = [
+            'alto' => 0,
+            'medio' => 0,
+            'baixo' => 0
+        ];
+
+
+        // > 8.0 -> Coeficiente Alto
+        // >= 6.5 && < 8.0 -> Coeficiente médio
+        // < 6.5 -> Coeficiente Baixo
+        if (count($coef_rendimento) > 0 && !empty($coef_rendimento[0])) {
+
+            foreach ($coef_rendimento as $c) {
+                if ($c[Aluno::COL_COEFICIENTE_RENDIMENTO] < 6.5) {
+                    $coef['baixo']++;
+                } else if ($c[Aluno::COL_COEFICIENTE_RENDIMENTO] >=  8.0) {
+                    $coef['alto']++;
+                } else {
+                    $coef['medio']++;
+                }
+            }
+        }
+
+        http_response_code(200);
+
+        return json_encode($coef);
     }
 }
