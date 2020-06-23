@@ -6,6 +6,7 @@ use core\model\Experiencia;
 use core\model\DisciplinaExperiencia;
 use core\model\Classificacao;
 use core\model\Perfil;
+use core\model\Turma;
 
 class Experiencias
 {
@@ -258,6 +259,46 @@ class Experiencias
         $campos = "e." . Experiencia::COL_ID . ", " . Experiencia::COL_ID_REUNIAO . ", " . Experiencia::COL_TITULO . " c." . Classificacao::COL_NOME;
         $campos = "e.*, c." . Classificacao::COL_NOME;
         $busca = [Experiencia::COL_ID_REUNIAO => $reuniao_id];
+
+        $experiencia = new Experiencia();
+        $experiencias = $experiencia->listar($campos, $busca, null, 1000);
+
+        $retorno = [];
+
+        if (!empty($experiencias) && !empty($experiencias[0])) {
+            foreach ($experiencias as $experiencia) {
+                $disciplinas = $this->disciplinasExperiencia($experiencia[Experiencia::COL_ID]);
+                $classificacao = $experiencia[Classificacao::COL_NOME];
+
+                array_push($retorno, [
+                    "experiencia" => $experiencia[Experiencia::COL_ID],
+                    "titulo" => $experiencia[Experiencia::COL_TITULO],
+                    "classificacao" => $classificacao,
+                    "disciplinas" => $disciplinas
+                ]);
+            }
+        }
+
+        http_response_code(200);
+        return json_encode($retorno);
+    }
+
+    /**
+     * Retorna todas as Experiências de uma turma
+     *
+     * @param  mixed $dados
+     * @return void
+     */
+    public function listarExperienciasTurma($dados)
+    {
+        if (!isset($dados['turma'])) {
+            throw new \Exception("É necessário informar o id da turma");
+        }
+
+        $turma_id = $dados['turma'];
+
+        $campos = Experiencia::TABELA . "." . Experiencia::COL_ID . ", " . Experiencia::COL_ID_REUNIAO . ", " . Experiencia::COL_TITULO . ", " . Classificacao::COL_NOME;
+        $busca = [Turma::COL_ID => $turma_id];
 
         $experiencia = new Experiencia();
         $experiencias = $experiencia->listar($campos, $busca, null, 1000);
