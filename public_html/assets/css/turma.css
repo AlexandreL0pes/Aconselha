@@ -3,7 +3,8 @@
   --medida-disciplinar-color: #b4ff51;
 }
 .main {
-  grid-template-rows: 0.3fr 2fr 3fr 5fr;
+  grid-template-rows: 0.3fr 3fr 4fr 5fr;
+  margin: 15px;
 }
 
 .detalhes {
@@ -239,8 +240,14 @@
 .medidas-avaliacao {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  padding: 10px 10px;
+  padding: 10px 5px;
+  grid-gap: 30px;
 }
+
+.medidas-avaliacao .medidas {
+  grid-column: span 2;
+}
+
 .titulo-medidas {
   margin-bottom: 0.6rem;
   display: flex;
@@ -320,6 +327,44 @@
   font-weight: 400;
 }
 /* Medidas */
+
+/* Diagnósticas  */
+.avaliacoes-diagnostica {
+  /* padding: 10px 10px; */
+}
+.avaliacoes-diagnostica h1 {
+  margin-bottom: 15px;
+}
+.avaliacoes-diagnostica .avaliacoes {
+  display: flex;
+  flex-flow: wrap;
+  gap: 3px;
+  row-gap: 5px;
+  padding: 5px;
+}
+
+.chip {
+  font-size: 1rem;
+  border-radius: 40px;
+  padding: 5px 10px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  align-self: center;
+}
+.chip.negativo {
+  /* border: 1px solid rgb(240, 55, 55); */
+  background: rgb(255, 0, 0);
+  color: #fff;
+}
+.chip.positivo {
+  /* border: 1px solid rgb(61, 61, 194); */
+  background: rgb(49, 49, 255);
+  color: #fff;
+}
+/* Diagnósticas  */
 
 /* Alunos */
 .alunos {
