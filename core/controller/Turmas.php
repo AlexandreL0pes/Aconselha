@@ -440,6 +440,13 @@ class Turmas
         return $coef;
     }
 
+    /**
+     * Retorna a classificação das notas dos estudantes
+     * 
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function obterQuantidadeConficienteGeral($dados = [])
     {
         if (!isset($dados['turma'])) {
@@ -474,5 +481,51 @@ class Turmas
 
         http_response_code(200);
         return json_encode($coef);
+    }
+
+
+    /**
+     * Retorna as estatísticas de uma turma, sendo elas: 
+     * - Coeficiente Geral
+     * - Quantidade de Experiências
+     * - Quantidade de Ensino-Aprendizado
+     * - Quantidade de Medidas Disciplinares
+     * @param  mixed $dados
+     * @return array
+     */
+    public function obterEstatistica($dados = [])
+    {
+        if (!isset($dados['turma'])) {
+            throw new \Exception("É necessário informar o id da turma");
+        }
+
+        // Obter Coeficiente Geral
+        $coeficiente_geral = $this->obterCoeficienteGeral($dados['turma']);
+
+        // Obter quantidade de ensino-aprendizado
+        $a = new Aprendizados();
+        $aprendizados_turma = $a->listarAprendizadosTurma($dados);
+        $aprendizados_turma = json_decode($aprendizados_turma, true);
+        $aprendizados_turma = count($aprendizados_turma);
+
+        // Obter Quantidade de experiencias
+        $e = new Experiencias();
+        $experiencias_turma = $e->listarExperienciasTurma($dados);
+        $experiencias_turma = json_decode($experiencias_turma, true);
+        $experiencias_turma = count($experiencias_turma);
+
+        // Quantidade Medias disciplinares
+        $md = new MedidasDisciplinares();
+        $medidas_turma = $md->listarMedidasTurma($dados['turma']);
+        $medidas_turma = count($medidas_turma);
+
+        $estatisticas = [
+            'coeficiente_geral' => $coeficiente_geral,
+            'aprendizados' => $aprendizados_turma,
+            'experiencias' => $experiencias_turma,
+            'medidas_disciplinares' => $medidas_turma
+        ];
+
+        return json_encode($estatisticas);
     }
 }
