@@ -932,6 +932,32 @@ create table DISCIPLINAS_MATRIZES_CURRICULARES
 )
 go
 
+create table MEDIDAS_DISCIPLINARES
+(
+	COD_MEDIDA_DISCIPLINAR int not null
+			primary key,
+	COD_MATRICULA int,
+	COD_TIPO_MEDIDA_DISCIPLINAR int not null,
+	DT_MEDIDA_DISCIPLINAR smalldatetime not null,
+	OBSERVACOES varchar(4000),
+	TIPO_USUARIO tinyint not null,
+	COD_PROFESSOR int,
+	COD_FUNCIONARIO int
+
+)
+go
+
+create table TIPOS_MEDIDAS_DISCIPLINARES
+(
+	COD_TIPO_MEDIDA_DISCIPLINAR int not null
+			primary key,
+	DESC_TIPO_MEDIDA_DISCIPLINAR varchar(70) not null,
+	CONTEUDO_CONTROLADO tinyint not null,
+	TIPO_USUARIO tinyint not null
+)
+go
+
+
 
 
 
