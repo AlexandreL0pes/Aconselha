@@ -140,7 +140,10 @@ class Turmas
 
 
         if (count($alunos) > 0) {
-            $retorno = $alunos;
+            foreach ($alunos as $aluno) {
+                $aluno['classificacao'] = Util::classificarCoeficiente($aluno['coeficiente_rendimento']);
+                $retorno[] = $aluno;
+            }
         }
 
         http_response_code(200);
@@ -548,7 +551,7 @@ class Turmas
 
         return json_encode($estatisticas);
     }
-    
+
     /**
      * Lista as medidas disciplinares de uma turma
      *
