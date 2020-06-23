@@ -3,7 +3,7 @@
   --medida-disciplinar-color: #b4ff51;
 }
 .main {
-  grid-template-rows: 0.3fr 2fr 2fr 5fr;
+  grid-template-rows: 0.3fr 2fr 3fr 5fr;
 }
 
 .detalhes {
@@ -240,17 +240,30 @@
 .medidas-avaliacao {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  padding: 10px 10px;
 }
-
+.titulo-medidas {
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5px;
+  align-items: baseline;
+}
 .medidas-avaliacao h1 {
-  font-size: 1.1rem !important;
+  font-size: 1rem !important;
   font-weight: 400;
   font-family: "Poppins", sans-serif !important;
+}
+.mostrar-tudo {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #222424;
+  align-self: center;
 }
 
 .lista-medidas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr)) ;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: minmax(50px, 70px);
   grid-gap: 10px;
 
