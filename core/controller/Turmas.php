@@ -9,6 +9,7 @@ use core\model\Turma;
 use core\model\Usuario;
 use core\sistema\Autenticacao;
 use core\sistema\Util;
+use DateTime;
 
 class Turmas
 {
@@ -496,7 +497,8 @@ class Turmas
     public function obterEstatistica($dados = [])
     {
         if (!isset($dados['turma'])) {
-            throw new \Exception("É necessário informar o id da turma");
+            http_response_code(400);
+            return json_encode(array('message' => 'É necessário informar a turma.'));
         }
 
         // Obter Coeficiente Geral
@@ -527,5 +529,37 @@ class Turmas
         ];
 
         return json_encode($estatisticas);
+    }
+
+    public function obterMedidasDisciplinares($dados)
+    {
+        if (!isset($dados['turma'])) {
+            http_response_code(400);
+            return json_encode(array('message' => 'É necessário informar a turma.'));
+        }
+
+        $md = new MedidasDisciplinares();
+
+        $medidas = $md->listarMedidasTurma($dados['turma']);
+
+        $medidas_completas = [];
+
+        $a = new Alunos();
+
+
+        if (count($medidas) > 0 && !empty($medidas[0])) {
+            foreach ($medidas as $medida) {
+                $aluno = $a->selecionar($medida['MATRICULA']);
+                $m = [
+                    'cod_medida' => $medida['COD_MEDIDA_DISCIPLINAR'],
+                    'aluno' => $aluno,
+                    'data' => Util::formataDataBR($medida['DT_MEDIDA_DISCIPLINAR']),
+                    'descricao' => $medida['DESC_TIPO_MEDIDA_DISCIPLINAR']
+                ];
+                array_push($medidas_completas, $m);
+            }
+        }
+        http_response_code(200);
+        return json_encode($medidas_completas);
     }
 }
