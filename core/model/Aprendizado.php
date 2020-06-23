@@ -53,6 +53,7 @@ class Aprendizado extends CRUD
         $where_condicao = " 1 = 1 ";
         $where_valor = [];
 
+        $tabela = self::TABELA;
         if ($busca && count($busca) > 0) {
             if (isset($busca[self::COL_ID_REUNIAO]) && !empty($busca[self::COL_ID_REUNIAO])) {
                 $where_condicao .= " AND " . self::COL_ID_REUNIAO . " = ? ";
@@ -62,12 +63,21 @@ class Aprendizado extends CRUD
                 $where_condicao .= " AND " . self::COL_ID . " = ? ";
                 $where_valor[] = $busca[self::COL_ID];
             }
+            if (isset($busca[Turma::COL_ID]) && !empty($busca[Turma::COL_ID])) {
+                $where_condicao .= " AND " . Turma::COL_ID . " = ? ";
+                $where_valor[] = $busca[Turma::COL_ID];
+
+                $tabela = self::TABELA .
+                    " INNER JOIN Reuniao ON Aprendizado.idReuniao = Reuniao.id ";
+            }
 
             $retorno = [];
 
             try {
-                $retorno = $this->read(null, self::TABELA, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
+                $retorno = $this->read(null, $tabela, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
             } catch (\Throwable $th) {
+                echo $this->pegarUltimoSQL();
+
                 echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
                 return false;
             }
