@@ -62,7 +62,7 @@ class MedidasDisciplinares
 
         return $retorno;
     }
-    
+
     /**
      * Retorna os dados de uma medida disciplinar
      *
@@ -74,7 +74,8 @@ class MedidasDisciplinares
         $campos = MedidaDisciplinar::COL_COD_MEDIDA_DISCIPLINAR . ", " .
             MedidaDisciplinar::COL_MATRICULA . ", " .
             MedidaDisciplinar::COL_DATA . ", " .
-            MedidaDisciplinar::COL_DESC_TIPO_MEDIDA_DISCIPLINAR;
+            MedidaDisciplinar::COL_DESC_TIPO_MEDIDA_DISCIPLINAR . ", " .
+            MedidaDisciplinar::COL_OBSERVACOES;
 
         $busca = [MedidaDisciplinar::COL_COD_MEDIDA_DISCIPLINAR => $cod_medida];
 
