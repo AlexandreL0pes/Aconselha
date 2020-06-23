@@ -62,4 +62,31 @@ class MedidasDisciplinares
 
         return $retorno;
     }
+    
+    /**
+     * Retorna os dados de uma medida disciplinar
+     *
+     * @param  mixed $cod_medida
+     * @return array
+     */
+    public function selecionar($cod_medida = null)
+    {
+        $campos = MedidaDisciplinar::COL_COD_MEDIDA_DISCIPLINAR . ", " .
+            MedidaDisciplinar::COL_MATRICULA . ", " .
+            MedidaDisciplinar::COL_DATA . ", " .
+            MedidaDisciplinar::COL_DESC_TIPO_MEDIDA_DISCIPLINAR;
+
+        $busca = [MedidaDisciplinar::COL_COD_MEDIDA_DISCIPLINAR => $cod_medida];
+
+        $md = new MedidaDisciplinar();
+        $medidas = $md->listar($campos, $busca, MedidaDisciplinar::COL_DATA . " DESC ", null)[0];
+
+        $retorno = [];
+
+        if (!empty($medidas)) {
+            $retorno = $medidas;
+        }
+
+        return $retorno;
+    }
 }
