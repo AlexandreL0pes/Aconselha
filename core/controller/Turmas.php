@@ -548,7 +548,13 @@ class Turmas
 
         return json_encode($estatisticas);
     }
-
+    
+    /**
+     * Lista as medidas disciplinares de uma turma
+     *
+     * @param  mixed $dados
+     * @return array
+     */
     public function obterMedidasDisciplinares($dados)
     {
         if (!isset($dados['turma'])) {
