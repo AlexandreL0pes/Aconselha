@@ -31,7 +31,6 @@ class Turmas
         }
 
 
-        $coef_geral = $this->obterCoeficienteGeral($codigoTurma);
         $campos = Turma::COL_ID . ", " .
             Turma::COL_DESC_TURMA . ", " .
             Turma::COL_CURSO;
@@ -40,6 +39,21 @@ class Turmas
 
         $turma = new Turma();
         $retornoTurma = ($turma->listar($campos, $busca, null, 1))[0];
+
+        $r = new Representantes();
+        $representante = $r->selecionarRepresentante(['turma' => $codigoTurma]);
+        $representante = json_decode($representante, true);
+        $vr = new ViceRepresentantes();
+        $vice = $vr->selecionarViceRepresentante(['turma' => $codigoTurma]);
+        $vice = json_decode($vice, true);
+
+        $c = new Conselheiros();
+        $conselheiro = $c->obterConselheiro($codigoTurma);
+        $conselheiro = json_decode($conselheiro, true);
+        if (isset($conselheiro['login'])) {
+            unset($conselheiro['login']);
+            unset($conselheiro['pessoa']);
+        }
 
         if (!empty($retornoTurma)) {
             $nomeTurma = $this->processarNome($retornoTurma[Turma::COL_ID]);
@@ -51,7 +65,11 @@ class Turmas
                 'nome' => $nomeTurma,
                 'curso' => $cursoTurma,
                 'codigo_curso' => $retornoTurma[Turma::COL_CURSO],
-                'coeficiente_geral' => $coef_geral
+                'lideres' => [
+                    'representante' => $representante,
+                    'vice' => $vice,
+                    'conselheiro' => $conselheiro
+                ]
             ];
 
             http_response_code(200);
