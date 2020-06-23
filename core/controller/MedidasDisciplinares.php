@@ -26,7 +26,7 @@ class MedidasDisciplinares
 
         $md = new MedidaDisciplinar();
 
-        $medidas = $md->listar($campos, $busca, null, null);
+        $medidas = $md->listar($campos, $busca, MedidaDisciplinar::COL_DATA . " DESC ", null);
 
         $retorno = [];
 
@@ -69,25 +69,29 @@ class MedidasDisciplinares
      * @param  mixed $cod_medida
      * @return array
      */
-    public function selecionar($cod_medida = null)
+    public function selecionar($dados = [])
     {
+        if (!isset($dados['medida_disciplinar'])) {
+            http_response_code(400);
+            return json_encode(array('message' => 'É necessário informar o id da medida.'));
+        }
         $campos = MedidaDisciplinar::COL_COD_MEDIDA_DISCIPLINAR . ", " .
             MedidaDisciplinar::COL_MATRICULA . ", " .
             MedidaDisciplinar::COL_DATA . ", " .
             MedidaDisciplinar::COL_DESC_TIPO_MEDIDA_DISCIPLINAR . ", " .
             MedidaDisciplinar::COL_OBSERVACOES;
 
-        $busca = [MedidaDisciplinar::COL_COD_MEDIDA_DISCIPLINAR => $cod_medida];
+        $busca = [MedidaDisciplinar::COL_COD_MEDIDA_DISCIPLINAR => $dados['medida_disciplinar']];
 
         $md = new MedidaDisciplinar();
-        $medidas = $md->listar($campos, $busca, MedidaDisciplinar::COL_DATA . " DESC ", null)[0];
-
-        $retorno = [];
+        $medidas = $md->listar($campos, $busca, null, null)[0];
 
         if (!empty($medidas)) {
-            $retorno = $medidas;
+            http_response_code(200);
+            return json_encode($medidas);
         }
 
-        return $retorno;
+        http_response_code(500);
+        return json_encode(array('message' => "Não foi encontrada a medida disciplinar requisitada."));
     }
 }
