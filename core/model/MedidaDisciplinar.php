@@ -32,7 +32,7 @@ class MedidaDisciplinar extends CRUD
 		$where_condicao = " 1 = 1 ";
 		$where_valor = [];
 
-
+		$tabela = self::TABELA;
 
 		if ($busca && count($busca) > 0) {
 			if (isset($busca[self::COL_COD_TURMA_ATUAL]) && !empty($busca[self::COL_COD_TURMA_ATUAL])) {
