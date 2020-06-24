@@ -1,5 +1,19 @@
 import { sendRequest } from "./utils.js";
 
+const listener = () => {
+  const btnFiltrarAlto = document.getElementById("filtrarAlto");
+  btnFiltrarAlto.addEventListener("click", filtrarAlto);
+
+  const btnFiltrarMedio = document.getElementById("filtrarMedio");
+  btnFiltrarMedio.addEventListener("click", filtrarMedio);
+
+  const btnFiltrarBaixo = document.getElementById("filtrarBaixo");
+  btnFiltrarBaixo.addEventListener("click", filtrarBaixo);
+
+  const btnRemoverFiltro = document.getElementById("removerFiltro");
+  btnRemoverFiltro.addEventListener("click", removerFiltro);
+};
+
 const gerarGraficoCoef = (qtdAlto, qtdMedio, qtdBaixo) => {
   var ctx = document.getElementById("coef-geral").getContext("2d");
   var myChart = new Chart(ctx, {
@@ -313,6 +327,7 @@ const obterEstudantes = () => {
       .then((response) => {
         console.log(response);
         listarEstudantes(response);
+        localStorage.setItem("estudantes", JSON.stringify(response));
       })
       .catch((err) => {
         console.error(err);
@@ -345,6 +360,66 @@ const gerarEstudanteCard = (aluno) => {
   return card;
 };
 
+const filtrarAlto = () => {
+  const lista_estudantes = document.getElementById("lista-estudantes");
+
+  let estudantes = localStorage.getItem("estudantes");
+  estudantes = JSON.parse(estudantes);
+
+  const filtrado = estudantes.filter((estudante) => {
+    return estudante.classificacao === "alto";
+  });
+  lista_estudantes.innerHTML = "";
+
+  filtrado.map((estudante) => {
+    lista_estudantes.append(gerarEstudanteCard(estudante));
+  });
+};
+const filtrarMedio = () => {
+  const lista_estudantes = document.getElementById("lista-estudantes");
+
+  let estudantes = localStorage.getItem("estudantes");
+  estudantes = JSON.parse(estudantes);
+
+  const filtrado = estudantes.filter((estudante) => {
+    return estudante.classificacao === "medio";
+  });
+  lista_estudantes.innerHTML = "";
+
+  filtrado.map((estudante) => {
+    lista_estudantes.append(gerarEstudanteCard(estudante));
+  });
+};
+const filtrarBaixo = () => {
+  const lista_estudantes = document.getElementById("lista-estudantes");
+
+  let estudantes = localStorage.getItem("estudantes");
+  estudantes = JSON.parse(estudantes);
+
+  const filtrado = estudantes.filter((estudante) => {
+    return estudante.classificacao === "baixo";
+  });
+  lista_estudantes.innerHTML = "";
+
+  filtrado.map((estudante) => {
+    lista_estudantes.append(gerarEstudanteCard(estudante));
+  });
+};
+
+const removerFiltro = () => {
+  const lista_estudantes = document.getElementById("lista-estudantes");
+
+  let estudantes = localStorage.getItem("estudantes");
+  estudantes = JSON.parse(estudantes);
+
+  lista_estudantes.innerHTML = "";
+
+  estudantes.map((estudante) => {
+    lista_estudantes.append(gerarEstudanteCard(estudante));
+  });
+};
+
+listener();
 obterEstudantes();
 obterCoef();
 obterInfoTurma();
