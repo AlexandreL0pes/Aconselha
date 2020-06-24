@@ -84,11 +84,22 @@ class MedidasDisciplinares
         $busca = [MedidaDisciplinar::COL_COD_MEDIDA_DISCIPLINAR => $dados['medida_disciplinar']];
 
         $md = new MedidaDisciplinar();
-        $medidas = $md->listar($campos, $busca, null, null)[0];
+        $medida = $md->listar($campos, $busca, null, null)[0];
 
-        if (!empty($medidas)) {
+        $a = new Alunos();
+        if (!empty($medida)) {
+
+            $retorno = [
+                'medida_disciplinar' => $medida[MedidaDisciplinar::COL_COD_MEDIDA_DISCIPLINAR],
+                'descricao' => $medida[MedidaDisciplinar::COL_DESC_TIPO_MEDIDA_DISCIPLINAR],
+                'observacao' => $medida[MedidaDisciplinar::COL_OBSERVACOES],
+                'data' => $medida[MedidaDisciplinar::COL_DATA],
+                'aluno' => $a->selecionar($medida[MedidaDisciplinar::COL_MATRICULA])
+            ];
+
+
             http_response_code(200);
-            return json_encode($medidas);
+            return json_encode($retorno);
         }
 
         http_response_code(500);
