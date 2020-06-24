@@ -79,6 +79,17 @@ const obterInfoTurma = () => {
       .catch((err) => {
         console.error(err);
       });
+
+    dados = { acao: "Turmas/obterMedidasDisciplinares", turma: turma };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        apresentarMedidas(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 };
 
@@ -89,9 +100,9 @@ const apresentarPrincipaisAvaliacoes = (dados) => {
     dados.map((perfil) => {
       avaliacoes.appendChild(gerarChip(perfil));
     });
-  }else {
+  } else {
     const avaliacoes = document.getElementById("avaliacoes");
-    avaliacoes.innerHTML = "Nenhuma avaliação foi encontrada"
+    avaliacoes.innerHTML = "Nenhuma avaliação foi encontrada";
   }
 };
 
@@ -145,5 +156,52 @@ const apresentarInfoTurma = (turma) => {
       turma.lideres.vice.nome;
   }
 };
+
+const apresentarMedidas = (medidas) => {
+  if (medidas[0].cod_medida) {
+    const lista_medidas = document.querySelector(".lista-medidas");
+    medidas.map((medida) => {
+      lista_medidas.appendChild(gerarMedida(medida));
+    });
+  }
+};
+
+const gerarMedida = (medida) => {
+  const medidaDiv = document.createElement("div");
+  medidaDiv.classList.add("medida");
+  medidaDiv.setAttribute("cod-medida", medida.cod_medida);
+
+  const meses = [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+  ];
+  const data = new Date(medida.data);
+  const dataFormatada = `${
+    meses[data.getMonth()]
+  } ${data.getFullYear().toString().substr(-2)}`;
+  
+  const content = `
+  <div class="descricao">
+    <p class="nome">${medida.aluno.nome}</p>
+    <p class="tipo-medida">${medida.descricao}</p>
+  </div>
+  <span class="data">${dataFormatada}</span>
+  `;
+
+  medidaDiv.innerHTML = content;
+
+  return medidaDiv;
+};
+
 obterCoef();
 obterInfoTurma();
