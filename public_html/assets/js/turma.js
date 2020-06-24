@@ -48,7 +48,7 @@ const obterInfoTurma = () => {
   const turma = localStorage.getItem("turmaAtual");
 
   if (turma) {
-    const dados = { acao: "Turmas/informacoesTurma", turma: turma };
+    let dados = { acao: "Turmas/informacoesTurma", turma: turma };
 
     sendRequest(dados)
       .then((response) => {
@@ -58,7 +58,30 @@ const obterInfoTurma = () => {
       .catch((err) => {
         console.error(object);
       });
+
+    dados = { acao: "Turmas/obterEstatistica", turma: turma };
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        apresentarEstatisticasTurma(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
+};
+
+const apresentarEstatisticasTurma = (estatistica) => {
+  const estatisticaTurma = document.getElementById("estatistica-turma");
+
+  estatisticaTurma.querySelector(".coef-geral .resultado").innerHTML =
+    estatistica.coeficiente_geral;
+  estatisticaTurma.querySelector(".experiencia .resultado").innerHTML =
+    estatistica.aprendizados;
+  estatisticaTurma.querySelector(".aprendizado .resultado").innerHTML =
+    estatistica.experiencias;
+  estatisticaTurma.querySelector(".medidas .resultado").innerHTML =
+    estatistica.medidas_disciplinares;
 };
 
 const apresentarInfoTurma = (turma) => {
@@ -69,17 +92,19 @@ const apresentarInfoTurma = (turma) => {
 
   turmaInfo.querySelector("#codigo").innerHTML = turma.codigo;
 
-  if (turma.lideres.conselheiro !== []) {
-    turmaInfo.querySelector(".conselheiro").innerHTML = turma.lideres.conselheiro.nome;
+  if (turma.lideres.conselheiro.length > 0) {
+    turmaInfo.querySelector(".conselheiro").innerHTML =
+      turma.lideres.conselheiro.nome;
   }
 
-  if (turma.lideres.representante !== []) {
-    turmaInfo.querySelector(".representante").innerHTML = turma.lideres.representante.nome;
+  if (turma.lideres.representante.length > 0) {
+    turmaInfo.querySelector(".representante").innerHTML =
+      turma.lideres.representante.nome;
   }
-  if (turma.lideres.vice !== []) {
-    turmaInfo.querySelector(".vice-representante").innerHTML = turma.lideres.vice.nome;
+  if (turma.lideres.vice.length > 0) {
+    turmaInfo.querySelector(".vice-representante").innerHTML =
+      turma.lideres.vice.nome;
   }
-
 };
 obterCoef();
 obterInfoTurma();
