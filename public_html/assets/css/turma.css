@@ -3,7 +3,7 @@
   --medida-disciplinar-color: #b4ff51;
 }
 .main {
-  grid-template-rows: 0.3fr 2fr auto 5fr;
+  grid-template-rows: 0.3fr 1fr auto 5fr;
   margin: 15px;
 }
 
@@ -415,6 +415,9 @@
   cursor: pointer;
   text-justify: center;
   text-align: center;
+
+  animation: fadeIn 0.7s ease-in-out;
+
 }
 
 .pesquisa {
