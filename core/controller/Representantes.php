@@ -104,7 +104,7 @@ class Representantes
                 'nome' => $representante['nome']
             ];
 
-            array_push($retorno, $representante);
+            $retorno = $representante;
         }
         http_response_code(200);
         return json_encode($retorno);

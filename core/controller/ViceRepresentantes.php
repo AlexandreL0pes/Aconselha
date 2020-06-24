@@ -101,7 +101,7 @@ class ViceRepresentantes
                 'nome' => $vice['nome']
             ];
 
-            array_push($retorno, $vice);
+            $retorno = $vice;
         }
         http_response_code(200);
         return json_encode($retorno);
