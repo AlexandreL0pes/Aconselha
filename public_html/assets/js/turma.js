@@ -142,18 +142,29 @@ const apresentarInfoTurma = (turma) => {
 
   turmaInfo.querySelector("#codigo").innerHTML = turma.codigo;
 
-  if (turma.lideres.conselheiro.length > 0) {
+  console.log(turma.lideres.conselheiro);
+  if (turma.lideres.conselheiro.nome !== undefined) {
     turmaInfo.querySelector(".conselheiro").innerHTML =
       turma.lideres.conselheiro.nome;
+  } else {
+    turmaInfo.querySelector(".conselheiro").innerHTML =
+      "Conselheiro Inexistente";
   }
 
-  if (turma.lideres.representante.length > 0) {
+  if (turma.lideres.representante.nome !== undefined) {
     turmaInfo.querySelector(".representante").innerHTML =
       turma.lideres.representante.nome;
+  } else {
+    turmaInfo.querySelector(".representante").innerHTML =
+      "Representante Inexistente";
   }
-  if (turma.lideres.vice.length > 0) {
+
+  if (turma.lideres.vice.nome !== undefined) {
     turmaInfo.querySelector(".vice-representante").innerHTML =
       turma.lideres.vice.nome;
+  } else {
+    turmaInfo.querySelector(".vice-representante").innerHTML =
+      "Vice-Representante Inexistente";
   }
 };
 
@@ -169,8 +180,9 @@ const apresentarMedidas = (medidas) => {
 const gerarMedida = (medida) => {
   const medidaDiv = document.createElement("div");
   medidaDiv.classList.add("medida");
-  medidaDiv.setAttribute("cod-medida", medida.cod_medida);
+  medidaDiv.setAttribute("data-cod-medida", medida.cod_medida);
 
+  medidaDiv.addEventListener("click", (element) => abrirMedida(element));
   const meses = [
     "Jan",
     "Fev",
@@ -189,7 +201,7 @@ const gerarMedida = (medida) => {
   const dataFormatada = `${
     meses[data.getMonth()]
   } ${data.getFullYear().toString().substr(-2)}`;
-  
+
   const content = `
   <div class="descricao">
     <p class="nome">${medida.aluno.nome}</p>
@@ -203,5 +215,94 @@ const gerarMedida = (medida) => {
   return medidaDiv;
 };
 
+const abrirMedida = (element) => {
+  console.log("Apertou o aprendizado!");
+
+  let medida = element.currentTarget.getAttribute("data-cod-medida");
+
+  const modalMedida = document.getElementById("visualizar-medida");
+
+  if (medida) {
+    localStorage.setItem("medida", medida);
+    modalMedida.classList.toggle("is-active");
+
+    const dados = {
+      acao: "MedidasDisciplinares/selecionar",
+      medida_disciplinar: medida,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        preencherMedida(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+};
+
+const preencherMedida = (medida) => {
+  const modal = document.getElementById("visualizar-medida");
+  modal.querySelector(".info-m .nome").innerHTML = medida.aluno.nome;
+  modal.querySelector(".info-m .matricula").innerHTML = medida.aluno.matricula;
+  const data = new Date(medida.data);
+
+  const meses = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+  ];
+
+  const dataFormatada = ` ${data.getDay()} ${
+    meses[data.getMonth()]
+  } ${data.getFullYear()}`;
+  modal.querySelector(".info-m .data").innerHTML = dataFormatada;
+
+  modal.querySelector(".info-medida .tipo-medida p").innerHTML =
+    medida.descricao;
+  modal.querySelector(".info-medida .observacao").innerHTML = medida.observacao;
+};
+
+const closeModal = (params) => {
+  const modalMedida = document.getElementById("visualizar-medida");
+
+  let closeBtn = modalMedida.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", (evnt) => {
+    fecharMedida();
+  });
+  let bgModal = modalMedida.querySelector(".modal-background");
+  bgModal.addEventListener("click", (evnt) => {
+    fecharMedida();
+  });
+};
+
+const fecharMedida = () => {
+  const modal = document.getElementById("visualizar-medida");
+  modal.classList.toggle("is-active");
+
+  if (localStorage.getItem("medida")) {
+    localStorage.removeItem("medida");
+  }
+
+  modal.querySelector(".info-m .nome").innerHTML = "";
+  modal.querySelector(".info-m .matricula").innerHTML = "";
+
+  modal.querySelector(".info-m .data").innerHTML = "";
+
+  modal.querySelector(".info-medida .tipo-medida p").innerHTML = "";
+  modal.querySelector(".info-medida .observacao").innerHTML = "";
+};
+
 obterCoef();
 obterInfoTurma();
+closeModal();

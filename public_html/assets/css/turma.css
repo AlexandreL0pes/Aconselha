@@ -3,7 +3,7 @@
   --medida-disciplinar-color: #b4ff51;
 }
 .main {
-  grid-template-rows: 0.3fr 1fr 2fr 5fr;
+  grid-template-rows: 0.3fr auto auto 5fr;
   margin: 15px;
 }
 
@@ -290,6 +290,9 @@
   border-left: 3px solid var(--medida-disciplinar-color);
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
+
+  
+  animation: fadeIn 0.7s ease-in-out;
 }
 .mostrar-mais {
   display: grid;
@@ -452,7 +455,6 @@
 }
 .info-aluno .matricula {
   font-size: 1rem;
-  margin-left: 5px;
   color: rgb(149, 147, 147);
 }
 .info-m .data {
