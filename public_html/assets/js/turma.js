@@ -68,7 +68,46 @@ const obterInfoTurma = () => {
       .catch((err) => {
         console.error(err);
       });
+
+    dados = { acao: "Perfis/listarPerfisRelevantes", turma: turma };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        apresentarPrincipaisAvaliacoes(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
+};
+
+const apresentarPrincipaisAvaliacoes = (dados) => {
+  console.log(dados[0]);
+  if (dados[0].nome !== undefined) {
+    const avaliacoes = document.getElementById("avaliacoes");
+    dados.map((perfil) => {
+      avaliacoes.appendChild(gerarChip(perfil));
+    });
+  }else {
+    const avaliacoes = document.getElementById("avaliacoes");
+    avaliacoes.innerHTML = "Nenhuma avaliação foi encontrada"
+  }
+};
+
+const gerarChip = (perfil) => {
+  const chip = document.createElement("span");
+  chip.classList.add("chip");
+
+  if (perfil.tipo === "1") {
+    chip.classList.add("positivo");
+  } else {
+    chip.classList.add("negativo");
+  }
+
+  chip.innerText = perfil.nome;
+
+  return chip;
 };
 
 const apresentarEstatisticasTurma = (estatistica) => {
