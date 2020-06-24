@@ -3,7 +3,7 @@
   --medida-disciplinar-color: #b4ff51;
 }
 .main {
-  grid-template-rows: 0.3fr 1fr auto 5fr;
+  grid-template-rows: 0.3fr 1fr auto 3fr;
   margin: 15px;
 }
 
@@ -390,15 +390,15 @@
 }
 
 .cardbox.baixo {
-  border-top: 2px solid #f22f2f !important;
+  border-top: 2px solid #f04545 !important;
 }
 
 .cardbox.medio {
-  border-top: 2px solid #3d21f1 !important;
+  border-top: 2px solid #4c39c7 !important;
 }
 
 .cardbox.alto {
-  border-top: 2px solid #28ac47 !important;
+  border-top: 2px solid #36ce59 !important;
 }
 
 .cardbox {
