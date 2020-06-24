@@ -22,7 +22,7 @@ class MedidasDisciplinares
             MedidaDisciplinar::COL_DESC_TIPO_MEDIDA_DISCIPLINAR;
 
 
-        $busca = [MedidaDisciplinar::COL_COD_TURMA_ATUAL => $cod_turma];
+        $busca = [MedidaDisciplinar::COL_COD_TURMA_ATUAL => $cod_turma, 'periodo' => 'atual'];
 
         $md = new MedidaDisciplinar();
 

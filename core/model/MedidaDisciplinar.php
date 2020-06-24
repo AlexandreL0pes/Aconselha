@@ -63,6 +63,10 @@ class MedidaDisciplinar extends CRUD
 					" INNER JOIN MATRICULAS ON MATRICULAS.COD_MATRICULA = MEDIDAS_DISCIPLINARES.COD_MATRICULA " .
 					" INNER JOIN TIPOS_MEDIDAS_DISCIPLINARES ON MEDIDAS_DISCIPLINARES.COD_TIPO_MEDIDA_DISCIPLINAR = TIPOS_MEDIDAS_DISCIPLINARES.COD_TIPO_MEDIDA_DISCIPLINAR ";
 			}
+
+			if (isset($busca['periodo']) && !empty($busca['periodo'])) {
+				$where_condicao .= " AND year(DT_MEDIDA_DISCIPLINAR) = year(getdate()) " ;
+			}
 		}
 
 		$retorno = [];
