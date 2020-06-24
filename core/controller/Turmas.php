@@ -580,7 +580,7 @@ class Turmas
                 $m = [
                     'cod_medida' => $medida['COD_MEDIDA_DISCIPLINAR'],
                     'aluno' => $aluno,
-                    'data' => Util::formataDataBR($medida['DT_MEDIDA_DISCIPLINAR']),
+                    'data' => $medida['DT_MEDIDA_DISCIPLINAR'],
                     'descricao' => $medida['DESC_TIPO_MEDIDA_DISCIPLINAR']
                 ];
                 array_push($medidas_completas, $m);
