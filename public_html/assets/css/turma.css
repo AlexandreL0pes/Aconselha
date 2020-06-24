@@ -3,7 +3,7 @@
   --medida-disciplinar-color: #b4ff51;
 }
 .main {
-  grid-template-rows: 0.3fr 3fr 4fr 5fr;
+  grid-template-rows: 0.3fr 1fr 2fr 5fr;
   margin: 15px;
 }
 
