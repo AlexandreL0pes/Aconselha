@@ -3,7 +3,7 @@
   --medida-disciplinar-color: #b4ff51;
 }
 .main {
-  grid-template-rows: 0.3fr auto auto 5fr;
+  grid-template-rows: 0.3fr 2fr auto 5fr;
   margin: 15px;
 }
 
@@ -270,7 +270,7 @@
 .lista-medidas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-auto-rows: minmax(50px, 70px);
+  grid-auto-rows: minmax(50px, 80px);
   grid-gap: 10px;
 
   padding: 10px 5px;
