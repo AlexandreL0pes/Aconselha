@@ -303,6 +303,49 @@ const fecharMedida = () => {
   modal.querySelector(".info-medida .observacao").innerHTML = "";
 };
 
+const obterEstudantes = () => {
+  const turma = localStorage.getItem("turmaAtual");
+
+  if (turma) {
+    const dados = { acao: "Turmas/listarEstudantes", turma: turma };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        listarEstudantes(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+};
+
+const listarEstudantes = (estudantes) => {
+  const lista_estudantes = document.getElementById("lista-estudantes");
+  if (estudantes.length > 0) {
+    estudantes.map((estudante) => {
+      lista_estudantes.append(gerarEstudanteCard(estudante));
+    });
+  }
+};
+const gerarEstudanteCard = (aluno) => {
+  const card = document.createElement("div");
+  card.classList.add("cardbox", "card-turma", aluno.classificacao);
+
+  card.setAttribute("data-matricula", aluno.matricula);
+
+  const content = `
+    <p class="subtitulo is-6">${aluno.nome}</p>
+    <p class="subtitulo is-8 gray-text">${aluno.matricula}</p>
+    <p class="subtitulo is-7 gray-text">${aluno.coeficiente_rendimento}</p>
+  `;
+
+  card.innerHTML = content;
+
+  return card;
+};
+
+obterEstudantes();
 obterCoef();
 obterInfoTurma();
 closeModal();
