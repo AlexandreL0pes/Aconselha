@@ -142,6 +142,7 @@ class Turmas
         if (count($alunos) > 0) {
             foreach ($alunos as $aluno) {
                 $aluno['classificacao'] = Util::classificarCoeficiente($aluno['coeficiente_rendimento']);
+                $aluno['coeficiente_rendimento'] = number_format($aluno['coeficiente_rendimento'],1, ',' ,'.');
                 $retorno[] = $aluno;
             }
         }
