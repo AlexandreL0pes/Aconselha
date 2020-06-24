@@ -44,4 +44,42 @@ const obterCoef = () => {
   }
 };
 
+const obterInfoTurma = () => {
+  const turma = localStorage.getItem("turmaAtual");
+
+  if (turma) {
+    const dados = { acao: "Turmas/informacoesTurma", turma: turma };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        apresentarInfoTurma(response);
+      })
+      .catch((err) => {
+        console.error(object);
+      });
+  }
+};
+
+const apresentarInfoTurma = (turma) => {
+  const turmaInfo = document.querySelector(".overview .info .turma-info");
+
+  turmaInfo.querySelector("#nome").innerHTML = turma.nome;
+  turmaInfo.querySelector("#curso").innerHTML = turma.curso;
+
+  turmaInfo.querySelector("#codigo").innerHTML = turma.codigo;
+
+  if (turma.lideres.conselheiro !== []) {
+    turmaInfo.querySelector(".conselheiro").innerHTML = turma.lideres.conselheiro.nome;
+  }
+
+  if (turma.lideres.representante !== []) {
+    turmaInfo.querySelector(".representante").innerHTML = turma.lideres.representante.nome;
+  }
+  if (turma.lideres.vice !== []) {
+    turmaInfo.querySelector(".vice-representante").innerHTML = turma.lideres.vice.nome;
+  }
+
+};
 obterCoef();
+obterInfoTurma();
