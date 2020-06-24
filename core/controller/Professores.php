@@ -9,7 +9,7 @@ use core\sistema\Autenticacao;
 
 class Professores
 {
-    
+
     /**
      * Retorna todas as turmas que um professor deu/dá aulas
      *
@@ -38,7 +38,7 @@ class Professores
         return $turmas_id;
     }
 
-        
+
     /**
      * Retorna todas as turmas que um professor dá aulas
      *
@@ -67,7 +67,7 @@ class Professores
         return $turmas_id;
     }
 
-        
+
     /**
      * Retorna as turma que um professor dá aula que tem um reunião em andamento
      *
@@ -105,7 +105,7 @@ class Professores
         // print_r($reunioes_professor);
         return json_encode($reunioes_professor);
     }
-    
+
     /**
      * Retorna todas as turma sde um prof com informações completas 
      *
@@ -126,7 +126,7 @@ class Professores
         }
         return json_encode($turmas);
     }
-    
+
     /**
      * Retorna o códgo de pessoa e nome de um professor
      *
@@ -152,7 +152,7 @@ class Professores
 
         return $professor;
     }
-    
+
     /**
      * Seleciona todos os professores atuais de uma turma
      *
@@ -174,5 +174,32 @@ class Professores
         }
 
         return $pessoas;
+    }
+
+    public function obterInformacao($dados)
+    {
+        if (!isset($dados['token'])) {
+            http_response_code(400);
+            return json_encode(array('message' => 'É necessário informar a turma.'));
+        }
+        $token = $dados['token'];
+
+        $cod_pessoa = Autenticacao::obterProfessor($token);
+
+        if ($cod_pessoa) {
+            $professor = $this->selecionar($cod_pessoa);
+            $professor['cod_pessoa'] = $professor['id'];
+            $professor['primeiro_nome'] = explode(" ", $professor['nome'])[0];
+            $professor['ultimo_nome'] = explode(" ", $professor['nome'])[1];
+
+            unset($professor['nome']);
+            unset($professor['id']);
+
+            http_response_code(200);
+            return json_encode($professor);
+        }
+
+        http_response_code(500);
+        return json_encode(array('message' => 'Não foi possível obter as informações'));
     }
 }
