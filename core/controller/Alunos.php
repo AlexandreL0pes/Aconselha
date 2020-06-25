@@ -7,6 +7,7 @@ namespace core\controller;
 use core\model\Aluno;
 use core\model\Aprendizado;
 use core\model\MedidaDisciplinar;
+use core\model\Turma;
 
 class Alunos
 {
@@ -54,7 +55,24 @@ class Alunos
 
         $medidas = $md->listarMedidasMatricula($dados['aluno']);
 
-        print_r($medidas);
+        $a = new Alunos();
+
+        $medidas_completas = [];
+
+        if (count($medidas) > 0 && !empty($medidas[0])) {
+            foreach ($medidas as $medida) {
+                $aluno = $a->selecionar($medida['MATRICULA']);
+                $m = [
+                    'cod_medida' => $medida['COD_MEDIDA_DISCIPLINAR'],
+                    'aluno' => $aluno,
+                    'data' => $medida['DT_MEDIDA_DISCIPLINAR'],
+                    'descricao' => $medida['DESC_TIPO_MEDIDA_DISCIPLINAR']
+                ];
+                array_push($medidas_completas, $m);
+            }
+        }
+        http_response_code(200);
+        return json_encode($medidas_completas);
     }
 
     public function obterCoeficienteGeral($matricula = null)
@@ -66,6 +84,11 @@ class Alunos
         $a = new Aluno();
 
         $coef = $a->listar($campos, $busca, null, 1)[0];
+
+        if (!empty($coef)) {
+            $coef = round($coef[Aluno::COL_COEFICIENTE_RENDIMENTO], 2);
+            return $coef;
+        }
 
         return $coef;
     }
@@ -81,9 +104,24 @@ class Alunos
         $coef = $this->obterCoeficienteGeral($dados['aluno']);
 
 
-        // $a = new Aprendizados();
-        // $aprendizadosAluno = $a->
+        $a = new Aprendizados();
 
-        // print_r($coef);
+        $aprendizadosAluno = $a->listarAprendizadoAluno($dados);
+        $aprendizadosAluno = json_decode($aprendizadosAluno, true);
+        $aprendizadosAluno = count($aprendizadosAluno);
+        
+        $medidas = $this->obterMedidasDisciplinares($dados);
+
+        $medidas = json_decode($medidas, true);
+        $medidas = count($medidas);
+
+
+        $estatisticas = [
+            'coeficiente_geral' => $coef,
+            'aprendizados' => $aprendizadosAluno,
+            'medidas' => $medidas
+        ];
+
+        return json_encode($estatisticas);
     }
 }
