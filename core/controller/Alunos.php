@@ -124,4 +124,20 @@ class Alunos
 
         return json_encode($estatisticas);
     }
+
+    public function obterAprendizados($dados)
+    {
+        if (!isset($dados['aluno'])) {
+            http_response_code(200);
+            return json_encode(array('message' => 'É necessário informar o aluno'));
+        }
+
+        $a = new Aprendizados();
+
+        $aprendizados = $a->listarAprendizadoAluno($dados);
+        #$aprendizados = json_decode($aprendizados, true);
+
+        http_response_code(200);
+        return $aprendizados;
+    }
 }
