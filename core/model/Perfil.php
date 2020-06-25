@@ -82,6 +82,16 @@ class Perfil extends CRUD
 
                 $group_by = " idPerfil ";
             }
+
+            if (isset($busca['perfis_relevantes_matricula']) && !empty($busca['perfis_relevantes_matricula'])) {
+                $where_condicao .= " AND " . "COD_MATRICULA" . " = ? ";
+                $where_valor[] = $busca['perfis_relevantes_matricula'];
+
+                $tabela = self::TABELA .
+                    " inner join Analise on Perfil.id = Analise.idPerfil " .
+                    " inner join Diagnostica  on Analise.idDiagnostica = Diagnostica.id ";
+                $group_by = " idPerfil ";
+            }
         }
 
         $retorno = [];
