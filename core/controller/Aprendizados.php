@@ -310,4 +310,34 @@ class Aprendizados
 
         return json_encode($retorno);
     }
+
+    public function listarAprendizadoAluno($dados)
+    {
+        $campos = Aprendizado::TABELA . "." . Aprendizado::COL_ID . ", " . Aprendizado::COL_ID_REUNIAO . ", " . Aprendizado::COL_DISCIPLINA . ", " . Aprendizado::COL_OBSERVACAO;
+        $busca = ['COD_MATRICULA' => $dados['aluno']];
+
+        $a = new Aprendizado();
+
+        $aprendizados = $a->listar($campos, $busca, null, 1000);
+
+        $retorno = [];
+
+        $d = new Disciplinas();
+        if (!empty($aprendizados) && !empty($aprendizados[0])) {
+            foreach ($aprendizados as $aprendizado) {
+                $disciplina = ['id' => $aprendizado[Aprendizado::COL_DISCIPLINA], 'nome' => 'Disciplina ' . $aprendizado[Aprendizado::COL_DISCIPLINA]];
+                $disciplina = $d->selecionar($aprendizado[Aprendizado::COL_DISCIPLINA]);
+
+                $estudantes = $this->estudantesAprendizado($aprendizado[Aprendizado::COL_ID]);
+
+                array_push($retorno, [
+                    "aprendizado" => $aprendizado[Aprendizado::COL_ID],
+                    "disciplina" => $disciplina,
+                    "estudantes" => $estudantes
+                ]);
+            }
+        }
+
+        return json_encode($retorno);
+    }
 }
