@@ -313,7 +313,7 @@ class Aprendizados
 
     public function listarAprendizadoAluno($dados)
     {
-        $campos = Aprendizado::TABELA . "." . Aprendizado::COL_ID . ", " . Aprendizado::COL_ID_REUNIAO . ", " . Aprendizado::COL_DISCIPLINA . ", " . Aprendizado::COL_OBSERVACAO;
+        $campos = Aprendizado::TABELA . "." . Aprendizado::COL_ID . ", " . Aprendizado::COL_ID_REUNIAO . ", " . Aprendizado::COL_DISCIPLINA . ", " . Aprendizado::COL_OBSERVACAO . ", " . Aprendizado::COL_DATA;
         $busca = ['COD_MATRICULA' => $dados['aluno']];
 
         $a = new Aprendizado();
@@ -333,7 +333,8 @@ class Aprendizados
                 array_push($retorno, [
                     "aprendizado" => $aprendizado[Aprendizado::COL_ID],
                     "disciplina" => $disciplina,
-                    "estudantes" => $estudantes
+                    "estudantes" => $estudantes,
+                    "data" => $aprendizado[Aprendizado::COL_DATA]
                 ]);
             }
         }
