@@ -5,8 +5,7 @@ namespace core\controller;
 
 
 use core\model\Aluno;
-
-
+use core\model\MedidaDisciplinar;
 
 class Alunos {
 
@@ -39,5 +38,20 @@ class Alunos {
         }
 
         return $aluno;
+    }
+
+
+    public function obterMedidasDisciplinares($dados)
+    {
+        if (!isset($dados['aluno'])) {
+            http_response_code(200);
+            return json_encode(array('message' => 'É necessário informar o aluno'));
+        }
+
+        $md = new MedidasDisciplinares();
+
+        $medidas = $md->listarMedidasMatricula($dados['aluno']);
+
+        print_r($medidas);
     }
 }
