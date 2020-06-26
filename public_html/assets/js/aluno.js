@@ -49,12 +49,55 @@ const obterEstatisticaAluno = () => {
 };
 
 const apresentarEstatisticas = (estatisticas) => {
-	const divEstatisticas = document.querySelector(".estatistica-aluno");
-	divEstatisticas.querySelector(".coef-geral .resultado").innerHTML = estatisticas.coeficiente_geral;
-	divEstatisticas.querySelector(".aprendizado .resultado").innerHTML = estatisticas.aprendizados;
-	divEstatisticas.querySelector(".medidas .resultado").innerHTML = estatisticas.medidas;
+  const divEstatisticas = document.querySelector(".estatistica-aluno");
+  divEstatisticas.querySelector(".coef-geral .resultado").innerHTML =
+    estatisticas.coeficiente_geral;
+  divEstatisticas.querySelector(".aprendizado .resultado").innerHTML =
+    estatisticas.aprendizados;
+  divEstatisticas.querySelector(".medidas .resultado").innerHTML =
+    estatisticas.medidas;
+};
 
-}
+const obterPrincipaisAvaliacoes = () => {
+  const matricula = getMatricula();
+  const dados = {
+    acao: "Perfis/listarPerfisRelevantesMatricula",
+    aluno: matricula,
+  };
+
+  sendRequest(dados)
+    .then((response) => {
+      apresentarPrincipaisAvaliacoes(response);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const apresentarPrincipaisAvaliacoes = (dados) => {
+  if (dados[0].nome !== undefined) {
+    const avaliacoes = document.getElementById("avaliacoes");
+    dados.map((perfil) => avaliacoes.appendChild(gerarChip(perfil)));
+  } else {
+    const avaliacoes = document.getElementById("avaliacoes");
+    avaliacoes.innerHTML = "Nenhuma avaliação foi encontrada.";
+  }
+};
+
+const gerarChip = (perfil) => {
+  const chip = document.createElement("span");
+  chip.classList.add("chip");
+
+  if (perfil.tipo === "1") {
+    chip.classList.add("positivo");
+  } else {
+    chip.classList.add("negativo");
+	}
+	
+	chip.innerText = perfil.nome;
+
+	return chip;
+};
 const getMatricula = () => {
   const aluno = getSearchParams();
 
@@ -69,5 +112,6 @@ const getMatricula = () => {
   return matricula;
 };
 obterInfoAluno();
-obterEstatisticaAluno()
+obterEstatisticaAluno();
+obterPrincipaisAvaliacoes();
 listener();
