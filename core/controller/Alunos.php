@@ -25,6 +25,7 @@ class Alunos
 
         $campos = Aluno::COL_MATRICULA . ", " .
             Aluno::COL_COD_CURSO . ", " .
+            Aluno::COL_COD_TURMA_ATUAL . ", " .
             "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome ";
 
         $busca = [Aluno::COL_MATRICULA => $matricula];
@@ -38,7 +39,8 @@ class Alunos
             $aluno = [
                 'nome' => $aluno['nome'],
                 'matricula' => $aluno[Aluno::COL_MATRICULA],
-                'curso' => $aluno[Aluno::COL_COD_CURSO]
+                'curso' => $aluno[Aluno::COL_COD_CURSO],
+                'turma' => $aluno[Aluno::COL_COD_TURMA_ATUAL]
             ];
         }
 
@@ -154,14 +156,21 @@ class Alunos
         // Selecionar Curso
         $a = $this->selecionar($dados['aluno']);
 
-        $curso_id = $a['curso'];
-        unset($a['curso']);
-        $c = new Cursos();
-        $curso = $c->selecionarCurso($curso_id);
+        // $curso_id = $a['curso'];
+        // unset($a['curso']);
+        // $c = new Cursos();
+        // $curso = $c->selecionarCurso($curso_id);
+
+        $turma_id = $a['turma'];
+        unset($a['turma']);
+
+        $t = new Turmas();
+        $turma = $t->informacoesTurma(['turma' => $turma_id]);
+        $turma = json_decode($turma);
 
         $info = [
             'aluno' => $a,
-            'curso' => $curso
+            'turma' => $turma
         ];
 
         http_response_code(200);
