@@ -345,18 +345,6 @@ const fecharMedida = () => {
   modal.querySelector(".info-medida .observacao").innerHTML = "";
 };
 
-const closeModal = (params) => {
-  const modalMedida = document.getElementById("visualizar-medida");
-
-  let closeBtn = modalMedida.querySelector(".modal-close-btn");
-  closeBtn.addEventListener("click", (evnt) => {
-    fecharMedida();
-  });
-  let bgModal = modalMedida.querySelector(".modal-background");
-  bgModal.addEventListener("click", (evnt) => {
-    fecharMedida();
-  });
-};
 
 obterInfoAluno();
 obterEstatisticaAluno();
