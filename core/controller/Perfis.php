@@ -55,7 +55,7 @@ class Perfis
             'perfis_relevantes_matricula' => $dados['aluno']
         ];
 
-        $perfis = $d->listar($campos, $busca, " qtd ASC ", 5);
+        $perfis = $d->listar($campos, $busca, " qtd DESC ", 5);
 
         if (count($perfis) > 0) {
             http_response_code(200);
