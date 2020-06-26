@@ -92,11 +92,11 @@ const gerarChip = (perfil) => {
     chip.classList.add("positivo");
   } else {
     chip.classList.add("negativo");
-	}
-	
-	chip.innerText = perfil.nome;
+  }
 
-	return chip;
+  chip.innerText = perfil.nome;
+
+  return chip;
 };
 const getMatricula = () => {
   const aluno = getSearchParams();
@@ -111,7 +111,87 @@ const getMatricula = () => {
 
   return matricula;
 };
+
+const obterMedidasDisciplinares = () => {
+  const matricula = getMatricula();
+
+  if (matricula) {
+    const dados = {
+      acao: "Alunos/obterMedidasDisciplinares",
+      aluno: matricula,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        apresentarMedidas(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+};
+
+const apresentarMedidas = (medidas) => {
+  if (medidas.length > 0) {
+    const lista_medidas = document.querySelector(".lista-medidas");
+    medidas.map((medida) => {
+      lista_medidas.appendChild(gerarMedida(medida));
+    });
+  }else{
+		const lista_medidas = document.querySelector(".lista-medidas");
+		let resultado = document.createElement("div");
+		resultado.innerText = "Nenhuma medida foi encontrada.";
+		resultado.classList.add("nenhum-resultado");
+		lista_medidas.appendChild(resultado);
+	}
+};
+
+const gerarMedida = (medida) => {
+  const medidaDiv = document.createElement("div");
+  medidaDiv.classList.add("medida");
+  medidaDiv.setAttribute("data-cod-medida", medida.cod_medida);
+
+  medidaDiv.addEventListener("click", (element) => abrirMedida(element));
+  const meses = [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+  ];
+  const data = new Date(medida.data);
+  const dataFormatada = `${
+    meses[data.getMonth()]
+  } ${data.getFullYear().toString().substr(-2)}`;
+
+
+	const descricao = medida.descricao.split(" ");
+	console.log(descricao);
+
+	let descricaoFormatada = descricao[0];
+	if (descricao[1] !== undefined) {
+		descricaoFormatada += " " + descricao[1];
+	}
+  const content = `
+  <div class="descricao">
+    <p class="nome">${descricaoFormatada}</p>
+    <p class="data">${dataFormatada}</p>
+  </div>
+  `;
+
+  medidaDiv.innerHTML = content;
+
+  return medidaDiv;
+};
 obterInfoAluno();
 obterEstatisticaAluno();
 obterPrincipaisAvaliacoes();
+obterMedidasDisciplinares();
 listener();
