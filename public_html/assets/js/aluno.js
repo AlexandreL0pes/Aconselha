@@ -137,13 +137,13 @@ const apresentarMedidas = (medidas) => {
     medidas.map((medida) => {
       lista_medidas.appendChild(gerarMedida(medida));
     });
-  }else{
-		const lista_medidas = document.querySelector(".lista-medidas");
-		let resultado = document.createElement("div");
-		resultado.innerText = "Nenhuma medida foi encontrada.";
-		resultado.classList.add("nenhum-resultado");
-		lista_medidas.appendChild(resultado);
-	}
+  } else {
+    const lista_medidas = document.querySelector(".lista-medidas");
+    let resultado = document.createElement("div");
+    resultado.innerText = "Nenhuma medida foi encontrada.";
+    resultado.classList.add("nenhum-resultado");
+    lista_medidas.appendChild(resultado);
+  }
 };
 
 const gerarMedida = (medida) => {
@@ -171,14 +171,13 @@ const gerarMedida = (medida) => {
     meses[data.getMonth()]
   } ${data.getFullYear().toString().substr(-2)}`;
 
+  const descricao = medida.descricao.split(" ");
+  console.log(descricao);
 
-	const descricao = medida.descricao.split(" ");
-	console.log(descricao);
-
-	let descricaoFormatada = descricao[0];
-	if (descricao[1] !== undefined) {
-		descricaoFormatada += " " + descricao[1];
-	}
+  let descricaoFormatada = descricao[0];
+  if (descricao[1] !== undefined) {
+    descricaoFormatada += " " + descricao[1];
+  }
   const content = `
   <div class="descricao">
     <p class="nome">${descricaoFormatada}</p>
@@ -190,8 +189,71 @@ const gerarMedida = (medida) => {
 
   return medidaDiv;
 };
+
+const obterAprendizados = () => {
+  const matricula = getMatricula();
+
+  if (matricula) {
+    const dados = { acao: "Alunos/obterAprendizados", aluno: matricula };
+
+    sendRequest(dados)
+      .then((response) => {
+        apresentarAprendizados(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+};
+
+const apresentarAprendizados = (aprendizados) => {
+  if (aprendizados.length > 0) {
+    const lista_aprendizados = document.getElementById("lista-aprendizados");
+    aprendizados.map((aprendizado) => {
+      lista_aprendizados.appendChild(gerarAprendizado(aprendizado));
+		});
+  } else{
+		const lista_aprendizados = document.getElementById("lista-aprendizados");
+    let resultado = document.createElement("div");
+    resultado.innerText = "Nenhuma medida foi encontrada.";
+    resultado.classList.add("nenhum-resultado");
+    lista_aprendizados.appendChild(resultado);
+	}
+};
+
+const gerarAprendizado = (aprendizado) => {
+	const aprendizadoDiv = document.createElement("div");
+	aprendizadoDiv.classList.add("aprendizado");
+
+	const meses = [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+  ];
+  const data = new Date(medida.data);
+  const dataFormatada = `${
+    meses[data.getMonth()]
+  } ${data.getFullYear().toString().substr(-2)}`;
+	let content = `
+		<div class="descricao">
+			<p class="disciplina">${aprendizado.disciplina.nome}</p>
+			<p class="data">${dataFormatada}</p>  
+		</div>
+	`
+}
+
 obterInfoAluno();
 obterEstatisticaAluno();
 obterPrincipaisAvaliacoes();
 obterMedidasDisciplinares();
+obterAprendizados();
 listener();
