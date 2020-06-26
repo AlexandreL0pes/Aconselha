@@ -97,4 +97,19 @@ const getCookie = (cname) => {
   return "";
 };
 
-export { sendRequest, showMessage, setCookie, getCookie};
+
+const getSearchParams = () => {
+  const url = window.location.search.replace("?", "");
+  let items = url.split("&");
+  let splited = [];
+  splited = items.map((item) => {
+    const s = item.split("=");
+    return { key: s[0], value: s[1] };
+  }).filter(item => {
+    return (item.key !== "" && item.value !== undefined);
+  });
+
+  return splited;
+};
+
+export { sendRequest, showMessage, setCookie, getCookie, getSearchParams};

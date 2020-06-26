@@ -1,4 +1,4 @@
-import { sendRequest, showMessage, setCookie, getCookie } from "./utils.js";
+import { sendRequest, showMessage, setCookie, getCookie, getSearchParams } from "./utils.js";
 
 const listeners = () => {
   const btnLogar = document.getElementById("btnLogar");
@@ -90,19 +90,7 @@ const verificarLogin = () => {
   }
 };
 
-const getSearchParams = () => {
-  const url = window.location.search.replace("?", "");
-  let items = url.split("&");
-  let splited = [];
-  splited = items.map((item) => {
-    const s = item.split("=");
-    return { key: s[0], value: s[1] };
-  }).filter(item => {
-    return (item.key !== "" && item.value !== undefined);
-  });
 
-  return splited;
-};
 
 const verificaErro = () => {
   const params = getSearchParams();
