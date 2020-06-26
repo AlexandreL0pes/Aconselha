@@ -345,22 +345,17 @@ const fecharMedida = () => {
   modal.querySelector(".info-medida .observacao").innerHTML = "";
 };
 
-const obterEstudantes = () => {
-  const turma = localStorage.getItem("turmaAtual");
+const closeModal = (params) => {
+  const modalMedida = document.getElementById("visualizar-medida");
 
-  if (turma) {
-    const dados = { acao: "Turmas/listarEstudantes", turma: turma };
-
-    sendRequest(dados)
-      .then((response) => {
-        console.log(response);
-        listarEstudantes(response);
-        localStorage.setItem("estudantes", JSON.stringify(response));
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
+  let closeBtn = modalMedida.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", (evnt) => {
+    fecharMedida();
+  });
+  let bgModal = modalMedida.querySelector(".modal-background");
+  bgModal.addEventListener("click", (evnt) => {
+    fecharMedida();
+  });
 };
 
 obterInfoAluno();
@@ -368,4 +363,5 @@ obterEstatisticaAluno();
 obterPrincipaisAvaliacoes();
 obterMedidasDisciplinares();
 obterAprendizados();
+closeModal();
 listener();

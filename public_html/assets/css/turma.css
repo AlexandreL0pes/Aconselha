@@ -457,7 +457,7 @@
   font-size: 1.5rem;
 }
 .info-aluno .matricula {
-  font-size: 1rem;
+  font-size: .9rem;
   color: rgb(149, 147, 147);
 }
 .info-m .data {
@@ -467,7 +467,7 @@
 }
 
 .tipo-medida {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 .info-medida {
   display: grid;
