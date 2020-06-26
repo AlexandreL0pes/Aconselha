@@ -181,10 +181,18 @@ const gerarMedida = (medida) => {
     meses[data.getMonth()]
   } ${data.getFullYear().toString().substr(-2)}`;
 
+
+  const descricao = medida.descricao.split(" ");
+  console.log(descricao);
+
+  let descricaoFormatada = descricao[0];
+  if (descricao[1] !== undefined) {
+    descricaoFormatada += " " + descricao[1];
+  }
   const content = `
     <div class="descricao">
       <p class="nome">${medida.aluno.nome}</p>
-      <p class="tipo-medida">${medida.descricao}</p>
+      <p class="tipo-medida">${descricaoFormatada}</p>
     </div>
     <span class="data">${dataFormatada}</span>
     `;
@@ -282,6 +290,112 @@ const fecharMedida = () => {
   modal.querySelector(".info-medida .observacao").innerHTML = "";
 };
 
+const obterEstudantes = () => {
+  const turma = localStorage.getItem("turmaAtual");
+
+  if (turma) {
+    const dados = { acao: "Turmas/listarEstudantes", turma: turma };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        listarEstudantes(response);
+        localStorage.setItem("estudantes", JSON.stringify(response));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+};
+
+const listarEstudantes = (estudantes) => {
+  const lista_estudantes = document.getElementById("lista-estudantes");
+  if (estudantes.length > 0) {
+    estudantes.map((estudante) => {
+      lista_estudantes.append(gerarEstudanteCard(estudante));
+    });
+  }
+};
+const gerarEstudanteCard = (aluno) => {
+  const card = document.createElement("div");
+  card.classList.add("cardbox", "card-turma", aluno.classificacao);
+
+  card.setAttribute("data-matricula", aluno.matricula);
+
+  const content = `
+      <p class="subtitulo is-6">${aluno.nome}</p>
+      <p class="subtitulo is-8 gray-text">${aluno.matricula}</p>
+      <p class="subtitulo is-7 gray-text">${aluno.coeficiente_rendimento}</p>
+    `;
+
+  card.addEventListener("click", (e) => {
+    window.location.href = `./aluno.html?matricula=${aluno.matricula}`;
+  });
+  card.innerHTML = content;
+
+  return card;
+};
+
+const filtrarAlto = () => {
+  const lista_estudantes = document.getElementById("lista-estudantes");
+
+  let estudantes = localStorage.getItem("estudantes");
+  estudantes = JSON.parse(estudantes);
+
+  const filtrado = estudantes.filter((estudante) => {
+    return estudante.classificacao === "alto";
+  });
+  lista_estudantes.innerHTML = "";
+
+  filtrado.map((estudante) => {
+    lista_estudantes.append(gerarEstudanteCard(estudante));
+  });
+};
+const filtrarMedio = () => {
+  const lista_estudantes = document.getElementById("lista-estudantes");
+
+  let estudantes = localStorage.getItem("estudantes");
+  estudantes = JSON.parse(estudantes);
+
+  const filtrado = estudantes.filter((estudante) => {
+    return estudante.classificacao === "medio";
+  });
+  lista_estudantes.innerHTML = "";
+
+  filtrado.map((estudante) => {
+    lista_estudantes.append(gerarEstudanteCard(estudante));
+  });
+};
+const filtrarBaixo = () => {
+  const lista_estudantes = document.getElementById("lista-estudantes");
+
+  let estudantes = localStorage.getItem("estudantes");
+  estudantes = JSON.parse(estudantes);
+
+  const filtrado = estudantes.filter((estudante) => {
+    return estudante.classificacao === "baixo";
+  });
+  lista_estudantes.innerHTML = "";
+
+  filtrado.map((estudante) => {
+    lista_estudantes.append(gerarEstudanteCard(estudante));
+  });
+};
+
+const removerFiltro = () => {
+  const lista_estudantes = document.getElementById("lista-estudantes");
+
+  let estudantes = localStorage.getItem("estudantes");
+  estudantes = JSON.parse(estudantes);
+
+  lista_estudantes.innerHTML = "";
+
+  estudantes.map((estudante) => {
+    lista_estudantes.append(gerarEstudanteCard(estudante));
+  });
+};
+
+obterEstudantes();
 
 obterEstatisticaTurma();
 obterPrincipaisAvaliacoes();
