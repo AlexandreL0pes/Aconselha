@@ -71,7 +71,7 @@ class Aprendizado extends CRUD
                     " INNER JOIN Reuniao ON Aprendizado.idReuniao = Reuniao.id ";
             }
 
-            if ($busca['COD_MATRICULA'] && !empty($busca['COD_MATRICULA'])) {
+            if (isset($busca['COD_MATRICULA']) && !empty($busca['COD_MATRICULA'])) {
                 $where_condicao .= " AND " . 'COD_MATRICULA' . " = ? ";
                 $where_valor[] =  $busca['COD_MATRICULA'];
                 $tabela = self::TABELA .
