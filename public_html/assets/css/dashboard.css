@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap");
 
 .main {
   display: grid;
@@ -54,7 +55,7 @@
   color: #222424;
   margin: 0px;
   padding: 15px 10px;
-  font-size: .9em;
+  font-size: 0.9em;
   font-weight: 300;
   grid-template-columns: 1fr;
   /* grid-template-rows: repeat(auto-fill, minmax(20px, 1fr)); */
@@ -75,7 +76,6 @@
   font-weight: 300;
   font-size: 0.75em;
   padding: 5px 10px;
-  
 }
 
 .reuniao-info > div {
@@ -281,3 +281,362 @@
   grid-column: span 2;
   font-size: 0.85em;
 }
+
+/* DASHBOARD */
+
+.main-dash {
+  row-gap: 20px;
+  display: grid;
+
+  transition: height 2s;
+}
+
+.overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 15px;
+}
+
+/* Gráfico */
+
+.overview .chart {
+  /* border: solid 2px purple; */
+  /* margin: 30px; */
+  /* height: 50px !important; */
+  padding: 10px 20px;
+
+  border-radius: 15px;
+  box-shadow: 0 3px 3px 4px rgba(0, 0, 0, 0.06);
+  transition: box-shadow ease-in-out 0.4s;
+}
+
+.chart .chart-title {
+  color: #2e2d2d;
+  font-size: 1.1rem;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400;
+  display: flex;
+  justify-content: left;
+  align-content: center;
+  margin-bottom: 10px;
+  padding: 0px 0px;
+}
+
+.chart .canvas-chart {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  max-width: 70%;
+  max-height: 100%;
+  margin: auto;
+}
+.chart .legenda {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  max-width: 150px;
+  margin: auto;
+  font-weight: 500;
+}
+
+.legenda .alto,
+.legenda .medio,
+.legenda .baixo {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+}
+.chart .legenda .alto .cor {
+  border-bottom: 2px solid #28ac47;
+  min-width: 30px;
+}
+.chart .legenda .medio .text {
+  font-size: 0.8rem;
+}
+.chart .legenda .medio .cor {
+  border-bottom: 2px solid #3d21f1;
+  min-width: 30px;
+}
+.chart .legenda .baixo .text {
+  font-size: 0.8rem;
+}
+.chart .legenda .baixo .cor {
+  border-bottom: 2px solid #f22f2f;
+  min-width: 30px;
+}
+.chart .legenda .alto .text {
+  font-size: 0.8rem;
+}
+
+/* Gráfico */
+
+/* Estatísticas turma */
+.estatistica-turma {
+  display: grid;
+  row-gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(50px, 60px);
+  column-gap: 5px;
+  align-items: center;
+  align-content: center;
+}
+
+.estatistica-turma .card-info {
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-family: "Popins", sans-serif;
+
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  grid-gap: 0px;
+
+  align-items: center;
+
+  padding: 5px 10px;
+}
+
+.estatistica-turma .card-info .descricao {
+  font-size: 0.7rem;
+  color: #909090;
+  font-weight: 300;
+}
+.estatistica-turma .card-info .resultado {
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0px;
+  padding-left: 10px;
+}
+
+.estatistica-turma .card-info.experiencia {
+  border-left: 2px solid;
+  border-left-color: #7b61b2;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.estatistica-turma .card-info.experiencia .resultado {
+  color: #7b61b2;
+}
+
+.estatistica-turma .card-info.coef-geral {
+  border-left: 2px solid;
+  border-left-color: #3aafae;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.estatistica-turma .card-info.coef-geral .resultado {
+  color: #3aafae;
+}
+.estatistica-turma .card-info.aprendizado {
+  border-left: 2px solid;
+  border-left-color: #ffa751;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.estatistica-turma .card-info.aprendizado .resultado {
+  color: #ffa751;
+}
+
+.card-info.medidas {
+  border-left: 2px solid;
+  border-left-color: #b4ff51;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.card-info.medidas .resultado {
+  color: #92ce45;
+}
+/* Estatísticas turma */
+
+/* Diagnósticas  */
+.avaliacoes-diagnostica {
+  /* padding: 10px 10px; */
+}
+.avaliacoes-diagnostica h1 {
+  font-size: 1.1rem !important;
+  font-weight: 400 !important;
+  font-family: "Poppins", sans-serif !important;
+  margin-bottom: 15px;
+}
+.avaliacoes-diagnostica .avaliacoes {
+  display: flex;
+  flex-flow: wrap;
+  gap: 3px;
+  row-gap: 5px;
+  padding: 5px;
+}
+
+.chip {
+  font-size: 1rem;
+  border-radius: 40px;
+  padding: 5px 10px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  align-self: center;
+}
+.chip.negativo {
+  background: rgb(255, 0, 0);
+  color: #fff;
+}
+.chip.positivo {
+  background: rgb(49, 49, 255);
+  color: #fff;
+}
+/* Diagnósticas  */
+
+/* Medidas */
+.medidas {
+}
+
+.titulo-medidas {
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5px;
+  align-items: baseline;
+}
+.medidas h1 {
+  font-size: 1rem !important;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif !important;
+}
+.mostrar-tudo {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #222424;
+  align-self: center;
+}
+
+.lista-medidas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: minmax(50px, 80px);
+  grid-gap: 10px;
+
+  padding: 10px 5px;
+}
+
+.lista-medidas .medida {
+  background: rgb(255, 254, 254);
+  padding: 10px 2px 10px 10px;
+  border-radius: 10px;
+  box-shadow: 0 3px 3px 4px rgba(0, 0, 0, 0.06);
+
+  display: grid;
+  grid-template-columns: 5fr 40px;
+
+  cursor: pointer;
+
+  border-left: 3px solid var(--medida-disciplinar-color);
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+
+  animation: fadeIn 0.7s ease-in-out;
+}
+.mostrar-mais {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: 1fr;
+
+  background: rgba(219, 218, 218, 0.459);
+  color: rgba(158, 158, 158, 0.774);
+  border-radius: 5px;
+  font-size: 1.5rem;
+
+  cursor: pointer;
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+.lista-medidas .medida .descricao {
+  padding-left: 5px;
+}
+
+.lista-medidas .medida .nome {
+  font-size: 1rem;
+  font-weight: normal;
+}
+.lista-medidas .medida .tipo-medida {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgb(153, 149, 149);
+  padding-left: 3px;
+}
+
+.lista-medidas .medida .data {
+  color: rgb(184, 179, 179);
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+/* Medidas */
+
+
+
+/* Alunos */
+.alunos {
+  /* padding-left: 5px; */
+}
+.alunos h1 {
+  font-size: 1rem !important;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif !important;
+  margin-bottom: 15px;
+}
+
+.overview-alunos {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  align-items: center;
+  justify-items: center;
+}
+
+.cardbox.baixo {
+  border-top: 2px solid #f04545 !important;
+}
+
+.cardbox.medio {
+  border-top: 2px solid #4c39c7 !important;
+}
+
+.cardbox.alto {
+  border-top: 2px solid #36ce59 !important;
+}
+
+.cardbox {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  background-color: #fff;
+  border-radius: 2px;
+  color: #222424;
+  margin: 0px;
+  padding: 5px;
+  box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.1);
+  transition: box-shadow ease-in-out 0.4s;
+  cursor: pointer;
+  text-justify: center;
+  text-align: center;
+
+  animation: fadeIn 0.7s ease-in-out;
+
+}
+
+.pesquisa {
+  display: flex;
+  justify-content: center;
+}
+.lista-estudantes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: minmax(100px, 1fr);
+  grid-gap: 10px;
+  margin: 20px 10px;
+}
+
+/* Alunos */
+
+
+/* DASHBOARD */
