@@ -355,6 +355,9 @@ const gerarEstudanteCard = (aluno) => {
     <p class="subtitulo is-7 gray-text">${aluno.coeficiente_rendimento}</p>
   `;
 
+  card.addEventListener("click", (e) => {
+    window.location.href = `./aluno.html?matricula=${aluno.matricula}`;
+  });
   card.innerHTML = content;
 
   return card;
