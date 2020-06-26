@@ -1,3 +1,19 @@
+<?php
+
+use core\sistema\Autenticacao;
+
+require_once '../../vendor/autoload.php';
+require_once '../../config.php';
+
+if (!isset($_COOKIE['token'])) {
+  header("Location: ../login.php");
+}
+
+if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheiro($_COOKIE['token'])) {
+  header("Location: ../login.php?erro=2");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +21,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Turma</title>
     <link rel="stylesheet" href="../assets/css/index.css" />
-    <link rel="stylesheet" href="../assets/css/aluno.css" />
+    <link rel="stylesheet" href="../assets/css/turma.css" />
+    <link rel="stylesheet" href="../assets/css/modals.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
@@ -127,7 +144,7 @@
         <section class="head">
           <div class="detalhes">
             <p class="principal">
-              Visão Geral - Aluno
+              Visão Geral - Turma
             </p>
             <p class="descricao">
               Bem-vindo de volta!
@@ -136,19 +153,27 @@
         </section>
         <section class="overview">
           <div class="info">
-            <div class="aluno">
-              <span class="nome">Alexandre Lopes</span>
+            <div class="turma-info">
               <div>
-                <span class="turma">3° B</span> -
-                <span class="curso">Informática</span>
+                <span name="turma" id="nome">3° B</span> -
+                <span name="curso" id="curso">Informática</span>
               </div>
-              <span class="matricula">2017103202030090</span>
+              <span class="cod-turma" id="codigo">20141.03INF10I.3B</span>
+              <span class="separator"></span>
+              <span class="conselheiro"></span>
+              <span class="representante"></span>
+              <span class="vice-representante"></span>
             </div>
           </div>
-          <div class="estatistica-aluno">
+
+          <div class="estatistica-turma" id="estatistica-turma">
             <div class="card-info coef-geral">
-              <p class="descricao">Coeficiente Rendimento</p>
+              <p class="descricao">Coeficiente Geral</p>
               <p class="resultado">0,0</p>
+            </div>
+            <div class="card-info experiencia">
+              <p class="descricao">Experiências</p>
+              <p class="resultado">0</p>
             </div>
             <div class="card-info aprendizado">
               <p class="descricao">Ensino-Aprendizado</p>
@@ -159,48 +184,81 @@
               <p class="resultado">0</p>
             </div>
           </div>
-          <div class="avaliacoes-diagnostica">
-            <h1>Principais Avaliações</h1>
-            <div class="avaliacoes" id="avaliacoes">
-              <!-- <span class="chip negativo">Faltsoso</span> -->
+          <div class="chart">
+            <h1 class="chart-title">Coeficiente Geral</h1>
+            <div class="canvas-chart">
+              <canvas id="coef-geral"></canvas>
+            </div>
+            <div class="legenda">
+              <div class="alto">
+                <span class="cor"></span>
+                <span class="text">Alto</span>
+              </div>
+              <div class="medio">
+                <span class="cor"></span>
+                <span class="text">Médio</span>
+              </div>
+              <div class="baixo">
+                <span class="cor"></span>
+                <span class="text">Baixo</span>
+              </div>
             </div>
           </div>
         </section>
-        <section class="medidas-ensino">
+        <section class="medidas-avaliacao">
           <div class="medidas">
             <div class="titulo-medidas">
               <h1>Medidas Disciplinares</h1>
               <a class="mostrar-tudo"
-                >Mostrar Mais
+                >Mostrar mais
                 <i class="fas fa-angle-down" aria-hidden="true"></i
               ></a>
             </div>
             <div class="lista-medidas">
-              <!-- <div class="medida">
-                <div class="descricao">
-                  <p class="nome">Ocorrência Leve</p>
-                  <p class="data">10 Jan 20</p>
-                </div>
+              <!-- <div class="mostrar-mais">
+                <span>+5</span>
               </div> -->
             </div>
           </div>
-          <div class="aprendizado">
-            <div class="titulo-aprendizados">
-              <h1>Dificuldades de Aprendizado</h1>
-              <a class="mostrar-tudo"
-                >Mostrar Mais
-                <i class="fas fa-angle-down" aria-hidden="true"></i
-              ></a>
-                </div>
-              <div class="lista-aprendizados" id="lista-aprendizados">
-                <!-- <div class="aprendizado">
-                  <div class="descricao">
-                    <p class="disciplina">Matemática</p>
-                    <p class="data">10 Jan 20</p>  
-                  </div>
-                </div> -->
-              </div>
+          <div class="avaliacoes-diagnostica">
+            <h1>Principais Avaliações</h1>
+            <div class="avaliacoes" id="avaliacoes">
             </div>
+          </div>
+        </section>
+        <section class="alunos">
+          <h1 class="principal">Estudantes</h1>
+          <div class="pesquisa">
+            <div class="field has-addons tipos">
+              <p class="control">
+                <button class="button is-small" id="filtrarAlto">
+                  <span>Alto</span>
+                </button>
+              </p>
+              <p class="control">
+                <button class="button is-small align-center" id="filtrarMedio">
+                  <span>Médio</span>
+                </button>
+              </p>
+              <p class="control">
+                <button class="button is-small align-center" id="filtrarBaixo">
+                  <span>Baixo</span>
+                </button>
+              </p>
+              <p class="control">
+                <button class="button is-small align-center" id="removerFiltro">
+                  <span>Todos</span>
+                </button>
+              </p>
+            </div>
+          </div>
+          <div class="overview-alunos"></div>
+          <div class="lista-estudantes" id="lista-estudantes">
+            <!-- <div class="cardbox card-turma alto" data-aluno="2017103202030090">
+              <p class="subtitulo is-6">Alexandre Lopes</p>
+              <p class="subtitulo is-8 gray-text">2017103202030090</p>
+              <p class="subtitulo is-7">9,0</p>
+            </div> -->
           </div>
         </section>
       </main>
@@ -256,7 +314,8 @@
     <div class="toasts" id="toasts"></div>
   </body>
   <script src="../assets/js/index.js" type="module"></script>
-  <script src="../assets/js/aluno.js" type="module"></script>
+  <script src="../assets/js/turma.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
   <!-- <script src="../assets/js/atendimentos.js" type="module"></script> -->
 </html>
