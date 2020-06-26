@@ -13,6 +13,7 @@ class Aluno extends CRUD
     const COL_NOME_PESSOA = "NOME_PESSOA";
     const COL_COD_TURMA_ATUAL = "COD_TURMA_ATUAL";
     const COL_COEFICIENTE_RENDIMENTO = "COEFICIENTE_RENDIMENTO";
+    const COL_COD_CURSO = "COD_CURSO";
 
     public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
     {

@@ -24,7 +24,8 @@ class Alunos
 
 
         $campos = Aluno::COL_MATRICULA . ", " .
-            "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome";
+            Aluno::COL_COD_CURSO . ", " .
+            "{fn CONCAT(SUBSTRING(PESSOAS.NOME_PESSOA, 1, CHARINDEX(' ', PESSOAS.NOME_PESSOA) - 1), {fn CONCAT(' ', REVERSE(SUBSTRING(REVERSE(PESSOAS.NOME_PESSOA), 1, CHARINDEX(' ', REVERSE(PESSOAS.NOME_PESSOA)) - 1)))})} as nome ";
 
         $busca = [Aluno::COL_MATRICULA => $matricula];
 
@@ -36,7 +37,8 @@ class Alunos
 
             $aluno = [
                 'nome' => $aluno['nome'],
-                'matricula' => $aluno[Aluno::COL_MATRICULA]
+                'matricula' => $aluno[Aluno::COL_MATRICULA],
+                'curso' => $aluno[Aluno::COL_COD_CURSO]
             ];
         }
 
@@ -109,7 +111,7 @@ class Alunos
         $aprendizadosAluno = $a->listarAprendizadoAluno($dados);
         $aprendizadosAluno = json_decode($aprendizadosAluno, true);
         $aprendizadosAluno = count($aprendizadosAluno);
-        
+
         $medidas = $this->obterMedidasDisciplinares($dados);
 
         $medidas = json_decode($medidas, true);
@@ -139,5 +141,30 @@ class Alunos
 
         http_response_code(200);
         return $aprendizados;
+    }
+
+    public function obterInformacoes($dados)
+    {
+        if (!isset($dados['aluno'])) {
+            http_response_code(400);
+            return json_encode(array('message' => 'É necessário informar o aluno.'));
+        }
+
+        // Selecionar Aluno
+        // Selecionar Curso
+        $a = $this->selecionar($dados['aluno']);
+
+        $curso_id = $a['curso'];
+        unset($a['curso']);
+        $c = new Cursos();
+        $curso = $c->selecionarCurso($curso_id);
+
+        $info = [
+            'aluno' => $a,
+            'curso' => $curso
+        ];
+
+        http_response_code(200);
+        return json_encode($info);
     }
 }
