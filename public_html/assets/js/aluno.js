@@ -239,7 +239,7 @@ const gerarAprendizado = (aprendizado) => {
     "Nov",
     "Dez",
   ];
-  const data = new Date(medida.data);
+  const data = new Date(aprendizado.data);
   const dataFormatada = `${
     meses[data.getMonth()]
   } ${data.getFullYear().toString().substr(-2)}`;
@@ -249,7 +249,119 @@ const gerarAprendizado = (aprendizado) => {
 			<p class="data">${dataFormatada}</p>  
 		</div>
 	`
+
+	aprendizadoDiv.innerHTML = content;
+	return aprendizadoDiv;
 }
+
+
+
+
+const abrirMedida = (element) => {
+  console.log("Apertou o aprendizado!");
+
+  let medida = element.currentTarget.getAttribute("data-cod-medida");
+
+  const modalMedida = document.getElementById("visualizar-medida");
+
+  if (medida) {
+    localStorage.setItem("medida", medida);
+    modalMedida.classList.toggle("is-active");
+
+    const dados = {
+      acao: "MedidasDisciplinares/selecionar",
+      medida_disciplinar: medida,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        preencherMedida(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+};
+
+const preencherMedida = (medida) => {
+  const modal = document.getElementById("visualizar-medida");
+  modal.querySelector(".info-m .nome").innerHTML = medida.aluno.nome;
+  modal.querySelector(".info-m .matricula").innerHTML = medida.aluno.matricula;
+  const data = new Date(medida.data);
+
+  const meses = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+  ];
+
+  const dataFormatada = ` ${data.getDay()} ${
+    meses[data.getMonth()]
+  } ${data.getFullYear()}`;
+  modal.querySelector(".info-m .data").innerHTML = dataFormatada;
+
+  modal.querySelector(".info-medida .tipo-medida p").innerHTML =
+    medida.descricao;
+  modal.querySelector(".info-medida .observacao").innerHTML = medida.observacao;
+};
+
+const closeModal = (params) => {
+  const modalMedida = document.getElementById("visualizar-medida");
+
+  let closeBtn = modalMedida.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", (evnt) => {
+    fecharMedida();
+  });
+  let bgModal = modalMedida.querySelector(".modal-background");
+  bgModal.addEventListener("click", (evnt) => {
+    fecharMedida();
+  });
+};
+
+const fecharMedida = () => {
+  const modal = document.getElementById("visualizar-medida");
+  modal.classList.toggle("is-active");
+
+  if (localStorage.getItem("medida")) {
+    localStorage.removeItem("medida");
+  }
+
+  modal.querySelector(".info-m .nome").innerHTML = "";
+  modal.querySelector(".info-m .matricula").innerHTML = "";
+
+  modal.querySelector(".info-m .data").innerHTML = "";
+
+  modal.querySelector(".info-medida .tipo-medida p").innerHTML = "";
+  modal.querySelector(".info-medida .observacao").innerHTML = "";
+};
+
+const obterEstudantes = () => {
+  const turma = localStorage.getItem("turmaAtual");
+
+  if (turma) {
+    const dados = { acao: "Turmas/listarEstudantes", turma: turma };
+
+    sendRequest(dados)
+      .then((response) => {
+        console.log(response);
+        listarEstudantes(response);
+        localStorage.setItem("estudantes", JSON.stringify(response));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+};
 
 obterInfoAluno();
 obterEstatisticaAluno();
