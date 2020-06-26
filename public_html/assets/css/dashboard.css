@@ -643,4 +643,48 @@
 /* Alunos */
 
 
+/* Modal */
+
+.modal-medida {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin: 10px;
+}
+
+.info-m {
+  display: grid;
+  align-items: center;
+  grid-template-rows: 2fr 1fr;
+}
+
+.info-aluno {
+  display: grid;
+  justify-items: left;
+}
+
+.info-aluno .nome {
+  font-size: 1.5rem;
+}
+.info-aluno .matricula {
+  font-size: .9rem;
+  color: rgb(149, 147, 147);
+}
+.info-m .data {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-left: 1px;
+}
+
+.tipo-medida {
+  font-size: 1.1rem;
+}
+.info-medida {
+  display: grid;
+  grid-template-rows: 30px 3fr;
+}
+.info-medida .observacao {
+  margin-left: 5px;
+}
+/* Modal */
+
 /* DASHBOARD */

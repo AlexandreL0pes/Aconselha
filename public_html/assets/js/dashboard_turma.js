@@ -282,7 +282,9 @@ const fecharMedida = () => {
   modal.querySelector(".info-medida .observacao").innerHTML = "";
 };
 
+
 obterEstatisticaTurma();
 obterPrincipaisAvaliacoes();
 obterMedidas();
 obterCoef();
+closeModal();
