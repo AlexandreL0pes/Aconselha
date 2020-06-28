@@ -310,7 +310,13 @@ class Aprendizados
 
         return json_encode($retorno);
     }
-
+    
+    /**
+     * Obtem todos as Avaliações de Ensino-Aprendizado que envolvem um estudante
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function listarAprendizadoAluno($dados)
     {
         $campos = Aprendizado::TABELA . "." . Aprendizado::COL_ID . ", " . Aprendizado::COL_ID_REUNIAO . ", " . Aprendizado::COL_DISCIPLINA . ", " . Aprendizado::COL_OBSERVACAO . ", " . Aprendizado::COL_DATA;
