@@ -38,10 +38,10 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
 
     <!-- Header -->
     <header class="header">
-      <div class="dropdown is-right is-small no-border" id="dropdown-user">
+    <div class="dropdown is-right is-small no-border" id="dropdown-user">
         <div class="dropdown-trigger">
           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu6">
-            <span>Coordenador</span>
+            <span>Gerência</span>
             <span class="icon is-small">
               <i class="fas fa-angle-down" aria-hidden="true"></i>
             </span>
@@ -50,16 +50,12 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
         <div class="dropdown-menu" id="dropdown-menu6" role="menu">
           <div class="dropdown-content">
             <div class="dropdown-item">
-              <a href="#" class="dropdown-item">
+              <a href="../professor/turmas.php" class="dropdown-item">
                 Professor
               </a>
               <hr class="dropdown-divider" />
-              <a href="#" class="dropdown-item">
+              <a href="../coordenador/reunioes.php" class="dropdown-item">
                 Coordenador
-              </a>
-              <hr class="dropdown-divider" />
-              <a href="#" class="dropdown-item">
-                Aluno
               </a>
             </div>
           </div>
