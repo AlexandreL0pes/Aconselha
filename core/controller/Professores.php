@@ -175,7 +175,13 @@ class Professores
 
         return $pessoas;
     }
-
+    
+    /**
+     * Obtem as principais informações do professor, como primeirnome e cod_pessoa
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function obterInformacao($dados)
     {
         if (!isset($dados['token'])) {
