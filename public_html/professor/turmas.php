@@ -49,7 +49,7 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
               aria-haspopup="true"
               aria-controls="dropdown-menu6"
             >
-              <span>Coordenador</span>
+              <span>Professor</span>
               <span class="icon is-small">
                 <i class="fas fa-angle-down" aria-hidden="true"></i>
               </span>
@@ -58,16 +58,8 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
           <div class="dropdown-menu" id="dropdown-menu6" role="menu">
             <div class="dropdown-content">
               <div class="dropdown-item">
-                <a href="#" class="dropdown-item">
-                  Professor
-                </a>
-                <hr class="dropdown-divider" />
-                <a href="#" class="dropdown-item">
+                <a href="../coordenador/reunioes.php" class="dropdown-item">
                   Coordenador
-                </a>
-                <hr class="dropdown-divider" />
-                <a href="#" class="dropdown-item">
-                  Aluno
                 </a>
               </div>
             </div>
