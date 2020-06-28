@@ -315,7 +315,7 @@ class Aprendizados
      * Obtem todos as Avaliações de Ensino-Aprendizado que envolvem um estudante
      *
      * @param  mixed $dados
-     * @return void
+     * @return json
      */
     public function listarAprendizadoAluno($dados)
     {
