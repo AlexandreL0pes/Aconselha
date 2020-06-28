@@ -2,6 +2,9 @@ import { sendRequest, getSearchParams } from "./utils.js";
 
 const listener = () => {};
 
+/**
+ * Requisita as informações do aluno
+ */
 const obterInfoAluno = () => {
   const matricula = getMatricula();
   if (matricula) {
@@ -20,6 +23,10 @@ const obterInfoAluno = () => {
   }
 };
 
+/**
+ * Apresenta na tela as informações do aluno
+ * @param {json} info Informações do aluno
+ */
 const apresentarInfoAluno = (info) => {
   const divAluno = document.querySelector(".info .aluno");
   divAluno.querySelector(".nome").innerHTML = info.aluno.nome;
@@ -48,6 +55,10 @@ const obterEstatisticaAluno = () => {
   }
 };
 
+/**
+ * Apresenta na tela as estatísticas do estudante
+ * @param {json} estatisticas Estatisticas do aluno
+ */
 const apresentarEstatisticas = (estatisticas) => {
   const divEstatisticas = document.querySelector(".estatistica-aluno");
   divEstatisticas.querySelector(".coef-geral .resultado").innerHTML =
@@ -58,6 +69,9 @@ const apresentarEstatisticas = (estatisticas) => {
     estatisticas.medidas;
 };
 
+/**
+ * Requisita os perfis relevantes do aluno
+ */
 const obterPrincipaisAvaliacoes = () => {
   const matricula = getMatricula();
   const dados = {
@@ -74,6 +88,10 @@ const obterPrincipaisAvaliacoes = () => {
     });
 };
 
+/**
+ * Apresenta os perfis do aluno 
+ * @param {json} dados Perfis do aluno
+ */
 const apresentarPrincipaisAvaliacoes = (dados) => {
   if (dados[0].nome !== undefined) {
     const avaliacoes = document.getElementById("avaliacoes");
