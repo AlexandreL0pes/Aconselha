@@ -42,7 +42,7 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
       <div class="dropdown is-right is-small no-border" id="dropdown-user">
         <div class="dropdown-trigger">
           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu6">
-            <span>Coordenador</span>
+            <span>Professor</span>
             <span class="icon is-small">
               <i class="fas fa-angle-down" aria-hidden="true"></i>
             </span>
@@ -51,16 +51,8 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
         <div class="dropdown-menu" id="dropdown-menu6" role="menu">
           <div class="dropdown-content">
             <div class="dropdown-item">
-              <a href="#" class="dropdown-item">
-                Professor
-              </a>
-              <hr class="dropdown-divider" />
-              <a href="#" class="dropdown-item">
+              <a href="../coordenador/reunioes.php" class="dropdown-item">
                 Coordenador
-              </a>
-              <hr class="dropdown-divider" />
-              <a href="#" class="dropdown-item">
-                Aluno
               </a>
             </div>
           </div>
@@ -169,104 +161,104 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
           <!-- INFORMAÇÕES TURMA -->
           <section class="tab-content main-dash">
             <div class="main-dash">
-            <section class="overview">
-              <div class="chart">
-                <h1 class="chart-title">Coeficiente Geral</h1>
-                <div class="canvas-chart">
-                  <canvas id="coef-geral"></canvas>
-                </div>
-                <div class="legenda">
-                  <div class="alto">
-                    <span class="cor"></span>
-                    <span class="text">Alto</span>
+              <section class="overview">
+                <div class="chart">
+                  <h1 class="chart-title">Coeficiente Geral</h1>
+                  <div class="canvas-chart">
+                    <canvas id="coef-geral"></canvas>
                   </div>
-                  <div class="medio">
-                    <span class="cor"></span>
-                    <span class="text">Médio</span>
+                  <div class="legenda">
+                    <div class="alto">
+                      <span class="cor"></span>
+                      <span class="text">Alto</span>
+                    </div>
+                    <div class="medio">
+                      <span class="cor"></span>
+                      <span class="text">Médio</span>
+                    </div>
+                    <div class="baixo">
+                      <span class="cor"></span>
+                      <span class="text">Baixo</span>
+                    </div>
                   </div>
-                  <div class="baixo">
-                    <span class="cor"></span>
-                    <span class="text">Baixo</span>
+                </div>
+
+                <div class="estatistica-turma" id="estatistica-turma">
+                  <div class="card-info coef-geral">
+                    <p class="descricao">Coeficiente Geral</p>
+                    <p class="resultado">0,0</p>
+                  </div>
+                  <div class="card-info experiencia">
+                    <p class="descricao">Experiências</p>
+                    <p class="resultado">0</p>
+                  </div>
+                  <div class="card-info aprendizado">
+                    <p class="descricao">Ensino-Aprendizado</p>
+                    <p class="resultado">0</p>
+                  </div>
+                  <div class="card-info medidas">
+                    <p class="descricao">Medidas Disciplinares</p>
+                    <p class="resultado">0</p>
                   </div>
                 </div>
-              </div>
 
-              <div class="estatistica-turma" id="estatistica-turma">
-                <div class="card-info coef-geral">
-                  <p class="descricao">Coeficiente Geral</p>
-                  <p class="resultado">0,0</p>
+                <div class="avaliacoes-diagnostica">
+                  <h1>Principais Avaliações</h1>
+                  <div class="avaliacoes" id="avaliacoes">
+                  </div>
                 </div>
-                <div class="card-info experiencia">
-                  <p class="descricao">Experiências</p>
-                  <p class="resultado">0</p>
-                </div>
-                <div class="card-info aprendizado">
-                  <p class="descricao">Ensino-Aprendizado</p>
-                  <p class="resultado">0</p>
-                </div>
-                <div class="card-info medidas">
-                  <p class="descricao">Medidas Disciplinares</p>
-                  <p class="resultado">0</p>
-                </div>
-              </div>
+              </section>
 
-              <div class="avaliacoes-diagnostica">
-                <h1>Principais Avaliações</h1>
-                <div class="avaliacoes" id="avaliacoes">
+              <section class="medidas">
+                <div class="titulo-medidas">
+                  <h1>Medidas Disciplinares</h1>
+                  <a class="mostrar-tudo">Mostrar mais
+                    <i class="fas fa-angle-down" aria-hidden="true"></i></a>
                 </div>
-              </div>
-            </section>
-
-            <section class="medidas">
-              <div class="titulo-medidas">
-                <h1>Medidas Disciplinares</h1>
-                <a class="mostrar-tudo">Mostrar mais
-                  <i class="fas fa-angle-down" aria-hidden="true"></i></a>
-              </div>
-              <div class="lista-medidas">
-                <!-- <div class="mostrar-mais">
+                <div class="lista-medidas">
+                  <!-- <div class="mostrar-mais">
                 <span>+5</span>
               </div> -->
-              </div>
-            </section>
-
-            <section class="alunos">
-              <h1 class="principal">Estudantes</h1>
-              <div class="pesquisa">
-                <div class="field has-addons tipos">
-                  <p class="control">
-                    <button class="button is-small" id="filtrarAlto">
-                      <span>Alto</span>
-                    </button>
-                  </p>
-                  <p class="control">
-                    <button class="button is-small align-center" id="filtrarMedio">
-                      <span>Médio</span>
-                    </button>
-                  </p>
-                  <p class="control">
-                    <button class="button is-small align-center" id="filtrarBaixo">
-                      <span>Baixo</span>
-                    </button>
-                  </p>
-                  <p class="control">
-                    <button class="button is-small align-center" id="removerFiltro">
-                      <span>Todos</span>
-                    </button>
-                  </p>
                 </div>
-              </div>
-              <div class="overview-alunos"></div>
-              <div class="lista-estudantes" id="lista-estudantes">
-                <!-- <div class="cardbox card-turma alto" data-aluno="2017103202030090">
+              </section>
+
+              <section class="alunos">
+                <h1 class="principal">Estudantes</h1>
+                <div class="pesquisa">
+                  <div class="field has-addons tipos">
+                    <p class="control">
+                      <button class="button is-small" id="filtrarAlto">
+                        <span>Alto</span>
+                      </button>
+                    </p>
+                    <p class="control">
+                      <button class="button is-small align-center" id="filtrarMedio">
+                        <span>Médio</span>
+                      </button>
+                    </p>
+                    <p class="control">
+                      <button class="button is-small align-center" id="filtrarBaixo">
+                        <span>Baixo</span>
+                      </button>
+                    </p>
+                    <p class="control">
+                      <button class="button is-small align-center" id="removerFiltro">
+                        <span>Todos</span>
+                      </button>
+                    </p>
+                  </div>
+                </div>
+                <div class="overview-alunos"></div>
+                <div class="lista-estudantes" id="lista-estudantes">
+                  <!-- <div class="cardbox card-turma alto" data-aluno="2017103202030090">
               <p class="subtitulo is-6">Alexandre Lopes</p>
               <p class="subtitulo is-8 gray-text">2017103202030090</p>
               <p class="subtitulo is-7">9,0</p>
             </div> -->
-              </div>
-            </section>
+                </div>
+              </section>
             </div>
-         
+
 
           </section>
           <!-- INFORMAÇÕES TURMA -->
@@ -423,39 +415,39 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
     </div>
 
     <div class="modal visualizar" id="visualizar-medida">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <div class="modal-card-title">Medida Disciplinar</div>
-            <div class="modal-close-btn">
-              <i class="fas fa-times sidenav__brand-close"></i>
-            </div>
-          </header>
-          <section class="modal-card-body">
-            <div class="modal-medida">
-              <div class="info-m">
-                <div class="info-aluno">
-                  <p class="nome">Alexandre Lopes</p>
-                  <p class="matricula">2017103202030090</p>
-                  <p class="data">10 Jan 2020</p>
-                </div>
-              </div>
-              <div class="info-medida">
-                <div class="tipo-medida">
-                  <p>Ocorrência Leve</p>
-                </div>
-                <p class="observacao">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Error quo quasi doloribus placeat quaerat, laboriosam beatae
-                  libero optio hic! Quaerat quidem eum soluta distinctio
-                  laudantium quo aperiam reprehenderit vitae laborum!
-                </p>
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <div class="modal-card-title">Medida Disciplinar</div>
+          <div class="modal-close-btn">
+            <i class="fas fa-times sidenav__brand-close"></i>
+          </div>
+        </header>
+        <section class="modal-card-body">
+          <div class="modal-medida">
+            <div class="info-m">
+              <div class="info-aluno">
+                <p class="nome">Alexandre Lopes</p>
+                <p class="matricula">2017103202030090</p>
+                <p class="data">10 Jan 2020</p>
               </div>
             </div>
-          </section>
-          <footer class="modal-card-foot"></footer>
-        </div>
+            <div class="info-medida">
+              <div class="tipo-medida">
+                <p>Ocorrência Leve</p>
+              </div>
+              <p class="observacao">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Error quo quasi doloribus placeat quaerat, laboriosam beatae
+                libero optio hic! Quaerat quidem eum soluta distinctio
+                laudantium quo aperiam reprehenderit vitae laborum!
+              </p>
+            </div>
+          </div>
+        </section>
+        <footer class="modal-card-foot"></footer>
       </div>
+    </div>
   </div>
   <div class="toasts" id="toasts"></div>
 </body>
