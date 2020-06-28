@@ -47,7 +47,13 @@ class Alunos
         return $aluno;
     }
 
-
+    
+    /**
+     * Retorna as medidas disciplinares de um aluno
+     *
+     * @param  mixed $dados
+     * @return array
+     */
     public function obterMedidasDisciplinares($dados)
     {
         if (!isset($dados['aluno'])) {
@@ -79,6 +85,13 @@ class Alunos
         return json_encode($medidas_completas);
     }
 
+        
+    /**
+     * Obtem o coeficiente geral do aluno
+     *
+     * @param  mixed $matricula
+     * @return array
+     */
     public function obterCoeficienteGeral($matricula = null)
     {
         $campos = Aluno::COL_COEFICIENTE_RENDIMENTO;
@@ -97,7 +110,13 @@ class Alunos
         return $coef;
     }
 
-
+    
+    /**
+     * Obtem as estatísticas de um aluno
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function obterEstatisticas($dados)
     {
         if (!isset($dados['aluno'])) {
@@ -128,7 +147,13 @@ class Alunos
 
         return json_encode($estatisticas);
     }
-
+    
+    /**
+     * Obtem as Avaliações de Ensino-aprendizado que o estudante está envolvido
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function obterAprendizados($dados)
     {
         if (!isset($dados['aluno'])) {
@@ -144,7 +169,13 @@ class Alunos
         http_response_code(200);
         return $aprendizados;
     }
-
+    
+    /**
+     * Obtem dados do estudante, como turma e nome do aluno
+     *
+     * @param  mixed $dados
+     * @return void
+     */
     public function obterInformacoes($dados)
     {
         if (!isset($dados['aluno'])) {
