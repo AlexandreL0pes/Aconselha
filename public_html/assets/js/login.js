@@ -61,8 +61,8 @@ const redirecionamento = (type) => {
     2: "./coordenador/index.php",
     3: "./professor/index.php",
     4: "./professor/index.php",
-    5: "./representante/ensino.php",
-    6: "./representante/ensino.php",
+    5: "./representante/index.php",
+    6: "./representante/index.php",
   };
   window.location.href = pages[type];
 };
