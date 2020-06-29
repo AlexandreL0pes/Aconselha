@@ -52,7 +52,7 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
         <div class="dropdown-menu" id="dropdown-menu6" role="menu">
           <div class="dropdown-content">
             <div class="dropdown-item">
-              <a href="../coordenador/reunioes.php" class="dropdown-item">
+              <a href="../coordenador/index.php" class="dropdown-item">
                 Coordenador
               </a>
             </div>
