@@ -50,7 +50,7 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
         <div class="dropdown-menu" id="dropdown-menu6" role="menu">
           <div class="dropdown-content">
             <div class="dropdown-item">
-              <a href="../professor/turmas.php" class="dropdown-item">
+              <a href="../professor/index.php" class="dropdown-item">
                 Professor
               </a>
               <hr class="dropdown-divider" />

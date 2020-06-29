@@ -59,8 +59,8 @@ const redirecionamento = (type) => {
   const pages = {
     1: "./gerencia/reunioes.php",
     2: "./coordenador/reunioes.php",
-    3: "./professor/turmas.php",
-    4: "./professor/turmas.php",
+    3: "./professor/index.php",
+    4: "./professor/index.php",
     5: "./representante/ensino.php",
     6: "./representante/ensino.php",
   };
