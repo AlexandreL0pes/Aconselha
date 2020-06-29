@@ -55,7 +55,7 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
                 Professor
               </a>
               <hr class="dropdown-divider" />
-              <a href="../gerencia/reunioes.php" class="dropdown-item">
+              <a href="../gerencia/index.php" class="dropdown-item">
                 Coordenador
               </a>
             </div>

@@ -57,7 +57,7 @@ const pegarDados = () => {
  */
 const redirecionamento = (type) => {
   const pages = {
-    1: "./gerencia/reunioes.php",
+    1: "./gerencia/index.php",
     2: "./coordenador/index.php",
     3: "./professor/index.php",
     4: "./professor/index.php",
