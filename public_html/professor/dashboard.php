@@ -61,14 +61,11 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
     </header>
     <!-- Header -->
 
-    <!-- Sidebar -->
-    <aside class="sidenav">
+  <!-- Sidebar -->
+  <aside class="sidenav">
       <ul class="sidenav__list">
         <li class="sidenav__list-item first-item">
           <img src="../assets/images/logo_sadc.svg" alt="" class="logo-icon" />
-        </li>
-        <li class="sidenav__list-item estudantes">
-          <img src="../assets/images/student.svg" alt="" class="icone" />
         </li>
         <li class="sidenav__list-item turmas">
           <img src="../assets/images/grupo.svg" alt="" class="icone" />
@@ -76,9 +73,9 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
         <li class="sidenav__list-item reunioes">
           <img class="icone" src="../assets/images/reunion.svg" alt="" />
         </li>
-        <li class="sidenav__list-item config">
+        <!-- <li class="sidenav__list-item config">
           <img class="icone" src="../assets/images/config.svg" alt="" />
-        </li>
+        </li> -->
       </ul>
       <div class="item-sair">
         <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
@@ -92,10 +89,6 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
         <i class="fas fa-times sidenav__brand-close"></i>
       </div>
       <ul class="sidenav__list-mobile">
-        <li class="sidenav__list-item-mobile estudantes">
-          <img src="../assets/images/student.svg" alt="" class="icone" />
-          <p class="sidenav-item-text">Alunos</p>
-        </li>
         <li class="sidenav__list-item-mobile turmas">
           <img src="../assets/images/grupo.svg" alt="" class="icone" />
           <p class="sidenav-item-text">Turmas</p>
@@ -104,10 +97,10 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
           <img src="../assets/images/reunion.svg" alt="" class="icone" />
           <p class="sidenav-item-text">Conselhos Anteriores</p>
         </li>
-        <li class="sidenav__list-item-mobile config">
+        <!-- <li class="sidenav__list-item-mobile config">
           <img src="../assets/images/config.svg" alt="" class="icone" />
           <p class="sidenav-item-text">Configurações</p>
-        </li>
+        </li> -->
       </ul>
       <div class="item-sair">
         <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
