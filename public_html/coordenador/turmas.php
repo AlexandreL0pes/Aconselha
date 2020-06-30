@@ -123,79 +123,8 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
       <!-- Sidebar Mobile -->
 
       <main class="main">
-        <!-- <div>
-          <h4 class="page-title">Turmas</h4>
-          <div class="turmas">
-            <div class="cardbox card-turma is-amb" data-turmaConselho="1">
-              <p class="">Meio Ambiente</p>
-              <p class="">1° B</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-amb" data-turmaConselho="1">
-              <p class="">Meio Ambiente</p>
-              <p class="">1° B</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-amb" data-turmaConselho="2">
-              <p class="">Meio Ambiente</p>
-              <p class="">1° B</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-agro" data-turmaConselho="3">
-              <p class="">Meio Ambiente</p>
-              <p class="">1° B</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-info" data-turmaConselho="5">
-              <p class="">Informática para Internet</p>
-              <p class=" ">3° B</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-info" data-turmaConselho="5">
-              <p class="">Informática</p>
-              <p class=" ">2° B</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-info" data-turmaConselho="5">
-              <p class="">Informática</p>
-              <p class=" ">1° B</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-info" data-turmaConselho="5">
-              <p class="">Informática</p>
-              <p class=" ">3° B</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-
-            <div class="cardbox card-turma is-agro" data-turmaConselho="5">
-              <p class="">Agropecuária</p>
-              <p class=" ">1° B</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-agro" data-turmaConselho="5">
-              <p class="">Agropecuária</p>
-              <p class=" ">2° B</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-agro" data-turmaConselho="5">
-              <p class="">Agropecuária</p>
-              <p class=" ">1° A</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-agro" data-turmaConselho="5">
-              <p class="">Agropecuária</p>
-              <p class=" ">3° A</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-            <div class="cardbox card-turma is-agro" data-turmaConselho="5">
-              <p class="">Agropecuária</p>
-              <p class=" ">3° C</p>
-              <p class="">INFI.2019/1.A</p>
-            </div>
-          </div>
-        </div> -->
         <section>
-          <h4 class="subtitulo is-6 descricao">Minhas Turmas</h4>
+          <h4 class="titulo is-5 descricao">Minhas Turmas</h4>
           <div class="turmas" id="turmas"></div>
         </section>
       </main>
