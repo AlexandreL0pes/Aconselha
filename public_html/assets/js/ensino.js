@@ -19,6 +19,9 @@ const listener = () => {
   const btnExcluirExperiencia = document.getElementById("excluir-experiencia");
   btnExcluirExperiencia.addEventListener("click", (e) => excluirExperiencia(e));
 
+  const btnExcluirAprendizado = document.getElementById("excluir-ensino");
+  btnExcluirAprendizado.addEventListener("click", (e) => excluirAprendizado(e));
+
   const btnFiltrarExperiencia = document.getElementById("filtrarExperiencia");
   btnFiltrarExperiencia.addEventListener("click", (e) => filtrarExperiencia());
 
@@ -800,6 +803,33 @@ const excluirExperiencia = () => {
           "error"
         );
         fecharExperiencia();
+      });
+  }
+};
+
+const excluirAprendizado = () => {
+  const aprendizado = localStorage.getItem("aprendizado");
+
+  if (aprendizado) {
+    const dados = { acao: "Aprendizados/excluir", aprendizado: aprendizado };
+
+    sendRequest(dados)
+      .then((response) => {
+        fecharAprendizado();
+        showMessage(
+          "Deu certo!",
+          "A dificuldade de aprendizado foi excluída com sucesso.",
+          "success"
+        );
+        listarAvaliacoes();
+      })
+      .catch((err) => {
+        fecharAprendizado();
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível excluir a dificuldade de aprendizado",
+          "error"
+        );
       });
   }
 };
