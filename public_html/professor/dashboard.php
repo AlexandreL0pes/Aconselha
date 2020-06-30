@@ -427,9 +427,9 @@ if (!Autenticacao::isProfessor($_COOKIE['token']) && !Autenticacao::isConselheir
           <div class="modal-medida">
             <div class="info-m">
               <div class="info-aluno">
-                <p class="nome">Alexandre Lopes</p>
-                <p class="matricula">2017103202030090</p>
-                <p class="data">10 Jan 2020</p>
+                <p class="nome"></p>
+                <p class="matricula"></p>
+                <p class="data"></p>
               </div>
             </div>
             <div class="info-medida">
