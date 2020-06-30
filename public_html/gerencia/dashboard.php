@@ -65,14 +65,11 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
     </header>
     <!-- Header -->
 
-    <!-- Sidebar -->
-    <aside class="sidenav">
+  <!-- Sidebar -->
+  <aside class="sidenav">
       <ul class="sidenav__list">
         <li class="sidenav__list-item first-item">
           <img src="../assets/images/logo_sadc.svg" alt="" class="logo-icon" />
-        </li>
-        <li class="sidenav__list-item estudantes">
-          <img src="../assets/images/student.svg" alt="" class="icone" />
         </li>
         <li class="sidenav__list-item turmas">
           <img src="../assets/images/grupo.svg" alt="" class="icone" />
@@ -96,10 +93,6 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
         <i class="fas fa-times sidenav__brand-close"></i>
       </div>
       <ul class="sidenav__list-mobile">
-        <li class="sidenav__list-item-mobile estudantes">
-          <img src="../assets/images/student.svg" alt="" class="icone" />
-          <p class="sidenav-item-text">Alunos</p>
-        </li>
         <li class="sidenav__list-item-mobile turmas">
           <img src="../assets/images/grupo.svg" alt="" class="icone" />
           <p class="sidenav-item-text">Turmas</p>

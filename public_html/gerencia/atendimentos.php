@@ -64,15 +64,11 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
       </div>
     </header>
     <!-- Header -->
-
-    <!-- Sidebar -->
-    <aside class="sidenav">
+ <!-- Sidebar -->
+ <aside class="sidenav">
       <ul class="sidenav__list">
         <li class="sidenav__list-item first-item">
           <img src="../assets/images/logo_sadc.svg" alt="" class="logo-icon" />
-        </li>
-        <li class="sidenav__list-item estudantes">
-          <img src="../assets/images/student.svg" alt="" class="icone" />
         </li>
         <li class="sidenav__list-item turmas">
           <img src="../assets/images/grupo.svg" alt="" class="icone" />
@@ -84,6 +80,9 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
           <img class="icone" src="../assets/images/config.svg" alt="" />
         </li>
       </ul>
+      <div class="item-sair">
+        <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
+      </div>
     </aside>
     <!-- Sidebar -->
 
@@ -93,10 +92,6 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
         <i class="fas fa-times sidenav__brand-close"></i>
       </div>
       <ul class="sidenav__list-mobile">
-        <li class="sidenav__list-item-mobile estudantes">
-          <img src="../assets/images/student.svg" alt="" class="icone" />
-          <p class="sidenav-item-text">Alunos</p>
-        </li>
         <li class="sidenav__list-item-mobile turmas">
           <img src="../assets/images/grupo.svg" alt="" class="icone" />
           <p class="sidenav-item-text">Turmas</p>
@@ -110,6 +105,12 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
           <p class="sidenav-item-text">Configurações</p>
         </li>
       </ul>
+      <div class="item-sair">
+        <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
+        <p class="text">
+          Sair
+        </p>
+      </div>
     </aside>
     <!-- Sidebar Mobile -->
 
