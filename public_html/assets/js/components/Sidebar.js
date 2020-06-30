@@ -25,7 +25,17 @@ const abrirReunioesEvent = () => {
 
   items.forEach((item) =>
     item.addEventListener("click", (element) => {
-      window.location.href = "./reunioes.php";
+      window.location.href = "./index.php";
+    })
+  );
+};
+
+const abrirReunioesAnterioresEvent = () => {
+  const items = document.querySelectorAll("aside .anteriores");
+
+  items.forEach((item) =>
+    item.addEventListener("click", (element) => {
+      window.location.href = "./reunioes_passadas.php";
     })
   );
 };
@@ -58,5 +68,6 @@ export default () => {
   abrirAlunosEvent();
   abrirReunioesEvent();
   abrirConfiguracoes();
+  abrirReunioesAnterioresEvent();
   sair();
 };
