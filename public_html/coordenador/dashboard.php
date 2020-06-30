@@ -39,7 +39,7 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
 
     <!-- Header -->
     <header class="header">
-    <div class="dropdown is-right is-small no-border" id="dropdown-user">
+      <div class="dropdown is-right is-small no-border" id="dropdown-user">
         <div class="dropdown-trigger">
           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu6">
             <span>Coordenador</span>
@@ -71,21 +71,18 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
         <li class="sidenav__list-item first-item">
           <img src="../assets/images/logo_sadc.svg" alt="" class="logo-icon" />
         </li>
-        <li class="sidenav__list-item estudantes">
-          <img src="../assets/images/student.svg" alt="" class="icone" />
-        </li>
         <li class="sidenav__list-item turmas">
           <img src="../assets/images/grupo.svg" alt="" class="icone" />
         </li>
         <li class="sidenav__list-item reunioes">
           <img class="icone" src="../assets/images/reunion.svg" alt="" />
         </li>
-        <li class="sidenav__list-item config">
-          <img class="icone" src="../assets/images/config.svg" alt="" />
-        </li>
+        <!-- <li class="sidenav__list-item config">
+            <img class="icone" src="../assets/images/config.svg" alt="" />
+          </li> -->
       </ul>
       <div class="item-sair">
-        <img src="../assets/images/logout.svg" alt="" class="sair-icone">
+        <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
       </div>
     </aside>
     <!-- Sidebar -->
@@ -96,10 +93,6 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
         <i class="fas fa-times sidenav__brand-close"></i>
       </div>
       <ul class="sidenav__list-mobile">
-        <li class="sidenav__list-item-mobile estudantes">
-          <img src="../assets/images/student.svg" alt="" class="icone" />
-          <p class="sidenav-item-text">Alunos</p>
-        </li>
         <li class="sidenav__list-item-mobile turmas">
           <img src="../assets/images/grupo.svg" alt="" class="icone" />
           <p class="sidenav-item-text">Turmas</p>
@@ -108,13 +101,13 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
           <img src="../assets/images/reunion.svg" alt="" class="icone" />
           <p class="sidenav-item-text">Conselhos Anteriores</p>
         </li>
-        <li class="sidenav__list-item-mobile config">
-          <img src="../assets/images/config.svg" alt="" class="icone" />
-          <p class="sidenav-item-text">Configurações</p>
-        </li>
+        <!-- <li class="sidenav__list-item-mobile config">
+            <img src="../assets/images/config.svg" alt="" class="icone" />
+            <p class="sidenav-item-text">Configurações</p>
+          </li> -->
       </ul>
       <div class="item-sair">
-        <img src="../assets/images/logout.svg" alt="" class="sair-icone">
+        <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
         <p class="text">
           Sair
         </p>
