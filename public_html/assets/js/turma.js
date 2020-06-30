@@ -356,7 +356,7 @@ const gerarEstudanteCard = (aluno) => {
   `;
 
   card.addEventListener("click", (e) => {
-    window.location.href = `./aluno.html?matricula=${aluno.matricula}`;
+    window.location.href = `./aluno.php?matricula=${aluno.matricula}`;
   });
   card.innerHTML = content;
 
