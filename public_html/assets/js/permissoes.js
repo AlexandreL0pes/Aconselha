@@ -298,6 +298,7 @@ const salvarCoordenador = (e) => {
 
   let dados = pegarDados();
 
+  let validacao = true;
   console.log(dados);
 
   if (
@@ -310,10 +311,25 @@ const salvarCoordenador = (e) => {
       "warning",
       4000
     );
+    validacao = false;
     // return false;
   }
 
-  sendRequest(dados)
+  if (
+    dados.email.length < 1 || dados.senha.length < 1
+  ) {
+    showMessage(
+      "Confira seus dados!",
+      "É necessário informar o novo coordenador",
+      "warning",
+      4000
+    );    
+    validacao = false;
+  }
+
+
+  if (validacao) {
+    sendRequest(dados)
     .then((response) => {
       console.log("Deu certo hein!");
       console.log(response);
@@ -335,6 +351,7 @@ const salvarCoordenador = (e) => {
         4000
       );
     });
+  }
 };
 
 /**
@@ -728,7 +745,7 @@ const salvarRepresentante = () => {
       "warning",
       4000
     );
-  }else{
+  } else {
     sendRequest(dados)
       .then((response) => {
         console.log("Deu certo hein!");
@@ -751,7 +768,6 @@ const salvarRepresentante = () => {
         );
       });
   }
-
 };
 
 const pegarDadosRepresentante = () => {
