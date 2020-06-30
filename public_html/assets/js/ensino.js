@@ -16,6 +16,9 @@ const listener = () => {
   const btnSalvarExperiencia = document.getElementById("salvar-experiencia");
   btnSalvarExperiencia.addEventListener("click", (e) => salvarExperiencia(e));
 
+  const btnExcluirExperiencia = document.getElementById("excluir-experiencia");
+  btnExcluirExperiencia.addEventListener("click", (e) => excluirExperiencia(e));
+
   const btnFiltrarExperiencia = document.getElementById("filtrarExperiencia");
   btnFiltrarExperiencia.addEventListener("click", (e) => filtrarExperiencia());
 
@@ -637,7 +640,11 @@ const abrirAprendizado = (element) => {
 
 const preencherAprendizado = (aprendizado) => {
   aprendizado.estudantes.map((estudante) => {
-    addChip(estudante.nome, estudante.matricula, "ensino-estudantes-selecionados");
+    addChip(
+      estudante.nome,
+      estudante.matricula,
+      "ensino-estudantes-selecionados"
+    );
   });
   const disciplina = document.querySelector("#ensino-disciplina");
   disciplina.value = aprendizado.disciplina.nome;
@@ -769,6 +776,33 @@ const apresentarInformacoesTurma = (dados) => {
   localStorage.setItem("turmaAtual", dados.codigo);
 };
 
+const excluirExperiencia = () => {
+  const experiencia = localStorage.getItem("experiencia");
+
+  if (experiencia) {
+    const dados = { acao: "Experiencias/excluir", experiencia: experiencia };
+
+    sendRequest(dados)
+      .then((response) => {
+        fecharExperiencia();
+        showMessage(
+          "Deu certo!",
+          "A experiência foi excluída com sucesso.",
+          "success"
+        );
+        listarAvaliacoes();
+      })
+      .catch((err) => {
+        console.error(err);
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível excluir a experiência.",
+          "error"
+        );
+        fecharExperiencia();
+      });
+  }
+};
 obterInformacoesTurma();
 listarAprendizados();
 listarExperiencias();

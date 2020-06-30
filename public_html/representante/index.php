@@ -194,7 +194,12 @@ if (!Autenticacao::isRepresentante($_COOKIE['token']) && !Autenticacao::isViceRe
           </div>
         </section>
         <footer class="modal-card-foot">
-          <div></div>
+          <button class="button is-danger excluir-ensino" name="" id="excluir-ensino">
+            <span class="icon is-small">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </span>
+            <span>Excluir</span>
+          </button>
           <div></div>
 
           <button class="button is-success salvar-ensino" name="" id="salvar-ensino">
@@ -262,7 +267,12 @@ if (!Autenticacao::isRepresentante($_COOKIE['token']) && !Autenticacao::isViceRe
           </div>
         </section>
         <footer class="modal-card-foot">
-          <div></div>
+          <button class="button is-danger excluir-experiencia" name="" id="excluir-experiencia">
+            <span class="icon is-small">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </span>
+            <span>Excluir</span>
+          </button>
           <div></div>
           <button class="button is-success salvar-experiencia" name="" id="salvar-experiencia">
             <span class="icon is-small">

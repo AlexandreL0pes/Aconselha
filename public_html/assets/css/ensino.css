@@ -73,7 +73,7 @@
 .avaliacoes {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-auto-rows: minmax(100px, 1fr);
+  grid-auto-rows: minmax(80px, 100px);
   grid-gap: 7px;
 }
 
