@@ -142,7 +142,7 @@ class Turmas
         if (count($alunos) > 0) {
             foreach ($alunos as $aluno) {
                 $aluno['classificacao'] = Util::classificarCoeficiente($aluno['coeficiente_rendimento']);
-                $aluno['coeficiente_rendimento'] = number_format($aluno['coeficiente_rendimento'],1, ',' ,'.');
+                $aluno['coeficiente_rendimento'] = number_format($aluno['coeficiente_rendimento'], 1, ',', '.');
                 $retorno[] = $aluno;
             }
         }
@@ -408,17 +408,19 @@ class Turmas
             $representante = $r->selecionarRepresentante(['turma' => $retornoTurma[Turma::COL_ID]]);
             $representante = json_decode($representante, true);
 
+            // print_r($representante);
+
             // Obtem o vice-representante
             $vice = $v->selecionarViceRepresentante(['turma' => $retornoTurma[Turma::COL_ID]]);
             $vice = json_decode($vice, true);
 
             $representante_completo = [];
-            if (!empty($representante[0])) {
-                $representante_completo = $representante[0];
+            if (!empty($representante)) {
+                $representante_completo = $representante;
             }
             $vice_representante_completo = [];
-            if (!empty($vice[0])) {
-                $vice_representante_completo = $vice[0];
+            if (!empty($vice)) {
+                $vice_representante_completo = $vice;
             }
 
             $turma = [
