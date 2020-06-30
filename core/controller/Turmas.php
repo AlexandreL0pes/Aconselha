@@ -592,4 +592,53 @@ class Turmas
         http_response_code(200);
         return json_encode($medidas_completas);
     }
+
+    public function listarTurmas($dados)
+    {
+
+        $curso_id = isset($dados['curso']) ? $dados['curso'] : null;
+
+
+        $campos = Turma::COL_ID . ", " .
+            Turma::COL_DESC_TURMA . ", " .
+            Turma::COL_CURSO;
+
+        $busca = ['ano' => 'atual'];
+
+        $t = new Turma();
+        $retornoTurmas = $t->listar($campos, $busca, null, null);
+
+        $c = new Conselheiros();
+        // print_r($retornoTurmas);
+
+        $turmas = [];
+        if (count($retornoTurmas) > 0 && !empty($retornoTurmas[0])) {
+
+            foreach ($retornoTurmas as $retornoTurma) {
+                $nome = $this->processarNome($retornoTurma[Turma::COL_ID]);
+
+                $curso = $this->processarCurso($retornoTurma[Turma::COL_DESC_TURMA]);
+
+
+                $turma = [
+                    'codigo' => $retornoTurma[Turma::COL_ID],
+                    'nome' => $nome,
+                    'curso' => $curso,
+                    'codigo_curso' => $retornoTurma[Turma::COL_CURSO],
+                ];
+
+
+                if ($curso_id == null) {
+                    array_push($turmas, $turma);
+                } else {
+                    if ($this->verificarTurmaCurso($retornoTurma[Turma::COL_ID], $curso_id)) {
+                        array_push($turmas, $turma);
+                    }
+                }
+            }
+        }
+
+        http_response_code(200);
+        return json_encode($turmas);
+    }
 }
