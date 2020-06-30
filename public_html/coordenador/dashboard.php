@@ -161,7 +161,108 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
               </div>
             </div>
           </section>
-          <section class="tab-content">Em desenvolvimento</section>
+          <section class="tab-content main-dash">
+            <div class="main-dash">
+              <section class="overview">
+                <div class="chart">
+                  <h1 class="chart-title">Coeficiente Geral</h1>
+                  <div class="canvas-chart">
+                    <canvas id="coef-geral"></canvas>
+                  </div>
+                  <div class="legenda">
+                    <div class="alto">
+                      <span class="cor"></span>
+                      <span class="text">Alto</span>
+                    </div>
+                    <div class="medio">
+                      <span class="cor"></span>
+                      <span class="text">Médio</span>
+                    </div>
+                    <div class="baixo">
+                      <span class="cor"></span>
+                      <span class="text">Baixo</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="estatistica-turma" id="estatistica-turma">
+                  <div class="card-info coef-geral">
+                    <p class="descricao">Coeficiente Geral</p>
+                    <p class="resultado">0,0</p>
+                  </div>
+                  <div class="card-info experiencia">
+                    <p class="descricao">Experiências</p>
+                    <p class="resultado">0</p>
+                  </div>
+                  <div class="card-info aprendizado">
+                    <p class="descricao">Ensino-Aprendizado</p>
+                    <p class="resultado">0</p>
+                  </div>
+                  <div class="card-info medidas">
+                    <p class="descricao">Medidas Disciplinares</p>
+                    <p class="resultado">0</p>
+                  </div>
+                </div>
+
+                <div class="avaliacoes-diagnostica">
+                  <h1>Principais Avaliações</h1>
+                  <div class="avaliacoes" id="avaliacoes">
+                  </div>
+                </div>
+              </section>
+
+              <section class="medidas">
+                <div class="titulo-medidas">
+                  <h1>Medidas Disciplinares</h1>
+                  <a class="mostrar-tudo">Mostrar mais
+                    <i class="fas fa-angle-down" aria-hidden="true"></i></a>
+                </div>
+                <div class="lista-medidas">
+                  <!-- <div class="mostrar-mais">
+                <span>+5</span>
+              </div> -->
+                </div>
+              </section>
+
+              <section class="alunos">
+                <h1 class="principal">Estudantes</h1>
+                <div class="pesquisa">
+                  <div class="field has-addons tipos">
+                    <p class="control">
+                      <button class="button is-small" id="filtrarAlto">
+                        <span>Alto</span>
+                      </button>
+                    </p>
+                    <p class="control">
+                      <button class="button is-small align-center" id="filtrarMedio">
+                        <span>Médio</span>
+                      </button>
+                    </p>
+                    <p class="control">
+                      <button class="button is-small align-center" id="filtrarBaixo">
+                        <span>Baixo</span>
+                      </button>
+                    </p>
+                    <p class="control">
+                      <button class="button is-small align-center" id="removerFiltro">
+                        <span>Todos</span>
+                      </button>
+                    </p>
+                  </div>
+                </div>
+                <div class="overview-alunos"></div>
+                <div class="lista-estudantes" id="lista-estudantes">
+                  <!-- <div class="cardbox card-turma alto" data-aluno="2017103202030090">
+              <p class="subtitulo is-6">Alexandre Lopes</p>
+              <p class="subtitulo is-8 gray-text">2017103202030090</p>
+              <p class="subtitulo is-7">9,0</p>
+            </div> -->
+                </div>
+              </section>
+            </div>
+
+
+          </section>
         </div>
       </div>
       <aside class="side">
@@ -319,11 +420,49 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
         <footer class="modal-card-foot"></footer>
       </div>
     </div>
+    <div class="modal visualizar" id="visualizar-medida">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <div class="modal-card-title">Medida Disciplinar</div>
+          <div class="modal-close-btn">
+            <i class="fas fa-times sidenav__brand-close"></i>
+          </div>
+        </header>
+        <section class="modal-card-body">
+          <div class="modal-medida">
+            <div class="info-m">
+              <div class="info-aluno">
+                <p class="nome"></p>
+                <p class="matricula"></p>
+                <p class="data"></p>
+              </div>
+            </div>
+            <div class="info-medida">
+              <div class="tipo-medida">
+                <p>Ocorrência Leve</p>
+              </div>
+              <p class="observacao">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Error quo quasi doloribus placeat quaerat, laboriosam beatae
+                libero optio hic! Quaerat quidem eum soluta distinctio
+                laudantium quo aperiam reprehenderit vitae laborum!
+              </p>
+            </div>
+          </div>
+        </section>
+        <footer class="modal-card-foot"></footer>
+      </div>
+    </div>
   </div>
   <div class="toasts" id="toasts"></div>
 </body>
 <script src="../assets/js/index.js" type="module"></script>
 <script src="../assets/js/dashboard_reuniao.js" type="module"></script>
+
+<script src="../assets/js/dashboard_turma.js" type="module"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <!-- <script src="../assets/js/atendimentos.js" type="module"></script> -->
 
 </html>
