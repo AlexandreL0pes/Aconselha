@@ -3,8 +3,10 @@
 
 namespace core\controller;
 
+use core\model\Permissao;
 use core\model\Professor;
 use core\model\Turma;
+use core\model\Usuario;
 use core\sistema\Autenticacao;
 
 class Professores
@@ -175,7 +177,7 @@ class Professores
 
         return $pessoas;
     }
-    
+
     /**
      * Obtem as principais informações do professor, como primeirnome e cod_pessoa
      *
@@ -207,5 +209,36 @@ class Professores
 
         http_response_code(500);
         return json_encode(array('message' => 'Não foi possível obter as informações'));
+    }
+
+
+    public function listarUsuariosProfessores()
+    {
+        $campos = Usuario::COL_ID . ", " . Usuario::COL_MATRICULA . ", " . Usuario::COL_PESSOA;
+        $busca = ['permissao' => Autenticacao::PROFESSOR];
+
+
+        $u = new Usuario();
+
+        $usuarios = $u->listar($campos, $busca, null, 1000);
+
+
+        $professores = [];
+
+        if (count($usuarios) > 0) {
+            foreach ($usuarios as $usuario) {
+                $professor = $this->selecionar($usuario[Usuario::COL_PESSOA]);
+
+                $professores[] = [
+                    'usuario' => $usuario[Usuario::COL_ID],
+                    'email' => $usuario[Usuario::COL_MATRICULA],
+                    'pessoa' => $usuario[Usuario::COL_PESSOA],
+                    'nome' => $professor['nome']
+                ];
+            }
+        }
+
+        http_response_code(200);
+        return json_encode($professores);
     }
 }
