@@ -1072,10 +1072,11 @@ const atualizarProfessores = (e) => {
   sendRequest(dados)
     .then((response) => {
       btnAtualizarProfessores.classList.toggle("is-loading");
+      solicitarProfessores();
       if (response.qtd_professores_add > 1) {
         showMessage(
           "Deu certo!",
-          `Foram adicionados ${response.qtd_professores_add} novos professores`,
+          `Foram adicionados ${response.qtd_professores_add} novos professores.`,
           "success",
           4000
         );
@@ -1083,7 +1084,7 @@ const atualizarProfessores = (e) => {
       if (response.qtd_professores_add == 1) {
         showMessage(
           "Deu certo!",
-          `Apenas ${response.qtd_professores_add} foi adicionado.`,
+          `Apenas ${response.qtd_professores_add} professor foi adicionado.`,
           "success",
           4000
         );
