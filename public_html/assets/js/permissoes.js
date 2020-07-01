@@ -17,6 +17,9 @@ btnSalvarConselheiro.addEventListener("click", (e) => salvarConselheiro(e));
 const btnSalvarRepresentante = document.querySelector(".salvar-representante");
 btnSalvarRepresentante.addEventListener("click", (e) => salvarRepresentante(e));
 
+const btnSalvarProfessor = document.querySelector(".salvar-professor");
+btnSalvarProfessor.addEventListener("click", (e) => salvarProfessor(e));
+
 const btnSalvarViceRepresentante = document.querySelector(
   ".salvar-vice-representante"
 );
@@ -172,8 +175,6 @@ const closeModal = (params) => {
   closeBtn.addEventListener("click", (event) => fecharProfessor());
   bgModal = modalProfessor.querySelector(".modal-background");
   bgModal.addEventListener("click", (event) => fecharProfessor());
-
-
 };
 
 /**
@@ -982,12 +983,14 @@ const abrirProfessor = (element) => {
 const preencherProfessor = (professor) => {
   console.log("Oi");
 
+  document
+    .getElementById("modal-professor")
+    .setAttribute("data-usuario", professor.usuario);
   document.getElementById("email-professor").value = professor.email;
   document.querySelector(".info-professor .titulo").innerHTML = professor.nome;
-  document.querySelector(".info-professor .gray-text").innerHTML = professor.email;
-
-
-}
+  document.querySelector(".info-professor .gray-text").innerHTML =
+    professor.email;
+};
 
 const fecharProfessor = () => {
   console.log("> Fechando Professor");
@@ -996,11 +999,60 @@ const fecharProfessor = () => {
   modal.classList.toggle("is-active");
 
   localStorage.removeItem("professorAtual");
-  
+
   document.getElementById("email-professor").value = "";
+  document.getElementById("senha-professor").value = "";
+
   document.querySelector(".info-professor .titulo").innerHTML = "";
   document.querySelector(".info-professor .gray-text").innerHTML = "";
-}
+
+  modal.setAttribute("data-usuario", null);
+};
+
+const salvarProfessor = () => {
+  console.log("> Salvando Professor");
+
+  const email = document.getElementById("email-professor").value;
+  const senha = document.getElementById("senha-professor").value;
+
+  const usuario = document
+    .getElementById("modal-professor")
+    .getAttribute("data-usuario");
+
+  if (email.length > 0 && senha.length > 0 && usuario !== null) {
+    const dados = {
+      acao: "Professores/alterarSenha",
+      email: email,
+      senha: senha,
+      usuario: usuario,
+    };
+
+    sendRequest(dados)
+      .then((response) => {
+        showMessage(
+          "Deu certo!",
+          "As credenciais do professor foram alteradas.",
+          "success"
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível alterar as credenciais.",
+          "error",
+          4000
+        );
+      });
+  } else {
+    showMessage(
+      "Preencha todos os campos!",
+      "Alguns dados ainda estão faltando, verifique o formulário.",
+      "warning",
+      4000
+    );
+  }
+};
 // Professores
 
 solicitarCursos();
