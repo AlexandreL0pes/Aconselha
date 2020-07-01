@@ -6,7 +6,8 @@
 
 .coordenadores,
 .conselheiros,
-.representantes {
+.representantes,
+.professores {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   grid-auto-rows: minmax(80px, 90px);
@@ -102,6 +103,14 @@
   font-size: 0.95rem;
 }
 
+.card-professor p:nth-child(1) {
+  font-size: 1rem;
+}
+
+.card-professor p:nth-child(2) {
+  font-size: 0.75rem;
+}
+
 .modal-close-btn {
   padding: 10px;
   cursor: pointer;
@@ -109,8 +118,7 @@
 
 .modal.conselheiro .modal-card-body,
 .modal.coordenador .modal-card-body,
-.modal.representante .modal-card-body
-{
+.modal.representante .modal-card-body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 10px;
@@ -123,9 +131,9 @@
 .modal.coordenador .info-curso {
   display: flex;
   flex-direction: column;
-  
+
   align-items: center;
-  
+
   padding: 10px 15px;
   /* margin: 20px 30px; */
 }
@@ -140,7 +148,6 @@
   font-size: 1rem;
 }
 /* Modal Coordenador */
-
 
 /* Modal Conselheiro */
 .modal.conselheiro .info-turma {
@@ -157,10 +164,9 @@
   font-size: 1rem;
 }
 .conselheiro .info-turma p:nth-child(3) {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 /* Modal Conselheiro */
-
 
 /* Modal Representante */
 
@@ -178,7 +184,6 @@
   justify-items: center;
 }
 
-
 .modal.representante .modal-card-body {
   row-gap: 20px;
 }
@@ -192,6 +197,6 @@
 }
 .representante .info-turma p:nth-child(3) {
   padding: 2px;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 /* Modal Representante */

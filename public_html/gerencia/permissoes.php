@@ -119,7 +119,7 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
 
       <section class="coordenacao" id="coordenacao">
         <div class="head">
-          <h4 class="subtitulo is-6">Coordenadores</h4>
+          <h4 class="titulo is-5">Coordenadores</h4>
         </div>
         <div class="coordenadores" id="coordenadores">
           <div class="cardbox card-coordenador is-info" data-curso="1">
@@ -138,7 +138,7 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
       </section>
       <section class="conselho" id="conselho">
         <div class="head">
-          <h4 class="subtitulo is-6">Conselheiros</h4>
+          <h4 class="titulo is-5">Conselheiros</h4>
         </div>
         <div class="conselheiros" id="conselheiros">
           <div class="cardbox card-conselheiro is-amb" data-turmaconselho="1">
@@ -165,7 +165,7 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
       </section>
       <section class="professor" id="professor">
         <div class="head">
-          <h4 class="subtitulo is-6">Professores</h4>
+          <h4 class="titulo is-5">Professores</h4>
         </div>
         <div class="professores" id="professores">
           <div class="cardbox card-professor" data-usuario="1">
@@ -182,7 +182,7 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
           </div>
           <div class="cardbox card-professor" data-usuario="1">
             <p class="">Adriano Braga</p>
-            <p class="gray-text">adriano.braga@gmail.com</p>
+            <p class="gray-text subtitulo is-7">adriano.braga@gmail.com</p>
           </div>
         </div>
       </section>
@@ -190,7 +190,7 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
       <section class="representacao" id="representacao">
         <h4></h4>
         <div class="head">
-          <h4 class="subtitulo is-6">Representantes</h4>
+          <h4 class="titulo is-5">Representantes</h4>
         </div>
         <div class="representantes" id="representantes">
           <div class="cardbox card-representante is-amb" data-turmaconselho="1">
