@@ -151,6 +151,7 @@ const closeModal = (params) => {
   const modalCoordenador = document.getElementById("modal-coordenador");
   const modalConselheiro = document.getElementById("modal-conselheiro");
   const modalRepresentante = document.getElementById("modal-representante");
+  const modalProfessor = document.getElementById("modal-professor");
 
   let closeBtn = modalCoordenador.querySelector(".modal-close-btn");
   closeBtn.addEventListener("click", (event) => fecharCoordenador());
@@ -166,6 +167,13 @@ const closeModal = (params) => {
   closeBtn.addEventListener("click", (event) => fecharRepresentante());
   bgModal = modalRepresentante.querySelector(".modal-background");
   bgModal.addEventListener("click", (event) => fecharRepresentante());
+
+  closeBtn = modalProfessor.querySelector(".modal-close-btn");
+  closeBtn.addEventListener("click", (event) => fecharProfessor());
+  bgModal = modalProfessor.querySelector(".modal-background");
+  bgModal.addEventListener("click", (event) => fecharProfessor());
+
+
 };
 
 /**
@@ -941,11 +949,58 @@ const addProfessorCard = (professor) => {
     <p class="gray-text subtitulo is-7">${professor.email}</p>
   `;
 
-  // card.addEventListener("click", (e) => abrirProfessor(e));
+  card.addEventListener("click", (e) => abrirProfessor(e));
 
   const professoresDiv = document.getElementById("professores");
   professoresDiv.appendChild(card);
 };
+
+const abrirProfessor = (element) => {
+  console.log("> Abrindo professor");
+
+  let usuario = element.currentTarget.getAttribute("data-usuario");
+
+  localStorage.setItem("usuarioAtual", usuario);
+
+  const modalProfessor = document.getElementById("modal-professor");
+  modalProfessor.classList.toggle("is-active");
+
+  const dados = {
+    acao: "Professores/selecionarProfessor",
+    usuario: usuario,
+  };
+
+  sendRequest(dados)
+    .then((response) => {
+      preencherProfessor(response);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const preencherProfessor = (professor) => {
+  console.log("Oi");
+
+  document.getElementById("email-professor").value = professor.email;
+  document.querySelector(".info-professor .titulo").innerHTML = professor.nome;
+  document.querySelector(".info-professor .gray-text").innerHTML = professor.email;
+
+
+}
+
+const fecharProfessor = () => {
+  console.log("> Fechando Professor");
+
+  const modal = document.getElementById("modal-professor");
+  modal.classList.toggle("is-active");
+
+  localStorage.removeItem("professorAtual");
+  
+  document.getElementById("email-professor").value = "";
+  document.querySelector(".info-professor .titulo").innerHTML = "";
+  document.querySelector(".info-professor .gray-text").innerHTML = "";
+}
 // Professores
 
 solicitarCursos();

@@ -460,6 +460,64 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
         </footer>
       </div>
     </div>
+
+    <div class="modal  professor" id="modal-professor">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Professor</p>
+          <div class="modal-close-btn">
+            <i class="fas fa-times sidenav__brand-close"></i>
+          </div>
+        </header>
+        <section class="modal-card-body">
+          <div class="info-professor">
+            <p class="titulo is-4">Adriano Braga</p>
+            <p class="gray-text">adriano.braga@gmail.com</p>
+          </div>
+          <div class="professor">
+            <div class="field">
+              <label class="label">E-mail</label>
+              <div class="dropdown">
+                <div class="dropdown-trigger">
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="text" placeholder="Digite seu email" value="" id="email-professor" />
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <p class="help">Se possível, insira seu e-mail institucional</p>
+            </div>
+            <div class="field">
+              <label class="label">Senha</label>
+              <div class="dropdown">
+                <div class="dropdown-trigger">
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="password" placeholder="Digite a senha" value="" id="senha-professor" />
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+          <div></div>
+          <div></div>
+          <button class="button is-success salvar-professor" name="" id="salvar-professor">
+            <span class="icon is-small">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </span>
+            <span>Salvar</span>
+          </button>
+        </footer>
+      </div>
+    </div>
+
   </div>
   <div class="toasts" id="toasts"></div>
 </body>

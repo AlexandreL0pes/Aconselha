@@ -118,7 +118,8 @@
 
 .modal.conselheiro .modal-card-body,
 .modal.coordenador .modal-card-body,
-.modal.representante .modal-card-body {
+.modal.representante .modal-card-body,
+.modal.professor .modal-card-body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 10px;
@@ -200,3 +201,17 @@
   font-size: 0.9rem;
 }
 /* Modal Representante */
+
+/* Modal Professor */
+
+.modal.professor .info-professor {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  padding: 10px 15px;
+  /* margin: 20px 30px; */
+}
+
+/* Modal Professor */
