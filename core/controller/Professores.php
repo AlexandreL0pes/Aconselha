@@ -4,6 +4,7 @@
 namespace core\controller;
 
 use core\model\Permissao;
+use core\model\Pessoa;
 use core\model\Professor;
 use core\model\Turma;
 use core\model\Usuario;
@@ -293,5 +294,130 @@ class Professores
             http_response_code(500);
             return json_encode(array('message' => "Não foi possível alterar os dados!"));
         }
+    }
+
+    public function atualizarUsuariosProfessores()
+    {
+        // Seleciona todos os professores do IF Ceres dos cursos técnicos 
+        // Verifica se cada um deles está salvo no bd
+        // Se não tiver, cadastra um novo usuário com senha padrão 
+        // Verificar se já tem um usuário com a pessoa
+        // Adicionar a permissão
+
+        $p = new Professor();
+        $campos =   " PESSOAS." . Professor::COL_COD_PESSOA . ", " . " PESSOAS.EMAIL ";
+        $busca = ['professores' => 1];
+        $retorno = $p->listar($campos, $busca, null, 10000);
+
+        $senha =  uniqid();
+
+        $err = [];
+        $qtd_professores_add = 0;
+        foreach ($retorno as $professor) {
+            if (!$this->verificarUsuarioExistente($professor[Professor::COL_COD_PESSOA])) {
+                $qtd_professores_add++;
+                $email = ($professor[Professor::COL_EMAIL] != "") ? $professor[Professor::COL_EMAIL] : $professor[Professor::COL_COD_PESSOA] . "@provisorio.ifgoiano.edu.br";
+
+                $u = $this->cadastrar($professor[Professor::COL_COD_PESSOA], $email, $senha);
+
+                if ($u == false) {
+                    $err[] = $professor[Professor::COL_COD_PESSOA];
+                }
+            }
+        }
+
+        if (count($err) > 0) {
+            http_response_code(500);
+            return json_encode(array('message' => 'Houveram erros durante a importação', 'error' => $err));
+        }
+
+        http_response_code(200);
+        return json_encode(array('message' => "Todos os professores foram cadastrados com sucesso!", 'qtd_professores_add' => $qtd_professores_add));
+    }
+
+    /**
+     * Verifica se um usuário existe, com base no COD_PESSOA 
+     *
+     * @param  mixed $pessoa
+     * @return bool
+     */
+    public function verificarUsuarioExistente($pessoa = null)
+    {
+        if ($pessoa == null) {
+            throw new \Exception("É ncessário informar a matrícula");
+        }
+
+        $campos = Usuario::COL_ID;
+        $busca = [
+            Usuario::COL_PESSOA => $pessoa
+        ];
+
+        $u = new Usuario();
+        $usuario = $u->listar($campos, $busca, null, 1)[0];
+
+        if (!empty($usuario)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public function cadastrar($pessoa, $email, $senha)
+    {
+        $data_inicio = date('Y-m-d');
+        $u = new Usuario();
+
+        // Tenta adicionar o usuário
+        $usuario = $u->adicionar([
+            Usuario::COL_MATRICULA => $email,
+            Usuario::COL_DATA_INICIO => $data_inicio,
+            Usuario::COL_SENHA => $senha,
+            Usuario::COL_PESSOA => $pessoa
+        ]);
+
+        // Caso o e-mail seja repetido, gera-se um novo e-mail e coloca no usuário
+        if ($usuario == false) {
+            $email = $pessoa . "@provisorio.ifgoiano.edu.br";
+            $usuario = $u->adicionar([
+                Usuario::COL_MATRICULA => $email,
+                Usuario::COL_DATA_INICIO => $data_inicio,
+                Usuario::COL_SENHA => $senha,
+                Usuario::COL_PESSOA => $pessoa
+            ]);
+        }
+        $permissao = false;
+
+        if ($usuario) {
+            $permissao = $this->addPermissao($usuario);
+        }
+
+        if ($usuario  && $permissao) {
+            return $usuario;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    /**
+     * Adiciona a permissão de Representante para um usuário
+     *
+     * @param  mixed $usuario_id
+     * @return void
+     */
+    public function addPermissao($usuario_id)
+    {
+        if (!isset($usuario_id)) {
+            throw new Exception("É necessário informar o id do usuário");
+        }
+
+        $resultado = true;
+        $p = new Permissao();
+
+        if (!$p->verificarPermissao($usuario_id, Autenticacao::PROFESSOR)) {
+            $resultado = $p->adicionar($usuario_id, Autenticacao::PROFESSOR);
+        }
+        return $resultado;
     }
 }

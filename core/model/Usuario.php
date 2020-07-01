@@ -28,7 +28,7 @@ class Usuario extends CRUD
             $retorno = $this->create(self::TABELA, $dados);
         } catch (\Throwable $th) {
             // echo $this->pegarUltimoSQL();
-            echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
+            // echo "<br><br><br>Mensagem: " . $th->getMessage() . "<br><br> Local: " . $th->getTraceAsString();
             return false;
         }
 

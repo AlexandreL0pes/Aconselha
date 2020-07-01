@@ -13,6 +13,7 @@ class Professor extends CRUD
     const TABELA = "PROFESSORES";
     const COL_COD_PESSOA = "COD_PESSOA";
     const COL_COD_INSTITUICAO = "COD_INSTITUICAO";
+    const COL_EMAIL = "EMAIL";
 
     public function listar($campos = null, $busca = [], $ordem = null, $limite = null)
     {
@@ -37,6 +38,10 @@ class Professor extends CRUD
                 $tabela = self::TABELA .
                     " INNER JOIN PAUTAS ON PROFESSORES.COD_PROFESSOR = PAUTAS.COD_PROFESSOR " .
                     " INNER JOIN PESSOAS ON PROFESSORES.COD_PESSOA = PESSOAS.COD_PESSOA ";
+
+                // Filtratndo apenas as pautas dos cursos técnicos integrados
+                $where_condicao .= " AND COD_TIPO_CURSO = ? ";
+                $where_valor[] = '265';
             }
 
             if (isset($busca['ano_letivo']) && !empty($busca['ano_letivo'])) {
@@ -57,6 +62,14 @@ class Professor extends CRUD
                     " INNER JOIN PAUTAS ON PROFESSORES.COD_PROFESSOR = PAUTAS.COD_PROFESSOR" .
                     " INNER JOIN PESSOAS ON PROFESSORES.COD_PESSOA = PESSOAS.COD_PESSOA ";
 
+                // Filtratndo apenas as pautas dos cursos técnicos integrados
+                $where_condicao .= " AND COD_TIPO_CURSO = ? ";
+                $where_valor[] = '265';
+            }
+
+            if (isset($busca['professores'])) {
+
+                $tabela = self::TABELA . " INNER JOIN PESSOAS ON PROFESSORES.COD_PESSOA = PESSOAS.COD_PESSOA ";
             }
         }
 
@@ -64,9 +77,6 @@ class Professor extends CRUD
         $where_condicao .= " AND " . self::TABELA . "." . self::COL_COD_INSTITUICAO . " = ? ";
         $where_valor[] = '3';
 
-        // Filtratndo apenas as pautas dos cursos técnicos integrados
-        $where_condicao .= " AND COD_TIPO_CURSO = ? ";
-        $where_valor[] = '265';
 
         $retorno = [];
 
