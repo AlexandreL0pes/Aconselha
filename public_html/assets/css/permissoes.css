@@ -35,6 +35,12 @@
   justify-content: space-between;
   align-items: center;
 }
+.professor .head {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .cardbox {
   display: grid;

@@ -166,6 +166,9 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
       <section class="professor" id="professor">
         <div class="head">
           <h4 class="titulo is-5">Professores</h4>
+          <button class="button  is-success" id="atualizar-professores">
+            <span>Atualizar Professores</span>
+            </button>
         </div>
         <div class="professores" id="professores">
           <div class="cardbox card-professor" data-usuario="1">

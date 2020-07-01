@@ -20,6 +20,13 @@ btnSalvarRepresentante.addEventListener("click", (e) => salvarRepresentante(e));
 const btnSalvarProfessor = document.querySelector(".salvar-professor");
 btnSalvarProfessor.addEventListener("click", (e) => salvarProfessor(e));
 
+const btnAtualizarProfessores = document.getElementById(
+  "atualizar-professores"
+);
+btnAtualizarProfessores.addEventListener("click", (e) =>
+  atualizarProfessores(e)
+);
+
 const btnSalvarViceRepresentante = document.querySelector(
   ".salvar-vice-representante"
 );
@@ -1054,6 +1061,53 @@ const salvarProfessor = () => {
     );
   }
 };
+
+const atualizarProfessores = (e) => {
+  const dados = { acao: "Professores/atualizarUsuariosProfessores" };
+  const btnAtualizarProfessores = document.getElementById(
+    "atualizar-professores"
+  );
+
+  btnAtualizarProfessores.classList.add("is-loading");
+  sendRequest(dados)
+    .then((response) => {
+      btnAtualizarProfessores.classList.toggle("is-loading");
+      if (response.qtd_professores_add > 1) {
+        showMessage(
+          "Deu certo!",
+          `Foram adicionados ${response.qtd_professores_add} novos professores`,
+          "success",
+          4000
+        );
+      }
+      if (response.qtd_professores_add == 1) {
+        showMessage(
+          "Deu certo!",
+          `Apenas ${response.qtd_professores_add} foi adicionado.`,
+          "success",
+          4000
+        );
+      }
+      if (response.qtd_professores_add == 0) {
+        showMessage(
+          "Deu certo!",
+          `A atualização foi feita, porém nenhum professor foi adicionado.`,
+          "success",
+          4000
+        );
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      showMessage(
+        "Houve um erro!",
+        "Não foi possível importar todos os professores!",
+        "error",
+        5000
+      );
+    });
+};
+
 // Professores
 
 solicitarCursos();
