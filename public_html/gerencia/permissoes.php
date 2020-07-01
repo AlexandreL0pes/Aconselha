@@ -38,7 +38,7 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
 
     <!-- Header -->
     <header class="header">
-    <div class="dropdown is-right is-small no-border" id="dropdown-user">
+      <div class="dropdown is-right is-small no-border" id="dropdown-user">
         <div class="dropdown-trigger">
           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu6">
             <span>Gerência</span>
@@ -163,6 +163,30 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
           </div>
         </div>
       </section>
+      <section class="professor" id="professor">
+        <div class="head">
+          <h4 class="subtitulo is-6">Professores</h4>
+        </div>
+        <div class="professores" id="professores">
+          <div class="cardbox card-professor" data-usuario="1">
+            <p class="">Adriano Braga</p>
+            <p class="gray-text">adriano.braga@gmail.com</p>
+          </div>
+          <div class="cardbox card-professor" data-usuario="1">
+            <p class="">Adriano Braga</p>
+            <p class="gray-text">adriano.braga@gmail.com</p>
+          </div>
+          <div class="cardbox card-professor" data-usuario="1">
+            <p class="">Adriano Braga</p>
+            <p class="gray-text">adriano.braga@gmail.com</p>
+          </div>
+          <div class="cardbox card-professor" data-usuario="1">
+            <p class="">Adriano Braga</p>
+            <p class="gray-text">adriano.braga@gmail.com</p>
+          </div>
+        </div>
+      </section>
+
       <section class="representacao" id="representacao">
         <h4></h4>
         <div class="head">
