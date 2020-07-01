@@ -1034,6 +1034,7 @@ const salvarProfessor = () => {
           "As credenciais do professor foram alteradas.",
           "success"
         );
+        fecharProfessor();
       })
       .catch((err) => {
         console.error(err);
