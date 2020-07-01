@@ -245,9 +245,9 @@ class Professores
     public function selecionarProfessor($dados = [])
     {
         $cod_usuario = $dados['usuario'];
-        
+
         $campos = Usuario::COL_ID . ", " . Usuario::COL_MATRICULA . ", " . Usuario::COL_PESSOA;
-        $busca = [Usuario::COL_ID => $cod_usuario ,'permissao' => Autenticacao::PROFESSOR];
+        $busca = [Usuario::COL_ID => $cod_usuario, 'permissao' => Autenticacao::PROFESSOR];
 
 
         $u = new Usuario();
@@ -272,6 +272,28 @@ class Professores
 
         http_response_code(200);
         return json_encode($professores);
+    }
 
+    public function alterarSenha($dados)
+    {
+        $cod_usuario = $dados['usuario'];
+
+        $data = [
+            Usuario::COL_ID => $cod_usuario,
+            Usuario::COL_MATRICULA => $dados['email'],
+            Usuario::COL_SENHA => $dados['senha']
+        ];
+
+        $u = new Usuario();
+
+        $retorno = $u->alterar($data);
+
+        if ($retorno > 0) {
+            http_response_code(200);
+            return json_encode(array('message' => "A senha foi alterada!"));
+        } else {
+            http_response_code(500);
+            return json_encode(array('message' => "Não foi possível alterar os dados!"));
+        }
     }
 }
