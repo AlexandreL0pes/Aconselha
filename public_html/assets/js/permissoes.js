@@ -906,9 +906,53 @@ const pegarDadosViceRepresentante = () => {
   return dados;
 };
 // Vice
+
+// Professores
+const solicitarProfessores = () => {
+  const dados = { acao: "Professores/listarUsuariosProfessores" };
+
+  sendRequest(dados)
+    .then((response) => {
+      if (response.length > 0) {
+        document.getElementById("professores").innerHTML = "";
+        response.map((professor) => addProfessorCard(professor));
+      } else {
+        const professoresDiv = document.getElementById("professores");
+        const msg = document.createElement("div");
+        msg.classList.add("nenhum-resultado");
+        msg.innerHTML = "Nenhum professor foi encontrado!";
+
+        professoresDiv.append(msg);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const addProfessorCard = (professor) => {
+  let card = document.createElement("div");
+
+  card.classList.add("cardbox", "card-professor");
+  card.setAttribute("data-usuario", professor.usuario);
+
+  card.innerHTML = `
+    <p class="">${professor.nome}</p>
+    <p class="gray-text subtitulo is-7">${professor.email}</p>
+  `;
+
+  // card.addEventListener("click", (e) => abrirProfessor(e));
+
+  const professoresDiv = document.getElementById("professores");
+  professoresDiv.appendChild(card);
+};
+// Professores
+
 solicitarCursos();
 solicitarConselheiros();
 solicitarRepresentantes();
+solicitarProfessores();
+
 autocompleteCoordenador();
 autocompleteConselheiro();
 autocompleteRepresentante();
