@@ -225,7 +225,7 @@ class Professores
 
         $professores = [];
 
-        if (count($usuarios) > 0) {
+        if (count($usuarios) > 0 && !empty($usuarios[0])) {
             foreach ($usuarios as $usuario) {
                 $professor = $this->selecionar($usuario[Usuario::COL_PESSOA]);
 
@@ -240,5 +240,38 @@ class Professores
 
         http_response_code(200);
         return json_encode($professores);
+    }
+
+    public function selecionarProfessor($dados = [])
+    {
+        $cod_usuario = $dados['usuario'];
+        
+        $campos = Usuario::COL_ID . ", " . Usuario::COL_MATRICULA . ", " . Usuario::COL_PESSOA;
+        $busca = [Usuario::COL_ID => $cod_usuario ,'permissao' => Autenticacao::PROFESSOR];
+
+
+        $u = new Usuario();
+
+        $usuarios = $u->listar($campos, $busca, null, 1000);
+
+
+        $professores = [];
+
+        if (count($usuarios) > 0 && !empty($usuarios[0])) {
+            foreach ($usuarios as $usuario) {
+                $professor = $this->selecionar($usuario[Usuario::COL_PESSOA]);
+
+                $professores[] = [
+                    'usuario' => $usuario[Usuario::COL_ID],
+                    'email' => $usuario[Usuario::COL_MATRICULA],
+                    'pessoa' => $usuario[Usuario::COL_PESSOA],
+                    'nome' => $professor['nome']
+                ];
+            }
+        }
+
+        http_response_code(200);
+        return json_encode($professores);
+
     }
 }
