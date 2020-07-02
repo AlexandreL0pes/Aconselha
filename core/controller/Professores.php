@@ -439,7 +439,7 @@ class Professores
     public function addPermissao($usuario_id)
     {
         if (!isset($usuario_id)) {
-            throw new Exception("É necessário informar o id do usuário");
+            throw new \Exception("É necessário informar o id do usuário");
         }
 
         $resultado = true;
