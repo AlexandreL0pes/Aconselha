@@ -213,6 +213,11 @@ class Professores
     }
 
 
+    /**
+     * Obtem todos os usuários cadastrados no banco que tem permissão de professor 
+     *
+     * @return array
+     */
     public function listarUsuariosProfessores()
     {
         $campos = Usuario::COL_ID . ", " . Usuario::COL_MATRICULA . ", " . Usuario::COL_PESSOA;
@@ -243,6 +248,12 @@ class Professores
         return json_encode($professores);
     }
 
+    /**
+     * Obtem os dados de um usuário professor
+     *
+     * @param  mixed $dados
+     * @return array
+     */
     public function selecionarProfessor($dados = [])
     {
         $cod_usuario = $dados['usuario'];
@@ -273,6 +284,12 @@ class Professores
         return json_encode($professores);
     }
 
+    /**
+     * Altera as credenciais do usuário com permissão de professor
+     *
+     * @param  mixed $dados
+     * @return array
+     */
     public function alterarSenha($dados)
     {
         $cod_usuario = $dados['usuario'];
@@ -296,6 +313,11 @@ class Professores
         }
     }
 
+    /**
+     * Obtem os professores cadastrados no SISTEMA ACADEMICO e importa eles para o bd local, com a permissão de professor
+     *
+     * @return array
+     */
     public function atualizarUsuariosProfessores()
     {
         // Seleciona todos os professores do IF Ceres dos cursos técnicos 
@@ -361,7 +383,15 @@ class Professores
         return false;
     }
 
-
+    
+    /**
+     * Cadastro de um usuário com permissão de professor
+     *
+     * @param string $pessoa
+     * @param string $email
+     * @param string $senha
+     * @return array
+     */
     public function cadastrar($pessoa, $email, $senha)
     {
         $data_inicio = date('Y-m-d');
