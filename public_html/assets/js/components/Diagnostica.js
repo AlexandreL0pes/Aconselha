@@ -278,7 +278,6 @@ export const listarPreviaDiagnosticas = () => {
     .then((diagnosticas) => {
       console.log(diagnosticas.length);
       if (diagnosticas.length > 0) {
-        console.log(asd);
         console.log("> Listando Prévia Diagnóstica!");
         gerarPreviaDiagnostica(diagnosticas);
         mostrarMenos();
