@@ -1,4 +1,4 @@
-import {sendRequest, showMessage} from './utils.js';
+import { sendRequest, showMessage } from "./utils.js";
 
 const btnSalvarMemoria = document.getElementById("salvar-memoria");
 btnSalvarMemoria.addEventListener("click", (e) => salvarMemoria(e));
@@ -72,6 +72,32 @@ const salvarMemoria = (params) => {
   }
 };
 
+const salvarMemoriaAutomaticamente = (params) => {
+  const reuniao = localStorage.getItem("conselhoAtual") || "";
+  const memoria = document.querySelector("#memoriaReuniao").value;
+  if (memoria !== "" && reuniao !== "") {
+    const dados = {
+      acao: "Reunioes/salvarMemoria",
+      reuniao: reuniao,
+      memoria: memoria,
+    };
+    console.log(dados);
+    sendRequest(dados)
+      .then((response) => {
+        console.log("> Salvando memória automaticamente!");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    showMessage(
+      "Quase lá!",
+      "Antes de enviar, preencha os campos necessários!",
+      "warning",
+      5000
+    );
+  }
+};
 
 const obterInformacoesTurma = () => {
   const turma = localStorage.getItem("turmaAtual") || null;
@@ -86,7 +112,12 @@ const obterInformacoesTurma = () => {
       })
       .catch((err) => {
         console.error(err);
-        showMessage("Houve um erro!", "Não foi possível acessar as informações da turma.", "error", 4000);
+        showMessage(
+          "Houve um erro!",
+          "Não foi possível acessar as informações da turma.",
+          "error",
+          4000
+        );
       });
   }
 };
@@ -102,3 +133,4 @@ const apresentarInformacoesTurma = (dados) => {
 obterInformacoesTurma();
 autoSizeTextarea();
 selecionarMemoria();
+setInterval(salvarMemoriaAutomaticamente,1000 * 30);
