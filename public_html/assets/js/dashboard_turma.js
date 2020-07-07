@@ -13,7 +13,12 @@ const listener = () => {
   const btnRemoverFiltro = document.getElementById("removerFiltro");
   btnRemoverFiltro.addEventListener("click", removerFiltro);
 };
-
+/**
+ * 
+ * @param {number} qtdAlto Qtd de estudantes com coef alto
+ * @param {number} qtdMedio Qtd de estudantes com coef medio
+ * @param {number} qtdBaixo Qtd de estudantes com coef baixo
+ */
 const gerarGraficoCoef = (qtdAlto, qtdMedio, qtdBaixo) => {
   var ctx = document.getElementById("coef-geral").getContext("2d");
   var myChart = new Chart(ctx, {
