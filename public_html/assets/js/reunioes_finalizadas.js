@@ -6,8 +6,10 @@ const solicitarReunioes = async () => {
 
   sendRequest(dados)
     .then((response) => {
-      gerarTabs(response);
-      navegacaoTabs();
+      if (response) {
+        gerarTabs(response);
+        navegacaoTabs();        
+      }
     })
     .catch((err) => {
       console.error(err);
