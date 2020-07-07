@@ -68,8 +68,8 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
       </header>
       <!-- Header -->
 
-     <!-- Sidebar -->
-    <aside class="sidenav">
+   <!-- Sidebar -->
+   <aside class="sidenav">
       <ul class="sidenav__list">
         <li class="sidenav__list-item first-item">
           <img src="../assets/images/logo_sadc.svg" alt="" class="logo-icon" />
@@ -80,9 +80,12 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
         <li class="sidenav__list-item reunioes">
           <img class="icone" src="../assets/images/reunion.svg" alt="" />
         </li>
-        <!-- <li class="sidenav__list-item config">
+        <li class="sidenav__list-item anteriores">
+          <img src="../assets/images/seta-para-tras.svg" alt="" class="icone" />
+        </li>
+        <li class="sidenav__list-item config">
           <img class="icone" src="../assets/images/config.svg" alt="" />
-        </li> -->
+        </li>
       </ul>
       <div class="item-sair">
         <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
@@ -104,10 +107,14 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
           <img src="../assets/images/reunion.svg" alt="" class="icone" />
           <p class="sidenav-item-text">Conselhos Anteriores</p>
         </li>
-        <!-- <li class="sidenav__list-item-mobile config">
+        <li class="sidenav__list-item-mobile anteriores">
+          <img src="../assets/images/seta-para-tras.svg" alt="" class="icone" />
+          <p class="sidenav-item-text">Conselhos Anteriores</p>
+        </li>
+        <li class="sidenav__list-item-mobile config">
           <img src="../assets/images/config.svg" alt="" class="icone" />
           <p class="sidenav-item-text">Configurações</p>
-        </li> -->
+        </li>
       </ul>
       <div class="item-sair">
         <img src="../assets/images/logout.svg" alt="" class="sair-icone" />
