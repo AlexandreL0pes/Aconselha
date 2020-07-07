@@ -135,5 +135,24 @@ let navegacaoTabs = () => {
       tabs[0].click();
     }
   };
+
+  /**
+ * Listener
+ * Redireciona o usuário para a página da reunião, correpondente ao card clicado
+ */
+let abrirReuniao = () => {
+  let idReuniao =
+    event.target.getAttribute("data-turmaconselho") ||
+    event.target.parentElement.getAttribute("data-turmaconselho");
+
+  let idTurma =
+    event.target.getAttribute("data-turma") ||
+    event.target.parentElement.getAttribute("data-turma");
+
+  localStorage.setItem("conselhoAtual", idReuniao);
+  localStorage.setItem("turmaAtual", idTurma);
+
+  window.location.href = "./reuniao_finalizada.php";
+};
   
 solicitarReunioes();
