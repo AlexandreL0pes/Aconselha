@@ -33,7 +33,6 @@
 
 /* Estilo para os tiles */
 .cardbox.is-info {
-  /* background: green; */
   border-top: 2px solid var(--info-color);
 }
 
@@ -49,7 +48,6 @@
   text-justify: center;
   justify-self: center;
   text-align: center;
-  /* border: solid red 2px; */
 }
 
 .cardbox > p:first-child {
@@ -62,7 +60,6 @@
 }
 
 .concluido {
-  /* background: rgba(39, 246, 2, 0.1); */
   cursor: auto;
 
   border-left: 4px solid;
@@ -111,14 +108,13 @@
   padding: 20px 20px;
   grid-gap: 3px;
   box-shadow: 0 11px 11px 4px rgba(0, 0, 0, 0.3);
-	transition: box-shadow ease-in-out 0.4s;
+  transition: box-shadow ease-in-out 0.4s;
 }
 
 .card-info > .button {
-	margin-top: 5px;
-	margin-bottom: 0;
-	justify-self: right;
-
+  margin-top: 5px;
+  margin-bottom: 0;
+  justify-self: right;
 }
 .page-head {
   display: grid;
@@ -129,13 +125,10 @@
   grid-column: 1 / -1;
   justify-content: center;
   justify-self: center;
-  /* border: solid red 2px; */
 }
 
 .card-info {
-  /* font-size: 0.8em;
-    border: solid 2px red; */
-    box-shadow: 0 5px 5px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 5px 4px rgba(0, 0, 0, 0.1);
   font-size: 0.9em;
   font-weight: 300;
 }
@@ -145,16 +138,9 @@
   font-weight: 600;
 }
 
-.card-info > p:nth-child(n + 2):nth-child(-n + 4) {
-	
+.card-avaliacao {
+  animation: fadeIn 0.7s ease-in-out;
 }
-
-.card-avaliacao { 
-  animation: fadeIn .7s ease-in-out;
-}
-.button.is-success {
-}
-
 
 .modal-close-btn {
   padding: 10px;
@@ -172,30 +158,23 @@
 /* Modal */
 
 .avaliacao-aluno > .info {
-	padding: 5px;
-	margin: 30px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	row-gap: 5px;
-	font-size: 1.2em;
-	box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
-	border-radius: 5px;
+  padding: 5px;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5px;
+  font-size: 1.2em;
+  box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
-.info > p { 
+.info > p {
   text-align: center;
 }
 
-.avaliacao-aluno {
-}
-
-.perfil-aluno > p {
-	/* font-weight: 500; */
-	/* font-size: .em; */
-}
 .gray-text {
-	color:rgb(98, 98, 98) !important;
+  color: rgb(98, 98, 98) !important;
 }
 .perfis {
   display: flex;
@@ -215,48 +194,31 @@
 
   border-radius: 3px;
   background: rgba(98, 98, 98, 0.1);
-	font-size: 1em !important;
-  
+  font-size: 1em !important;
+
   cursor: pointer;
   text-transform: capitalize;
-	transition: background 0.4s ease-in-out;
+  transition: background 0.4s ease-in-out;
 }
-/* .chip > .chip-text {
-  padding: 0px 5px;
-	text-transform: capitalize;
-	cursor: pointer;
-} */
 
 .chip > .chip-close {
-  /* margin: 5px;   */
   font-size: 1.4em;
   cursor: pointer;
   padding-right: 2px;
 }
 
 .chip.selected {
-
-	/* background: rgb(238,178,32); */
   color: rgb(236, 233, 233);
   background: #eeb220;
 }
 
-.modal-card-foot > button:nth-child(2){
-	flex-grow: .5;
-	/* max-width: 100rem; */
-}
-
-.modal-card-foot {
-	/* column-gap: 50px; */
-}
-
-.modal {
+.modal-card-foot > button:nth-child(2) {
+  flex-grow: 0.5;
 }
 
 .modal.is-active {
-  transition: all  1s ease !important;
+  transition: all 1s ease !important;
 }
-
 
 /* .turma-info {
   display: grid;
@@ -269,7 +231,7 @@
   font-size: 0.9em;
   font-weight: 300;
   grid-template-columns: 1fr;
-  /* grid-template-rows: repeat(auto-fill, minmax(20px, 1fr)); */
+  /* grid-template-rows: repeat(auto-fill, minmax(20px, 1fr)); 
   box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.2);
   grid-gap: 0px;
 }
@@ -279,4 +241,3 @@
   font-weight: 500;
   color: #121313;
 } */
-
