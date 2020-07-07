@@ -221,3 +221,7 @@
 }
 
 /* Modal Professor */
+.nenhum-resultado {
+  grid-column: span 2;
+  font-size: 0.95rem;
+}

@@ -933,6 +933,7 @@ const solicitarProfessores = () => {
         document.getElementById("professores").innerHTML = "";
         response.map((professor) => addProfessorCard(professor));
       } else {
+        document.getElementById("professores").innerHTML = "";
         const professoresDiv = document.getElementById("professores");
         const msg = document.createElement("div");
         msg.classList.add("nenhum-resultado");
