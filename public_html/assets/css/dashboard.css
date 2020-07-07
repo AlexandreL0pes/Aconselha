@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap");
 
-:root{
+:root {
   --medida-disciplinar-color: #b4ff51;
 }
 
@@ -62,7 +62,6 @@
   font-size: 0.9em;
   font-weight: 300;
   grid-template-columns: 1fr;
-  /* grid-template-rows: repeat(auto-fill, minmax(20px, 1fr)); */
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
   grid-gap: 0px;
 }
@@ -83,7 +82,6 @@
 }
 
 .reuniao-info > div {
-  /* border: solid red 1px; */
   justify-self: center;
   align-self: center;
 }
@@ -227,7 +225,6 @@
   background: rgba(202, 201, 201, 0.459);
   color: rgba(158, 158, 158, 0.774);
   border-radius: 5px;
-  /* max-width: 7rem; */
   font-size: 1.5rem;
 
   cursor: pointer;
@@ -304,9 +301,6 @@
 /* Gráfico */
 
 .overview .chart {
-  /* border: solid 2px purple; */
-  /* margin: 30px; */
-  /* height: 50px !important; */
   padding: 10px 20px;
 
   border-radius: 15px;
@@ -452,9 +446,6 @@
 /* Estatísticas turma */
 
 /* Diagnósticas  */
-.avaliacoes-diagnostica {
-  /* padding: 10px 10px; */
-}
 .avaliacoes-diagnostica h1 {
   font-size: 1.1rem !important;
   font-weight: 400 !important;
@@ -576,8 +567,6 @@
 }
 /* Medidas */
 
-
-
 /* Alunos */
 .alunos {
   /* padding-left: 5px; */
@@ -625,7 +614,6 @@
   text-align: center;
 
   animation: fadeIn 0.7s ease-in-out;
-
 }
 
 .pesquisa {
@@ -641,7 +629,6 @@
 }
 
 /* Alunos */
-
 
 /* Modal */
 
@@ -666,7 +653,7 @@
   font-size: 1.5rem;
 }
 .info-aluno .matricula {
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: rgb(149, 147, 147);
 }
 .info-m .data {
