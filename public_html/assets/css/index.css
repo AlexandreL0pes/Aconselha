@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
 :root {
   --size-sidebar: 40px;
 
@@ -17,7 +17,7 @@ body {
   margin: 0;
   padding: 0;
   color: #2f2f2d !important;
-  font-family: 'Roboto', sans-serif ;
+  font-family: "Roboto", sans-serif;
   font-size: 0.75rem;
   font-weight: 500;
 }
@@ -86,7 +86,6 @@ html {
         SIDEBAR
 */
 
-
 .sidenav__list {
   list-style-type: none;
   display: grid;
@@ -111,10 +110,6 @@ html {
   margin-top: 20px;
   font-size: 1.3em;
 }
-
-
-
-
 
 .sidenav__close-icon {
   position: absolute;
@@ -199,7 +194,6 @@ html {
   font-weight: 500;
 }
 
-
 .sidenav {
   display: none;
 }
@@ -217,6 +211,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: end;
+  align-self: end;
 
   color: black;
   font-size: 1em;
@@ -227,8 +222,6 @@ html {
   padding: 10px;
   cursor: pointer;
 }
-
-
 
 /* 
         SIDEBAR
@@ -538,6 +531,6 @@ img.icone {
   }
 }
 
-.debug { 
+.debug {
   border: 1px solid #9e46f1;
 }
