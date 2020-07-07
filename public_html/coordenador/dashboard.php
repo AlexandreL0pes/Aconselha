@@ -77,6 +77,9 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
         <li class="sidenav__list-item reunioes">
           <img class="icone" src="../assets/images/reunion.svg" alt="" />
         </li>
+        <li class="sidenav__list-item anteriores">
+          <img src="../assets/images/seta-para-tras.svg" alt="" class="icone" />
+        </li>
         <!-- <li class="sidenav__list-item config">
             <img class="icone" src="../assets/images/config.svg" alt="" />
           </li> -->
@@ -99,8 +102,13 @@ if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
         </li>
         <li class="sidenav__list-item-mobile reunioes">
           <img src="../assets/images/reunion.svg" alt="" class="icone" />
+          <p class="sidenav-item-text">Reuniões</p>
+        </li>
+        <li class="sidenav__list-item-mobile anteriores">
+          <img src="../assets/images/seta-para-tras.svg" alt="" class="icone" />
           <p class="sidenav-item-text">Conselhos Anteriores</p>
         </li>
+        
         <!-- <li class="sidenav__list-item-mobile config">
             <img src="../assets/images/config.svg" alt="" class="icone" />
             <p class="sidenav-item-text">Configurações</p>
