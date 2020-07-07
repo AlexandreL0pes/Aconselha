@@ -120,9 +120,6 @@
   font-size: 0.6em;
 }
 
-.pesquisa {
-  /* flex-grow: 0.6; */
-}
 .field.tipos {
   justify-content: center !important;
   margin-top: 5px;
@@ -214,7 +211,6 @@
   column-gap: 5px;
   row-gap: 5px;
   padding: 5px 10px;
-  /* margin: 5px 0px; */
 }
 
 
@@ -238,7 +234,6 @@
 }
 
 .chip.estudante, .chip.disciplina, .chip.item > .chip-close {
-  /* margin: 5px;   */
   font-size: 1.2em;
   cursor: pointer;
   padding-right: 2px;
@@ -275,7 +270,6 @@
 
 
 .input,.text-area {
-  /* border: none !important; */
   box-shadow: none !important;
   color: rgb(0, 0, 0) !important;
 }
@@ -295,7 +289,6 @@
   margin: 0px !important;
 }
 .modal-card-body > .columns > .column {
-  /* padding: 5px !important; */
   padding: 0;
   padding-right: 10px;
 }
