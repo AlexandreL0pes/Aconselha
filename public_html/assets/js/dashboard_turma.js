@@ -43,6 +43,9 @@ const gerarGraficoCoef = (qtdAlto, qtdMedio, qtdBaixo) => {
   });
 };
 
+/**
+ * Obtem o coeficiente de rendimento da turma
+ */
 const obterCoef = () => {
   const turma = localStorage.getItem("turmaAtual");
 
