@@ -113,7 +113,6 @@
   padding-left: 10px;
 }
 
-
 .estatistica-aluno .card-info.coef-geral {
   border-left: 2px solid;
   border-left-color: #3aafae;
@@ -253,7 +252,6 @@
   padding-left: 3px;
 }
 
-
 /* Medidas */
 
 /* Aprendizado */
@@ -312,11 +310,8 @@
 
 .nenhum-resultado {
   grid-column: span 2;
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
-
-
-
 
 /* Modal */
 
@@ -341,7 +336,7 @@
   font-size: 1.5rem;
 }
 .info-aluno .matricula {
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: rgb(149, 147, 147);
 }
 .info-m .data {
