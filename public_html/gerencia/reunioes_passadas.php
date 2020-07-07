@@ -9,7 +9,7 @@ if (!isset($_COOKIE['token'])) {
   header("Location: ../login.php");
 }
 
-if (!Autenticacao::isCoordenador($_COOKIE['token'])) {
+if (!Autenticacao::isGerente($_COOKIE['token'])) {
   header("Location: ../login.php?erro=2");
 }
 
