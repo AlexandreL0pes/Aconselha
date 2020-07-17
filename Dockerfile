@@ -62,7 +62,7 @@ RUN cp -v /usr/lib/php/7.2/php.ini-development /etc/php/7.2/apache2/php.ini
 
 ## ------------- Add-ons ------------------
 #Install GIT
-#RUN apt-get -y install -y git-core
+RUN apt-get -y install -y git-core
 
 #PHP Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
