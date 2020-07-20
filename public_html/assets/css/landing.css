@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
+
+
+/* Reset CSS */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000; 
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;   
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+/* Reset CSS */
+
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #000000;
+	font-family: "Roboto", sans-serif;
+	font-weight: 500;
+	height: 100vh;
+
+	/* display: grid;
+	grid-template-rows: 10vh 90vh; */
+}
+
+html {
+	/* border-box box model allows us to add padding and border to our elements without increasing their size */
+	box-sizing: border-box !important;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+/* nav > div {
+	font-size: 1.6em;
+	min-height: 50px;
+	padding: 1rem 2rem;
+} */
+nav {
+	font-size: 1.6em;
+	/* min-height: 50px; */
+	display: grid;
+	row-gap: 20px;
+	padding: 1rem 1.3rem;
+}
+
+nav .logo {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 1.3rem;
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+	color: #000000;
+	padding: 10px 10px;
+}
+
+nav {
+	display: grid;
+	justify-items: center;
+	text-align: center;
+}
+
+nav a {
+	color: #000000;
+	text-decoration: none;
+	font-size: 1.17rem;
+	font-weight: 300;
+}
+
+.links {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 30px;
+}
+
+.button.sign-in {
+	display: none;
+}
+
+main {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	/* padding: 20px 50px; */
+	grid-gap: 15px;
+	margin-left: 2em ;
+	margin-top: 3em;
+}
+
+main .text {
+	/* max-width: 70vw; */
+	display: grid;
+	align-items: center;
+	justify-self: center;
+}
+
+main .title {
+	font-size: 2em;
+	padding: 0;
+	margin: 0;
+	font-weight: normal;
+}
+
+main .text .content {
+	padding-top: 10px;
+	padding-left: 5px;
+	margin: 0;
+	font-weight: 300;
+	font-size: 1.1rem;
+}
+
+.img {
+	display: grid;
+	justify-items: center;
+}
+
+.img img {
+	max-height: 60vh;
+}
+
+main .text .button {
+	/* margin: 25px 10px ; */
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding: 5px 20px;
+	border-radius: 10px;
+
+	font-family: Roboto;
+	font-style: normal;
+
+	border: 1px solid #ffc700;
+	border-radius: 10px;
+	background: #ffc700;
+	color: #ffffff;
+
+	font-size: 1.6em;
+}
+
+@media (min-width: 35rem) {
+	nav {
+		grid-template-columns: 1fr auto auto auto;
+		justify-items: start;
+	}
+	.links {
+		grid-template-columns: 1fr 1fr 1fr;
+		justify-items: start;
+		align-items: center;
+		grid-gap: 30px;
+	}
+
+	.button.sign-in {
+		display: block;
+		border: 1px solid #000000;
+		padding: 5px 20px;
+		border-radius: 10px;
+
+		font-family: Roboto;
+		font-style: normal;
+	}
+	main {
+		margin-left: 4em ;
+		margin-top: 3em;
+	}
+}
