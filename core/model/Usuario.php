@@ -131,6 +131,7 @@ class Usuario extends CRUD
         try {
             $retorno = $this->read(null, $tabela, $campos, $where_condicao, $where_valor, null, $ordem, $limite);
             // echo $this->pegarUltimoSQL();
+            // print_r($where_valor);
         } catch (\Throwable $th) {
             echo $this->pegarUltimoSQL();
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();

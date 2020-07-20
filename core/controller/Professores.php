@@ -235,12 +235,15 @@ class Professores
             foreach ($usuarios as $usuario) {
                 $professor = $this->selecionar($usuario[Usuario::COL_PESSOA]);
 
-                $professores[] = [
-                    'usuario' => $usuario[Usuario::COL_ID],
-                    'email' => $usuario[Usuario::COL_MATRICULA],
-                    'pessoa' => $usuario[Usuario::COL_PESSOA],
-                    'nome' => $professor['nome']
-                ];
+                if (isset($professor['nome'])) {
+                    $professores[] = [
+                        'usuario' => $usuario[Usuario::COL_ID],
+                        'email' => $usuario[Usuario::COL_MATRICULA],
+                        'pessoa' => $usuario[Usuario::COL_PESSOA],
+                        'nome' => $professor['nome']
+                    ];
+
+                }
             }
         }
 
@@ -383,7 +386,7 @@ class Professores
         return false;
     }
 
-    
+
     /**
      * Cadastro de um usuário com permissão de professor
      *

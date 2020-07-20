@@ -36,12 +36,12 @@ class Professor extends CRUD
                 $where_valor[] = $busca[self::COL_COD_PESSOA];
 
                 $tabela = self::TABELA .
-                    " INNER JOIN PAUTAS ON PROFESSORES.COD_PROFESSOR = PAUTAS.COD_PROFESSOR " .
-                    " INNER JOIN PESSOAS ON PROFESSORES.COD_PESSOA = PESSOAS.COD_PESSOA ";
+                    // " INNER JOIN PAUTAS ON PROFESSORES.COD_PROFESSOR = PAUTAS.COD_PROFESSOR " .
+                    " LEFT JOIN PESSOAS ON PROFESSORES.COD_PESSOA = PESSOAS.COD_PESSOA ";
 
                 // Filtratndo apenas as pautas dos cursos técnicos integrados
-                $where_condicao .= " AND COD_TIPO_CURSO = ? ";
-                $where_valor[] = '265';
+                // $where_condicao .= " AND COD_TIPO_CURSO = ? ";
+                // $where_valor[] = '265';
             }
 
             if (isset($busca['ano_letivo']) && !empty($busca['ano_letivo'])) {
@@ -69,7 +69,9 @@ class Professor extends CRUD
 
             if (isset($busca['professores'])) {
 
-                $tabela = self::TABELA . " INNER JOIN PESSOAS ON PROFESSORES.COD_PESSOA = PESSOAS.COD_PESSOA ";
+                $tabela = self::TABELA . " INNER JOIN PESSOAS ON PROFESSORES.COD_PESSOA = PESSOAS.COD_PESSOA INNER JOIN PAUTAS ON PROFESSORES.COD_PROFESSOR = PAUTAS.COD_PROFESSOR ";
+                $where_condicao .= " AND COD_TIPO_CURSO = ? ";
+                $where_valor[] = '265';
             }
         }
 
@@ -83,6 +85,7 @@ class Professor extends CRUD
         try {
             $retorno = $this->read($database, $tabela, $campos, $where_condicao, $where_valor, null, null);
             // echo $this->pegarUltimoSQL();
+            // print_r($where_valor);
         } catch (\Throwable $th) {
             echo $this->pegarUltimoSQL();
             echo "Mensagem: " . $th->getMessage() . "\n Local: " . $th->getTraceAsString();
