@@ -13,7 +13,7 @@
 			<div class="links">
 				<a href="#">Sobre</a>
 				<a href="#">Suporte</a>
-				<a class="button sign-in" href="#">Entrar</a>
+				<a class="button sign-in" href="./login.php">Entrar</a>
 			</div>
 		</nav>
 
@@ -22,7 +22,7 @@
         <div>
           <h1 class="title">Apoiando suas reuniões!</h1>
           <p class="content">O Aconselha entrega aos professores, coordenadores e estudantes uma nova abordagem aos conselhos de classe.</p>
-          <button href="#" class="button">Entrar</button>
+          <button href="./login.php" class="button">Entrar</button>
         </div>
       </div>
       <div class="img">
@@ -30,4 +30,7 @@
       </div>
 		</main>
 	</body>
+	<script>
+		document.querySelector("button.button").addEventListener('click', (event) => {window.location.href = "./login.php"});
+	</script>
 </html>
