@@ -185,6 +185,7 @@ main .text {
 	display: grid;
 	align-items: center;
 	justify-self: center;
+	animation: fadeIn 1s ease-in-out;
 }
 
 main .title {
@@ -205,6 +206,7 @@ main .text .content {
 .img {
 	display: grid;
 	justify-items: center;
+	animation: fadeIn 1s ease-in-out;
 }
 
 .img img {
@@ -255,4 +257,13 @@ main .text .button {
 		margin-left: 4em ;
 		margin-top: 3em;
 	}
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
