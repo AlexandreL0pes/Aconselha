@@ -20,8 +20,7 @@
               Bem-vindo(a)!
             </p>
             <p class="text">
-              Para entrar na plataforma, preencha os campos com sua matrícula do
-              SUAP e a senha informada pela gerência de ensino. Caso seja um representante de sala, utilize suas credenciais do Q-Acadêmico.
+              Para entrar na plataforma, preencha os campos com as credenciais informadas pela gerência de ensino. Caso seja um representante de sala, utilize suas credenciais do Q-Acadêmico.
             </p>
           </div>
           <svg
@@ -445,7 +444,7 @@
         </div>
         <div class="login-content">
           <div class="login">
-            <h2 class="title">Seja bem-vindo(a) ao SADC</h2>
+            <h2 class="title">Seja bem-vindo(a) ao Aconselha</h2>
             <div class="field">
               <label class="label">Matrícula</label>
               <p class="control has-icons-left">
