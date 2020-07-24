@@ -1,5 +1,5 @@
-# SADC
-Um sistema de apoio à decisão para conselhos de classe.
+# Aconselha
+O Aconselha oferece aos usuários automatização na gerência de conselhos de classe, integrando todos os indivíduos da reunião, sendo eles docentes, representantes de sala, coordenações e equipe pedagógica. 
 
 ![](https://img.shields.io/github/issues/AlexandreL0pes/sadc)
 ![](https://img.shields.io/github/forks/AlexandreL0pes/sadc)
@@ -8,8 +8,9 @@ Um sistema de apoio à decisão para conselhos de classe.
 
 ## Descrição 
 
-SADC é um sistema de apoio à decisão para conselhos de classe. O objetivo principal desse projeto é possibilitar o armazenamento e consulta de dados levantados durantes as reuniões de conselho de classe, além de apresentar informações relevantes acerca do ensino-aprendizado dos estudantes.
+Aconselha é um sistema de apoio à decisão para conselhos de classe. O objetivo principal desse projeto é possibilitar o armazenamento e consulta de dados levantados durantes as reuniões de conselho de classe, além de apresentar informações relevantes acerca do ensino-aprendizado dos estudantes.
 
+![Aconselha - Tela Inicial](docs/ACONSELHA.jpg)
 ## Pré-Requisitos
 - Docker 
 
