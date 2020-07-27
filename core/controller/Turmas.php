@@ -191,7 +191,9 @@ class Turmas
         $retorno = $turma->listar($campos, $busca, null, 10000);
 
         $retorno = array_map(function ($id) {
-            return $id[Turma::COL_ID];
+            if (isset($id[Turma::COL_ID])) {
+                return $id[Turma::COL_ID];
+            }
         }, $retorno);
 
         return $retorno;

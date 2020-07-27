@@ -258,20 +258,22 @@ class Reunioes
 		$curso = (isset($dados['curso']) && !empty($dados['curso'])) ? $dados['curso'] : null;
 		$turmasCompletas = [];
 
-		foreach ($turmas_fora as $t) {
-			$retorno = $turmas->informacoesTurma(['turma' => $t]);
-
-			$retorno = json_decode($retorno, true);
-
-			if ($curso != null) {
-				if ($retorno['codigo_curso'] == $curso) {
+		if (count($turmas_fora) > 0 && !empty($turmas_fora[0])) {
+			foreach ($turmas_fora as $t) {
+				$retorno = $turmas->informacoesTurma(['turma' => $t]);
+	
+				$retorno = json_decode($retorno, true);
+	
+				if ($curso != null) {
+					if ($retorno['codigo_curso'] == $curso) {
+						unset($retorno['codigo_curso']);
+						array_push($turmasCompletas, $retorno);
+					}
+				} else {
 					unset($retorno['codigo_curso']);
 					array_push($turmasCompletas, $retorno);
 				}
-			} else {
-				unset($retorno['codigo_curso']);
-				array_push($turmasCompletas, $retorno);
-			}
+			}		
 		}
 
 		// print_r($turmasCompletas);
