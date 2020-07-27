@@ -311,6 +311,7 @@
 
 .lista-medidas .medida .descricao {
   padding-left: 5px;
+  overflow: hidden;
 }
 
 .lista-medidas .medida .nome {
@@ -322,6 +323,13 @@
   font-weight: 400;
   color: rgb(153, 149, 149);
   padding-left: 3px;
+
+  overflow: hidden;/*/<------------new/*/
+}
+.elipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .lista-medidas .medida .data {

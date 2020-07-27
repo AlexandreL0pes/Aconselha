@@ -219,7 +219,7 @@ const gerarMedida = (medida) => {
   const content = `
   <div class="descricao">
     <p class="nome">${medida.aluno.nome}</p>
-    <p class="tipo-medida">${medida.descricao}</p>
+    <p class="tipo-medida elipsis">${medida.descricao}</p>
   </div>
   <span class="data">${dataFormatada}</span>
   `;
