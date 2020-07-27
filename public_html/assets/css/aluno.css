@@ -347,12 +347,14 @@
 
 .tipo-medida {
   font-size: 1.1rem;
+  color: black;
 }
 .info-medida {
   display: grid;
-  grid-template-rows: 30px 3fr;
+  grid-template-rows: 1fr 3fr;
 }
 .info-medida .observacao {
   margin-left: 5px;
+  font-size: .95rem;
 }
 /* Modal */
