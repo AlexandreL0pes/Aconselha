@@ -520,10 +520,12 @@ class Turmas
      */
     public function obterEstatistica($dados = [])
     {
+
         if (!isset($dados['turma'])) {
             http_response_code(400);
             return json_encode(array('message' => 'É necessário informar a turma.'));
         }
+
 
         // Obter Coeficiente Geral
         $coeficiente_geral = $this->obterCoeficienteGeral($dados['turma']);

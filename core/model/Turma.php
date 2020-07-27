@@ -73,7 +73,7 @@ class Turma extends CRUD
         $where_condicao .= " AND " . self::COL_ID . " NOT LIKE ? ";
         $where_valor[] = '%VER';
 
-        $where_condicao .= " AND (COD_CURSO = 80 OR COD_CURSO = 862 OR COD_CURSO = 851) ";
+        $where_condicao .= " AND (TURMAS.COD_CURSO = 80 OR TURMAS.COD_CURSO = 862 OR TURMAS.COD_CURSO = 851) ";
         $retorno = [];
 
         try {
