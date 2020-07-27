@@ -169,7 +169,7 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
           </div>
         </div>
         <div class="chart">
-          <h1 class="chart-title">Coeficiente Geral</h1>
+          <h1 class="chart-title">Desempenho Geral</h1>
           <div class="canvas-chart">
             <canvas id="coef-geral"></canvas>
           </div>

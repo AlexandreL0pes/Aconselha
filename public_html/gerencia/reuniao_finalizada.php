@@ -165,7 +165,7 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
             <div class="main-dash">
               <section class="overview">
                 <div class="chart">
-                  <h1 class="chart-title">Coeficiente Geral</h1>
+                  <h1 class="chart-title">Desempenho Geral</h1>
                   <div class="canvas-chart">
                     <canvas id="coef-geral"></canvas>
                   </div>
@@ -271,9 +271,6 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
             <span name="turma" id="nome"></span> -
             <span name="curso" id="curso"></span>
           </span>
-          <!-- <span class="gray-text" >
-              Prof. Adriano Honorato Braga
-            </span> -->
           <span class="gray-text" id="codigo"></span>
         </div>
         <div class="reuniao-info">
