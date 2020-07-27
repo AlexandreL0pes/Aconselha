@@ -136,7 +136,6 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
         </div>
       </section>
       <section class="overview">
-        <div class="info">
           <div class="turma-info">
             <div>
               <span name="turma" id="nome">3° B</span> -
@@ -148,7 +147,6 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
             <span class="representante"></span>
             <span class="vice-representante"></span>
           </div>
-        </div>
 
         <div class="estatistica-turma" id="estatistica-turma">
           <div class="card-info coef-geral">

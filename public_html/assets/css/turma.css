@@ -44,7 +44,7 @@
 }
 
 .turma-info .cod-turma {
-  padding: 2px;
+  padding: 0px 2px;
   font-size: 0.85rem;
   color: #909090;
 }
@@ -80,11 +80,11 @@
   border-radius: 2px;
   color: #080808;
   margin: 0px;
-  padding: 15px 15px;
-  grid-gap: 2px;
-  box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.1);
-  transition: box-shadow ease-in-out 0.4s;
 
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: 0 3px 3px 4px rgba(0, 0, 0, .06);
+  transition: box-shadow ease-in-out .4s;
   font-size: 0.8rem;
 }
 

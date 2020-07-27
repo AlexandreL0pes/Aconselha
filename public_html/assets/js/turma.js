@@ -149,7 +149,7 @@ const apresentarEstatisticasTurma = (estatistica) => {
 };
 
 const apresentarInfoTurma = (turma) => {
-  const turmaInfo = document.querySelector(".overview .info .turma-info");
+  const turmaInfo = document.querySelector(".overview .turma-info");
 
   turmaInfo.querySelector("#nome").innerHTML = turma.nome;
   turmaInfo.querySelector("#curso").innerHTML = turma.curso;
