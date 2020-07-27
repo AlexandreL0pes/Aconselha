@@ -226,30 +226,6 @@ if (!Autenticacao::isGerente($_COOKIE['token'])) {
 
               <section class="alunos">
                 <h1 class="principal">Estudantes</h1>
-                <div class="pesquisa">
-                  <div class="field has-addons tipos">
-                    <p class="control">
-                      <button class="button is-small" id="filtrarAlto">
-                        <span>Alto</span>
-                      </button>
-                    </p>
-                    <p class="control">
-                      <button class="button is-small align-center" id="filtrarMedio">
-                        <span>Médio</span>
-                      </button>
-                    </p>
-                    <p class="control">
-                      <button class="button is-small align-center" id="filtrarBaixo">
-                        <span>Baixo</span>
-                      </button>
-                    </p>
-                    <p class="control">
-                      <button class="button is-small align-center" id="removerFiltro">
-                        <span>Todos</span>
-                      </button>
-                    </p>
-                  </div>
-                </div>
                 <div class="overview-alunos"></div>
                 <div class="lista-estudantes" id="lista-estudantes">
                   <!-- <div class="cardbox card-turma alto" data-aluno="2017103202030090">
