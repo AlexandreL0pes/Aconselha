@@ -15,6 +15,6 @@
         "monolog/monolog": "1.0.*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "firebase/php-jwt": "^5.2"
+        "firebase/php-jwt": "^6.0"
     }
 }
